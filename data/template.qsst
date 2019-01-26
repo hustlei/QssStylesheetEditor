@@ -1,0 +1,29 @@
+/* 
+author:lei
+*/
+/*
+ColorIndexs:
+text= red 
+background= red 
+border=#888
+select=#59f
+focus=#EA2
+
+*/
+
+QWidget
+{
+    color: $text;
+    background-color: $background;
+}
+
+QStatusBar{
+    background: transparent;
+    border-top:1px solid $border;
+}
+/* ================================================================ */
+/* MENU                                                             */
+/* ================================================================ */
+QMenuBar {
+    background-color: $background;
+}
