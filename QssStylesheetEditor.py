@@ -16,7 +16,7 @@ class QssWin(QMainWindow,QssWin):
         import os
         os.chdir(os.path.dirname(__file__))
         self.setWindowTitle(self.tr("Qss Template Editor"))
-        self.setWindowIcon(QIcon("ui/img/Colorize.ico"))
+        self.setWindowIcon(QIcon("Ui/img/Colorize.ico"))
         self.qsst=Qsst()
         self.dlg=QColorDialog(self)
         
@@ -29,6 +29,7 @@ class QssWin(QMainWindow,QssWin):
         self.textEdit.mouseLeave.connect(self.render)
         self.saveAct.triggered.connect(self.save)
         self.openAct.triggered.connect(self.open)
+        self.exportAct.triggered.connect(self.export)
         self.open(file="data/default.qsst")
         self.file="data/new-1.qsst"
         self.setWindowTitle("Qss Template Editor  -  "+os.path.basename(self.file))
@@ -55,6 +56,13 @@ class QssWin(QMainWindow,QssWin):
             with open(file,'w') as f:
                 f.write(self.textEdit.toPlainText())
                 self.setWindowTitle("Qss Template Editor  -  "+os.path.basename(file))
+                
+    def export(self):
+        self.qsst.convertQss()
+        #f=os.path.join(os.path.splitext(f)[0],"Qss")
+        file,_=QFileDialog.getSaveFileName(self,"export Qss file",".","Qss(*.qss);;all(*.*)")
+        with open(file,'w') as f:
+            f.write(self.qsst.qss)
         
     def loadColors(self):
         self.qsst.srctext=self.textEdit.toPlainText()
