@@ -2,15 +2,15 @@
 
 import os
 import sys
-from PyQt5.QtCore import (QEvent, QFile, QFileInfo, QIODevice, QRegExp,
-                          QTextStream,Qt,pyqtSignal)
-from PyQt5.QtWidgets import (QAction, QApplication,  QFileDialog,
-                             QMainWindow, QMessageBox, QTextEdit)
-from PyQt5.QtGui import QFont, QIcon,QColor,QKeySequence,QSyntaxHighlighter,QTextCharFormat,QTextCursor
+from PyQt5.QtCore import (Qt, QEvent, QFile, QFileInfo, QIODevice, QRegExp, QTextStream,
+                          pyqtSignal)
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QFileDialog, QMessageBox,
+                             QTextEdit)
+from PyQt5.QtGui import (QFont, QIcon,QColor,QKeySequence,QSyntaxHighlighter,QTextCharFormat,
+                         QTextCursor,QCursor)
 
 
-__version__ = "1.1.0"
-
+__version__ = "1.1.1"
 
 class Highlighter(QSyntaxHighlighter):
 
@@ -198,6 +198,11 @@ class TextEdit(QTextEdit):
             # return True
         # return QTextEdit.event(self, event)
 
+    def dropEvent(self, QDropEvent):
+        if(QDropEvent.mimeData().hasUrls()):
+            file=QDropEvent.mimeData().urls()[0].toLocalFile()
+            with open(file,"r") as f:
+                self.setText(f.read())
 
 class MainWindow(QMainWindow):
 

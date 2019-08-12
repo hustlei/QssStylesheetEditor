@@ -18,7 +18,8 @@ from QssTemplate import Qsst
 class MainWin(QMainWindow, Widgets_MainWin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
-        self.setWindowTitle(self.tr("Qss Template Editor"))
+        self.title=self.tr("QssStylesheetEditor v1.1")
+        self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))
         self.qsst = Qsst()
         self.clrBtnDict = {}
@@ -92,7 +93,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         #if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         if(not self.edited):
             self.edited=True
-            self.setWindowTitle("Qss Template Editor  -  *" + os.path.basename(self.file))
+            self.setWindowTitle(self.title+" - *" + os.path.basename(self.file))
             self.actions["save"].setEnabled(True)
 
         if (e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter or #大键盘为Ret小键盘为Enter
@@ -114,10 +115,8 @@ class MainWin(QMainWindow, Widgets_MainWin):
         #     item = self.colorGridLayout.itemAt(0)
         # self.colorGridLayout.update()  # 不起作用
 
-        a,b=list(self.clrBtnDict.keys()),list(self.qsst.varDict.keys())
-        a.sort()
-        b.sort()
-        if(a != b):
+        #a,b=list(self.clrBtnDict.keys()),list(self.qsst.varDict.keys());a.sort();b.sort()
+        if(sorted(list(self.clrBtnDict.keys()))!=sorted(list(self.qsst.varDict.keys()))):
             while(self.colorPanelLayout.count()>0):
                 self.colorPanelLayout.removeItem(self.colorPanelLayout.itemAt(0))
 
@@ -183,7 +182,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
                 self.textEdit.setText(self.lastSavedText)
             self.renderStyle()
             self.loadColorPanel()
-            self.setWindowTitle("Qss Template Editor  -  " + os.path.basename(file))
+            self.setWindowTitle(self.title+" - " + os.path.basename(file))
 
     def new(self):
         if(self.edited):
@@ -197,7 +196,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.open(file="data/default.qsst")
         self.newIndex=self.newIndex+1
         self.file="new{}.qsst".format(self.newIndex)
-        self.setWindowTitle("Qss Template Editor  -  " + os.path.basename(self.file))
+        self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
         self.edited=False
 
     def save(self):
@@ -205,7 +204,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             with open(self.file,'w') as f:
                 self.lastSavedText=self.textEdit.toPlainText()
                 f.write(self.lastSavedText)
-                self.setWindowTitle("Qss Template Editor  -  " + os.path.basename(self.file))
+                self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
                 self.edited=False
                 self.actions["save"].setEnabled(False)
         else:
@@ -219,7 +218,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             with open(file, 'w') as f:
                 self.lastSavedText=self.textEdit.toPlainText()
                 f.write(self.lastSavedText)
-                self.setWindowTitle("Qss Template Editor  -  " + os.path.basename(file))
+                self.setWindowTitle(self.title+" - " + os.path.basename(file))
 
     def export(self):
         self.qsst.convertQss()
