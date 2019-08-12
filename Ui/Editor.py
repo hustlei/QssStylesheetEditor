@@ -171,6 +171,7 @@ class TextEdit(QTextEdit):
     keyPressed=pyqtSignal(QKeyEvent)
     loseFocus=pyqtSignal()
     mouseLeave=pyqtSignal()
+    mousePress=pyqtSignal()
     def __init__(self, parent=None):
         super(TextEdit, self).__init__(parent)
         self.highlighter = Highlighter(self.document())
@@ -179,13 +180,17 @@ class TextEdit(QTextEdit):
         QTextEdit.keyPressEvent(self, event)
         self.keyPressed.emit(event)
         
-    def focusOutEvent(self,evnet):
+    def focusOutEvent(self,e):
         self.loseFocus.emit()
         
-    def leaveEvent(self,event):
+    def leaveEvent(self,e):
         self.mouseLeave.emit()
-        
-    # def event(self, event):
+
+    def mousePressEvent(self, QMouseEvent):
+        super().mousePressEvent(QMouseEvent)
+        self.mousePress.emit()
+
+# def event(self, event):
         # if (event.type() == QEvent.KeyPress and
             # event.key() == Qt.Key_Tab):
             # cursor = self.textCursor()

@@ -11,9 +11,10 @@ QssStylesheetEditor使用Python编写，GUI使用Pyqt5。
 + 也可以定义变量，在Qss中引用。编辑完后，可以导出为Qss格式。
 + 变量的颜色可以在颜色对话框中拾取。
 
-![GUI](QssStylesheetEditor.png)
+![GUI(v1.1版本)](img/screenshot/QssStylesheetEditor_v1.1.png)
+![GUI(v1.0版本)](img/screenshot/QssStylesheetEditor_v1.0.png)
 
-![GUI](Color.png)
+![GUI](img/Color.png)
 
 # 变量定义
 
@@ -29,7 +30,6 @@ border=#888
 > 变量需要在/* */内
 
 变量通过“$变量名”方式引用。参考如下：
-
 ~~~
 QWidget
 {
