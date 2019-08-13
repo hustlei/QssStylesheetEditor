@@ -44,11 +44,11 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.actions["save"].triggered.connect(self.save)
         self.actions["saveas"].triggered.connect(self.saveAs)
         self.actions["export"].triggered.connect(self.export)
-        self.actions["undo"].triggered.connect(self.textEdit.undo)
-        self.actions["redo"].triggered.connect(self.textEdit.redo)
-        self.actions["cut"].triggered.connect(self.textEdit.cut)
-        self.actions["copy"].triggered.connect(self.textEdit.copy)
-        self.actions["paste"].triggered.connect(self.textEdit.paste)
+        self.actions["undo"].triggered.connect(self.editor.undo)
+        self.actions["redo"].triggered.connect(self.editor.redo)
+        self.actions["cut"].triggered.connect(self.editor.cut)
+        self.actions["copy"].triggered.connect(self.editor.copy)
+        self.actions["paste"].triggered.connect(self.editor.paste)
         self.actions["ShowColor"].triggered.connect(self.docks["color"].setVisible)
         self.actions["ShowPreview"].triggered.connect(self.docks["preview"].setVisible)
 
@@ -60,13 +60,13 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.docks["color"].dockLocationChanged.connect(sizeDock)
 
         #main editor
-        self.textEdit.keyPressed.connect(self.textChanged)
+        self.editor.keyPress.connect(self.textChanged)
         def rend():
             self.renderStyle()
             self.loadColorPanel()
-        self.textEdit.loseFocus.connect(rend)
-        self.textEdit.mouseLeave.connect(rend)
-        self.textEdit.mousePress.connect(rend)
+        self.editor.loseFocus.connect(rend)
+        self.editor.mouseLeave.connect(rend)
+        self.editor.mousePress.connect(rend)
 
     def unuseQss(self,unuse):
         if(unuse):
@@ -78,7 +78,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.themeCombo.setEnabled(False)
 
     def renderStyle(self):
-        self.qsst.srctext = self.textEdit.toPlainText()
+        self.qsst.srctext = self.editor.text()
         self.qsst.loadVars()
         self.qsst.convertQss()
 
@@ -102,7 +102,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.loadColorPanel()
 
     def loadColorPanel(self):
-        self.qsst.srctext = self.textEdit.toPlainText()
+        self.qsst.srctext = self.editor.text()
         self.qsst.loadVars()
 
         #item = self.colorGridLayout.itemAt(0)
@@ -119,7 +119,6 @@ class MainWin(QMainWindow, Widgets_MainWin):
         if(sorted(list(self.clrBtnDict.keys()))!=sorted(list(self.qsst.varDict.keys()))):
             while(self.colorPanelLayout.count()>0):
                 self.colorPanelLayout.removeItem(self.colorPanelLayout.itemAt(0))
-
             self.clrBtnDict = {}
             for varName, clrStr in self.qsst.varDict.items():
                 contianerWidget = QWidget()
@@ -134,24 +133,26 @@ class MainWin(QMainWindow, Widgets_MainWin):
                 btn.move(80,5)
                 self.colorPanelLayout.addWidget(contianerWidget)
                 self.colorPanelLayout.setSpacing(5)
-
-
-                if ("rgb" in clrStr):
-                    t = clrStr.strip(r" rgba()")
-                    c = t.split(',')
-                    if (len(c) > 3):
-                        lable = c[3]
-                    else:
-                        lable = 255
-                    color = QColor(c[0],c[1], c[2], lable)
-                else:
-                    color = QColor(clrStr)
-                s = ''
-                if (qGray(color.rgb()) < 100):
-                    s += "color:white;"
-
-                btn.setStyleSheet(s + "background:" + btn.text())
                 btn.clicked.connect(lambda x, var=varName: self.chclr(var))
+
+        for varName,btn in self.clrBtnDict.items():
+            clrStr=self.qsst.varDict[varName]
+            btn.setText(clrStr)
+            if ("rgb" in clrStr):
+                t = clrStr.strip(r" rgba()")
+                c = t.split(',')
+                if (len(c) > 3):
+                    lable = c[3]
+                else:
+                    lable = 255
+                color = QColor(c[0],c[1], c[2], lable)
+            else:
+                color = QColor(clrStr)
+            s = ''
+            if (qGray(color.rgb()) < 100):
+                s += "color:white;"
+
+            btn.setStyleSheet(s + "background:" + btn.text())
 
     def chclr(self, var):
         color = QColorDialog.getColor(Qt.white, self, "color pick", QColorDialog.ShowAlphaChannel)
@@ -168,7 +169,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.clrBtnDict[var].setStyleSheet(s + "background:" + clrstr)
             self.qsst.varDict[var] = clrstr
             self.qsst.writeVars()
-            self.textEdit.setPlainText(self.qsst.srctext)
+            self.editor.setPlainText(self.qsst.srctext)
             self.renderStyle()
 
     def open(self,_=None, file=None):#_参数用于接收action的event参数,bool类型
@@ -179,7 +180,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.file=file
             with open(file,'r') as f:
                 self.lastSavedText = f.read()
-                self.textEdit.setText(self.lastSavedText)
+                self.editor.setText(self.lastSavedText)
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title+" - " + os.path.basename(file))
@@ -202,7 +203,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
     def save(self):
         if (self.file and os.path.exists(self.file)):
             with open(self.file,'w') as f:
-                self.lastSavedText=self.textEdit.toPlainText()
+                self.lastSavedText=self.editor.toPlainText()
                 f.write(self.lastSavedText)
                 self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
                 self.edited=False
@@ -216,7 +217,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         if (file):
             self.file = file
             with open(file, 'w') as f:
-                self.lastSavedText=self.textEdit.toPlainText()
+                self.lastSavedText=self.editor.toPlainText()
                 f.write(self.lastSavedText)
                 self.setWindowTitle(self.title+" - " + os.path.basename(file))
 
@@ -234,7 +235,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
     def closeEvent(self, e):
         if(self.edited):
-            if(self.lastSavedText!=self.textEdit.toPlainText()):
+            if(self.lastSavedText!=self.editor.toPlainText()):
                 msg=QMessageBox(QMessageBox.Question,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                                 QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Discard)

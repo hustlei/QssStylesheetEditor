@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import sys
 
-from .Editor import TextEdit
+from .Editor import CodeEditor
 from .preview import previewWidget
 from .QFlowLayout import QFlowLayout
 
@@ -15,7 +15,7 @@ class Widgets_MainWin(object):
         self.menubar = mainwin.menuBar()
         self.statusbar = mainwin.statusBar()
         self.mainWidget = QTabWidget()
-        self.textEdit=TextEdit()
+        self.editor=CodeEditor()
 
         self.actions = {}
         self.menus = {}
@@ -186,4 +186,4 @@ class Widgets_MainWin(object):
     def createMainWidget(self):
         self.setCentralWidget(self.mainWidget)
         self.mainWidget.setTabBarAutoHide(True)
-        self.mainWidget.addTab(self.textEdit,"main")
+        self.mainWidget.addTab(self.editor, "main")
