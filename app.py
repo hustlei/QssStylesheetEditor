@@ -169,7 +169,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.clrBtnDict[var].setStyleSheet(s + "background:" + clrstr)
             self.qsst.varDict[var] = clrstr
             self.qsst.writeVars()
-            self.editor.setPlainText(self.qsst.srctext)
+            self.editor.setText(self.qsst.srctext)
             self.renderStyle()
 
     def open(self,_=None, file=None):#_参数用于接收action的event参数,bool类型
@@ -203,7 +203,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
     def save(self):
         if (self.file and os.path.exists(self.file)):
             with open(self.file,'w') as f:
-                self.lastSavedText=self.editor.toPlainText()
+                self.lastSavedText=self.editor.text()
                 f.write(self.lastSavedText)
                 self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
                 self.edited=False
@@ -217,7 +217,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         if (file):
             self.file = file
             with open(file, 'w') as f:
-                self.lastSavedText=self.editor.toPlainText()
+                self.lastSavedText=self.editor.text()
                 f.write(self.lastSavedText)
                 self.setWindowTitle(self.title+" - " + os.path.basename(file))
 
@@ -235,7 +235,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
     def closeEvent(self, e):
         if(self.edited):
-            if(self.lastSavedText!=self.editor.toPlainText()):
+            if(self.lastSavedText!=self.editor.text()):
                 msg=QMessageBox(QMessageBox.Question,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                                 QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Discard)
