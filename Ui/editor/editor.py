@@ -282,7 +282,7 @@ class CodeEditor(QsciScintilla):
         with open(filename, 'rb') as f:
             l=min(os.path.getsize(filename),500)
             bytes=f.read()
-            self.coding=chardet0.detect(bytes[:l])['encoding']
+            self.coding=chardet.detect(bytes[:l])['encoding']
             self.setText(bytes.decode(self.coding))
             self.setModified(False)
             self.setHighlightLanguage(self.guessLang(filename))
