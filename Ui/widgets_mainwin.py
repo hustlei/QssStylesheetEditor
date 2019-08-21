@@ -4,9 +4,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import sys
 
-from .Editor import CodeEditor
+from .editor import CodeEditor
 from .preview import previewWidget
-from .QFlowLayout import QFlowLayout
+from .flow_layout import QFlowLayout
 
 class Widgets_MainWin(object):
     def setupUi(self, mainwin):

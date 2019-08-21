@@ -11,8 +11,8 @@ from PyQt5.QtGui import QIcon, QColor, qGray,QFont
 from PyQt5.QtCore import Qt,QSize
 # import sip
 
-from Ui import Widgets_MainWin
-from Ui.QFlowLayout import QFlowLayout
+from ui import Widgets_MainWin
+from ui.flow_layout import QFlowLayout
 from QssTemplate import Qsst
 
 class MainWin(QMainWindow, Widgets_MainWin):
@@ -159,7 +159,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         if (color.isValid()):
             s = ''
             if (color.alpha() == 255):
-                clrstr = color.name()
+                clrstr = color.getName()
             else:
                 clrstr = 'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
                 s = 'font-size:8px;'
@@ -178,9 +178,8 @@ class MainWin(QMainWindow, Widgets_MainWin):
                                                   "qsst(*.qsst);;qss(*.qss);;all(*.*)")#_是filefilter
         if (os.path.exists(file)):
             self.file=file
-            with open(file,'r') as f:
-                self.lastSavedText = f.read()
-                self.editor.setText(self.lastSavedText)
+            self.editor.load(file)
+            self.lastSavedText = self.editor.text()
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title+" - " + os.path.basename(file))

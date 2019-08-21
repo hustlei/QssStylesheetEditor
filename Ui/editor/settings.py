@@ -3,35 +3,41 @@
 # QsciLexer<Name>
 language_extensions = (
     ('None', '.txt'),
-    ('Bash', '.sh'),
-    ('Batch', '.bat'),
-    # ('CMake', ''),
-    ('CPP', '.cpp .h'),
+    #('Custom', ''),
+    ('Bash', '.sh .bashrc .bash_history'),
+    ('Batch', '.bat .cmd'),
+    ('CMake', '.cmake'),
+    ('CPP', '.c++ .cpp .cxx .cc .hh .hxx .hpp .c .h'),
     ('CSharp', '.cs'),
-    ('CSS', '.css'),
-    # ('D', ''),
+    ('CSS', '.css .qss .qsst'),
+    ('CoffeeScript','.coffee'),
+    ('D', '.d'),
     ('Diff', '.diff'),
-    # ('Fortran', ''),
-    # ('Fortran77', ''),
+    ('Fortran', '.f'),
+    ('Fortran77', '.f77 .f90'),
     ('HTML', '.html'),
-    # ('IDL', ''),
+    ('IDL', '.idl'),
+    ('JSON', '.json'),
     ('Java', '.java'),
     ('JavaScript', '.js'),
-    # ('Lua', ''),
-    # ('Makefile', ''),
-    # ('Pascal', ''),
+    ('Lua', '.lua'),
+    ('Makefile', '.make .mk .makefile'),
+    ('Markdown', '.md .markdown'),
+    ('Matlab', '.m'),
+    ('Pascal', '.pas'),
     ('Perl', '.pl'),
-    # ('PostScript', ''),
-    # ('POV', ''),
-    # ('Properties', ''),
+    ('PostScript', '.ps .eps .ai'),
+    ('POV', '.pov'),
+    ('Properties', '.properties'),
     ('Python', '.py .pyw'),
     ('Ruby', '.rb'),
     ('SQL', '.sql'),
-    # ('TCL', ''),
-    # ('TeX', ''),
-    # ('VHDL', ''),
+    ('TCL', '.tcl'),
+    ('TeX', '.tex .latex'),
+    ('VHDL', '.vhd .vhdl'),
+    ('Verilog', '.v'),
     ('XML', '.xml .svg'),
-    ('YAML', '.yaml'),
+    ('YAML', '.yaml .yml'),
 )
 
 _settings = {
@@ -279,11 +285,12 @@ _other_color_settings = (
     'callTipsHighlightColor',
 )
 
+import os
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import  Qt,QVariant
 
-class PySciSettings (QDialog):
+class EditorSettings (QDialog):
     """A dialog window for configuring a QsciScintilla editor.
     """
     def __init__(self, editor):
@@ -292,6 +299,20 @@ class PySciSettings (QDialog):
 
         layout = self._create_layout()
         self.setLayout(layout)
+
+    def guess_language(cls, filename):
+        """Guess the language based on the given filename's extension, and return
+        the name of the language, or the string 'None' if no extension matches.
+        """
+        # Get the file's extension
+        root, ext = os.path.splitext(filename)
+        # See if any known language extensions match
+        for language, extensions in language_extensions:
+            if ext in extensions.split(' '):
+                return language
+
+        # No match -- asume plain text
+        return 'None'
 
 
     def _create_layout(self):
@@ -385,7 +406,7 @@ class PySciSettings (QDialog):
 
         checkbox.stateChanged[int].connect(checkbox_changed)
 
-        # Set the initial checkbox state based on current value
+        # Set the initial checkbox state based on current getValue
         if self.editor.get_config(name):
             checkbox.setCheckState(Qt.Checked)
         else:
@@ -395,7 +416,7 @@ class PySciSettings (QDialog):
 
 
     def _create_combobox(self, name):
-        """Return a combobox for modifying a multiple-value setting.
+        """Return a combobox for modifying a multiple-getValue setting.
         """
         setting = _settings[name]
         # Create the combobox and populate it
@@ -404,7 +425,7 @@ class PySciSettings (QDialog):
             data = QVariant(value)
             combo.addItem(label, data)
 
-        # Set the initial value, if any
+        # Set the initial getValue, if any
         current = self.editor.get_config(name)
         index = combo.findData(current)
         combo.setCurrentIndex(index)
@@ -431,7 +452,7 @@ class PySciSettings (QDialog):
         def button_pressed():
             current_color = self.editor.get_config(name)
             color = QColorDialog.getColor(current_color)
-            button.setStyleSheet("background-color: %s" % color.name())
+            button.setStyleSheet("background-color: %s" % color.getName())
             self.editor.set_config(name, color)
 
         # Connect event handler
@@ -439,7 +460,7 @@ class PySciSettings (QDialog):
 
         # Set default background color
         color = self.editor.get_config(name)
-        button.setStyleSheet("background-color: %s" % color.name())
+        button.setStyleSheet("background-color: %s" % color.getName())
 
         return button
 
@@ -449,7 +470,7 @@ class PySciSettings (QDialog):
         """
         spinbox = QSpinBox()
 
-        # Set initial value
+        # Set initial getValue
         spinbox.setValue(self.editor.get_config(name))
 
         def spinbox_changed(value):
@@ -477,7 +498,7 @@ class PySciSettings (QDialog):
         checkbox = QCheckBox('Line numbers', self)
         checkbox.stateChanged[int].connect(checkbox_changed)
 
-        # Set the initial checkbox state based on current value
+        # Set the initial checkbox state based on current getValue
         if self.editor.get_config('marginLineNumbers', 0):
             checkbox.setCheckState(Qt.Checked)
         else:
@@ -494,7 +515,7 @@ if __name__=="__main__":
     win=QWidget()
     ed=CodeEditor()
     layout=QVBoxLayout()
-    d=PySciSettings(ed)
+    d=EditorSettings(ed)
     layout.addWidget(d)
     d.show()
     win.show()

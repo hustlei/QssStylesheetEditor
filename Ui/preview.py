@@ -333,7 +333,7 @@ class previewWidget(QTabWidget):
         #c.setStyleSheet("border:1px solid gray;")
         c.setStyleSheet("background:rgba(0,0,0,100);")
         def clr():
-            # clr=QColor(scroll1.value(),scroll2.value(),scroll3.value(),100)
+            # clr=QColor(scroll1.getValue(),scroll2.getValue(),scroll3.getValue(),100)
             # p=QPalette()
             # p.setColor(QPalette.Background,clr)
             # c.setPalette(p)
