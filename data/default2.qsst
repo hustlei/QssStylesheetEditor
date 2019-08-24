@@ -1,1 +1,56 @@
-000
+/* ================================================ *
+author:lei
+lastedited:2019.8
+* ================================================ */
+
+$text       =#222
+$background =#fff
+$border     =#a8a8a8
+$selected   =#8bf       /*selected:hover*/
+$pressed    =#59f
+$focused    =#EA2
+
+
+
+QWidget
+{
+    color: $text;
+    background-color: $background;
+}
+
+
+/* =============================================== */
+
+/* MenuBar Menu                                    */
+
+/* =============================================== */
+
+QMenuBar {
+    background-color: $background;
+    spacing: 1px;
+    border-bottom: 1px solid $border;
+}
+
+QMenuBar::item{
+    background: transparent;
+    padding: 1px 8px;
+}
+
+QMenuBar::item:selected{
+    background:$selected;
+    border: 1px solid $selected;
+}
+
+QMenuBar::item:pressed{
+    background:$pressed;
+    border: 1px solid $pressed;
+    margin-bottom:-1px;
+    padding-bottom:1px;
+}
+
+QMenu{
+    background-color: red;
+    margin: 20px;
+    /*border: 1px solid red;*/
+}
+

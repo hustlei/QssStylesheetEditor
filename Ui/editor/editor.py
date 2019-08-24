@@ -15,6 +15,7 @@ from PyQt5 import Qsci
 
 from .enums import BadEnum, EditorEnums
 from .settings import *
+from ..editor import custom_lexer,custom_lexer
 
 sys.path.insert(0,os.path.join(os.path.dirname(__file__),"3rdparty.zip"))
 import chardet
@@ -29,7 +30,7 @@ class CodeEditor(QsciScintilla):
         super().__init__()
         self.coding="utf-8"
         self.settings={}
-        self._set_default_config()
+        self._setDefaultConfig()
         # Override defaults with any customizations
         self.configure(**config)
 
@@ -48,7 +49,7 @@ class CodeEditor(QsciScintilla):
         super().mousePressEvent(QMouseEvent)
         self.mousePress.emit()
 
-    def _set_default_config(self):
+    def _setDefaultConfig(self):
         """Set default configuration settings.
         """
         self.configure(
@@ -63,7 +64,7 @@ class CodeEditor(QsciScintilla):
             wrapVisualFlags='WrapFlagNone',  # 无对应getter
             # End-of-line mode
             # EolMode: Eol(Windows|Unix|Mac) SC_EOL_CRLF|SC_EOL_LF|SC_EOL_CR
-            # eolMode = self.SC_EOL_LF,# 以\n换行
+            eolMode = 'EolWindows',#self.SC_EOL_LF,# 以\n换行
             eolVisibility=False,  # 是否显示换行符
 
             # Whitespace: Ws(Invisible|Visible|VisibleAfterIndent)
@@ -113,8 +114,8 @@ class CodeEditor(QsciScintilla):
 
             # margin（line number）
             marginLineNumbers=(0, True),# 设置第0个边栏为行号边栏，True表示显示
-            marginsForegroundColor=QColor('#ff0000ff'),
-            marginsBackgroundColor=QColor('#ff0000ff'),  # 行号边栏背景颜色 不起作用？
+            marginsForegroundColor=QColor('#ff000000'),
+            marginsBackgroundColor=QColor('lightgray'),  # 行号边栏背景颜色 打开新文件后就不起作用了？
 
             # margin (folding)
             # Folding: (No|Plain|Circled|Boxed|CircledTree|BoxedTree)FoldStyle
@@ -123,30 +124,7 @@ class CodeEditor(QsciScintilla):
             ###marginType=(2,QsciScintilla.SC_MARGIN_SYMBOL),#页边类型
             ###marginMarkerMask=(2,QsciScintilla.SC_MASK_FOLDERS),#页边掩码
             ###marginSensitivity=(2,True),#注册通知事件，当用户点击边栏时，scintilla会通知我们
-
-            # default highlightLang
-            highlightLanguage='CSS',
         )
-
-    ### Extensions
-
-    def get_config(self, name, *args):
-        """Return the current configuration setting for attribute ``name``.
-        If ``name`` refers to an enumerated setting, return the string version
-        of that enumeration.
-        """
-        getter = getattr(self, name)
-        value = getter(*args)
-        try:
-            return EditorEnums.getName(value)
-        except BadEnum:
-            return value
-
-    def set_config(self, name, value):
-        """Set the current configuration setting for attribute ``getName``.
-        """
-        conf = {name: value}
-        self.configure(**conf)
 
     def configure(self, **config):
         """Configure the editor with the given settings.
@@ -190,6 +168,7 @@ class CodeEditor(QsciScintilla):
     # Language and syntax highlighting
     # Note: These follow the getter/setter pattern of other
     # QsciScintilla settings, to allow `configure` to manipulate them.
+
     def language(self):
         """Getter for language.
         """
@@ -209,66 +188,21 @@ class CodeEditor(QsciScintilla):
             self.lexer = None
         else:
             print("%s syntax highlighting" % language)
+            custom=False
+            for lexer in dir(custom_lexer):
+                if lexer[9:]==language:
+                    custom=True
+                    break
+
             try:
-                self.lexer = getattr(Qsci, 'QsciLexer'+language)(self)#lexer = QsciLexerCSS()
+                if custom:
+                    self.lexer = getattr(custom_lexer, 'QsciLexer' + language)(self)
+                else:
+                    self.lexer = getattr(Qsci, 'QsciLexer'+language)(self)#lexer = QsciLexerCSS()
             except AttributeError:
                 raise ValueError("Unknown language: '%s'" % language)
             self.lexer.setDefaultFont(self.font())
         self.setLexer(self.lexer)
-        # high light code
-        # self.lexer.setColor(QColor("#ffffff"))
-        # self.lexer.setPaper(QColor("#333333"))
-        # self.lexer.setColor(QColor("#5BA5F7"), QsciLexerPython.ClassName)
-        # self.lexer.setColor(QColor("#FF0B66"), QsciLexerPython.Keyword)
-        self.lexer.setColor(QColor("gray"), QsciLexerCSS.Comment)
-        self.lexer.setFont(self.font(), QsciLexerCSS.Comment)
-        # self.lexer.setColor(QColor("#BD4FE8"), QsciLexerPython.Number)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.DoubleQuotedString)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.TripleSingleQuotedString)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.TripleDoubleQuotedString)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.DoubleQuotedString)
-        # self.lexer.setColor(QColor("#04F452"), QsciLexerPython.FunctionMethodName)
-        # self.lexer.setColor(QColor("#FFFFFF"), QsciLexerPython.Operator)
-        # self.lexer.setColor(QColor("#FFFFFF"), QsciLexerPython.Identifier)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.CommentBlock)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.UnclosedString)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.HighlightedIdentifier)
-        # self.lexer.setColor(QColor("#F1E607"), QsciLexerPython.Decorator)
-
-        # marker
-        # self.markerDefine(QsciScintilla.Minus, QsciScintilla.SC_MARKNUM_FOLDEROPEN)
-        # self.markerDefine(QsciScintilla.Plus, QsciScintilla.SC_MARKNUM_FOLDER)
-        # self.markerDefine(QsciScintilla.Minus, QsciScintilla.SC_MARKNUM_FOLDEROPENMID)
-        # self.markerDefine(QsciScintilla.Plus, QsciScintilla.SC_MARKNUM_FOLDEREND)
-
-        # marker define color
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDEREND)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDEREND)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDEROPENMID)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDEROPENMID)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"),QsciScintilla.SC_MARKNUM_FOLDERMIDTAIL)
-        # self.setMarkerForegroundColor(QColor("#272727"),QsciScintilla.SC_MARKNUM_FOLDERMIDTAIL)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"),QsciScintilla.SC_MARKNUM_FOLDERTAIL)
-        # self.setMarkerForegroundColor(QColor("#272727"),QsciScintilla.SC_MARKNUM_FOLDERTAIL)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDERSUB)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDERSUB)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDER)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDER)
-        # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDEROPEN)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDEROPEN)
-
-        # self.SCI_MARKERDEFINE(QsciScintilla.SC_MARKNUM_FOLDEROPEN,QsciScintilla.SC_MARK_CHARACTER+65)#折叠标签样式
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDEROPEN, QsciScintilla.BoxedMinus)
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDEREND, QsciScintilla.SC_MARK_BOXPLUSCONNECTED)
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDEROPENMID, QsciScintilla.SC_MARK_BOXMINUSCONNECTED)
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDERMIDTAIL, QsciScintilla.SC_MARK_TCORNERCURVE)
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDERSUB, QsciScintilla.SC_MARK_VLINE)
-        # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDERTAIL, QsciScintilla.SC_MARK_LCORNERCURVE)
-        # 折叠标签颜色
-        # self.setMarkerBackgroundColor(QColor("0xa0a0a0"),QsciScintilla.SC_MARKNUM_FOLDERSUB )
-        # SendEditor(SCI_MARKERSETBACK, SC_MARKNUM_FOLDERMIDTAIL, 0xa0a0a0);
-        # SendEditor(SCI_MARKERSETBACK, SC_MARKNUM_FOLDERTAIL, 0xa0a0a0);
-        # SendEditor(SCI_SETFOLDFLAGS, 16 | 4, 0); // 如果折叠就在折叠行的上下各画一条横线
 
     def clear(self):
         """Clear the contents of the editor.
@@ -280,17 +214,27 @@ class CodeEditor(QsciScintilla):
         """Load the given file into the editor.
         """
         with open(filename, 'rb') as f:
+            self.setEnabled(True)
             l=min(os.path.getsize(filename),500)
             bytes=f.read()
-            self.coding=chardet.detect(bytes[:l])['encoding']
-            self.setText(bytes.decode(self.coding))
+            try:
+                self.coding=chardet.detect(bytes[:l])['encoding']
+                if(self.coding=="ascii"):
+                    self.coding="utf-8"
+                self.setText(bytes.decode(self.coding))
+            except:# Exception:
+                self.coding=""
+                self.setText("can't open this file, it may be a binary file.")
+                self.setEnabled(False)
             self.setModified(False)
             self.setHighlightLanguage(self.guessLang(filename))
 
     def save(self, filename):
         """Save the editor contents to the given filename.
         """
-        with open(filename, 'w') as outfile:
+        with open(filename, 'w',newline='') as outfile:
+            #不指定newline，则换行符为各系统默认的换行符（\n, \r, or \r\n, ）
+            #newline=''表示不转换
             outfile.write(self.text())
             self.setModified(False)
 
@@ -311,7 +255,9 @@ class CodeEditor(QsciScintilla):
                 return language
 
         # No match -- asume plain text
-        return 'None'
+        if(ext==".txt" or ext==".text"):
+            return 'None'
+        return "QSS"
 
     ###
     ### The Missing Getters 只有set函数，但是没有对应get函数的属性
@@ -359,4 +305,26 @@ class CodeEditor(QsciScintilla):
     def setMarginWidthes(self,*widthes):
         for i,w in widthes:
            self.setMarginWidth(i,w)
+
+    ###
+    ### extension
+    ###
+
+    def get_config(self, name, *args):
+        """Return the current configuration setting for attribute ``name``.
+        If ``name`` refers to an enumerated setting, return the string version
+        of that enumeration.
+        """
+        getter = getattr(self, name)
+        value = getter(*args)
+        try:
+            return EditorEnums.getName(value)
+        except BadEnum:
+            return value
+
+    def set_config(self, name, value):
+        """Set the current configuration setting for attribute ``getName``.
+        """
+        conf = {name: value}
+        self.configure(**conf)
 

@@ -24,8 +24,8 @@ class Qsst():
         """
         if qssStr is None:
             qssStr=self.srctext
-        self.varUsed=re.findall(r'[.\s]*\$+([^\$;]+)\s*;+[.\s]*',qssStr)
-        varsDefined=re.findall(r'([^\s=;\/*$]+)\s*=[ \t]*([^\s=;\/*$]*)[\t ]*[\r\n;]+',qssStr)
+        self.varUsed=re.findall(r':[ \t\w,.:()]*[$]([\w]+)',qssStr)
+        varsDefined=re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+',qssStr)
         self.varDict={}
         for var,val in varsDefined:
             self.varDict[var]=val
@@ -39,9 +39,14 @@ class Qsst():
         """
         根据varDict中变量的值，把模板文件中引用的变量用值替换，转换为qss文件。
         """
+
         qssStr=self.srctext
         varDict=self.varDict
-        self.loadVars()        
+        self.loadVars()
+        #删除变量定义
+        varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+')
+        qssStr=varsDefined.sub("",qssStr)
+
         for v in self.varDict:
             if(v in varDict.keys()):
                 qssStr=qssStr.replace("$"+v,varDict[v])
@@ -50,33 +55,31 @@ class Qsst():
                 qssStr=qssStr.replace("$"+v,' ')
         self.qss=qssStr
         
-    def replaceVarsInQss(self,val):
-        """
-        把转换后的qss文件中，若还存在引用的变量（$开头）都赋值为val
-        本方法暂时存在问题，qss和表达式需要+u
-        """
-        re.sub(r'(?<:[\s]*)\$([a-zA-Z_\u4e00-\u9fa5][0-9a-zA-Z_\u4e00-\u9fa5]*)',val,self.qss)
+    # def replaceVarsInQss(self,val):
+    #     """
+    #     把转换后的qss文件中，若还存在引用的变量（$开头）都赋值为val
+    #     本方法暂时存在问题，qss和表达式需要+u
+    #     """
+    #     re.sub(r'(?<:[\s]*)\$([a-zA-Z_\u4e00-\u9fa5][0-9a-zA-Z_\u4e00-\u9fa5]*)',val,self.qss)
         
     def writeVars(self):
-        varlist=self.varDict
+        varDictNew=self.varDict
         self.loadVars()
-        if(self.varDict):
-            self.srctext=re.sub(r'[\t ]*([^;\s=/*]+)\s*={1}[\t ]*([^;\s=/*]*)[\t ]*',
-                        lambda m:r'{}={}'.format(m.group(1),varlist[m.group(1)]),
-                        self.srctext)
-            if(len(varlist)>len(self.varDict)):
+        if(self.varDict):#如果文件中变量不为空，更新变量值
+            self.srctext=re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
+                        lambda m:'${}={};'.format(m.group(1),varDictNew.get(m.group(1),"")), self.srctext)
+            if(self.varUndefined):#在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
                 s=''
-                for var,val in varlist.items():
-                    if(var not in self.varDict.keys()):
-                        s+=var+"="+val+"\n"
-                self.srctext=re.sub(r'[\t ]*([^;\s=/*]+\s*={1}[\t ]*[^;\s=/*]*)[\t ]*',
-                        r'{}\1'.format(s),
-                        self.srctext,1)
+                for var,val in varDictNew.items():
+                    if(var in self.varUndefined):
+                        s+="$"+var+"="+val+";\n"
+                self.srctext=re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
+                        r'{}$\1=\2;\n'.format(s), self.srctext, 1)
         else:
-            s='/*'
-            for var,val in varlist.items():
-                s+=var+"="+val+"\n"
-            s+='*/\n'
+            s=''
+            for var,val in varDictNew.items():
+                s+="$"+var+"="+val+"\n"
+            s+='\n'
             self.srctext=s+self.srctext
         self.loadVars()
             

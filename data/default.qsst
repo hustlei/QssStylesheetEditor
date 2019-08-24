@@ -6,6 +6,8 @@ border=#888
 pressed=#59f
 focused=#EA2
 */
+$text=red;
+
 
 QWidget
 {

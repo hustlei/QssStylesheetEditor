@@ -24,9 +24,9 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.qsst = Qsst()
         self.clrBtnDict = {}
         self.file=None
-        self.edited=False
         self.lastSavedText=""
         self.newIndex=0
+        self.__lastKeyTextChanged=False#如果上一次按键文本改变了，那么鼠标，方向键都会导致重新渲染
 
         self.setupUi(self)
         self.setupActions()
@@ -91,15 +91,19 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         #if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
-        if(not self.edited):
-            self.edited=True
+        if(not self.editor.isModified()):
+            self.editor.setModified(True)
             self.setWindowTitle(self.title+" - *" + os.path.basename(self.file))
             self.actions["save"].setEnabled(True)
 
-        if (e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter or #大键盘为Ret小键盘为Enter
-            e.key() == Qt.Key_Semicolon or e.key() == Qt.Key_BraceRight): # or e.key() == Qt.Key_Tab):
+        if (e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter #大键盘为Ret小键盘为Enter
+            or e.key() == Qt.Key_Semicolon or e.key() == Qt.Key_BraceRight or e.key() == Qt.Key_Tab
+            or e.key() == Qt.Key_Up or e.key() == Qt.Key_Down or e.key() == Qt.Key_Left or e.key() == Qt.Key_Right):
             self.renderStyle()
             self.loadColorPanel()
+            self.__lastKeyTextChanged = False
+        else:
+            self.__lastKeyTextChanged = True
 
     def loadColorPanel(self):
         self.qsst.srctext = self.editor.text()
@@ -158,11 +162,12 @@ class MainWin(QMainWindow, Widgets_MainWin):
         color = QColorDialog.getColor(Qt.white, self, "color pick", QColorDialog.ShowAlphaChannel)
         if (color.isValid()):
             s = ''
+            clrstr=color.name()
             if (color.alpha() == 255):
-                clrstr = color.getName()
+                clrstr = color.name()
             else:
-                clrstr = 'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
-                s = 'font-size:8px;'
+                clrstr = color.name(QColor.HexArgb)#'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
+            #     s = 'font-size:8px;'
             if (qGray(color.rgb()) < 100):
                 s += 'color:white;'
             self.clrBtnDict[var].setText(clrstr)
@@ -178,14 +183,14 @@ class MainWin(QMainWindow, Widgets_MainWin):
                                                   "qsst(*.qsst);;qss(*.qss);;all(*.*)")#_是filefilter
         if (os.path.exists(file)):
             self.file=file
-            self.editor.load(file)
             self.lastSavedText = self.editor.text()
+            self.editor.load(self.file)
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title+" - " + os.path.basename(file))
 
     def new(self):
-        if(self.edited):
+        if(self.editor.isModified()):
             ret=QMessageBox.question(self,"Qss Template Editer","当前文件尚未保存，是否要保存文件？",
                                      QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel,QMessageBox.No)
             if(ret==QMessageBox.Yes):
@@ -197,16 +202,14 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.newIndex=self.newIndex+1
         self.file="new{}.qsst".format(self.newIndex)
         self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
-        self.edited=False
+        self.editor.setModified(False)
 
     def save(self):
         if (self.file and os.path.exists(self.file)):
-            with open(self.file,'w') as f:
-                self.lastSavedText=self.editor.text()
-                f.write(self.lastSavedText)
-                self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
-                self.edited=False
-                self.actions["save"].setEnabled(False)
+            self.lastSavedText=self.editor.text()
+            self.editor.save(self.file)
+            self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
+            self.actions["save"].setEnabled(False)
         else:
             self.saveAs()
 
@@ -215,10 +218,10 @@ class MainWin(QMainWindow, Widgets_MainWin):
         file, filefilter = QFileDialog.getSaveFileName(self, "save file", self.file, "qsst(*.qsst);;qss(*.qss);;all(*.*)")
         if (file):
             self.file = file
-            with open(file, 'w') as f:
-                self.lastSavedText=self.editor.text()
-                f.write(self.lastSavedText)
-                self.setWindowTitle(self.title+" - " + os.path.basename(file))
+            self.lastSavedText=self.editor.text()
+            self.editor.save(self.file)
+            self.setWindowTitle(self.title+" - " + os.path.basename(file))
+            self.actions["save"].setEnabled(False)
 
     def export(self):
         self.qsst.convertQss()
@@ -233,7 +236,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
                 f.write(self.qsst.qss)
 
     def closeEvent(self, e):
-        if(self.edited):
+        if(self.editor.isModified()):
             if(self.lastSavedText!=self.editor.text()):
                 msg=QMessageBox(QMessageBox.Question,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                                 QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
@@ -251,7 +254,9 @@ class MainWin(QMainWindow, Widgets_MainWin):
                     qApp.exit()
                 else:
                     e.ignore()
+
 def main():
+    sys.setrecursionlimit(1500)
     app = QApplication(sys.argv)
     win = MainWin()
     win.show()
