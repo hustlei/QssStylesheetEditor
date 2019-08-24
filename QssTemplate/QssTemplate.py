@@ -44,7 +44,7 @@ class Qsst():
         varDict=self.varDict
         self.loadVars()
         #删除变量定义
-        varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+')
+        varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[ \t;]*[\r\n]{0,2}')
         qssStr=varsDefined.sub("",qssStr)
 
         for v in self.varDict:

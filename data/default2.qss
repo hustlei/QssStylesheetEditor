@@ -1,0 +1,51 @@
+/* ================================================ *
+author:lei
+lastedited:2019.8
+* ================================================ */
+
+/*selected:hover*/
+
+
+
+QWidget
+{
+    color: #222;
+    background-color: #fff;
+}
+
+
+/* =============================================== */
+
+/* MenuBar Menu                                    */
+
+/* =============================================== */
+
+QMenuBar {
+    background-color: #fff;
+    spacing: 1px;
+    border-bottom: 1px solid #a8a8a8;
+}
+
+QMenuBar::item{
+    background: transparent;
+    padding: 1px 8px;
+}
+
+QMenuBar::item:selected{
+    background:#8bf;
+    border: 1px solid #8bf;
+}
+
+QMenuBar::item:pressed{
+    background:#59f;
+    border: 1px solid #59f;
+    margin-bottom:-1px;
+    padding-bottom:1px;
+}
+
+QMenu{
+    background-color: red;
+    margin: 20px;
+    /*border: 1px solid red;*/
+}
+

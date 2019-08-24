@@ -180,7 +180,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
     def open(self,_=None, file=None):#_参数用于接收action的event参数,bool类型
         if (file is None):
             file, _ = QFileDialog.getOpenFileName(self, "Open File", file,
-                                                  "qsst(*.qsst);;qss(*.qss);;all(*.*)")#_是filefilter
+                                                  "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")#_是filefilter
         if (os.path.exists(file)):
             self.file=file
             self.lastSavedText = self.editor.text()
@@ -232,7 +232,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             f=os.path.splitext(self.file)[0]
         file, _ = QFileDialog.getSaveFileName(self, "export Qss", f, "Qss(*.qss);;all(*.*)")
         if file:
-            with open(file, 'w') as f:
+            with open(file, 'w', newline='') as f:
                 f.write(self.qsst.qss)
 
     def closeEvent(self, e):
