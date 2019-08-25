@@ -72,6 +72,8 @@ class Widgets_MainWin(object):
         self.actions["ShowPreview"] = createAct("&PreviewPanel","ShowPreviewPanel",None,"img/view.png",checkable=True)
         self.actions["ShowPreview"].setChecked(True)
 
+        self.actions["about"] = createAct("&About","About")
+
         # self.exitAct.triggered.connect(qApp.exit)#等价于qApp.quit
         self.actions["exit"].triggered.connect(self.close)
 
@@ -102,6 +104,9 @@ class Widgets_MainWin(object):
         self.menus["View"] = QMenu("&View")
         self.menus["View"].addAction(self.actions["ShowColor"])
         self.menus["View"].addAction(self.actions["ShowPreview"])
+
+        self.menus["Help"] = QMenu("&Help")
+        self.menus["Help"].addAction(self.actions["about"])
 
         for m in self.menus.values():
             self.menubar.addMenu(m)

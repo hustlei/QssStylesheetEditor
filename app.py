@@ -18,7 +18,8 @@ from QssTemplate import Qsst
 class MainWin(QMainWindow, Widgets_MainWin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
-        self.title=self.tr("QssStylesheetEditor v1.1")
+        self.ver="v1.1"
+        self.title=self.tr("QssStylesheet Editor "+self.ver)
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))
         self.qsst = Qsst()
@@ -67,6 +68,11 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.editor.loseFocus.connect(rend)
         self.editor.mouseLeave.connect(rend)
         self.editor.mousePress.connect(rend)
+
+        aboutText="<b><center>"+self.title+"</center></b><br><br>"
+        aboutText+="本软件为QtWidget样式表Qss文件高级编辑软件，<br>支持自定义变量，支持实时预览。<br><br>"
+        aboutText+="author: lileilei<br>website: https://blog.csdn.net/hustlei<br><br>业余编写，欢迎交流: hustlei@sina.cn"
+        self.actions["about"].triggered.connect(lambda:QMessageBox.about(self,"about",aboutText))
 
     def unuseQss(self,unuse):
         if(unuse):
@@ -195,7 +201,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
     def new(self):
         if(self.editor.isModified()):
-            ret=QMessageBox.question(self,"Qss Template Editer","当前文件尚未保存，是否要保存文件？",
+            ret=QMessageBox.question(self,self.title,"当前文件尚未保存，是否要保存文件？",
                                      QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel,QMessageBox.No)
             if(ret==QMessageBox.Yes):
                 self.save()
@@ -242,7 +248,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
     def closeEvent(self, e):
         if(self.editor.isModified()):
             if(self.lastSavedText!=self.editor.text()):
-                msg=QMessageBox(QMessageBox.Question,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
+                msg=QMessageBox(QMessageBox.Question,self.title,self.tr("是否将更改保存到"+os.path.basename(self.file)),
                                 QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Cancel)
                 msg.button(QMessageBox.Save).setText(self.tr("保存"))
