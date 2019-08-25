@@ -15,7 +15,7 @@ from PyQt5 import Qsci
 
 from .enums import BadEnum, EditorEnums
 from .settings import *
-from ..editor import custom_lexer,custom_lexer
+from ..editor import custom_lexer
 
 sys.path.insert(0,os.path.join(os.path.dirname(__file__),"3rdparty.zip"))
 import chardet
@@ -194,13 +194,14 @@ class CodeEditor(QsciScintilla):
                     custom=True
                     break
 
-            try:
-                if custom:
-                    self.lexer = getattr(custom_lexer, 'QsciLexer' + language)(self)
-                else:
-                    self.lexer = getattr(Qsci, 'QsciLexer'+language)(self)#lexer = QsciLexerCSS()
-            except AttributeError:
-                raise ValueError("Unknown language: '%s'" % language)
+            # try:
+            if custom:
+                self.lexer = getattr(custom_lexer, 'QsciLexer' + language)(self)
+            else:
+                self.lexer = getattr(Qsci, 'QsciLexer'+language)(self)#lexer = QsciLexerCSS()
+            # except AttributeError:
+            #     raise AttributeError
+                #raise ValueError("Unknown language: '%s'" % language)
             self.lexer.setDefaultFont(self.font())
         self.setLexer(self.lexer)
 

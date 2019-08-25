@@ -1,6 +1,6 @@
 import re
 
-from PyQt5.Qsci import QsciLexerCustom
+from PyQt5.Qsci import QsciScintilla, QsciLexerCustom
 from PyQt5.QtGui import QColor, QFont
 
 
@@ -21,12 +21,18 @@ class QsciLexerQSS(QsciLexerCustom):
     Variable = 13  # qsst变量$引用
     Param = 14 # 括号内参数
 
+    namelist = {
+        0: 'Default', 1: 'Tag', 2: 'IDSelector', 3: 'ClassSelector',
+        4: 'PseudoElement', 5: 'PseudoClass', 6: 'Attribute', 7: 'Operator',
+        8: 'Property', 9: 'Value', 10: 'Comment', 11: 'DoubleQuotedString',
+        12: 'SingleQuotedString', 13: 'Variable', 14: 'Param'}
     operatorList = ('{', '}', '[', ']', '(', ')', '::', '.', ':', ';', ',', '/*', '*/', '#',
                     '$', '=', '"', "'", '\r', '\n')  # '!' * @ > + ~ |
     unitList=('pt','px','ex','em')
 
-    def __init__(self, parent=None):
+    def __init__(self, parent):
         super().__init__(parent)
+        self.__editor=parent
         self.setDefaultStyle()
 
     def setDefaultStyle(self):
@@ -64,30 +70,57 @@ class QsciLexerQSS(QsciLexerCustom):
         # self.setFont(QFont("Consolas", 14, weight=QFont.Normal), 0)   # Style 0: Consolas 14pt
         # self.setFont(QFont("Consolas", 14, weight=QFont.Normal), 1)
 
+        SC=QsciScintilla
+        # 折叠标签颜色
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERSUB, QColor("0xa0a0a0"))
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERMIDTAIL, QColor("0xa0a0a0"))
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERTAIL, QColor("0xa0a0a0"))
+
+        #if (self.__editor.folding() == QsciScintilla.BoxedTreeFoldStyle):
+            # 显示这些标记的掩码是0xFE000000，同样头文件里已经定义好了
+            # define SC_MASK_FOLDERS 0xFE000000
+            #//self.__editor..SendScintilla(SC.SCI_SETMARGINMASKN, SC.MARGIN_FOLD_INDEX, SC.SC_MASK_FOLDERS)# 页边掩码
+            #self.__editor..setMarginMarkerMask(2,0x7e000000)#fold margin只显示25-31的图标
+            #折叠标签样式
+            # self.__editor.markerDefine(65,SC.SC_MARKNUM_FOLDEROPEN)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDEROPEN,SC.SC_MARK_BOXMINUS)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDER,SC.SC_MARK_BOXPLUS)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDERSUB,SC.SC_MARK_VLINE)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDERTAIL,SC.SC_MARK_LCORNER)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDEROPENMID,SC.SC_MARK_BOXMINUSCONNECTED)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDEREND,SC.SC_MARK_BOXPLUSCONNECTED)
+            # self.__editor.SendScintilla(SC.SCI_MARKERDEFINE,SC.SC_MARKNUM_FOLDERMIDTAIL,SC.SC_MARK_TCORNER)
+
+            # define SC_MARKNUM_FOLDEROPEN  31      //展开
+            # define SC_MARKNUM_FOLDER      30      //折叠
+            # define SC_MARKNUM_FOLDERSUB   29      //普通文本(各级内部) |部分
+            # define SC_MARKNUM_FOLDERTAIL  28      //尾部
+            # define SC_MARKNUM_FOLDEROPENMID 26    //子级展开
+            # define SC_MARKNUM_FOLDEREND     25    //子级折叠
+            # define SC_MARKNUM_FOLDERMIDTAIL 27    //子级尾部
+
     def language(self):
         return "QSS"
 
+    def setDefaultFont(self, font):
+        for i in self.namelist.keys():
+            self.setFont(font,i)
+
     def description(self, style):
         #必须定义重载这个函数，否则不着
-        namelist={
-            0:'Default',1:'Tag',2:'IDSelector',3:'ClassSelector',
-            4:'PseudoElement',5:'PseudoClass',6:'Attribute',7:'Operator',
-            8:'Property',9:'Value',10:'Comment',11:'DoubleQuotedString',
-            12:'SingleQuotedString',13:'Variable',14:'Param'}
-        return namelist.get(style,"")
+        return self.namelist.get(style,"")
 
     def styleText(self, start, end):
         # 1. Slice out a part from the text
         # ----------------------------------
-        editor = self.parent()
-        text = editor.text()
+        text = self.__editor.text()
 
         #扩大着色范围，避免修改文件过程中局部着色出错。
         while start>0:
-            if(text[start]=="{" or text[start]=="}"):
+            if(text[start]=="{" or text[start]=="}" or start==0):
                 break
             else:
-                start=start-1
+                start-=1
 
         # 2. Initialize the styling procedure
         # ------------------------------------
@@ -220,7 +253,48 @@ class QsciLexerQSS(QsciLexerCustom):
             else:
                 self.setStyling(count,state)
 
-    ###
+        # Folding Setting
+        # Initialize the folding variables
+        SCI = self.__editor.SendScintilla
+        GETFOLDLEVEL = QsciScintilla.SCI_GETFOLDLEVEL
+        SETFOLDLEVEL = QsciScintilla.SCI_SETFOLDLEVEL
+        HEADERFLAG = QsciScintilla.SC_FOLDLEVELHEADERFLAG
+        LEVELBASE = QsciScintilla.SC_FOLDLEVELBASE
+        NUMBERMASK = QsciScintilla.SC_FOLDLEVELNUMBERMASK
+        WHITEFLAG = QsciScintilla.SC_FOLDLEVELWHITEFLAG
+
+        index = SCI(QsciScintilla.SCI_LINEFROMPOSITION, start)
+        if index == 0:
+            level = LEVELBASE
+        else:
+            lastLevel = SCI(GETFOLDLEVEL, index - 1)
+            level=lastLevel
+
+        lines = text.splitlines(True)
+        for line in iter(lines):
+            open_count = line.count('{')
+            close_count = line.count('}')
+            isBlankLine = (line.strip=="")
+            flag=0x000
+
+            if isBlankLine:
+                flag = WHITEFLAG
+            elif open_count > close_count:
+                flag = HEADERFLAG
+            else:
+                flag &= NUMBERMASK
+
+            SCI(SETFOLDLEVEL, index, level | flag)
+            level += open_count
+            level -= close_count
+            index+=1
+
+            # l=(level & ~HEADERFLAG)-LEVELBASE
+            # print("{}:{}".format(index+1,l))
+        # Reset the fold level of the last line
+        #editor.SendScintilla(QsciScintilla.SCI_SETFOLDLEVEL, len(lines), 0)
+        #editor.SendScintilla(QsciScintilla.SCI_SETFOLDFLAGS, 16 | 4, 0)# // 如果折叠就在折叠行的上下各画一条横线
+
     ### token 判断
     ###
     def isOperator(self, ch):
@@ -233,7 +307,6 @@ class QsciLexerQSS(QsciLexerCustom):
 
     def isAWordChar(self, ch):
         return ch >= 0x80 or ch.isalnum() or ch == "-" or ch == "_"
-
 
 if __name__ == '__main__':
     from PyQt5.QtWidgets import *
