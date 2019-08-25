@@ -2,12 +2,12 @@
 author:lei
 lastedited:2019.8
 * ================================================ */
-$text       =#222
-$background =#fff
-$border     =#a8a8a8
-$selected   =#8bf       /*selected,hover*/
-$pressed    =#59f
-$focused    =#EA2       /*actived*/
+$text = #222;
+$background = #fff;
+$border = #a8a8a8;
+$selected = #00007f; /*selected,hover*/
+$pressed = #59f;
+$focused = #EA2; /*actived*/
 
 
 QWidget

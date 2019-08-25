@@ -164,9 +164,9 @@ class MainWin(QMainWindow, Widgets_MainWin):
             s = ''
             clrstr=color.name()
             if (color.alpha() == 255):
-                clrstr = color.name()
+                clrstr = color.name().upper()
             else:
-                clrstr = color.name(QColor.HexArgb)#'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
+                clrstr = color.name(QColor.HexArgb).upper()#'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
             #     s = 'font-size:8px;'
             if (qGray(color.rgb()) < 100):
                 s += 'color:white;'
@@ -174,7 +174,11 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.clrBtnDict[var].setStyleSheet(s + "background:" + clrstr)
             self.qsst.varDict[var] = clrstr
             self.qsst.writeVars()
-            self.editor.setText(self.qsst.srctext)
+            pos=self.editor.verticalScrollBar().sliderPosition()#用setText之后undo redo堆栈全部消失，所以暂时用这种方法
+            self.editor.selectAll()
+            self.editor.replaceSelectedText(self.qsst.srctext)#setText(self.qsst.srctext)
+            #self.editor.setCursorPosition(xp,yp)
+            self.editor.verticalScrollBar().setSliderPosition(pos)
             self.renderStyle()
 
     def open(self,_=None, file=None):#_参数用于接收action的event参数,bool类型
@@ -240,7 +244,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             if(self.lastSavedText!=self.editor.text()):
                 msg=QMessageBox(QMessageBox.Question,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                                 QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
-                msg.setDefaultButton(QMessageBox.Discard)
+                msg.setDefaultButton(QMessageBox.Cancel)
                 msg.button(QMessageBox.Save).setText(self.tr("保存"))
                 msg.button(QMessageBox.Discard).setText(self.tr("放弃"))
                 msg.button(QMessageBox.Cancel).setText(self.tr("取消"))

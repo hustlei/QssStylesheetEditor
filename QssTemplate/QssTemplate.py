@@ -67,18 +67,18 @@ class Qsst():
         self.loadVars()
         if(self.varDict):#如果文件中变量不为空，更新变量值
             self.srctext=re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
-                        lambda m:'${}={};'.format(m.group(1),varDictNew.get(m.group(1),"")), self.srctext)
+                        lambda m:'${} = {};'.format(m.group(1),varDictNew.get(m.group(1),"")), self.srctext)
             if(self.varUndefined):#在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
                 s=''
                 for var,val in varDictNew.items():
                     if(var in self.varUndefined):
-                        s+="$"+var+"="+val+";\n"
+                        s+="$"+var+" = "+val+";\n"
                 self.srctext=re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
-                        r'{}$\1=\2;\n'.format(s), self.srctext, 1)
+                        r'{}$\1 = \2;\n'.format(s), self.srctext, 1)
         else:
             s=''
             for var,val in varDictNew.items():
-                s+="$"+var+"="+val+"\n"
+                s+="$"+var+" = "+val+";\n"
             s+='\n'
             self.srctext=s+self.srctext
         self.loadVars()
