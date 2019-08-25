@@ -27,11 +27,11 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.file=None
         self.lastSavedText=""
         self.newIndex=0
-        self.__lastKeyTextChanged=False#如果上一次按键文本改变了，那么鼠标，方向键都会导致重新渲染
 
         self.setupUi(self)
         self.setupActions()
         self.new()
+
         self.statusbar.showMessage("Ready")
 
     def setupActions(self):
@@ -74,6 +74,8 @@ class MainWin(QMainWindow, Widgets_MainWin):
         aboutText+="author: lileilei<br>website: https://blog.csdn.net/hustlei<br><br>业余编写，欢迎交流: hustlei@sina.cn"
         self.actions["about"].triggered.connect(lambda:QMessageBox.about(self,"about",aboutText))
 
+        self.editor.modificationChanged.connect(self.motifyChanged)
+
     def unuseQss(self,unuse):
         if(unuse):
             self.setStyleSheet('')
@@ -94,22 +96,23 @@ class MainWin(QMainWindow, Widgets_MainWin):
         else:
             self.setStyleSheet(self.qsst.qss)
 
-
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         #if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
-        if(not self.editor.isModified()):
-            self.editor.setModified(True)
-            self.setWindowTitle(self.title+" - *" + os.path.basename(self.file))
-            self.actions["save"].setEnabled(True)
 
         if (e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter #大键盘为Ret小键盘为Enter
             or e.key() == Qt.Key_Semicolon or e.key() == Qt.Key_BraceRight or e.key() == Qt.Key_Tab
             or e.key() == Qt.Key_Up or e.key() == Qt.Key_Down or e.key() == Qt.Key_Left or e.key() == Qt.Key_Right):
             self.renderStyle()
             self.loadColorPanel()
-            self.__lastKeyTextChanged = False
+
+    def motifyChanged(self,e):
+        if(self.editor.isModified()):
+            self.setWindowTitle(self.title+" - *" + os.path.basename(self.file))
+            self.actions["save"].setEnabled(True)
         else:
-            self.__lastKeyTextChanged = True
+            self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
+            self.actions["save"].setEnabled(False)
+
 
     def loadColorPanel(self):
         self.qsst.srctext = self.editor.text()

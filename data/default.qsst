@@ -5,7 +5,7 @@ lastedited:2019.8
 $text = #222;
 $background = #FFF;
 $border = #888;
-$selected = #8BF; /*selected,hover*/
+$selected = #8BF; /*hover*/
 $pressed = #59F;
 $focused = #EA2; /*actived*/
 
@@ -38,13 +38,17 @@ QMenuBar::item:selected{
 QMenuBar::item:pressed{
     background: $pressed;
     border: 1px solid $pressed;
-    margin-bottom: -1px;
-    padding-bottom: 1px;
+    padding-top: 4px; /*margin-bottom: -4px;*/
 }
 
 QMenu{
-    background-color: red;
+    background-color: $background;
     margin: 20px;
-    /*border: 1px solid red;*/
+    border: 1px solid red;*/
 }
+
+QMenu::item{
+    padding: 2px 20px;
+    border: 1px solid transparent; /* reserve space for selection border */
+    }
 
