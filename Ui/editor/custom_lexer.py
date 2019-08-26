@@ -30,9 +30,9 @@ class QsciLexerQSS(QsciLexerCustom):
                     '$', '=', '"', "'", '\r', '\n')  # '!' * @ > + ~ |
     unitList=('pt','px','ex','em')
 
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.__editor=parent
+    def __init__(self,codeEditor):
+        super().__init__(codeEditor)
+        self.__editor=codeEditor
         self.setDefaultStyle()
 
     def setDefaultStyle(self):
@@ -116,8 +116,9 @@ class QsciLexerQSS(QsciLexerCustom):
         text = self.__editor.text()
 
         #扩大着色范围，避免修改文件过程中局部着色出错。
+        t=str.encode(text)#start end是byte字节数，如果有非注意和len(text)长度不一样
         while start>0:
-            if(text[start]=="{" or text[start]=="}" or start==0):
+            if(t[start]=="{" or start==0):
                 break
             else:
                 start-=1
@@ -125,7 +126,7 @@ class QsciLexerQSS(QsciLexerCustom):
         # 2. Initialize the styling procedure
         # ------------------------------------
         self.startStyling(start)
-        text=text[start:end]
+        text=bytes.decode(t[start:end])
 
         # 3. Tokenize the text
         # ---------------------
@@ -160,7 +161,10 @@ class QsciLexerQSS(QsciLexerCustom):
             if state == self.Comment:
                 if token == "*/":
                     self.setStyling(count,self.Operator)
-                    lastState, state = state, self.Tag
+                    if inBrace:
+                        lastState, state = state, self.Property
+                    else:
+                        lastState, state = state, self.Tag
                 else:
                     self.setStyling(count, self.Comment)
             elif state == self.DoubleQuotedString:
@@ -234,7 +238,8 @@ class QsciLexerQSS(QsciLexerCustom):
                     state = lastState
                     inParentheses = False
                 elif token == ",":
-                    pass
+                    if(not inBrace):
+                        lastState, state = state, self.Tag
                 elif token ==";":
                     if opPrev == "=":
                         state = self.Tag

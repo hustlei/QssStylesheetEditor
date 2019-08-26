@@ -3,12 +3,13 @@ author:lei
 lastedited:2019.8
 * ================================================ */
 $text = #222;
-$background = #FFF;
+$background = #FAFAFAFA;
 $border = #888;
 $selected = #8BF; /*hover*/
 $pressed = #59F;
 $focused = #EA2; /*actived*/
-
+$grad1a = #eee; /*gradient start*/
+$grad1b = #fafafa; /*gradient end*/
 
 QWidget
 {
@@ -41,14 +42,169 @@ QMenuBar::item:pressed{
     padding-top: 4px; /*margin-bottom: -4px;*/
 }
 
-QMenu{
-    background-color: $background;
-    margin: 20px;
-    border: 1px solid red;*/
+QMenu {
+    background-color: $background;/*主菜单Qmenu不起作用,不知道为什么*/
+    border: 1px solid $border;
 }
 
-QMenu::item{
-    padding: 2px 20px;
+QMenu::item {
+    padding: 2px 50px 2px 25px;
     border: 1px solid transparent; /* reserve space for selection border */
-    }
+}
 
+QMenu::item:selected {
+    border-color: $border transparent;
+    background: $selected;
+}
+
+
+QMenu::separator {
+    height: 1px;
+    background: $border;
+    margin: 0 5px;
+}
+
+QMenu::indicator {/*待定*/
+    width: 13px;
+    height: 13px;
+}
+
+QMenu::icon:checked { /* appearance of a 'checked' icon */
+    background: gray;
+    border: 1px inset gray;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+}
+
+/* =============================================== */
+/* ToolBar StatusBar                               */
+/* =============================================== */
+QToolBar {
+    background: $background;
+    spacing: 1px; /* spacing between items in the tool bar */
+    padding: 1px;
+    border-bottom: 1px solid $border;
+}
+
+QStatusBar{
+    background: transparent;
+    border-top:1px solid $border;
+}
+
+QStatusBar::item {
+    margin: 2px 0;
+    border-left: 1px solid $border;
+}
+
+QStatusBar QLabel{
+    background: transparent;
+    margin: 0  2px;
+}
+
+QStatusBar QPushButton{
+    background: transparent;
+    margin: 0  2px;
+}
+
+QStatusBar QPushButton:hover{
+    background: $selected;
+    margin: 0  2px;
+}
+
+/* =============================================== */
+/* Label                                           */
+/* =============================================== */
+QFrame, QLabel {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 1px;
+}
+
+QToolTip {
+    border: 1px solid $border;
+    border-radius: 3px;
+    padding: 1px;
+    opacity: 100;
+}
+
+/* =============================================== */
+/* TextBox                                         */
+/* =============================================== */
+QLineEdit {
+    background: transparent;
+    selection-background-colo: $selected;
+    border: 1px solid $border;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+/*QLineEdit[readOnly="true"] { color: gray }*/
+QLineEdit:read-only {
+    background: lightgray;
+}
+QLineEdit[echoMode="2"]{
+    lineedit-password-character: ****;
+}
+
+/*QDialog QLineEdit { color: brown }*/
+
+/* =============================================== */
+/* Button                                          */
+/* =============================================== */
+QPushButton {
+    border: 1px solid $border;
+    border-radius: 2px;
+    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, 
+                       stop: 0 $grad1a, stop: 0.05 $grad1b,
+                       stop: 0.5 $grad1b, 
+                       stop: 0.9 $grad1a, stop: 1 $grad1a);;
+    padding: 1px 4px;
+    min-width: 50px;
+    min-height: 16px;
+}
+
+QPushButton:flat {
+    border: none; /* no border for a flat push button */
+}
+
+QPushButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+
+
+QPushButton:pressed
+{
+    border-width: 1px;      
+    background-color: $pressed;
+    border-color: $border;
+}
+
+QPushButton:focus, QPushButton:default {
+    border-color: $focused; /* make the default button prominent */
+}
+
+
+
+
+
+
+
+
+
+/* =============================================== */
+/* ProgressBar                                     */
+/* =============================================== */
+QProgressBar {
+    border: 1px solid $border;
+    border-radius: 4px;    
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: $focused;
+    width: 4px;
+    margin: 1px;
+}
