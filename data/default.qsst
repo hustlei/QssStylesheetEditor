@@ -3,18 +3,23 @@ author:lei
 lastedited:2019.8
 * ================================================ */
 $text = #222;
-$background = #FAFAFAFA;
-$border = #888;
+$background = #FFFFFF;
+$border = #999999;
 $selected = #8BF; /*hover*/
 $pressed = #59F;
 $focused = #EA2; /*actived*/
-$grad1a = #eee; /*gradient start*/
-$grad1b = #fafafa; /*gradient end*/
+$grad1a = #DADADF; /*gradient start*/
+$grad1b = #EAEAEF; /*gradient end*/
 
 QWidget
 {
     color: $text;
     background-color: $background;
+}
+
+QFrame{
+    color: $text;
+    background-color: $background;/*不能设置为transparent*/
 }
 
 /* =============================================== */
@@ -42,8 +47,8 @@ QMenuBar::item:pressed{
     padding-top: 4px; /*margin-bottom: -4px;*/
 }
 
-QMenu {
-    background-color: $background;/*主菜单Qmenu不起作用,不知道为什么*/
+QMenu {/* QMainWindow 的MenuBar下拉的Menu是系统菜单，这个设置无效，其他地方菜单有效*/
+    background-color: $background;
     border: 1px solid $border;
 }
 
@@ -117,7 +122,7 @@ QStatusBar QPushButton:hover{
 /* =============================================== */
 /* Label                                           */
 /* =============================================== */
-QFrame, QLabel {
+QLabel {
     background: transparent;
     border: 1px solid transparent;
     padding: 1px;
@@ -125,9 +130,10 @@ QFrame, QLabel {
 
 QToolTip {
     border: 1px solid $border;
+    background-color: $background;
     border-radius: 3px;
+    opacity: 128;/*不起作用？*/
     padding: 1px;
-    opacity: 100;
 }
 
 /* =============================================== */
@@ -135,45 +141,60 @@ QToolTip {
 /* =============================================== */
 QLineEdit {
     background: transparent;
-    selection-background-colo: $selected;
+    selection-background-color: $selected;
     border: 1px solid $border;
     border-radius: 2px;
+    border-style: inset;
     padding: 0 1px;
 }
+
+QLineEdit:hover{
+    border-color: $selected;
+}
+
 /*QLineEdit[readOnly="true"] { color: gray }*/
+QLineEdit[echoMode="2"]{
+    lineedit-password-character: 88;/*字符的ascii码*/
+}
+
 QLineEdit:read-only {
+    color: lightgray;
+}
+
+QLineEdit:disabled{
+    color: lightgray;
     background: lightgray;
 }
-QLineEdit[echoMode="2"]{
-    lineedit-password-character: ****;
+
+QTextEdit{
+    selection-background-color:$selected;
+    border: 1px solid $border;
+    border-style: inset;
 }
-
-/*QDialog QLineEdit { color: brown }*/
-
+QTextEdit:hover{
+    border-color: $selected;
+}
+QTextEdit:focus{
+    border-color: $focused;
+}
 /* =============================================== */
 /* Button                                          */
 /* =============================================== */
 QPushButton {
     border: 1px solid $border;
     border-radius: 2px;
-    background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, 
-                       stop: 0 $grad1a, stop: 0.05 $grad1b,
-                       stop: 0.5 $grad1b, 
-                       stop: 0.9 $grad1a, stop: 1 $grad1a);;
+    /*background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, 
+        stop: 0 $grad1a, stop: 0.05 $grad1b,stop: 0.5 $grad1b, 
+        stop: 0.9 $grad1a, stop: 1 $grad1a);*/
     padding: 1px 4px;
     min-width: 50px;
     min-height: 16px;
-}
-
-QPushButton:flat {
-    border: none; /* no border for a flat push button */
 }
 
 QPushButton:hover{
     background-color: $selected;
     border-color: $pressed;
 }
-
 
 QPushButton:pressed
 {
@@ -187,19 +208,96 @@ QPushButton:focus, QPushButton:default {
 }
 
 
+QToolButton { /* ToolBar里的按钮和带下拉菜单的按钮 */
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    margin: 1px;
+}
 
+QToolButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+    border-radius: 3px;
+}
 
+QToolButton:pressed{
+    background-color: $pressed;
+    border-color: $focused;
+    border-radius: 3px;
+}
 
+/* only for MenuButtonPopup */
+QToolButton[popupMode="1"]{
+    padding-left: 1px;
+    padding-right: 15px; /* make way for the popup button */
+    border: 1px solid $border;
+    min-height: 15px;
+    /*background: qlineargradient(x1:0, y1:0 ,x2:0, y2:1
+        stop: 0 $grad1a, stop: 0.05 $grad1b, stop: 0.5 $grad1b
+        stop: 0.95 $grad1a stop: 1$grad1a)*/
+}
+QToolButton[popupMode="1"]:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+QToolButton[popupMode="1"]:pressed{
+    border-width: 1px;
+    background-color: $pressed;
+    border-color: $border;
+}
+QToolButton::menu-button {
+    border: 1px solid $border;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 16px;
+}
 
-
-
-
+/* =============================================== */
+/* ComboBox                                        */
+/* =============================================== */
+QComboBox{
+    border: 1px solid $border;
+}
+QComboBox:editable{
+    border-style: inset;
+}
+QComboBox:hover{
+    border-color: $selected;
+}
+QComboBox:focus{
+    border-color: $focused;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 2px;
+    padding-left: 2px;
+}
+QComboBox QAbstractItemView {
+    border: 1px solid $border;
+    selection-background-color: $selected;
+}
+/*QComboBox QAbstractItemView::item {
+    height: 12px;需要设置comboBox.setView(QListView())否则会使用默认的item样式
+}*/
+/* =============================================== */
+/* SpinBox DateTime                                */
+/* =============================================== */
+QSpinBox, QDoubleSpinBox,QDateEdit,QTimeEdit,QDateTimeEdit{
+    border: 1px solid $border;
+    border-style: inset;
+}
+QSpinBox:hover, QDoubleSpinBox:hover,QDateEdit:hover, QTimeEdit:hover,QDateTimeEdit:hover{
+    border-color: $selected;
+}
+QSpinBox:focus, QDoubleSpinBox:focus,QDateEdit:focus,QTimeEdit:focus,QDateTimeEdit:focus{
+    border-color: $focused;
+}
 /* =============================================== */
 /* ProgressBar                                     */
 /* =============================================== */
 QProgressBar {
     border: 1px solid $border;
-    border-radius: 4px;    
+    border-radius: 4px;
     text-align: center;
 }
 

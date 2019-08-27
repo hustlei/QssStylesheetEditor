@@ -112,6 +112,24 @@ class previewWidget(QTabWidget):
         layoutCol2.addRow("实数校验：", text7)
         layoutCol2.addRow("正则表达式校验：", text8)
 
+        text9=QLineEdit()
+        text9.setPlaceholderText("input email")
+        model=QStandardItemModel(0,1,self)
+        completer=QCompleter(model,self)
+        text9.setCompleter(completer)
+        def textch(s):
+            if("@" in s): return
+            strList=["@163.com","@qq.com","@gmail.com","@hotmail.com","@126.com"]
+            model.removeRows(0,model.rowCount())
+            for i in strList:
+                model.insertRow(0)
+                model.setData(model.index(0,0),s+i)
+        text9.textChanged.connect(textch)
+        text10=QLineEdit("ReadOnly")
+        text10.setReadOnly(True)
+        layoutCol1.addRow("自动补全:",text9)
+        layoutCol2.addRow("Readonly:",text10)
+
         ###Button
         group2 = QGroupBox("Button")
         group2layout = QVBoxLayout()

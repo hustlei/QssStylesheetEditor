@@ -216,13 +216,14 @@ class CodeEditor(QsciScintilla):
         """
         with open(filename, 'rb') as f:
             self.setEnabled(True)
-            lm=os.path.getsize(filename)
-            l=min(lm,500)
+            #lm=os.path.getsize(filename)
             bytes=f.read()
+            l=min(len(bytes),1024)
             try:
-                self.coding=chardet.detect(bytes[:l])['encoding']
-                if(self.coding=="ascii"):
-                    self.coding=chardet.detect(bytes[:lm])['encoding']
+                rst=chardet.detect(bytes[:l])
+                self.coding = rst["encoding"]
+                if(rst["confidence"] < 0.7):
+                    self.coding=chardet.detect(bytes)['encoding']
                 self.setText(bytes.decode(self.coding))
             except:# Exception:
                 self.coding=""
