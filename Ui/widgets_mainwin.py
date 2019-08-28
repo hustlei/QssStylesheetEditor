@@ -185,8 +185,8 @@ class Widgets_MainWin(object):
         colorPanelWidget.setLayout(self.colorPanelLayout)
         self.docks["color"].setWidget(colorPanelWidget)
         self.docks["preview"].setWidget(previewWidget())
-
-
+        
+        self.docks["color"].visibilityChanged.connect(self.actions["ShowColor"].setChecked)
 
     def createMainWidget(self):
         self.setCentralWidget(self.mainWidget)

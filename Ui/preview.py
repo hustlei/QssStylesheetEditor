@@ -51,6 +51,7 @@ class previewWidget(QTabWidget):
     def setupTab1(self,tab1):
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
+        scrollArea.setWidgetResizable(True)
         mainWidget = QWidget()
         layout = QVBoxLayout()
         mainWidget.setLayout(layout)
@@ -76,7 +77,7 @@ class previewWidget(QTabWidget):
         text2 = QLineEdit()
         text2.setPlaceholderText("请输入数据")
         lebel3 = QLabel("<b>密码</b>(passward):")
-        text3 = QLineEdit("****")
+        text3 = QLineEdit("******")
         text3.setEchoMode(QLineEdit.Password)
         label4 = QLabel("网址标签：")
         label5 = QLabel("<a href='https://blog.csdn.net/hustlei/'>hustlei.ml</a>")
@@ -114,6 +115,7 @@ class previewWidget(QTabWidget):
 
         text9=QLineEdit()
         text9.setPlaceholderText("input email")
+        text9.setToolTip("please input a email address.")
         model=QStandardItemModel(0,1,self)
         completer=QCompleter(model,self)
         text9.setCompleter(completer)
@@ -177,6 +179,7 @@ class previewWidget(QTabWidget):
         group3.setLayout(group3Layout)
         layout.addWidget(group3)
 
+        group3.setCheckable(True)
         ch1=QRadioButton("Radio")
         ch2=QRadioButton("Iconradio")
         ch2.setIcon(QIcon("img/Flag_blueHS.png"))
@@ -238,6 +241,7 @@ class previewWidget(QTabWidget):
     def setupTab2(self,tab2):
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
+        scrollArea.setWidgetResizable(True)
         mainWidget = QWidget()
         layout = QVBoxLayout()
         mainWidget.setLayout(layout)
@@ -533,6 +537,7 @@ class previewWidget(QTabWidget):
     def setupTab4(self,tab4):
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
+        scrollArea.setWidgetResizable(True)
         mainWidget = QWidget()
         layout = QVBoxLayout()
         mainWidget.setLayout(layout)
@@ -616,6 +621,7 @@ class previewWidget(QTabWidget):
         layout = QVBoxLayout()
         mainWidget.setLayout(layout)
         mainWidget.setMinimumSize(QSize(420,600))
+        scrollArea.setWidgetResizable(True)
         scrollArea.setWidget(mainWidget)
         scrollContainer.addWidget(scrollArea)
         tab.setLayout(scrollContainer)
@@ -723,6 +729,7 @@ class previewWidget(QTabWidget):
     def setupTab6(self,tab):
         container=QHBoxLayout()
         scrollArea=QScrollArea()
+        scrollArea.setWidgetResizable(True)
         w=QWidget()
         w.setMinimumSize(QSize(400,500))
         layout=QVBoxLayout()
