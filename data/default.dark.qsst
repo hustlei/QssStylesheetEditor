@@ -2,14 +2,14 @@
 author:lei
 lastedited:2019.8
 * ================================================ */
-$text = #222;
-$background = #FFFFFF;
-$border = #999999;
-$selected = #8BF; /*hover*/
-$pressed = #59F;
-$focused = #EA2; /*actived*/
-$grad1a = #EEEEEF; /*gradient start*/
-$grad1b = #DADADF; /*gradient end*/
+$text = #FFFFFF;
+$background = #333333;
+$border = #666666;
+$selected = #DCFFBB33; /*hover*/
+$pressed = #EEAA22;
+$focused = #88BBFF; /*actived*/
+$grad1a = #AAAAAA; /*gradient start*/
+$grad1b = #888888; /*gradient end*/
 
 QWidget
 {
@@ -41,6 +41,9 @@ QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);
 }
 QSplitter::handle:pressed{
     border-color: $pressed;
+}
+QAbstractScrollArea, QSciScintilla{
+    background-color: $background;
 }
 /* 一定要记得，用qApp或者QApplication.instance的setStyle，
     用self.setStyle会有很多地方不生效：Menu ToolTip等*/

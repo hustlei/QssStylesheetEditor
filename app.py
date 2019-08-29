@@ -94,6 +94,13 @@ class MainWin(QMainWindow, Widgets_MainWin):
         else:
             #self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
             qApp.setStyleSheet(self.qsst.qss)
+            if self.qsst.varDict["background"]:
+                try:
+                    c=QColor()
+                    c.setNamedColor(self.qsst.varDict.get("background",""))
+                    self.editor.lexer.setPapers(c)
+                except Exception:
+                    print(Exception.__name__)
 
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         #if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):

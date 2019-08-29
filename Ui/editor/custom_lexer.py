@@ -99,6 +99,11 @@ class QsciLexerQSS(QsciLexerCustom):
             # define SC_MARKNUM_FOLDEREND     25    //子级折叠
             # define SC_MARKNUM_FOLDERMIDTAIL 27    //子级尾部
 
+    def setPapers(self, clr):
+        self.setDefaultPaper(clr)
+        for i in range(len(self.namelist)):
+            self.setPaper(clr,i)
+
     def language(self):
         return "QSS"
 
