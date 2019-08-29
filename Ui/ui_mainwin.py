@@ -123,7 +123,7 @@ class Widgets_MainWin(object):
         self.themeCombo.addItems(QStyleFactory.keys())
         theme = QApplication.style().objectName()
         self.themeCombo.setCurrentIndex(self.themeCombo.findText(theme, Qt.MatchFixedString))
-        self.themeCombo.setEnabled(False)
+        #self.themeCombo.setEnabled(False)
         #themeCombo.activated[str].connect(qApp.setStyle)
         # themeCombo.currentTextChanged.connect(qApp.setStyle)
         #checkbox.stateChanged.connect(self.themeCombo.setEnabled)

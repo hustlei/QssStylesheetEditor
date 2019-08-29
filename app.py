@@ -78,12 +78,10 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
     def unuseQss(self,unuse):
         if(unuse):
-            self.setStyleSheet('')
-            self.themeCombo.setEnabled(True)
+            qApp.setStyleSheet('')
         else:
             self.renderStyle()
             self.loadColorPanel()
-            self.themeCombo.setEnabled(False)
 
     def renderStyle(self):
         self.qsst.srctext = self.editor.text()

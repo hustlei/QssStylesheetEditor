@@ -162,7 +162,7 @@ QToolTip {
 /* TextBox                                         */
 /* =============================================== */
 QLineEdit {
-    background: transparent;
+    background: $background;/*不建议设为透明，否则table编辑时会字显示*/
     selection-background-color: $selected;
     border: 1px solid $border;
     border-radius: 2px;
@@ -379,19 +379,14 @@ QScrollBar{
     border: 1px solid $border;
     border-radius: 5px;
     padding: 1px;
+    height: 10px;
+    width: 10px;
 }
 QScrollBar:hover{
     border-color:$selected;
 }
-QScrollBar:horizontal {
-    height: 12px;
-}
-QScrollBar:vertical {
-    width: 12px;
-}
 QScrollBar::handle{
-    border: 1px solid $border;
-    border-radius: 4px;
+    border-radius: 3px;
     background: $pressed;
     min-width: 16px;
     min-height: 16px;
@@ -404,9 +399,14 @@ QScrollBar::add-page, QScrollBar::sub-page {
     width: 0px;
     background: transparent;
 }
-
+QScrollArea{
+    border: none;
+}
+/*QScrollArea  QAbstractSlider{
+    border-radius: 0px;
+}*/
 /* =============================================== */
-/* ScrollBar                                       */
+/* DockWidget                                       */
 /* =============================================== */
 QDockWidget, QDockWidget > QWidget/*not work*/
 {
@@ -414,9 +414,10 @@ QDockWidget, QDockWidget > QWidget/*not work*/
     background: transparent;
 }
 QDockWidget::title {
-    border: 1px solid $border;
+    border-bottom: 1px solid $border;
+    border-style: inset;
     text-align: left; /* align the text to the left */
-    padding-left: 2px;
+    padding: 6px;
 }
 
 /* =============================================== */
@@ -507,4 +508,66 @@ QTabBar::tab:left{
 QTabBar::tab:right{
     border-left: transparent;
     margin-bottom: 1px;
+}
+
+/* =============================================== */
+/* QHeaderView for list table                      */
+/* =============================================== */
+QHeaderView {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+}
+QHeaderView::section, QTableCornerButton::section {/*设置表头属性*//*左上角*/
+	background-color: $grad1a;
+	padding: 0 3px;
+	border-right: 1px solid $border;
+	border-bottom: 1px solid $border;
+	border-radius: 0px;
+}
+QHeaderView::section:hover{
+    background-color: $selected;
+}
+QHeaderView::section:pressed{
+    background-color: $pressed;
+}
+QHeaderView::section:checked {
+    background-color: $focused;
+}
+
+/* =============================================== */
+/* QTableWidget                                    */
+/* =============================================== */
+QTableWidget, QTableView
+{
+    gridline-color: $border;    /*表格中的网格线条颜色*/
+    background: $background;
+    /*设置交替颜色，需要在函数属性中设置:tableWidget->setAlternatingRowColors(true)*/
+    alternate-background-color: $grad1a;
+    /*selection-color:$background;    鼠标选中时前景色：文字颜色*/
+    selection-background-color:$selected;   /*鼠标选中时背景色*/
+    border:1px solid $border;  /*边框线的宽度、颜色*/
+    /*border:none;    去除边界线*/
+    /*border-radius:5px;*/
+    /*padding:10px 10px;*/  /*表格与边框的间距*/
+}
+QTableView::item, QTabWidget::item{
+    background: transparent;
+	outline-style: none;
+	border: none;
+}
+
+QTableView::item:hover {
+	background: $selected;
+    border: 1px solid $focused;
+}
+
+QTableView::item:selected {
+	background: $selected;
+	color: $grad1a;
+}
+
+QTableView::item:selected:active {
+	background: $pressed;
+	color: $grad1a;
 }
