@@ -16,6 +16,7 @@ from PyQt5 import Qsci
 from .enums import BadEnum, EditorEnums
 from .settings import *
 from ..editor import custom_lexer
+from .search import searchDialog
 
 sys.path.insert(0,os.path.join(os.path.dirname(__file__),"3rdparty.zip"))
 import chardet
@@ -33,6 +34,15 @@ class CodeEditor(QsciScintilla):
         self._setDefaultConfig()
         # Override defaults with any customizations
         self.configure(**config)
+
+        self.searchDialog=searchDialog(self)
+
+    def find(self):
+        self.searchDialog.setReplaceMode(False)
+        self.searchDialog.show()
+    def replace(self):
+        self.searchDialog.setReplaceMode(True)
+        self.searchDialog.show()
 
     def keyPressEvent(self, event):
         super().keyPressEvent(event)
@@ -204,6 +214,13 @@ class CodeEditor(QsciScintilla):
                 #raise ValueError("Unknown language: '%s'" % language)
             self.lexer.setDefaultFont(self.font())
         self.setLexer(self.lexer)
+
+    def setBackgroundColor(self,color):
+        if(self.lexer):
+            try:
+                self.lexer.setPapers(color)
+            except Exception:
+                pass
 
     def clear(self):
         """Clear the contents of the editor.

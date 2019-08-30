@@ -61,6 +61,8 @@ class Widgets_MainWin(object):
         self.actions["cut"] = createAct("&Cut","Cut",QKeySequence.Cut,'img/cut.png')
         self.actions["copy"] = createAct("&Copy","Copy",QKeySequence.Copy,'img/copy.png')
         self.actions["paste"] = createAct("&Paste","Paste",QKeySequence.Paste,'img/paste.png')
+        self.actions["find"] = createAct("&Find","Find",QKeySequence.Find,'img/find.png')
+        self.actions["replace"] = createAct("&Replace","Replace",QKeySequence.Replace,'img/replace.png')
 
         # self.fontcolorAct=QAction(QIcon("img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
@@ -100,6 +102,10 @@ class Widgets_MainWin(object):
         editMenu.addAction(self.actions["copy"])
         editMenu.addAction(self.actions["paste"])
         self.menus["Edit"].addMenu(editMenu)
+
+        searchMenu=QMenu("Search",self.menus["Edit"])
+        searchMenu.addAction(self.actions["find"])
+        searchMenu.addAction(self.actions["replace"])
 
         self.menus["View"] = QMenu("&View")
         self.menus["View"].addAction(self.actions["ShowColor"])
@@ -148,6 +154,9 @@ class Widgets_MainWin(object):
         self.toolbars["Edit"].addAction(self.actions["cut"])
         self.toolbars["Edit"].addAction(self.actions["copy"])
         self.toolbars["Edit"].addAction(self.actions["paste"])
+        self.toolbars["Search"]=QToolBar("Search")
+        self.toolbars["Search"].addAction(self.actions["find"])
+        self.toolbars["Search"].addAction(self.actions["replace"])
 
         self.toolbars["View"] = QToolBar("View")
         self.toolbars["View"].addAction(self.actions["ShowColor"])

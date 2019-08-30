@@ -30,7 +30,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
         self.setupUi(self)
         self.setupActions()
-        self.new()
+        self.newWithTemplate()
 
         self.statusbar.showMessage("Ready")
 
@@ -47,11 +47,15 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.actions["export"].triggered.connect(self.export)
         self.actions["undo"].triggered.connect(self.editor.undo)
         self.actions["redo"].triggered.connect(self.editor.redo)
+        self.actions["undo"].setEnabled(self.editor.isUndoAvailable())
+        self.actions["redo"].setEnabled(self.editor.isRedoAvailable())
         self.actions["cut"].triggered.connect(self.editor.cut)
         self.actions["copy"].triggered.connect(self.editor.copy)
         self.actions["paste"].triggered.connect(self.editor.paste)
         self.actions["ShowColor"].triggered.connect(self.docks["color"].setVisible)
         self.actions["ShowPreview"].triggered.connect(self.docks["preview"].setVisible)
+        self.actions["find"].triggered.connect(self.editor.find)
+        self.actions["replace"].triggered.connect(self.editor.replace)
 
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
@@ -72,7 +76,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
         aboutText="<b><center>"+self.title+"</center></b><br><br>"
         aboutText+="本软件为QtWidget样式表Qss文件高级编辑软件，<br>支持自定义变量，支持实时预览。<br><br>"
         aboutText+="author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei'>https://blog.csdn.net/hustlei</a><br><br>业余编写，欢迎交流: hustlei@sina.cn"
-        aboutText+="<br>copyright &copy; 2019, all right reserved."
+        aboutText+="<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(lambda:QMessageBox.about(self,"about",aboutText))
 
         self.editor.modificationChanged.connect(self.motifyChanged)
@@ -95,13 +99,14 @@ class MainWin(QMainWindow, Widgets_MainWin):
         else:
             #self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
             qApp.setStyleSheet(self.qsst.qss)
-            if self.qsst.varDict["background"]:
+            cstr=self.qsst.varDict.get("background", "")
+            if cstr:
                 try:
                     c=QColor()
-                    c.setNamedColor(self.qsst.varDict.get("background",""))
-                    self.editor.lexer.setPapers(c)
+                    c.setNamedColor(cstr)
+                    self.editor.setBackgroundColor(c)
                 except Exception:
-                    print(Exception.__name__)
+                    pass
 
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         #if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
@@ -111,6 +116,9 @@ class MainWin(QMainWindow, Widgets_MainWin):
             or e.key() == Qt.Key_Up or e.key() == Qt.Key_Down or e.key() == Qt.Key_Left or e.key() == Qt.Key_Right):
             self.renderStyle()
             self.loadColorPanel()
+
+        self.actions["undo"].setEnabled(self.editor.isUndoAvailable())
+        self.actions["redo"].setEnabled(self.editor.isRedoAvailable())
 
     def motifyChanged(self,e):
         if(self.editor.isModified()):
@@ -171,11 +179,19 @@ class MainWin(QMainWindow, Widgets_MainWin):
             s = ''
             if (qGray(color.rgb()) < 100):
                 s += "color:white;"
+            else:
+                s += "color:black;"
 
             btn.setStyleSheet(s + "background:" + btn.text())
 
     def chclr(self, var):
-        color = QColorDialog.getColor(Qt.white, self, "color pick", QColorDialog.ShowAlphaChannel)
+        c=QColor()
+        cstr=self.sender().text()
+        if(cstr):
+            c.setNamedColor(cstr)
+        else:
+            c.setNamedColor("white")
+        color = QColorDialog.getColor(c, self, "color pick", QColorDialog.ShowAlphaChannel)
         if (color.isValid()):
             s = ''
             clrstr=color.name()
@@ -218,7 +234,25 @@ class MainWin(QMainWindow, Widgets_MainWin):
             elif(ret==QMessageBox.Cancel):
                 return
 
-        self.open(file="data/default.qsst")
+        self.newIndex=self.newIndex+1
+        self.file="new{}.qsst".format(self.newIndex)
+        self.lastSavedText = ""
+        self.editor.setText("")
+        self.renderStyle()
+        self.loadColorPanel()
+        self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
+        self.editor.setModified(False)
+
+    def newWithTemplate(self, templatefile="data/default.qsst"):
+        if(self.editor.isModified()):
+            ret=QMessageBox.question(self,self.title,"当前文件尚未保存，是否要保存文件？",
+                                     QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel,QMessageBox.No)
+            if(ret==QMessageBox.Yes):
+                self.save()
+            elif(ret==QMessageBox.Cancel):
+                return
+
+        self.open(file=templatefile)
         self.newIndex=self.newIndex+1
         self.file="new{}.qsst".format(self.newIndex)
         self.setWindowTitle(self.title+" - " + os.path.basename(self.file))

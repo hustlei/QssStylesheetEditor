@@ -2,13 +2,13 @@
 author:lei
 lastedited:2019.8
 * ================================================ */
-$text = #FFFFFF;
-$background = #333333;
+$text = #CCCCCC;
+$background = #DC333333;
 $border = #666666;
-$selected = #DCFFBB33; /*hover*/
-$pressed = #EEAA22;
-$focused = #88BBFF; /*actived*/
-$grad1a = #AAAAAA; /*gradient start*/
+$selected = #66AAEE; /*hover*/
+$pressed = #DCDD9922;
+$focused = #DC88BBFF; /*actived*/
+$grad1a = #999999; /*gradient start*/
 $grad1b = #888888; /*gradient end*/
 
 QWidget
