@@ -126,6 +126,8 @@ class Widgets_MainWin(object):
     def createToolbars(self):
         checkbox = QCheckBox("DisableQSS")
         self.themeCombo = QComboBox()
+        checkbox.setToolTip(self.tr("Using system style, disable qss."))
+        self.themeCombo.setToolTip(self.tr("Select current system style."))
         self.themeCombo.addItems(QStyleFactory.keys())
         theme = QApplication.style().objectName()
         self.themeCombo.setCurrentIndex(self.themeCombo.findText(theme, Qt.MatchFixedString))

@@ -18,7 +18,7 @@ from QssTemplate import Qsst
 class MainWin(QMainWindow, Widgets_MainWin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
-        self.ver="v1.2"
+        self.ver="v1.3"
         self.title=self.tr("QssStylesheet Editor "+self.ver)
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))
@@ -75,7 +75,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
 
         aboutText="<b><center>"+self.title+"</center></b><br><br>"
         aboutText+="本软件为QtWidget样式表Qss文件高级编辑软件，<br>支持自定义变量，支持实时预览。<br><br>"
-        aboutText+="author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei'>https://blog.csdn.net/hustlei</a><br><br>业余编写，欢迎交流: hustlei@sina.cn"
+        aboutText+="author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>业余编写，欢迎交流: hustlei@sina.cn"
         aboutText+="<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(lambda:QMessageBox.about(self,"about",aboutText))
 

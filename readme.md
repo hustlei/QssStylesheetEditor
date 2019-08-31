@@ -7,6 +7,10 @@ QssStylesheetEditor是一个编译Qt样式表,即Qss样式文件的软件。
 + 自定义变量会自动显示在颜色编辑面板，可以通过颜色对话框中拾取变量的颜色。
 + 编辑器支持代码高亮，代码折叠。
 
+# screenshot
+
+![GUI(v1.2版本) screeshot](img/screenshot/QssStylesheetEditor_v1.2.png "GUI(v1.2版本)")
+
 # 使用
 
 本软件基于Python3，依赖PyQt5, Qscintilla。
@@ -33,7 +37,11 @@ QWidget
 ~~~
 
 
-# GUI截图
+# screenshot(old version)
 
-** GUI(V1.2) **
-![GUI(v1.2版本) screeshot](img/screenshot/QssStylesheetEditor_v1.2.png "GUI(v1.2版本)")
+<div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.1.PNG" alt="v1.1" height=200/>
+<div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
+
+
