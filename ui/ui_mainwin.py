@@ -8,7 +8,7 @@ from .editor import CodeEditor
 from .preview import previewWidget
 from .flow_layout import QFlowLayout
 
-class Widgets_MainWin(object):
+class Ui_Mainwin(object):
     def setupUi(self, mainwin):
         self.win = mainwin
         self.win.resize(1200, 600)
