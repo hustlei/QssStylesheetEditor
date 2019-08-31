@@ -40,7 +40,7 @@ QWidget
 # screenshot(old version)
 
 <div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.1.PNG" alt="v1.1" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
     <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
 
