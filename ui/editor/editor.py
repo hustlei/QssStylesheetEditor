@@ -9,7 +9,7 @@ from PyQt5.QtCore import (Qt, QEvent, QFile, QFileInfo, QIODevice, QRegExp, QTex
                           pyqtSignal)
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QFileDialog, QMessageBox,
                              QTextEdit)
-from PyQt5.QtGui import (QFont, QKeyEvent,QColor)
+from PyQt5.QtGui import (QFont, QKeyEvent,QColor,QDropEvent)
 from PyQt5.Qsci import *
 from PyQt5 import Qsci
 
@@ -26,6 +26,7 @@ class CodeEditor(QsciScintilla):
     loseFocus=pyqtSignal()
     mouseLeave=pyqtSignal()
     mousePress=pyqtSignal()
+    drop=pyqtSignal(QDropEvent)
 
     def __init__(self, **config):
         super().__init__()
@@ -63,6 +64,10 @@ class CodeEditor(QsciScintilla):
         super().mousePressEvent(QMouseEvent)
         self.mousePress.emit()
 
+    def dropEvent(self, QDropEvent):
+        if(QDropEvent.mimeData().hasUrls()):
+            self.drop.emit(QDropEvent)
+
     def _setDefaultConfig(self):
         """Set default configuration settings.
         """
@@ -72,7 +77,7 @@ class CodeEditor(QsciScintilla):
             font = QFont('Consolas', 11),# 设置默认字体
             marginsFont = QFont('Courier New', 10),
 
-            # Wrap mode: Wrap(None|Word|Character|Whitespace)
+            # Wrap mode: Wrap(None|Word|Character|Whitespace) 0,1,2,3
             wrapMode='WrapNone',  # self.setWrapMode(self.WrapWord)    # 自动换行
             # Text wrapping visual flag: WrapFlag(None|ByText|ByBorder|InMargin)
             wrapVisualFlags='WrapFlagNone',  # 无对应getter
@@ -242,16 +247,48 @@ class CodeEditor(QsciScintilla):
             l=min(len(bytes),1024)
             try:
                 rst=chardet.detect(bytes[:l])
+                if(rst["confidence"] < 0.8):
+                    l=min(len(bytes), 256*1024)
+                    rst=chardet.detect(bytes[:l])#['encoding']
                 self.coding = rst["encoding"]
-                if(rst["confidence"] < 0.7):
-                    self.coding=chardet.detect(bytes)['encoding']
-                self.setText(bytes.decode(self.coding))
+                if(rst["confidence"] > 0.8):
+                    self.setText(bytes.decode(self.coding))
+                else:
+                    if(self.__isBin(bytes)):
+                        raise Exception
+                    else:
+                        self.coding="bin?"
+                        self.setText(self.__byte2str(bytes))
             except:# Exception:
-                self.coding=""
+                self.coding="none"
                 self.setText("can't open this file, it may be a binary file.")
                 self.setEnabled(False)
+                return False
             self.setModified(False)
             self.setHighlightLanguage(self.guessLang(filename))
+            return True
+
+    def __byte2str(self,bytes,echoescape=True):
+        #s=""
+        # if echoescape:
+        #     for b in bytes:#ord(chr(b))
+        #         c=chr(b)
+        #         if b < 0x30:#>= 0x80 or c.isalnum() or c == "-" or c == "_":
+        #             s+="x"
+        #         else:
+        #             s+="X"
+        # else:
+        #     for b in bytes:
+        #         s+=chr(b)
+        str_list=[chr(b) for b in bytes if b > 0x30]
+        s="".join(str_list)
+        return s
+
+    def __isBin(self,bytes):
+        chr_list=[b for b in bytes if b>0x30]
+        count=len(chr_list)
+        f=count/len(bytes)
+        return True if f>0.7 else False
 
     def save(self, filename):
         """Save the editor contents to the given filename.

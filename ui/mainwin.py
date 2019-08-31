@@ -23,6 +23,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.file=None
         self.lastSavedText=""
         self.newIndex=0
+        self.setAcceptDrops(True)
 
         self.setupUi(self)
         self.setupActions()
@@ -58,6 +59,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                 lambda:self.editor.setEolVisibility(not self.editor.eolVisibility()))
         self.actions["fontup"].triggered.connect(self.editor.zoomIn)
         self.actions["fontdown"].triggered.connect(self.editor.zoomOut)
+        self.actions["autowrap"].triggered.connect(lambda:self.editor.setWrapMode(0 if self.editor.wrapMode() else 2))
 
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
@@ -79,6 +81,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                                                                     self.tr("line:")+str(l+1)+self.tr("  pos:")+str(p)))
         self.editor.selectionChanged.connect(self.__setSelectStatus)
         self.editor.modificationChanged.connect(self.motifyChanged)
+        self.editor.drop.connect(self.dropEvent)
 
         #help
         aboutText="<b><center>"+self.title+"</center></b><br><br>"
@@ -115,7 +118,11 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.setStyleSheet('')
         else:
             #self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
+            # try:
             qApp.setStyleSheet(self.qsst.qss)
+            #     self.statusbar.showMessage("")#不起作用
+            # except Exception:
+            #     self.statusbar.showMessage("qss parse failed")
             cstr=self.qsst.varDict.get("background", "")
             if cstr:
                 try:
@@ -236,8 +243,13 @@ class MainWin(QMainWindow, Ui_Mainwin):
                                                   "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")#_是filefilter
         if (os.path.exists(file)):
             self.file=file
+            self.statusbar.showMessage("opening file...")
             self.lastSavedText = self.editor.text()
-            self.editor.load(self.file)
+            ok=self.editor.load(self.file)
+            if ok:
+                self.statusbar.showMessage("load file successfully")
+            else:
+                self.statusbar.showMessage("load file failed")
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title+" - " + os.path.basename(file))
@@ -271,6 +283,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                 return
 
         self.open(file=templatefile)
+        self.statusbar.showMessage("new file created, using template")
         self.newIndex=self.newIndex+1
         self.file="new{}.qsst".format(self.newIndex)
         self.setWindowTitle(self.title+" - " + os.path.basename(self.file))
@@ -306,6 +319,18 @@ class MainWin(QMainWindow, Ui_Mainwin):
         if file:
             with open(file, 'w', newline='') as f:
                 f.write(self.qsst.qss)
+
+    def dragEnterEvent(self, qDragEnterEvent):
+        if(qDragEnterEvent.mimeData().hasUrls()):
+            qDragEnterEvent.acceptProposedAction()
+            #print(qDragEnterEvent.possibleActions())
+            #qDragEnterEvent.setDropAction(Qt::CopyAction Qt::MoveAction Qt::LinkAction Qt::IgnoreAction Qt::TargetMoveAction)
+
+    def dropEvent(self, QDropEvent):
+        if (QDropEvent.mimeData().hasUrls()):
+            file = QDropEvent.mimeData().urls()[0].toLocalFile()
+            if(os.path.exists(file)):
+                self.open(file=file)
 
     def closeEvent(self, e):
         if(self.editor.isModified()):
