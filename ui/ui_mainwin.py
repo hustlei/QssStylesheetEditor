@@ -65,6 +65,8 @@ class Widgets_MainWin(object):
         self.actions["replace"] = createAct("&Replace","Replace",QKeySequence.Replace,'img/replace.png')
         self.actions["echospace"] = createAct("&Space","Show Spaces",None,'img/space.png')
         self.actions["echoeol"] = createAct("&Eol","Show Eol",None,'img/eol.png')
+        self.actions["fontup"] = createAct("&BiggerFont","Bigger Font",None,'img/fontup.png')
+        self.actions["fontdown"] = createAct("&SmallerFont","Smaller Font",None,'img/fontdown.png')
 
         # self.fontcolorAct=QAction(QIcon("img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
@@ -170,6 +172,8 @@ class Widgets_MainWin(object):
         self.toolbars["View"].addAction(self.actions["ShowPreview"])
 
         self.toolbars["Echo"]=QToolBar("Echo")
+        self.toolbars["Echo"].addAction(self.actions["fontup"])
+        self.toolbars["Echo"].addAction(self.actions["fontdown"])
         self.toolbars["Echo"].addAction(self.actions["echospace"])
         self.toolbars["Echo"].addAction(self.actions["echoeol"])
 

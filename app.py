@@ -56,11 +56,13 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.actions["ShowPreview"].triggered.connect(self.docks["preview"].setVisible)
         self.actions["find"].triggered.connect(self.editor.find)
         self.actions["replace"].triggered.connect(self.editor.replace)
-
         self.actions["echospace"].triggered.connect(
                 lambda:self.editor.setWhitespaceVisibility(not self.editor.whitespaceVisibility()))
         self.actions["echoeol"].triggered.connect(
                 lambda:self.editor.setEolVisibility(not self.editor.eolVisibility()))
+        self.actions["fontup"].triggered.connect(self.editor.zoomIn)
+        self.actions["fontdown"].triggered.connect(self.editor.zoomOut)
+
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
             if(dockLoc==Qt.TopDockWidgetArea or dockLoc==Qt.BottomDockWidgetArea):
