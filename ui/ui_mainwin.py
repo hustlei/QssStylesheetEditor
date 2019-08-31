@@ -63,6 +63,8 @@ class Widgets_MainWin(object):
         self.actions["paste"] = createAct("&Paste","Paste",QKeySequence.Paste,'img/paste.png')
         self.actions["find"] = createAct("&Find","Find",QKeySequence.Find,'img/find.png')
         self.actions["replace"] = createAct("&Replace","Replace",QKeySequence.Replace,'img/replace.png')
+        self.actions["echospace"] = createAct("&Space","Show Spaces",None,'img/space.png')
+        self.actions["echoeol"] = createAct("&Eol","Show Eol",None,'img/eol.png')
 
         # self.fontcolorAct=QAction(QIcon("img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
@@ -95,6 +97,7 @@ class Widgets_MainWin(object):
 
         # editMenu=self.menus["Edit"].addMenu("TextEdit")
         editMenu = QMenu("Text", self.menus["Edit"])
+        editMenu.setIcon(QIcon("img/edit_whitepage.png"))
         editMenu.addAction(self.actions["undo"])
         editMenu.addAction(self.actions["redo"])
         editMenu.addSeparator()
@@ -104,8 +107,10 @@ class Widgets_MainWin(object):
         self.menus["Edit"].addMenu(editMenu)
 
         searchMenu=QMenu("Search",self.menus["Edit"])
+        searchMenu.setIcon(QIcon("img/findnext.png"))
         searchMenu.addAction(self.actions["find"])
         searchMenu.addAction(self.actions["replace"])
+        self.menus["Edit"].addMenu(searchMenu)
 
         self.menus["View"] = QMenu("&View")
         self.menus["View"].addAction(self.actions["ShowColor"])
@@ -164,15 +169,35 @@ class Widgets_MainWin(object):
         self.toolbars["View"].addAction(self.actions["ShowColor"])
         self.toolbars["View"].addAction(self.actions["ShowPreview"])
 
+        self.toolbars["Echo"]=QToolBar("Echo")
+        self.toolbars["Echo"].addAction(self.actions["echospace"])
+        self.toolbars["Echo"].addAction(self.actions["echoeol"])
+
         for t in self.toolbars.values():
             self.win.addToolBar(t)
 
     def createStatusBar(self):
-        self.status["date"] = QLabel()
         self.statusbar.showMessage("Ready")
         # self.statusbar.addWidget(QWidget(),1)
-        self.statusbar.addPermanentWidget(self.status["date"])
-        self.status["date"].setText(QDate.currentDate().toString())
+        # self.status["date"] = QLabel()
+        # self.statusbar.addPermanentWidget(self.status["date"])
+        # self.status["date"].setText(QDate.currentDate().toString())
+        # self.status["date"].setVisible(False)
+
+        self.status["line"]=QLabel("line:0 pos:0")
+        self.status["select"]=QLabel("select: none")
+        self.status["coding"]=QLabel("coding")
+        self.status["lines"]=QLabel("lines:0")
+        self.status["line"].setMinimumWidth(120)
+        self.status["select"].setMinimumWidth(150)
+        self.status["coding"].setMinimumWidth(80)
+        self.status["coding"].setAlignment(Qt.AlignCenter)
+        self.status["lines"].setMinimumWidth(60)
+        self.status["lines"].setAlignment(Qt.AlignRight)
+        self.statusbar.addPermanentWidget(self.status["line"])
+        self.statusbar.addPermanentWidget(self.status["select"])
+        self.statusbar.addPermanentWidget(self.status["coding"])
+        self.statusbar.addPermanentWidget(self.status["lines"])
 
     def createDocks(self):
         self.docks["color"] = QDockWidget("Colors")

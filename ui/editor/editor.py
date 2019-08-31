@@ -30,12 +30,16 @@ class CodeEditor(QsciScintilla):
     def __init__(self, **config):
         super().__init__()
         self.coding="utf-8"
+
         self.settings={}
         self._setDefaultConfig()
         # Override defaults with any customizations
         self.configure(**config)
 
         self.searchDialog=searchDialog(self)
+
+    def getEditInfo(self):
+        self.line=len(self.line)
 
     def find(self):
         self.searchDialog.setReplaceMode(False)

@@ -1,5 +1,5 @@
 
-# todo
+# ToDo
 
 + 编辑器字体及大小修改
 + tab自动转为空格个数设置
@@ -18,9 +18,16 @@
 + 保存语言配置
 + 打包为exe，制作Nsis安装包
 
-# changelog
+# ChangeLog
 
 ## v1.3(开发中)
+主要修改：**制作windows x64版本exe软件**
+
++ ** Features **
+    - 状态栏显示文件行数、编码、当前鼠标位置、选择的行号
+    - 增加是否显示空格符号，换行符
++ ** BugFix **
+    - 修复Find对话框statusbar显示问题
 
 ## v1.2
 

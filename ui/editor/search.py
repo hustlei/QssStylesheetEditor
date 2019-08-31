@@ -1,21 +1,23 @@
 
 from PyQt5.Qsci import QsciScintilla
-from PyQt5.QtWidgets import (QWidget, QHBoxLayout, QGridLayout,QVBoxLayout,QCheckBox,QPushButton,
+from PyQt5.QtWidgets import (QMainWindow,QWidget, QHBoxLayout, QGridLayout,QVBoxLayout,QCheckBox,QPushButton,
                              QLabel,QLineEdit,QSpacerItem,QStatusBar)
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt,QMargins
 
-class searchDialog(QWidget):
+class searchDialog(QMainWindow):
     def __init__(self, editor, replace=False):
         super().__init__(editor)
         self.__editor=editor
         self.isReplace=replace
         self.setWindowFlags(Qt.Tool)
+        self.setMinimumWidth(350)
+        self.setFixedSize(350,200)
+
         if replace:
             self.setWindowTitle("替换")
         else:
             self.setWindowTitle("查找")
         self.setupUi()
-
         self.searchText=""
         self.replaceText=""
 
@@ -62,16 +64,16 @@ class searchDialog(QWidget):
         self.chText()
 
     def setupUi(self):
-        mainLayout=QVBoxLayout()
+        mainw=QWidget()
         layout=QHBoxLayout()
         grid=QGridLayout()
         lay2=QVBoxLayout()
         layout.addLayout(grid)
         layout.addLayout(lay2)
-        mainLayout.addLayout(layout)
-        self.statusbar=QStatusBar(self)
-        mainLayout.addWidget(self.statusbar)
-        self.setLayout(mainLayout)
+        mainw.setLayout(layout)
+        self.setCentralWidget(mainw)
+        self.statusbar=self.statusBar()
+        self.statusbar.setSizeGripEnabled(False)
 
         self.__reverseCheckbox=QCheckBox("反向查找")
         caseSensitiveCheckbox=QCheckBox("匹配大小写")
@@ -88,7 +90,8 @@ class searchDialog(QWidget):
         grid.addWidget(self.__label2,1,0,1,1,Qt.AlignRight)
         grid.addWidget(self.__searchTextBox,0,1)
         grid.addWidget(self.__replaceTextBox,1,1)
-        grid.addItem(QSpacerItem(20,20),2,0)
+        grid.addItem(QSpacerItem(20,5),2,0)
+        grid.setRowStretch(2,1)
         grid.addWidget(self.__reverseCheckbox,3,0)
         grid.addWidget(caseSensitiveCheckbox,4,0)
         grid.addWidget(wordCheckbox,5,0)
@@ -110,6 +113,7 @@ class searchDialog(QWidget):
 
         findNextBtn=QPushButton("查找下一个")
         self.__findPreBtn=QPushButton("查找上一个")
+        self.__findPreBtn.setMinimumWidth(150)
         countBtn=QPushButton("计数")
         cancelBtn=QPushButton("取消")
         self.__replaceBtn=QPushButton("替换")

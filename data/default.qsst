@@ -42,6 +42,9 @@ QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);
 QSplitter::handle:pressed{
     border-color: $pressed;
 }
+QSizeGrip{
+    background-color: none;
+}
 /* 一定要记得，用qApp或者QApplication.instance的setStyle，
     用self.setStyle会有很多地方不生效：Menu ToolTip等*/
 /* =============================================== */

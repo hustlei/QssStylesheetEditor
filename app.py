@@ -57,6 +57,10 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.actions["find"].triggered.connect(self.editor.find)
         self.actions["replace"].triggered.connect(self.editor.replace)
 
+        self.actions["echospace"].triggered.connect(
+                lambda:self.editor.setWhitespaceVisibility(not self.editor.whitespaceVisibility()))
+        self.actions["echoeol"].triggered.connect(
+                lambda:self.editor.setEolVisibility(not self.editor.eolVisibility()))
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
             if(dockLoc==Qt.TopDockWidgetArea or dockLoc==Qt.BottomDockWidgetArea):
@@ -72,14 +76,29 @@ class MainWin(QMainWindow, Widgets_MainWin):
         self.editor.loseFocus.connect(rend)
         self.editor.mouseLeave.connect(rend)
         self.editor.mousePress.connect(rend)
+        self.editor.linesChanged.connect(lambda :self.status["lines"].setText(self.tr("lines:")+str(self.editor.lines())))
+        self.editor.cursorPositionChanged.connect(lambda l,p:self.status["line"].setText(
+                                                                    self.tr("line:")+str(l+1)+self.tr("  pos:")+str(p)))
+        self.editor.selectionChanged.connect(self.__setSelectStatus)
+        self.editor.modificationChanged.connect(self.motifyChanged)
 
+        #help
         aboutText="<b><center>"+self.title+"</center></b><br><br>"
         aboutText+="本软件为QtWidget样式表Qss文件高级编辑软件，<br>支持自定义变量，支持实时预览。<br><br>"
         aboutText+="author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>业余编写，欢迎交流: hustlei@sina.cn"
         aboutText+="<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(lambda:QMessageBox.about(self,"about",aboutText))
 
-        self.editor.modificationChanged.connect(self.motifyChanged)
+
+    def __setSelectStatus(self):
+        linefrom,posfrom,lineto,posto=self.editor.getSelection()
+        linefrom+=1
+        lineto+=1
+        if(linefrom==0 or lineto ==0):
+            text="select: none"
+        else:
+            text="select:ln"+str(linefrom)+" - ln"+str(lineto)
+        self.status["select"].setText(text)
 
     def unuseQss(self,unuse):
         if(unuse):
@@ -224,6 +243,7 @@ class MainWin(QMainWindow, Widgets_MainWin):
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title+" - " + os.path.basename(file))
+            self.status["coding"].setText(self.editor.coding)
 
     def new(self):
         if(self.editor.isModified()):
