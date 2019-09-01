@@ -1,18 +1,18 @@
 
 # ToDo
 
-+ 打包为exe，制作Nsis安装包
++ 国际化
++ 最近打开的文档目录
++ 制作Nsis安装包
     - 资源文件编译
 + 编辑器注释功能
-+ 最近打开的文档目录
 + 帮助文档
     - 软件帮助
     - Qss帮助及示例
-+ 国际化
 
 # ChangeLog
 
-## v1.3(开发中)
+## v1.3
 主要修改：**制作windows x64版本exe软件**
 
 + ** Features **
@@ -22,6 +22,8 @@
     - 增加ScreenSplash
     - 增加拖放打开文件功能
     - 语法提示增加Qss关键字
+    - 打包win64 binary exe portable
+    - qss内用相对路径图片，修改为相对qss文件位置
 + ** BugFix **
     - 修复Find对话框statusbar显示问题
 

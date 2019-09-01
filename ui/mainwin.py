@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt,QSize
 from ui import Ui_Mainwin
 from ui.flow_layout import QFlowLayout
 from qss_template import Qsst
+import re
 
 class MainWin(QMainWindow, Ui_Mainwin):
     def __init__(self, parent=None):
@@ -115,11 +116,20 @@ class MainWin(QMainWindow, Ui_Mainwin):
 
         norand=self.actions["DisableQss"].isChecked()
         if(norand):
-            self.setStyleSheet('')
+            qApp.setStyleSheet('')
         else:
             #self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
             # try:
-            qApp.setStyleSheet(self.qsst.qss)
+            #saved=os.path.exists(self.file)
+            # lastcwd=os.getcwd()
+            # if saved:
+            #     dir=os.path.dirname(self.file)
+            #     os.chdir(dir)
+            path = os.path.dirname(self.file).replace("\\", "/")
+            styleSheet = re.sub(r'url\([\s]*[\"\']*[\s]*([^\/\s][^:\s\"\'\)]*)[\s]*[\"\']*[\s]*\)',
+                                r'url("{}/\1")'.format(path).format(path), self.qsst.qss)#不支持带空格路径
+            qApp.setStyleSheet(styleSheet)
+
             #     self.statusbar.showMessage("")#不起作用
             # except Exception:
             #     self.statusbar.showMessage("qss parse failed")
