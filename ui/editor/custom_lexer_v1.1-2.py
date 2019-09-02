@@ -1,19 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2005 - 2019 Detlev Offenbach <detlev@die-offenbachs.de>
-#
-
-"""
-Module implementing a QSS lexer with some additional methods.
-"""
-
 from __future__ import unicode_literals
 
 from PyQt5.Qsci import QsciLexerCSS
 
 
-
-class QsciLexerQSS( QsciLexerCSS):
+class QsciLexerQSS(QsciLexerCSS):
     """
     Subclass to implement some additional lexer dependent methods.
     """
@@ -42,8 +34,6 @@ class QsciLexerQSS( QsciLexerCSS):
             self.tr("Browser-Specific Pseudo-Classes"),
             self.tr("Browser-Specific Pseudo-Elements"),
         ]
-
-
 
     def isCommentStyle(self, style):
         """

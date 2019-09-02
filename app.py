@@ -1,13 +1,21 @@
-﻿# -*- coding: utf-8 -*-
+﻿#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""QssStylesheetEditor app start module
 
-import sys,os
+Create QApplication and show splash. Include minimal module to accelerate spalsh load.
+
+Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""
+
+from PyQt5.QtWidgets import QApplication
+import sys
+import os
 os.chdir(os.path.dirname(__file__))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from PyQt5.QtWidgets import QApplication
 
 def main():
-    #sys.setrecursionlimit(1500)
+    # sys.setrecursionlimit(1500)
     app = QApplication(sys.argv)
     print("starting...")
     from ui.splash import SplashScreen
@@ -17,7 +25,7 @@ def main():
     win = MainWin()
     win.show()
     splash.finish(win)
-
     sys.exit(app.exec_())
+
 
 main()

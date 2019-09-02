@@ -1,5 +1,3 @@
-# enums.py
-
 """Wrapper for Qsci.QsciScintilla enumerations.
 """
 from PyQt5.Qsci import QsciScintilla
@@ -12,6 +10,7 @@ class BadEnum(Exception):
     def __init__(self, name):
         super(BadEnum, self).__init__("Enumeration unknown: '%s'" % name)
 
+
 class EditorEnums():
     types = {
         # annotation display styles
@@ -20,7 +19,6 @@ class EditorEnums():
             ('AnnotationStandard', QsciScintilla.AnnotationStandard),
             ('AnnotationBoxed', QsciScintilla.AnnotationBoxed),
         ),
-
         # sources for auto-completion lists.
         QsciScintilla.AutoCompletionSource: (
             ('AcsNone', QsciScintilla.AcsNone),
@@ -28,7 +26,6 @@ class EditorEnums():
             ('AcsDocument', QsciScintilla.AcsDocument),
             ('AcsAPIs', QsciScintilla.AcsAPIs),
         ),
-
         # brace matching modes. The character pairs (), [] and () are treated as
         # braces. The Python lexer will also match a : with the end of the
         # corresponding indented block.
@@ -37,7 +34,6 @@ class EditorEnums():
             ('StrictBraceMatch', QsciScintilla.StrictBraceMatch),
             ('SloppyBraceMatch', QsciScintilla.SloppyBraceMatch),
         ),
-
         # call tip styles
         QsciScintilla.CallTipsStyle: (
             ('CallTipsNone', QsciScintilla.CallTipsNone),
@@ -45,21 +41,18 @@ class EditorEnums():
             ('CallTipsNoAutoCompletionContext', QsciScintilla.CallTipsNoAutoCompletionContext),
             ('CallTipsContext', QsciScintilla.CallTipsContext),
         ),
-
         # edge modes for long lines
         QsciScintilla.EdgeMode: (
             ('EdgeNone', QsciScintilla.EdgeNone),
             ('EdgeLine', QsciScintilla.EdgeLine),
             ('EdgeBackground', QsciScintilla.EdgeBackground),
         ),
-
         # end-of-line modes
         QsciScintilla.EolMode: (
             ('EolWindows', QsciScintilla.EolWindows),
             ('EolUnix', QsciScintilla.EolUnix),
             ('EolMac', QsciScintilla.EolMac),
         ),
-
         # styles for the folding margin
         QsciScintilla.FoldStyle: (
             ('NoFoldStyle', QsciScintilla.NoFoldStyle),
@@ -69,7 +62,6 @@ class EditorEnums():
             ('CircledTreeFoldStyle', QsciScintilla.CircledTreeFoldStyle),
             ('BoxedTreeFoldStyle', QsciScintilla.BoxedTreeFoldStyle),
         ),
-
         # margin types
         QsciScintilla.MarginType: (
             ('SymbolMargin', QsciScintilla.SymbolMargin),
@@ -79,7 +71,6 @@ class EditorEnums():
             ('TextMargin', QsciScintilla.TextMargin),
             ('TextMarginRightJustified', QsciScintilla.TextMarginRightJustified),
         ),
-
         # pre-defined marker symbols
         QsciScintilla.MarkerSymbol: (
             ('Circle', QsciScintilla.Circle),
@@ -111,7 +102,6 @@ class EditorEnums():
             #('LeftRectangle', QsciScintilla.LeftRectangle),
             #('Underline', QsciScintilla.Underline),
         ),
-
         # whitespace visibility modes. When whitespace is visible spaces are
         # displayed as small centred dots and tabs are displayed as light arrows
         # pointing to the right.
@@ -120,14 +110,12 @@ class EditorEnums():
             ('WsVisible', QsciScintilla.WsVisible),
             ('WsVisibleAfterIndent', QsciScintilla.WsVisibleAfterIndent),
         ),
-
         # line wrap modes
         QsciScintilla.WrapMode: (
             ('WrapNone', QsciScintilla.WrapNone),
             ('WrapWord', QsciScintilla.WrapWord),
             ('WrapCharacter', QsciScintilla.WrapCharacter),
         ),
-
         # line wrap visual flags
         QsciScintilla.WrapVisualFlag: (
             ('WrapFlagNone', QsciScintilla.WrapFlagNone),
@@ -151,7 +139,6 @@ class EditorEnums():
         else:
             return cls.dict[name]
 
-
     def getName(cls, value):
         """Return the string version of the given enumeration getValue,
         or raise `BadEnum` if there's no such enumeration getValue.
@@ -170,6 +157,7 @@ class EditorEnums():
             raise BadEnum(value)
 
         return lookup[value]
+
 
 if __name__ == "__main__":
     print(EditorEnums.dict)

@@ -1,50 +1,49 @@
-#!/usr/bin/env python3
-
+# -*- coding: utf-8 -*-
+"""
+Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""
 __version__ = "1.0"
 
 import sys
 import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
+import chardet
 
-from PyQt5.QtCore import (Qt, QEvent, QFile, QFileInfo, QIODevice, QRegExp, QTextStream,
-                          pyqtSignal)
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QFileDialog, QMessageBox,
-                             QTextEdit)
-from PyQt5.QtGui import (QFont, QKeyEvent,QColor,QDropEvent)
+from ..editor import custom_lexer
+from .settings import *
+from .search import searchDialog
+from .enums import BadEnum, EditorEnums
+from PyQt5.QtGui import (QFont, QKeyEvent, QColor, QDropEvent)
+from PyQt5.QtCore import (pyqtSignal)
 from PyQt5.Qsci import *
 from PyQt5 import Qsci
 
-from .enums import BadEnum, EditorEnums
-from .settings import *
-from ..editor import custom_lexer
-from .search import searchDialog
-
-sys.path.insert(0,os.path.join(os.path.dirname(__file__),"3rdparty.zip"))
-import chardet
 
 class CodeEditor(QsciScintilla):
-    keyPress=pyqtSignal(QKeyEvent)
-    loseFocus=pyqtSignal()
-    mouseLeave=pyqtSignal()
-    mousePress=pyqtSignal()
-    drop=pyqtSignal(QDropEvent)
+    keyPress = pyqtSignal(QKeyEvent)
+    loseFocus = pyqtSignal()
+    mouseLeave = pyqtSignal()
+    mousePress = pyqtSignal()
+    drop = pyqtSignal(QDropEvent)
 
     def __init__(self, **config):
         super().__init__()
-        self.coding="utf-8"
+        self.coding = "utf-8"
 
-        self.settings={}
+        self.settings = {}
         self._setDefaultConfig()
         # Override defaults with any customizations
         self.configure(**config)
 
-        self.searchDialog=searchDialog(self)
+        self.searchDialog = searchDialog(self)
 
     def getEditInfo(self):
-        self.line=len(self.line)
+        self.line = len(self.line)
 
     def find(self):
         self.searchDialog.setReplaceMode(False)
         self.searchDialog.show()
+
     def replace(self):
         self.searchDialog.setReplaceMode(True)
         self.searchDialog.show()
@@ -73,48 +72,50 @@ class CodeEditor(QsciScintilla):
         """
         self.configure(
             # Fonts
-            utf8 = True,  # 支持中文字符
-            font = QFont('Consolas', 11),# 设置默认字体
-            marginsFont = QFont('Courier New', 10),
+            utf8=True,  # 支持中文字符
+            font=QFont('Consolas', 11),  # 设置默认字体
+            marginsFont=QFont('Courier New', 10),
 
             # Wrap mode: Wrap(None|Word|Character|Whitespace) 0,1,2,3
             wrapMode='WrapNone',  # self.setWrapMode(self.WrapWord)    # 自动换行
-            # Text wrapping visual flag: WrapFlag(None|ByText|ByBorder|InMargin)
+            # Text wrapping visual flag:
+            # WrapFlag(None|ByText|ByBorder|InMargin)
             wrapVisualFlags='WrapFlagNone',  # 无对应getter
             # End-of-line mode
             # EolMode: Eol(Windows|Unix|Mac) SC_EOL_CRLF|SC_EOL_LF|SC_EOL_CR
-            eolMode = 'EolWindows',#self.SC_EOL_LF,# 以\n换行
+            eolMode='EolWindows',  # self.SC_EOL_LF,# 以\n换行
             eolVisibility=False,  # 是否显示换行符
 
             # Whitespace: Ws(Invisible|Visible|VisibleAfterIndent)
-            whitespaceVisibility='WsInvisible',#是否显示空格，类似word空格处显示为点
+            whitespaceVisibility='WsInvisible',  # 是否显示空格，类似word空格处显示为点
             #  WhitespaceSize: (0|1|2) 点大小，0不显示，1小点，2大点
-            whitespaceSize=2,#
+            whitespaceSize=2,
 
             # indent
-            indentationsUseTabs = False,#False表示用空格代替\t
-            tabWidth = 4,#空格数量，或者\t宽度
-            indentationGuides = True,# 用tab键缩进时，在缩进位置上显示一个竖点线，缩进有效，在字符串后加空格不显示
-            indentationWidth = 0,#如果在行首部空格位置tab，缩进的宽度字符数，并且不会转换为空格
-            autoIndent = True,# 换行后自动缩进
+            indentationsUseTabs=False,  # False表示用空格代替\t
+            tabWidth=4,  # 空格数量，或者\t宽度
+            indentationGuides=True,  # 用tab键缩进时，在缩进位置上显示一个竖点线，缩进有效，在字符串后加空格不显示
+            indentationWidth=0,  # 如果在行首部空格位置tab，缩进的宽度字符数，并且不会转换为空格
+            autoIndent=True,  # 换行后自动缩进
             backspaceUnindents=True,
-            tabIndents = True,#True如果行前空格数少于tabWidth，补齐空格数,False如果在文字前tab同true，如果在行首tab，则直接增加tabwidth个空格
+            tabIndents=True,
+            # True如果行前空格数少于tabWidth，补齐空格数,False如果在文字前tab同true，如果在行首tab，则直接增加tabwidth个空格
 
             # current line color
             caretWidth=2,  # 光标宽度，0表示不显示光标
-            caretForegroundColor=QColor("#ff000000"),#光标颜色
-            caretLineVisible=True,#是否高亮显示光标所在行
-            caretLineBackgroundColor=QColor('#FFF0F0F0'),#光标所在行背景颜色
+            caretForegroundColor=QColor("#ff000000"),  # 光标颜色
+            caretLineVisible=True,  # 是否高亮显示光标所在行
+            caretLineBackgroundColor=QColor('#FFF0F0F0'),  # 光标所在行背景颜色
 
             # selection color
             # selectionBackgroundColor=QColor("#606060"),
             # selectionForegroundColor=QColor("#FFFFFF"),
 
             # edges
-            edgeColumn = 80,
+            edgeColumn=80,
             # Edge mode: Edge(None|Line|Background)
-            edgeMode = 'EdgeLine',
-            edgeColor = QColor('#FF88FFFF'),
+            edgeMode='EdgeLine',
+            edgeColor=QColor('#FF88FFFF'),
 
             # Brace matching: (No|Strict|Sloppy)BraceMatch
             braceMatching='SloppyBraceMatch',
@@ -125,24 +126,25 @@ class CodeEditor(QsciScintilla):
             autoCompletionSource='AcsAll',  # 自动补全。对于所有Ascii字符
             autoCompletionCaseSensitivity=False,  # 自动补全大小写敏感,不是很有用
             autoCompletionThreshold=1,  # 输入多少个字符才弹出补全提示
-            autoCompletionReplaceWord=True,#是否用补全的字符串替代光标右边的字符串
+            autoCompletionReplaceWord=True,  # 是否用补全的字符串替代光标右边的字符串
 
             # margins switch
-            marginWidthes=((1,0), (3, 0), (4, 0)),  # 设置边栏宽度，设置宽度为0表示不显示
-            marginWidth=(2, 12), # 设置边栏宽度
+            marginWidthes=((1, 0), (3, 0), (4, 0)),  # 设置边栏宽度，设置宽度为0表示不显示
+            marginWidth=(2, 12),  # 设置边栏宽度
 
             # margin（line number）
-            marginLineNumbers=(0, True),# 设置第0个边栏为行号边栏，True表示显示
+            marginLineNumbers=(0, True),  # 设置第0个边栏为行号边栏，True表示显示
             marginsForegroundColor=QColor('#ff000000'),
-            marginsBackgroundColor=QColor('lightgray'),  # 行号边栏背景颜色 打开新文件后就不起作用了？
+            marginsBackgroundColor=QColor(
+                'lightgray'),  # 行号边栏背景颜色 打开新文件后就不起作用了？
 
             # margin (folding)
             # Folding: (No|Plain|Circled|Boxed|CircledTree|BoxedTree)FoldStyle
             folding="BoxedTreeFoldStyle",  # 代码可折叠
             foldMarginColors=(QColor('#aad'), QColor('#bbe')),
-            ###marginType=(2,QsciScintilla.SC_MARGIN_SYMBOL),#页边类型
-            ###marginMarkerMask=(2,QsciScintilla.SC_MASK_FOLDERS),#页边掩码
-            ###marginSensitivity=(2,True),#注册通知事件，当用户点击边栏时，scintilla会通知我们
+            # marginType=(2,QsciScintilla.SC_MARGIN_SYMBOL),#页边类型
+            # marginMarkerMask=(2,QsciScintilla.SC_MASK_FOLDERS),#页边掩码
+            # marginSensitivity=(2,True),#注册通知事件，当用户点击边栏时，scintilla会通知我们
         )
 
     def configure(self, **config):
@@ -170,7 +172,7 @@ class CodeEditor(QsciScintilla):
             if isinstance(args, (tuple, list)):
                 setter(*args)
             # Convert strings to enum getValue
-            elif type(args)==str and args in EditorEnums.dict:
+            elif isinstance(args, str) and args in EditorEnums.dict:
                 setter(EditorEnums.dict[args])
             # Single-argument setting
             else:
@@ -179,7 +181,8 @@ class CodeEditor(QsciScintilla):
         # Adjust margin if line numbers are on
         if 'marginLineNumbers' in config:
             if config['marginLineNumbers'] == (0, True):
-                font_metrics = QtGui.QFontMetrics(self.settings['marginsFont'])#self.marginsFont())
+                font_metrics = QtGui.QFontMetrics(
+                    self.settings['marginsFont'])  # self.marginsFont())
                 self.setMarginWidth(0, font_metrics.width('000') + 5)
             else:
                 self.setMarginWidth(0, 0)
@@ -207,24 +210,26 @@ class CodeEditor(QsciScintilla):
             self.lexer = None
         else:
             print("%s syntax highlighting" % language)
-            custom=False
+            custom = False
             for lexer in dir(custom_lexer):
-                if lexer[9:]==language:
-                    custom=True
+                if lexer[9:] == language:
+                    custom = True
                     break
 
             # try:
             if custom:
-                self.lexer = getattr(custom_lexer, 'QsciLexer' + language)(self)
+                self.lexer = getattr(
+                    custom_lexer, 'QsciLexer' + language)(self)
             else:
-                self.lexer = getattr(Qsci, 'QsciLexer'+language)(self)#lexer = QsciLexerCSS()
+                self.lexer = getattr(
+                    Qsci, 'QsciLexer' + language)(self)  # lexer = QsciLexerCSS()
             # except AttributeError:
             #     raise AttributeError
                 #raise ValueError("Unknown language: '%s'" % language)
             self.lexer.setDefaultFont(self.font())
         self.setLexer(self.lexer)
 
-    def setBackgroundColor(self,color):
+    def setBackgroundColor(self, color):
         if(self.lexer):
             try:
                 self.lexer.setPapers(color)
@@ -242,14 +247,14 @@ class CodeEditor(QsciScintilla):
         """
         with open(filename, 'rb') as f:
             self.setEnabled(True)
-            #lm=os.path.getsize(filename)
-            bytes=f.read()
-            l=min(len(bytes),1024)
+            # lm=os.path.getsize(filename)
+            bytes = f.read()
+            l = min(len(bytes), 1024)
             try:
-                rst=chardet.detect(bytes[:l])
+                rst = chardet.detect(bytes[:l])
                 if(rst["confidence"] < 0.8):
-                    l=min(len(bytes), 256*1024)
-                    rst=chardet.detect(bytes[:l])#['encoding']
+                    l = min(len(bytes), 256 * 1024)
+                    rst = chardet.detect(bytes[:l])  # ['encoding']
                 self.coding = rst["encoding"]
                 if(rst["confidence"] > 0.8):
                     self.setText(bytes.decode(self.coding))
@@ -257,10 +262,10 @@ class CodeEditor(QsciScintilla):
                     if(self.__isBin(bytes)):
                         raise Exception
                     else:
-                        self.coding="bin?"
+                        self.coding = "bin?"
                         self.setText(self.__byte2str(bytes))
-            except:# Exception:
-                self.coding="none"
+            except BaseException:  # Exception:
+                self.coding = "none"
                 self.setText("can't open this file, it may be a binary file.")
                 self.setEnabled(False)
                 return False
@@ -268,8 +273,8 @@ class CodeEditor(QsciScintilla):
             self.setHighlightLanguage(self.guessLang(filename))
             return True
 
-    def __byte2str(self,bytes,echoescape=True):
-        #s=""
+    def __byte2str(self, bytes, echoescape=True):
+        # s=""
         # if echoescape:
         #     for b in bytes:#ord(chr(b))
         #         c=chr(b)
@@ -280,27 +285,27 @@ class CodeEditor(QsciScintilla):
         # else:
         #     for b in bytes:
         #         s+=chr(b)
-        str_list=[chr(b) for b in bytes if b > 0x30]
-        s="".join(str_list)
+        str_list = [chr(b) for b in bytes if b > 0x30]
+        s = "".join(str_list)
         return s
 
-    def __isBin(self,bytes):
-        chr_list=[b for b in bytes if b>0x30]
-        count=len(chr_list)
-        f=count/len(bytes)
-        return True if f>0.7 else False
+    def __isBin(self, bytes):
+        chr_list = [b for b in bytes if b > 0x30]
+        count = len(chr_list)
+        f = count / len(bytes)
+        return True if f > 0.7 else False
 
     def save(self, filename):
         """Save the editor contents to the given filename.
         """
-        with open(filename, 'w',newline='') as outfile:
-            #不指定newline，则换行符为各系统默认的换行符（\n, \r, or \r\n, ）
-            #newline=''表示不转换
+        with open(filename, 'w', newline='') as outfile:
+            # 不指定newline，则换行符为各系统默认的换行符（\n, \r, or \r\n, ）
+            # newline=''表示不转换
             outfile.write(self.text())
             self.setModified(False)
 
     ###
-    ### Tools
+    # Tools
     ###
 
     def guessLang(cls, filename):
@@ -316,12 +321,12 @@ class CodeEditor(QsciScintilla):
                 return language
 
         # No match -- asume plain text
-        if(ext==".txt" or ext==".text"):
+        if(ext == ".txt" or ext == ".text"):
             return 'None'
         return "QSS"
 
     ###
-    ### The Missing Getters 只有set函数，但是没有对应get函数的属性
+    # The Missing Getters 只有set函数，但是没有对应get函数的属性
     ###
 
     def caretLineVisible(self):
@@ -361,14 +366,15 @@ class CodeEditor(QsciScintilla):
         )
         return (red, green, blue)
     ###
-    ### extension Getters setter
+    # extension Getters setter
     ###
-    def setMarginWidthes(self,*widthes):
-        for i,w in widthes:
-           self.setMarginWidth(i,w)
+
+    def setMarginWidthes(self, *widthes):
+        for i, w in widthes:
+            self.setMarginWidth(i, w)
 
     ###
-    ### extension
+    # extension
     ###
 
     def get_config(self, name, *args):
@@ -388,4 +394,3 @@ class CodeEditor(QsciScintilla):
         """
         conf = {name: value}
         self.configure(**conf)
-

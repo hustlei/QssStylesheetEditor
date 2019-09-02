@@ -1,6 +1,11 @@
-# Language lexers and their file extensions
-# (Name, extensions) tuples, where <Name> must match
-# QsciLexer<Name>
+# -*- coding: utf-8 -*-
+""" Language lexers and their file extensions
+
+(Name, extensions) tuples, where <Name> must match QsciLexer<Name>
+
+Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""
+
 language_extensions = (
     ('None', '.txt'),
     #('Custom', ''),
@@ -289,7 +294,8 @@ _other_color_settings = (
 import os
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QDialog
-from PyQt5.QtCore import  Qt,QVariant
+from PyQt5.QtCore import Qt, QVariant
+
 
 class EditorSettings (QDialog):
     """A dialog window for configuring a QsciScintilla editor.
@@ -311,10 +317,8 @@ class EditorSettings (QDialog):
         for language, extensions in language_extensions:
             if ext in extensions.split(' '):
                 return language
-
         # No match -- asume plain text
         return 'None'
-
 
     def _create_layout(self):
         """Create and return the main layout for the dialog widget.
@@ -358,7 +362,6 @@ class EditorSettings (QDialog):
 
         return main_layout
 
-
     def _create_widget(self, name):
         """Return an appropriate widget for the given configuration setting.
         """
@@ -375,7 +378,6 @@ class EditorSettings (QDialog):
         elif type_ == 'color':
             widget = self._create_color_picker(name)
 
-
         # Label with possible tooltip
         label = QLabel(setting['label'])
 
@@ -390,7 +392,6 @@ class EditorSettings (QDialog):
         layout.addWidget(widget)
 
         return layout
-
 
     def _create_checkbox(self, name):
         """Return a ``QCheckBox`` for the given setting.
@@ -414,7 +415,6 @@ class EditorSettings (QDialog):
             checkbox.setCheckState(Qt.Unchecked)
 
         return checkbox
-
 
     def _create_combobox(self, name):
         """Return a combobox for modifying a multiple-getValue setting.
@@ -442,7 +442,6 @@ class EditorSettings (QDialog):
 
         return combo
 
-
     def _create_color_picker(self, name):
         """Return a color-picker widget for a color-based setting.
         """
@@ -465,7 +464,6 @@ class EditorSettings (QDialog):
 
         return button
 
-
     def _create_number_box(self, name):
         """Return a numeric entry widget for a numeric setting.
         """
@@ -481,7 +479,6 @@ class EditorSettings (QDialog):
         spinbox.valueChanged[int].connect(spinbox_changed)
 
         return spinbox
-
 
     def _create_line_number_checkbox(self):
         """Return a widget for enabling/disabling line numbers.
@@ -507,16 +504,17 @@ class EditorSettings (QDialog):
 
         return checkbox
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     from PyQt5.QtWidgets import *
     import sys
-    
+
     from Editor import CodeEditor
-    app=QApplication(sys.argv)
-    win=QWidget()
-    ed=CodeEditor()
-    layout=QVBoxLayout()
-    d=EditorSettings(ed)
+    app = QApplication(sys.argv)
+    win = QWidget()
+    ed = CodeEditor()
+    layout = QVBoxLayout()
+    d = EditorSettings(ed)
     layout.addWidget(d)
     d.show()
     win.show()

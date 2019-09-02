@@ -1,15 +1,21 @@
+# -*- coding: utf-8 -*-
+"""
+Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""
 from PyQt5.Qsci import QsciLexerCSS
 from PyQt5.QtGui import QColor
 
+
 class QsciLexerQSS(QsciLexerCSS):
-    def __init__(self,parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.setDefault()
-        if(parent!=None):
-            font=parent.font()
+        if(parent is not None):
+            font = parent.font()
             font.setBold(False)
-            font.setWeight(font.Light)#QFont::Light 25 Normal 50 DemiBold 63 Bold 75 Black 87
-            self.setFont(font, QsciLexerQSS.Comment)#QsciLexerQSS.Comment=9
+            # QFont::Light 25 Normal 50 DemiBold 63 Bold 75 Black 87
+            font.setWeight(font.Light)
+            self.setFont(font, QsciLexerQSS.Comment)  # QsciLexerQSS.Comment=9
 
     def setDefault(self):
         # high light code
@@ -52,7 +58,8 @@ class QsciLexerQSS(QsciLexerCSS):
         # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDER)
         # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDER)
         # self.setMarkerBackgroundColor(QColor("#FFFFFF"), QsciScintilla.SC_MARKNUM_FOLDEROPEN)
-        # self.setMarkerForegroundColor(QColor("#272727"), QsciScintilla.SC_MARKNUM_FOLDEROPEN)
+        # self.setMarkerForegroundColor(QColor("#272727"),
+        # QsciScintilla.SC_MARKNUM_FOLDEROPEN)
 
         # self.SCI_MARKERDEFINE(QsciScintilla.SC_MARKNUM_FOLDEROPEN,QsciScintilla.SC_MARK_CHARACTER+65)#折叠标签样式
         # self.markerDefine(QsciScintilla.SC_MARKNUM_FOLDEROPEN, QsciScintilla.BoxedMinus)
