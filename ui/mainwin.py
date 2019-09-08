@@ -19,7 +19,7 @@ from qss_template import Qsst
 class MainWin(QMainWindow, Ui_Mainwin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
-        self.ver = "v1.3"
+        self.ver = "v1.35"
         self.title = self.tr("QssStylesheet Editor " + self.ver)
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))

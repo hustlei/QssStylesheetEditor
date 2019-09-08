@@ -12,6 +12,12 @@
 
 # ChangeLog
 
+## v1.35
+主要修改：**制作windows版本安装包**
+
++ ** Features **
+    - 增加安装包制作的Nsis源码
+
 ## v1.3
 主要修改：**制作windows x64版本exe软件**
 

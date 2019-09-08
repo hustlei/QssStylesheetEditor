@@ -15,13 +15,15 @@
  ******************************/
 
 ; 安装程序初始定义常量
-!define PRODUCT_NAME "QssStylesheetEditor"																#### please change
-!define Project ${PRODUCT_NAME}           																#### please change
-!define PRODUCT_VERSION "1.3" 																						#### please change
+!define Project "QssStylesheetEditor"     																#### please change
+!define PRODUCT_NAME ${Project}																						#### please change
+!define Exe_Name "AppStart"                                               #### please change
+!define PRODUCT_VERSION "1.35" 																						#### please change
+!define ProjectIcon "..\img\colorize.ico"	                              	#### please change
 !define PRODUCT_PUBLISHER "lileilei"              												#### please change
-!define PRODUCT_WEB_SITE "http://hustlei.github.io"                       #### please change
+!define PRODUCT_WEB_SITE "https://blog.csdn.net/hustlei/article/details/87887369"                       #### please change
 !define PRODUCt_BRAND_TEXT "hustlei,2015 @wuhan"                          #### please change
-!define StartMenuDir "QssStylesheetEditor"                          			#### please change
+!define StartMenuDir ${Project}						                          			#### please change
 
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${PRODUCT_NAME}.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -45,7 +47,7 @@ RequestExecutionLevel admin
 ; MUI(界面) 预定义常量
 !define MUI_ABORTWARNING
 ; 修改图标
-!define MUI_ICON "..\img\colorize.ico"                              	#### please change
+!define MUI_ICON ${ProjectIcon}				                              	#### please change
 !define MUI_UNICON "uninstall.ico"
 ; 修改欢迎和完成背景色
 !define MUI_BGCOLOR F3F3F3
@@ -93,7 +95,7 @@ $\r$\n$\r$\n$\r$\n点击[下一步(N)]继续。"
 ; 显示自定义安装页面
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW show                           #### please change
 ; 安装完成页面
-!define MUI_FINISHPAGE_RUN "$INSTDIR\${Project}.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\${Exe_Name}.exe"
 #!define MUI_FINISHPAGE_RUN_NOTCHECKED                              #### please change
 #指定安装完成后是否运行应用程序 checkbox 为非选中状态
 !insertmacro MUI_PAGE_FINISH
@@ -110,7 +112,7 @@ $\r$\n$\r$\n$\r$\n点击[下一步(N)]继续。"
 
 ChangeUI IDD_SELCOM myui.exe
 Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
-OutFile "..\dist\${Project}Installer.exe"                   	    #### please change
+OutFile "..\dist\${Project}${PRODUCT_VERSION}_win_Installer.exe"                   	    #### please change
 InstallDir "$PROGRAMFILES\${Project}"
 InstallDirRegKey HKLM "${PRODUCT_UNINST_KEY}" "UninstallString"
 ShowInstDetails show
@@ -144,7 +146,7 @@ SectionEnd
 
 Section "关联epub文件" SEC1                                     	#### please change
 	SectionIn 1 RO
-	!insertmacro Assoc "qss,qsst" "qss" "qss样式文件" "$INSTDIR\${Project}.exe" \
+	!insertmacro Assoc "qss,qsst" "qss" "qss样式文件" "$INSTDIR\${Exe_Name}.exe" \
 											 "$INSTDIR\scripts\img\qss.ico"
 		System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 		Sleep 500
@@ -153,8 +155,8 @@ SectionEnd
 Section -AdditionalIcons
   SetOutPath "$INSTDIR"
   CreateDirectory "$SMPROGRAMS\${StartMenuDir}"
-  CreateShortCut "$SMPROGRAMS\${StartMenuDir}\${Project}.lnk" "$INSTDIR\${Project}.exe"
-  CreateShortCut "$DESKTOP\${Project}.lnk" "$INSTDIR\${Project}.exe"
+  CreateShortCut "$SMPROGRAMS\${StartMenuDir}\${Project}.lnk" "$INSTDIR\${Exe_Name}.exe"
+  CreateShortCut "$DESKTOP\${Project}.lnk" "$INSTDIR\${Exe_Name}.exe"
   WriteIniStr "$INSTDIR\${PRODUCT_NAME}.url" "InternetShortcut" "URL" "${PRODUCT_WEB_SITE}"
   CreateShortCut "$SMPROGRAMS\${StartMenuDir}\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
   CreateShortCut "$SMPROGRAMS\${StartMenuDir}\Uninstall.lnk" "$INSTDIR\uninst.exe"
@@ -162,7 +164,7 @@ SectionEnd
 
 Section -Post
   WriteUninstaller "$INSTDIR\uninst.exe"
-  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "" "$INSTDIR\${Project}.exe"
+  WriteRegStr HKLM "${PRODUCT_DIR_REGKEY}" "${ProjectIcon}" "$INSTDIR\${Exe_Name}.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName" "$(^Name)"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString" "$INSTDIR\uninst.exe"
   WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayIcon" "$INSTDIR\bin\rc4net.dll"
@@ -191,7 +193,7 @@ Section Uninstall                                           #### please change
 
 	Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\${Project}.exe"
+  Delete "$INSTDIR\${Exe_Name}.exe"
   RMDir /r "$INSTDIR\*.*"
 
   Delete "$SMPROGRAMS\${StartMenuDir}\Uninstall.lnk"
