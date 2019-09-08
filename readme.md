@@ -22,8 +22,8 @@ windows 64bit 操作系统可以下载exe，直接运行。
 
 下载地址：
 
-+ QssStylesheetEditor_1.3_win64_portable **[[zip Download]](https://pan.baidu.com/s/1dbC9rq91SlxguRONlUOocg)**(secuirity code: mq3c)
-+ QssStylesheetEditor_1.3_win64_portable **[[7z Download]](https://pan.baidu.com/s/1HM9SW6BRlCkGKyUxonbh1w)**(secuirity code: bcaz) 
++ QssStylesheetEditor_1.35_win64_installer **[[Download]](https://pan.baidu.com/s/1jbCksYPrWM5yoVA5hEx8zw)**(secuirity code: 5u5s)
++ QssStylesheetEditor_1.35_win64_portable  **[[Download]](https://pan.baidu.com/s/15bh_r84-NyhwOph_cV2rpw)**(secuirity code: 4hha)
 
 
 ## 其他操作系统
