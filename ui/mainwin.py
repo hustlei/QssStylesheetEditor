@@ -30,6 +30,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
+        self.config=Config()
         #ui
         self.setAcceptDrops(True)
         self.setupUi(self)
@@ -39,7 +40,6 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.setLayoutDirection(Qt.RightToLeft)
         #conf
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
-        self.config=Config()
         self.loadConfig()
         #init
         self.__isNewFromTemplate=False
@@ -107,6 +107,9 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.editor.selectionChanged.connect(self.__setSelectStatus)
         self.editor.modificationChanged.connect(self.motifyChanged)
         self.editor.drop.connect(self.dropEvent)
+
+        # setting
+        self.actions["config"].triggered.connect(self.config.showDialog)
 
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"

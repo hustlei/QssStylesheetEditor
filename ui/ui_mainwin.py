@@ -171,6 +171,8 @@ class Ui_Mainwin(object):
             checkable=True)
         self.actions["ShowPreview"].setChecked(True)
 
+        self.actions["config"]=createAct(self.tr("&Config"),self.tr("settings."),None,"img/config.png")
+
         self.actions["about"] = createAct(self.tr("&About"), self.tr("About"))
 
         # self.exitAct.triggered.connect(qApp.exit)#等价于qApp.quit
@@ -180,6 +182,7 @@ class Ui_Mainwin(object):
         self.menus["File"] = QMenu(self.tr("&File"))
         self.menus["Edit"] = QMenu(self.tr("&Edit"))
         self.menus["View"] = QMenu(self.tr("&View"))
+        self.menus["Tool"] = QMenu(self.tr("&Tool"))
         self.menus["Help"] = QMenu(self.tr("&Help"))
 
         recentMenu = QMenu(self.tr("Recent"), self.menus["File"])
@@ -217,6 +220,8 @@ class Ui_Mainwin(object):
 
         self.menus["View"].addAction(self.actions["ShowColor"])
         self.menus["View"].addAction(self.actions["ShowPreview"])
+
+        self.menus["Tool"].addAction(self.actions["config"])
 
         self.menus["Help"].addAction(self.actions["about"])
 
