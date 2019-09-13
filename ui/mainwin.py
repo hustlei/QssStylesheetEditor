@@ -6,7 +6,7 @@ import os
 import re
 
 from PyQt5.QtWidgets import (qApp, QMainWindow, QWidget, QLabel, QPushButton,
-                             QColorDialog, QFileDialog, QMessageBox)
+                             QColorDialog, QFileDialog, QMessageBox, QAction)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize
 # import sip
@@ -14,6 +14,8 @@ from PyQt5.QtCore import Qt, QSize
 from ui import Ui_Mainwin
 from ui.flow_layout import QFlowLayout
 from qss_template import Qsst
+from .recent import Recent
+from config import Config
 
 
 class MainWin(QMainWindow, Ui_Mainwin):
@@ -28,12 +30,19 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
+        #ui
         self.setAcceptDrops(True)
-
         self.setupUi(self)
         self.setupActions()
+        #conf
+        self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
+        self.config=Config()
+        self.config.read(self.configfile)
+        self.recent=Recent(self.open, self.submenus["recent"])
+        self.recent.setList(self.config.getSec("file")["recent"])
+        #init
+        self.__isNewFromTemplate=False
         self.newWithTemplate()
-
         self.statusbar.showMessage("Ready")
 
     def setupActions(self):
@@ -43,7 +52,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
 
         # menubar toolbar
         self.actions["new"].triggered.connect(self.new)
-        self.actions["open"].triggered.connect(self.open)
+        self.actions["open"].triggered.connect(self._openact)
         self.actions["save"].triggered.connect(self.save)
         self.actions["saveas"].triggered.connect(self.saveAs)
         self.actions["export"].triggered.connect(self.export)
@@ -274,7 +283,10 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.editor.verticalScrollBar().setSliderPosition(pos)
             self.renderStyle()
 
-    def open(self, _=None, file=None):  # _参数用于接收action的event参数,bool类型
+    def _openact(self, _=None, file=None):
+        self.open(file)
+
+    def open(self, file=None):  # _参数用于接收action的event参数,bool类型
         if (file is None):
             file, _ = QFileDialog.getOpenFileName(
                 self, "Open File", file, "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
@@ -291,6 +303,10 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.loadColorPanel()
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
             self.status["coding"].setText(self.editor.coding)
+            if(not self.__isNewFromTemplate):
+                self.recent.addFile(self.file)
+        else:
+            self.statusbar.showMessage("file not found.")
 
     def new(self):
         if(self.editor.isModified()):
@@ -326,8 +342,9 @@ class MainWin(QMainWindow, Ui_Mainwin):
                 self.save()
             elif(ret == QMessageBox.Cancel):
                 return
-
+        self.__isNewFromTemplate=True
         self.open(file=templatefile)
+        self.__isNewFromTemplate=False
         self.statusbar.showMessage("new file created, using template")
         self.newIndex = self.newIndex + 1
         self.file = "new{}.qsst".format(self.newIndex)
@@ -344,6 +361,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                 os.path.basename(
                     self.file))
             self.actions["save"].setEnabled(False)
+            self.recent.addFile(self.file)
         else:
             self.saveAs()
 
@@ -357,6 +375,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.editor.save(self.file)
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
             self.actions["save"].setEnabled(False)
+            self.recent.addFile(self.file)
 
     def export(self):
         self.qsst.convertQss()
@@ -406,6 +425,14 @@ class MainWin(QMainWindow, Ui_Mainwin):
                     self.save()
                     e.ignore()
                 elif(ret == QMessageBox.Discard or ret == QMessageBox.No):
+                    self.updateConfig()
+                    self.config.save()
                     qApp.exit()
                 else:
                     e.ignore()
+        else:
+            self.updateConfig()
+            self.config.save()
+
+    def updateConfig(self):
+        self.config.getSec("file")["recent"]=self.recent.__pathes

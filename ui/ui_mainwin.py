@@ -22,6 +22,7 @@ class Ui_Mainwin(object):
 
         self.actions = {}
         self.menus = {}
+        self.submenus = {}
         self.contexMenus = {}
         self.toolbars = {}
         self.status = {}
@@ -179,17 +180,10 @@ class Ui_Mainwin(object):
         self.menus["File"] = QMenu("&File")
         self.menus["Edit"] = QMenu("&Edit")
         self.menus["View"] = QMenu("&View")
+        self.menus["Help"] = QMenu("&Help")
 
-        self.menus["File"].addMenu(self.menus["View"])
-        self.menus["File"].addAction(self.actions["new"])
-        self.menus["File"].addAction(self.actions["open"])
-        self.menus["File"].addAction(self.actions["save"])
-        self.menus["File"].addAction(self.actions["saveas"])
-        self.menus["File"].addAction(self.actions["export"])
-        self.menus["File"].addSeparator()
-        self.menus["File"].addAction(self.actions["exit"])
+        recentMenu = QMenu("Recent", self.menus["File"])
 
-        # editMenu=self.menus["Edit"].addMenu("TextEdit")
         editMenu = QMenu("Text", self.menus["Edit"])
         editMenu.setIcon(QIcon("img/edit_whitepage.png"))
         editMenu.addAction(self.actions["undo"])
@@ -198,19 +192,31 @@ class Ui_Mainwin(object):
         editMenu.addAction(self.actions["cut"])
         editMenu.addAction(self.actions["copy"])
         editMenu.addAction(self.actions["paste"])
-        self.menus["Edit"].addMenu(editMenu)
 
         searchMenu = QMenu("Search", self.menus["Edit"])
         searchMenu.setIcon(QIcon("img/findnext.png"))
         searchMenu.addAction(self.actions["find"])
         searchMenu.addAction(self.actions["replace"])
+
+        self.submenus["recent"]=recentMenu
+        self.submenus["text"]=editMenu
+        self.submenus["search"]=searchMenu
+
+        self.menus["File"].addAction(self.actions["new"])
+        self.menus["File"].addAction(self.actions["open"])
+        self.menus["File"].addAction(self.actions["save"])
+        self.menus["File"].addAction(self.actions["saveas"])
+        self.menus["File"].addAction(self.actions["export"])
+        self.menus["File"].addMenu(self.submenus["recent"])
+        self.menus["File"].addSeparator()
+        self.menus["File"].addAction(self.actions["exit"])
+
+        self.menus["Edit"].addMenu(editMenu)
         self.menus["Edit"].addMenu(searchMenu)
 
-        self.menus["View"] = QMenu("&View")
         self.menus["View"].addAction(self.actions["ShowColor"])
         self.menus["View"].addAction(self.actions["ShowPreview"])
 
-        self.menus["Help"] = QMenu("&Help")
         self.menus["Help"].addAction(self.actions["about"])
 
         for m in self.menus.values():
