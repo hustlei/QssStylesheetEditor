@@ -85,20 +85,18 @@ class QFlowLayout(QLayout):
         return y + lineHeight - rect.y()
 
 
-class Window(QWidget):
-    def __init__(self):
-        super(Window, self).__init__()
-        flowLayout = QFlowLayout()
-        flowLayout.addWidget(QPushButton("Short"))
-        flowLayout.addWidget(QPushButton("Longer"))
-        flowLayout.addWidget(QPushButton("Different text"))
-        flowLayout.addWidget(QPushButton("More text"))
-        flowLayout.addWidget(QPushButton("Even longer button text"))
-        self.setLayout(flowLayout)
-        self.setWindowTitle("Flow Layout")
-
-
 if __name__ == '__main__':
+    class Window(QWidget):
+        def __init__(self):
+            super(Window, self).__init__()
+            flowLayout = QFlowLayout()
+            flowLayout.addWidget(QPushButton("Short"))
+            flowLayout.addWidget(QPushButton("Longer"))
+            flowLayout.addWidget(QPushButton("Different text"))
+            flowLayout.addWidget(QPushButton("More text"))
+            flowLayout.addWidget(QPushButton("Even longer button text"))
+            self.setLayout(flowLayout)
+            self.setWindowTitle("Flow Layout")
     import sys
     app = QApplication(sys.argv)
     mainWin = Window()

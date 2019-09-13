@@ -28,9 +28,9 @@ class searchDialog(QMainWindow):
         self.setFixedSize(350, 200)
 
         if replace:
-            self.setWindowTitle("替换")
+            self.setWindowTitle(self.tr("Replace"))
         else:
-            self.setWindowTitle("查找")
+            self.setWindowTitle(self.tr("Find"))
         self.setupUi()
         self.searchText = ""
         self.replaceText = ""
@@ -59,9 +59,9 @@ class searchDialog(QMainWindow):
         self.__replaceTextBox.setVisible(isReplace)
         self.__reverseCheckbox.setVisible(isReplace)
         if isReplace:
-            self.setWindowTitle("替换")
+            self.setWindowTitle(self.tr("Replace"))
         else:
-            self.setWindowTitle("查找")
+            self.setWindowTitle(self.tr("Find"))
 
     def setReverse(self, isReverse):
         if(self.__forward == isReverse):
@@ -93,13 +93,13 @@ class searchDialog(QMainWindow):
         self.statusbar = self.statusBar()
         self.statusbar.setSizeGripEnabled(False)
 
-        self.__reverseCheckbox = QCheckBox("反向查找")
-        caseSensitiveCheckbox = QCheckBox("匹配大小写")
-        wordCheckbox = QCheckBox("单词匹配")
-        escapeCheckbox = QCheckBox(r'支持反义字符"\n,\r,\t,\0,\x..."')
-        regCheckbox = QCheckBox("正则表达式")
-        label1 = QLabel("查找内容：")
-        self.__label2 = QLabel("替换为：")
+        self.__reverseCheckbox = QCheckBox(self.tr("反向查找"))
+        caseSensitiveCheckbox = QCheckBox(self.tr("匹配大小写"))
+        wordCheckbox = QCheckBox(self.tr("单词匹配"))
+        escapeCheckbox = QCheckBox(self.tr(r'支持反义字符"\n,\r,\t,\0,\x..."'))
+        regCheckbox = QCheckBox(self.tr("正则表达式"))
+        label1 = QLabel(self.tr("查找内容："))
+        self.__label2 = QLabel(self.tr("替换为："))
         self.__searchTextBox = QLineEdit()
         self.__replaceTextBox = QLineEdit()
         self.__searchTextBox.setMinimumWidth(160)
@@ -128,13 +128,13 @@ class searchDialog(QMainWindow):
         escapeCheckbox.stateChanged.connect(self.setEscape)
         regCheckbox.stateChanged.connect(self.setRe)
 
-        findNextBtn = QPushButton("查找下一个")
-        self.__findPreBtn = QPushButton("查找上一个")
+        findNextBtn = QPushButton(self.tr("查找下一个"))
+        self.__findPreBtn = QPushButton(self.tr("查找上一个"))
         self.__findPreBtn.setMinimumWidth(150)
-        countBtn = QPushButton("计数")
-        cancelBtn = QPushButton("取消")
-        self.__replaceBtn = QPushButton("替换")
-        self.__replaceAllBtn = QPushButton("替换全部")
+        countBtn = QPushButton(self.tr("计数"))
+        cancelBtn = QPushButton(self.tr("取消"))
+        self.__replaceBtn = QPushButton(self.tr("替换"))
+        self.__replaceAllBtn = QPushButton(self.tr("替换全部"))
         self.__replaceAllBtn.setVisible(False)
         lay2.addWidget(findNextBtn)
         lay2.addWidget(self.__findPreBtn)
@@ -198,15 +198,15 @@ class searchDialog(QMainWindow):
             if self.__ok:
                 self.__start = False
             else:
-                self.statusbar.showMessage("未查找到。")
+                self.statusbar.showMessage(self.tr("未查找到。"))
         else:
             if replace and self.__ok:
                 self.__editor.replaceSelectedText(self.replaceText)
 
             self.__ok = self.__editor.findNext()
             if not self.__ok:
-                text = "底部" if self.__forward else "顶部"
-                self.statusbar.showMessage("已经到达" + text + ".")
+                text = self.tr("底部") if self.__forward else self.tr("顶部")
+                self.statusbar.showMessage(self.tr("已经到达") + text + ".")
 
         if self.__forward:
             self.__line, self.__index = self.__editor.getSelection()[2:]

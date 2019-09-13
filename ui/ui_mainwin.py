@@ -64,128 +64,128 @@ class Ui_Mainwin(object):
             ("(", QKeySequence(standardkey).toString(), ")"))
 
         self.actions["new"] = createAct(
-            "&New",
-            "new" +
+            self.tr("&New"),
+            self.tr("new") +
             keys2str(
                 QKeySequence.New),
             QKeySequence.New,
             'img/NewDocument.png')
         self.actions["open"] = createAct(
-            "&Open",
-            "Open" +
+            self.tr("&Open"),
+            self.tr("Open") +
             keys2str(
                 QKeySequence.Open),
             QKeySequence.Open,
             'img/openHS.png')
         self.actions["save"] = createAct(
-            "&Save",
-            "Save" +
+            self.tr("&Save"),
+            self.tr("Save") +
             keys2str(
                 QKeySequence.Save),
             QKeySequence.Save,
             'img/save.png')
         self.actions["saveas"] = createAct(
-            "&Save as...", "Save as...", None, 'img/saveas.png')
+            self.tr("&Save as..."), self.tr("Save as..."), None, 'img/saveas.png')
         self.actions["export"] = createAct(
-            "&ExportQss", "ExportQss", "Ctrl+Alt+E", 'img/export5.png')
+            self.tr("&ExportQss"), self.tr("ExportQss"), "Ctrl+Alt+E", 'img/export5.png')
         self.actions["exit"] = createAct(
-            "&Exit", "Exit", "Ctrl+Q", 'img/close.png')
+            self.tr("&Exit"), self.tr("Exit"), "Ctrl+Q", 'img/close.png')
         self.actions["undo"] = createAct(
-            "&Undo",
-            "Undo" +
+            self.tr("&Undo"),
+            self.tr("Undo") +
             keys2str(
                 QKeySequence.Undo),
             QKeySequence.Undo,
             'img/undo.png')
         self.actions["redo"] = createAct(
-            "&Redo",
-            "Redo" +
+            self.tr("&Redo"),
+            self.tr("Redo") +
             keys2str(
                 QKeySequence.Redo),
             QKeySequence.Redo,
             'img/redo.png')
         self.actions["cut"] = createAct(
-            "&Cut",
-            "Cut" +
+            self.tr("&Cut"),
+            self.tr("Cut") +
             keys2str(
                 QKeySequence.Cut),
             QKeySequence.Cut,
             'img/cut.png')
         self.actions["copy"] = createAct(
-            "&Copy",
-            "Copy" +
+            self.tr("&Copy"),
+            self.tr("Copy") +
             keys2str(
                 QKeySequence.Copy),
             QKeySequence.Copy,
             'img/copy.png')
         self.actions["paste"] = createAct(
-            "&Paste",
-            "Paste" +
+            self.tr("&Paste"),
+            self.tr("Paste") +
             keys2str(
                 QKeySequence.Paste),
             QKeySequence.Paste,
             'img/paste.png')
         self.actions["find"] = createAct(
-            "&Find",
-            "Find" +
+            self.tr("&Find"),
+            self.tr("Find") +
             keys2str(
                 QKeySequence.Find),
             QKeySequence.Find,
             'img/find.png')
         self.actions["replace"] = createAct(
-            "&Replace",
-            "Replace" +
+            self.tr("&Replace"),
+            self.tr("Replace") +
             keys2str(
                 QKeySequence.Replace),
             QKeySequence.Replace,
             'img/replace.png')
         self.actions["fontup"] = createAct(
-            "&BiggerFont", "Bigger Font", None, 'img/fontup.png')
+            self.tr("&BiggerFont"), self.tr("Bigger Font"), None, 'img/fontup.png')
         self.actions["fontdown"] = createAct(
-            "&SmallerFont", "Smaller Font", None, 'img/fontdown.png')
+            self.tr("&SmallerFont"),self.tr("Smaller Font"), None, 'img/fontdown.png')
         self.actions["echospace"] = createAct(
-            "&Space", "Show Spaces", None, 'img/space.png')
+            self.tr("&Space"), self.tr("Show Spaces"), None, 'img/space.png')
         self.actions["echoeol"] = createAct(
-            "&Eol", "Show Eol", None, 'img/eol.png')
+            self.tr("&Eol"), self.tr("Show Eol"), None, 'img/eol.png')
         self.actions["autowrap"] = createAct(
-            "&AutoWrap", "Auto wrap text", None, "img/autowrap.png")
+            self.tr("&AutoWrap"), self.tr("Auto wrap text"), None, "img/autowrap.png")
 
         # self.fontcolorAct=QAction(QIcon("img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
         # self.fontcolorAct.setStatusTip("FontColor")
         self.actions["DisableQss"] = createAct(
-            "&DisableQss", "DisableQss", checkable=True)
+            self.tr("&DisableQss"), self.tr("DisableQss"), checkable=True)
         self.actions["DisableQss"].setChecked(False)
         self.actions["ShowColor"] = createAct(
-            "&ColorPanel",
-            "ShowColorPanel",
+            self.tr("&ColorPanel"),
+            self.tr("ShowColorPanel"),
             None,
             "img/color.png",
             checkable=True)
         self.actions["ShowColor"].setChecked(True)
         self.actions["ShowPreview"] = createAct(
-            "&PreviewPanel",
-            "ShowPreviewPanel",
+            self.tr("&PreviewPanel"),
+            self.tr("ShowPreviewPanel"),
             None,
             "img/view.png",
             checkable=True)
         self.actions["ShowPreview"].setChecked(True)
 
-        self.actions["about"] = createAct("&About", "About")
+        self.actions["about"] = createAct(self.tr("&About"), self.tr("About"))
 
         # self.exitAct.triggered.connect(qApp.exit)#等价于qApp.quit
         self.actions["exit"].triggered.connect(self.close)
 
     def createMenubar(self):
-        self.menus["File"] = QMenu("&File")
-        self.menus["Edit"] = QMenu("&Edit")
-        self.menus["View"] = QMenu("&View")
-        self.menus["Help"] = QMenu("&Help")
+        self.menus["File"] = QMenu(self.tr("&File"))
+        self.menus["Edit"] = QMenu(self.tr("&Edit"))
+        self.menus["View"] = QMenu(self.tr("&View"))
+        self.menus["Help"] = QMenu(self.tr("&Help"))
 
-        recentMenu = QMenu("Recent", self.menus["File"])
+        recentMenu = QMenu(self.tr("Recent"), self.menus["File"])
         recentMenu.setIcon(QIcon("img/none.png"))
 
-        editMenu = QMenu("Text", self.menus["Edit"])
+        editMenu = QMenu(self.tr("Text"), self.menus["Edit"])
         editMenu.setIcon(QIcon("img/edit_whitepage.png"))
         editMenu.addAction(self.actions["undo"])
         editMenu.addAction(self.actions["redo"])
@@ -194,7 +194,7 @@ class Ui_Mainwin(object):
         editMenu.addAction(self.actions["copy"])
         editMenu.addAction(self.actions["paste"])
 
-        searchMenu = QMenu("Search", self.menus["Edit"])
+        searchMenu = QMenu(self.tr("Search"), self.menus["Edit"])
         searchMenu.setIcon(QIcon("img/findnext.png"))
         searchMenu.addAction(self.actions["find"])
         searchMenu.addAction(self.actions["replace"])
@@ -224,13 +224,13 @@ class Ui_Mainwin(object):
             self.menubar.addMenu(m)
 
     def createContexMenus(self):
-        self.contexMenus["Edit"] = QMenu("Edit")
+        self.contexMenus["Edit"] = QMenu(self.tr("Edit"))
         self.contexMenus["Edit"].addAction(self.actions["cut"])
         self.contexMenus["Edit"].addAction(self.actions["copy"])
         self.contexMenus["Edit"].addAction(self.actions["paste"])
 
     def createToolbars(self):
-        checkbox = QCheckBox("DisableQSS")
+        checkbox = QCheckBox(self.tr("DisableQSS"))
         self.themeCombo = QComboBox()
         checkbox.setToolTip(self.tr("Using system style, disable qss."))
         self.themeCombo.setToolTip(self.tr("Select system style."))
@@ -246,33 +246,33 @@ class Ui_Mainwin(object):
         checkbox.stateChanged.connect(self.actions["DisableQss"].setChecked)
         #checkbox.stateChanged.connect(lambda x:self.actions["DisableQss"].setChecked(checkbox.isChecked()))
 
-        self.toolbars["Main"] = QToolBar("Main")
+        self.toolbars["Main"] = QToolBar(self.tr("Main","toolbar"))
         self.toolbars["Main"].addWidget(checkbox)
         self.toolbars["Main"].addWidget(self.themeCombo)
 
-        self.toolbars["File"] = QToolBar("File")
+        self.toolbars["File"] = QToolBar(self.tr("File"))
         self.toolbars["File"].addAction(self.actions["new"])
         self.toolbars["File"].addAction(self.actions["open"])
         self.toolbars["File"].addAction(self.actions["save"])
         # self.toolbars["File"].addAction(self.actions["saveas"])
         self.toolbars["File"].addAction(self.actions["export"])
 
-        self.toolbars["Edit"] = QToolBar("Edit")
+        self.toolbars["Edit"] = QToolBar(self.tr("Edit"))
         self.toolbars["Edit"].addAction(self.actions["undo"])
         self.toolbars["Edit"].addAction(self.actions["redo"])
         self.toolbars["Edit"].addSeparator()
         self.toolbars["Edit"].addAction(self.actions["cut"])
         self.toolbars["Edit"].addAction(self.actions["copy"])
         self.toolbars["Edit"].addAction(self.actions["paste"])
-        self.toolbars["Search"] = QToolBar("Search")
+        self.toolbars["Search"] = QToolBar(self.tr("Search"))
         self.toolbars["Search"].addAction(self.actions["find"])
         self.toolbars["Search"].addAction(self.actions["replace"])
 
-        self.toolbars["View"] = QToolBar("View")
+        self.toolbars["View"] = QToolBar(self.tr("View"))
         self.toolbars["View"].addAction(self.actions["ShowColor"])
         self.toolbars["View"].addAction(self.actions["ShowPreview"])
 
-        self.toolbars["Echo"] = QToolBar("Echo")
+        self.toolbars["Echo"] = QToolBar(self.tr("Echo"))
         self.toolbars["Echo"].addAction(self.actions["fontup"])
         self.toolbars["Echo"].addAction(self.actions["fontdown"])
         self.toolbars["Echo"].addAction(self.actions["echospace"])
@@ -283,17 +283,17 @@ class Ui_Mainwin(object):
             self.win.addToolBar(t)
 
     def createStatusBar(self):
-        self.statusbar.showMessage("Ready")
+        self.statusbar.showMessage(self.tr("Ready"))
         # self.statusbar.addWidget(QWidget(),1)
         # self.status["date"] = QLabel()
         # self.statusbar.addPermanentWidget(self.status["date"])
         # self.status["date"].setText(QDate.currentDate().toString())
         # self.status["date"].setVisible(False)
 
-        self.status["line"] = QLabel("line:0 pos:0")
-        self.status["select"] = QLabel("select: none")
-        self.status["coding"] = QLabel("coding")
-        self.status["lines"] = QLabel("lines:0")
+        self.status["line"] = QLabel(self.tr("line:0 pos:0"))
+        self.status["select"] = QLabel(self.tr("select: none"))
+        self.status["coding"] = QLabel(self.tr("coding"))
+        self.status["lines"] = QLabel(self.tr("lines:0"))
         self.status["line"].setMinimumWidth(120)
         self.status["select"].setMinimumWidth(150)
         self.status["coding"].setMinimumWidth(80)
@@ -306,8 +306,8 @@ class Ui_Mainwin(object):
         self.statusbar.addPermanentWidget(self.status["lines"])
 
     def createDocks(self):
-        self.docks["color"] = QDockWidget("Colors")
-        self.docks["preview"] = QDockWidget("Preview")
+        self.docks["color"] = QDockWidget(self.tr("Colors"))
+        self.docks["preview"] = QDockWidget(self.tr("Preview"))
 
         self.docks["color"].setMinimumSize(QSize(120, 20))
         self.docks["color"].setFeatures(QDockWidget.AllDockWidgetFeatures)
@@ -336,4 +336,4 @@ class Ui_Mainwin(object):
     def createMainWidget(self):
         self.setCentralWidget(self.mainWidget)
         self.mainWidget.setTabBarAutoHide(True)
-        self.mainWidget.addTab(self.editor, "main")
+        self.mainWidget.addTab(self.editor, self.tr("main","editor tab in tabwidget of mainwidget"))

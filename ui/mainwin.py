@@ -35,6 +35,8 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.setupUi(self)
         self.setupActions()
         self.recent=Recent(self.open, self.submenus["recent"])
+        if self.tr("LTR") == "RTL":
+            self.setLayoutDirection(Qt.RightToLeft)
         #conf
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
         self.config=Config()
@@ -42,7 +44,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         #init
         self.__isNewFromTemplate=False
         self.newWithTemplate()
-        self.statusbar.showMessage("Ready")
+        self.statusbar.showMessage(self.tr("Ready"))
 
     def setupActions(self):
         # theme  toolbarWidget
@@ -108,8 +110,8 @@ class MainWin(QMainWindow, Ui_Mainwin):
 
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
-        aboutText += "本软件为QtWidget样式表Qss文件高级编辑软件，<br>支持自定义变量，支持实时预览。<br><br>"
-        aboutText += "author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>业余编写，欢迎交流: hustlei@sina.cn"
+        aboutText += self.tr("This software is a advanced editor for QtWidget stylesheet(Qss)，<br>support custom variable and real-time preview.<br><br>")
+        aboutText += self.tr("author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>welcom communicate with me: hustlei@sina.cn")
         aboutText += "<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(
             lambda: QMessageBox.about(self, "about", aboutText))
@@ -119,9 +121,9 @@ class MainWin(QMainWindow, Ui_Mainwin):
         linefrom += 1
         lineto += 1
         if(linefrom == 0 or lineto == 0):
-            text = "select: none"
+            text = self.tr("select: none")
         else:
-            text = "select:ln" + str(linefrom) + " - ln" + str(lineto)
+            text = self.tr("select:ln") + str(linefrom) + self.tr(" - ln") + str(lineto)
         self.status["select"].setText(text)
 
     def unuseQss(self, unuse):
@@ -257,7 +259,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         else:
             c.setNamedColor("white")
         color = QColorDialog.getColor(
-            c, self, "color pick", QColorDialog.ShowAlphaChannel)
+            c, self, self.tr("color pick"), QColorDialog.ShowAlphaChannel)
         if (color.isValid()):
             s = ''
             clrstr = color.name()
@@ -288,16 +290,16 @@ class MainWin(QMainWindow, Ui_Mainwin):
     def open(self, file=None):  # _参数用于接收action的event参数,bool类型
         if (file is None):
             file, _ = QFileDialog.getOpenFileName(
-                self, "Open File", file, "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
+                self, self.tr("Open File"), file, "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
         if (os.path.exists(file)):
             self.file = file
-            self.statusbar.showMessage("opening file...")
+            self.statusbar.showMessage(self.tr("opening file..."))
             self.lastSavedText = self.editor.text()
             ok = self.editor.load(self.file)
             if ok:
-                self.statusbar.showMessage("load file successfully")
+                self.statusbar.showMessage(self.tr("load file successfully"))
             else:
-                self.statusbar.showMessage("load file failed")
+                self.statusbar.showMessage(self.tr("load file failed"))
             self.renderStyle()
             self.loadColorPanel()
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
@@ -305,14 +307,14 @@ class MainWin(QMainWindow, Ui_Mainwin):
             if(not self.__isNewFromTemplate):
                 self.recent.addFile(self.file)
         else:
-            self.statusbar.showMessage("file not found.")
+            self.statusbar.showMessage(self.tr("file not found."))
 
     def new(self):
         if(self.editor.isModified()):
             ret = QMessageBox.question(
                 self,
                 self.title,
-                "当前文件尚未保存，是否要保存文件？",
+                self.tr("当前文件尚未保存，是否要保存文件？"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
             if(ret == QMessageBox.Yes):
@@ -321,7 +323,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                 return
 
         self.newIndex = self.newIndex + 1
-        self.file = "new{}.qsst".format(self.newIndex)
+        self.file = self.tr("new{}.qsst").format(self.newIndex)
         self.lastSavedText = ""
         self.editor.setText("")
         self.renderStyle()
@@ -334,7 +336,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             ret = QMessageBox.question(
                 self,
                 self.title,
-                "当前文件尚未保存，是否要保存文件？",
+                self.tr("当前文件尚未保存，是否要保存文件？"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
             if(ret == QMessageBox.Yes):
@@ -344,9 +346,9 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.__isNewFromTemplate=True
         self.open(file=templatefile)
         self.__isNewFromTemplate=False
-        self.statusbar.showMessage("new file created, using template")
+        self.statusbar.showMessage(self.tr("new file created, using template"))
         self.newIndex = self.newIndex + 1
-        self.file = "new{}.qsst".format(self.newIndex)
+        self.file = self.tr("new{}.qsst").format(self.newIndex)
         self.setWindowTitle(self.title + " - " + os.path.basename(self.file))
         self.editor.setModified(False)
 
@@ -367,7 +369,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
     def saveAs(self):
         # f="." if self.file==None else self.file
         file, filefilter = QFileDialog.getSaveFileName(
-            self, "save file", self.file, "qsst(*.qsst);;qss(*.qss);;all(*.*)")
+            self, self.tr("save file"), self.file, "qsst(*.qsst);;qss(*.qss);;all(*.*)")
         if (file):
             self.file = file
             self.lastSavedText = self.editor.text()
@@ -384,7 +386,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             # f=self.file[:-1]
             f = os.path.splitext(self.file)[0]
         file, _ = QFileDialog.getSaveFileName(
-            self, "export Qss", f, "Qss(*.qss);;all(*.*)")
+            self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
         if file:
             with open(file, 'w', newline='') as f:
                 f.write(self.qsst.qss)
@@ -409,7 +411,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
                     QMessageBox.Question,
                     self.title,
                     self.tr(
-                        "是否将更改保存到" +
+                        self.tr("是否将更改保存到") +
                         os.path.basename(
                             self.file)),
                     QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)

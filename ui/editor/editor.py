@@ -266,7 +266,7 @@ class CodeEditor(QsciScintilla):
                         self.setText(self.__byte2str(bytes))
             except BaseException:  # Exception:
                 self.coding = "none"
-                self.setText("can't open this file, it may be a binary file.")
+                self.setText(self.tr("can't open this file, it may be a binary file."))
                 self.setEnabled(False)
                 return False
             self.setModified(False)
