@@ -42,3 +42,6 @@ class Recent():
     def setList(self, filelist):
         self._pathes=filelist
         self._updateMenu()
+
+    def getList(self):
+        return self._pathes

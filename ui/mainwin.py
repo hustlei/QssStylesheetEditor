@@ -34,12 +34,11 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.setAcceptDrops(True)
         self.setupUi(self)
         self.setupActions()
+        self.recent=Recent(self.open, self.submenus["recent"])
         #conf
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
         self.config=Config()
-        self.config.read(self.configfile)
-        self.recent=Recent(self.open, self.submenus["recent"])
-        self.recent.setList(self.config.getSec("file")["recent"])
+        self.loadConfig()
         #init
         self.__isNewFromTemplate=False
         self.newWithTemplate()
@@ -435,4 +434,13 @@ class MainWin(QMainWindow, Ui_Mainwin):
             self.config.save()
 
     def updateConfig(self):
-        self.config.getSec("file")["recent"]=self.recent.__pathes
+        self.config.getSec("file")["recent"]=self.recent.getList()
+        self.config.getSec("file")["recentcount"]=self.recent.maxcount
+        self.config.getSec("editor")["fontsize"]=self.editor.font().pointSize()
+
+    def loadConfig(self):
+        self.config.read()
+        recentlist=self.config.getSec("file")["recent"]
+        self.recent.setList(recentlist)
+        self.recent.maxcount=self.config.getSec("file")["recentcount"]
+        self.editor.font().setPointSize(self.config.getSec("editor")["fontsize"])

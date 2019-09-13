@@ -1,8 +1,6 @@
 [file]
-recent = ["E:/Working/Coding/Python/QssStylesheetEditor/data/default.qss",]
+recent = [ "E:/Working/Coding/Python/QssStylesheetEditor/data/default.qss",]
+recentcount = 8
 
 [editor]
-fonts = 12
-
-[editor.font]
-size = 12
+fontsize = 11
