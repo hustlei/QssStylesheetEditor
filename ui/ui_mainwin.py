@@ -183,6 +183,7 @@ class Ui_Mainwin(object):
         self.menus["Help"] = QMenu("&Help")
 
         recentMenu = QMenu("Recent", self.menus["File"])
+        recentMenu.setIcon(QIcon("img/none.png"))
 
         editMenu = QMenu("Text", self.menus["Edit"])
         editMenu.setIcon(QIcon("img/edit_whitepage.png"))

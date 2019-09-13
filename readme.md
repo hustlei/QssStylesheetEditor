@@ -63,6 +63,7 @@ QWidget
 **QssStylesheetEditor自动识别添加变量,颜色拾取功能**
 
 在QssStylesheetEditor中自定义一个变量后，在软件的颜色栏会自动显示变量名字和颜色，点击颜色可以用通过颜色拾取框选取变量颜色。
+
 <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/ColorDlg_v1.3.png" height=180 />
 
 在QssStylesheetEditor中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
