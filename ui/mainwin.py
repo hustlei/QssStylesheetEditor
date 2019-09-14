@@ -11,8 +11,8 @@ from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize, QTranslator
 # import sip
 
-from ui import MainWinBase
-from ui.flow_layout import QFlowLayout
+from .mainwinbase import MainWinBase
+from .flow_layout import QFlowLayout
 from qss_template import Qsst
 from .recent import Recent
 from config import Config, ConfDialog
