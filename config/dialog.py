@@ -43,21 +43,21 @@ class ConfDialog(QWidget):
         g=QGroupBox(self.tr("General"))
         glayout=QFormLayout()
         label1=QLabel(self.tr("select UI language:"))
-        combo1=QComboBox()
-        combo1.addItems(self.findLang())
-        combo1.setMinimumWidth(150)
+        langCombo=QComboBox()
+        langCombo.addItems(self.findLang())
+        langCombo.setMinimumWidth(150)
         label2=QLabel(self.tr("Number of recent files:"))
-        spin1=QSpinBox()
-        spin1.setMinimum(1)
-        spin1.setMaximum(30)
+        recentcountspin=QSpinBox()
+        recentcountspin.setMinimum(1)
+        recentcountspin.setMaximum(30)
         label3 = QLabel(self.tr("Font Size:"))
-        spin2 = QSpinBox()
-        spin2.setMinimum(1)
-        spin2.setMaximum(30)
+        fontsizespin = QSpinBox()
+        fontsizespin.setMinimum(1)
+        fontsizespin.setMaximum(30)
 
-        glayout.addRow(label1,combo1)
-        glayout.addRow(label2,spin1)
-        glayout.addRow(label3,spin2)
+        glayout.addRow(label1,langCombo)
+        glayout.addRow(label2,recentcountspin)
+        glayout.addRow(label3,fontsizespin)
         g.setLayout(glayout)
 
         layw.addWidget(g)
@@ -70,8 +70,23 @@ class ConfDialog(QWidget):
         w=EditorSettings(self.win.editor)
         self.stack.addWidget(w)
 
-        self.cancelbtn.clicked.connect(self.close)
         self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)
+        self.cancelbtn.clicked.connect(self.close)
+        self.cancelbtn.setVisible(False)
+        self.okbtn.clicked.connect(self.close)
+
+        #default value
+        fontsizespin.setValue(self.win.editor.font.getPointSize())
+        recentcountspin.setValue(self.win.recent.maxcount)
+        lang=self.win.config.getSec("general")["language"]
+        if(lang in self.findLang()):
+            langCombo.setCurrentText(lang)
+
+        #action
+        fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
+        def setCount(x):
+            self.win.recent.maxcount=x
+        recentcountspin.valueChanged.connect(setCount)
 
     def findLang(self):
         langs=["English"]
