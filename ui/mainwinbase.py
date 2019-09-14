@@ -11,12 +11,15 @@ from .preview import previewWidget
 from .flow_layout import QFlowLayout
 
 
-class Ui_Mainwin(object):
-    def setupUi(self, mainwin):
-        self.win = mainwin
-        self.win.resize(1200, 600)
-        self.menubar = mainwin.menuBar()
-        self.statusbar = mainwin.statusBar()
+class MainWinBase(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setupUi()
+
+    def setupUi(self):
+        self.resize(1200, 600)
+        self.menubar = self.menuBar()
+        self.statusbar = self.statusBar()
         self.mainWidget = QTabWidget()
         self.editor = CodeEditor()
 
@@ -64,7 +67,7 @@ class Ui_Mainwin(object):
             ("(", QKeySequence(standardkey).toString(), ")"))
 
         self.actions["new"] = createAct(
-            qApp.tr("&New"),
+            self.tr("&New","&New"),
             self.tr("new") +
             keys2str(
                 QKeySequence.New),
@@ -285,7 +288,7 @@ class Ui_Mainwin(object):
         self.toolbars["Echo"].addAction(self.actions["autowrap"])
 
         for t in self.toolbars.values():
-            self.win.addToolBar(t)
+            self.addToolBar(t)
 
     def createStatusBar(self):
         self.statusbar.showMessage(self.tr("Ready"))
@@ -320,8 +323,8 @@ class Ui_Mainwin(object):
         self.docks["preview"].setFeatures(
             QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetFloatable)
 
-        self.win.addDockWidget(Qt.LeftDockWidgetArea, self.docks["color"])
-        self.win.addDockWidget(Qt.RightDockWidgetArea, self.docks["preview"])
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.docks["color"])
+        self.addDockWidget(Qt.RightDockWidgetArea, self.docks["preview"])
 
         class ColorPanelWidget(QWidget):
             def __init__(self):

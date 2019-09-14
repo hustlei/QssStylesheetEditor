@@ -12,7 +12,7 @@
 <context>
     <name>ColorPanelWidget</name>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="344"/>
+        <location filename="../../ui/mainwinbase.py" line="344"/>
         <source>main</source>
         <comment>editor tab in tabwidget of mainwidget</comment>
         <translation type="unfinished">常用</translation>
@@ -183,6 +183,12 @@
         <source>Current file is not saved, do you want to save?</source>
         <translation type="unfinished">文件未保存，是否保存？</translation>
     </message>
+    
+    <message>
+        <location filename="../../ui/mainwin.py" line="430"/>
+        <source>Save before close?</source>
+        <translation type="unfinished">文件未保存，是否保存?</translation>
+    </message>
 </context>
 <context>
     <name>SplashScreen</name>
@@ -193,350 +199,350 @@
     </message>
 </context>
 <context>
-    <name>Ui_Mainwin</name>
+    <name>MainwinBase</name>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="66"/>
+        <location filename="../../ui/mainwinbase.py" line="66"/>
         <source>&amp;New</source>
         <translation type="unfinished">新建(&amp;N)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="66"/>
+        <location filename="../../ui/mainwinbase.py" line="66"/>
         <source>new</source>
         <translation type="unfinished">新建</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="73"/>
+        <location filename="../../ui/mainwinbase.py" line="73"/>
         <source>&amp;Open</source>
         <translation type="unfinished">打开(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="73"/>
+        <location filename="../../ui/mainwinbase.py" line="73"/>
         <source>Open</source>
         <translation type="unfinished">打开</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="80"/>
+        <location filename="../../ui/mainwinbase.py" line="80"/>
         <source>&amp;Save</source>
         <translation type="unfinished">保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="80"/>
+        <location filename="../../ui/mainwinbase.py" line="80"/>
         <source>Save</source>
         <translation type="unfinished">保存</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="87"/>
+        <location filename="../../ui/mainwinbase.py" line="87"/>
         <source>&amp;Save as...</source>
         <translation type="unfinished">另存为(&amp;V)...</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="87"/>
+        <location filename="../../ui/mainwinbase.py" line="87"/>
         <source>Save as...</source>
         <translation type="unfinished">另存为...</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="89"/>
+        <location filename="../../ui/mainwinbase.py" line="89"/>
         <source>&amp;ExportQss</source>
         <translation type="unfinished">导出Qss(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="89"/>
+        <location filename="../../ui/mainwinbase.py" line="89"/>
         <source>ExportQss</source>
         <translation type="unfinished">导出Qss</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="91"/>
+        <location filename="../../ui/mainwinbase.py" line="91"/>
         <source>&amp;Exit</source>
         <translation type="unfinished">退出(&amp;X)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="91"/>
+        <location filename="../../ui/mainwinbase.py" line="91"/>
         <source>Exit</source>
         <translation type="unfinished">退出</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="93"/>
+        <location filename="../../ui/mainwinbase.py" line="93"/>
         <source>&amp;Undo</source>
         <translation type="unfinished">撤销(&amp;U)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="93"/>
+        <location filename="../../ui/mainwinbase.py" line="93"/>
         <source>Undo</source>
         <translation type="unfinished">撤销</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="100"/>
+        <location filename="../../ui/mainwinbase.py" line="100"/>
         <source>&amp;Redo</source>
         <translation type="unfinished">重做(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="100"/>
+        <location filename="../../ui/mainwinbase.py" line="100"/>
         <source>Redo</source>
         <translation type="unfinished">重做</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="107"/>
+        <location filename="../../ui/mainwinbase.py" line="107"/>
         <source>&amp;Cut</source>
         <translation type="unfinished">剪切(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="107"/>
+        <location filename="../../ui/mainwinbase.py" line="107"/>
         <source>Cut</source>
         <translation type="unfinished">剪切</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="114"/>
+        <location filename="../../ui/mainwinbase.py" line="114"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">复制(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="114"/>
+        <location filename="../../ui/mainwinbase.py" line="114"/>
         <source>Copy</source>
         <translation type="unfinished">复制</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="121"/>
+        <location filename="../../ui/mainwinbase.py" line="121"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">粘贴(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="121"/>
+        <location filename="../../ui/mainwinbase.py" line="121"/>
         <source>Paste</source>
         <translation type="unfinished">粘贴</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="128"/>
+        <location filename="../../ui/mainwinbase.py" line="128"/>
         <source>&amp;Find</source>
         <translation type="unfinished">查找(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="128"/>
+        <location filename="../../ui/mainwinbase.py" line="128"/>
         <source>Find</source>
         <translation type="unfinished">查找</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="135"/>
+        <location filename="../../ui/mainwinbase.py" line="135"/>
         <source>&amp;Replace</source>
         <translation type="unfinished">替换(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="135"/>
+        <location filename="../../ui/mainwinbase.py" line="135"/>
         <source>Replace</source>
         <translation type="unfinished">替换</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="142"/>
+        <location filename="../../ui/mainwinbase.py" line="142"/>
         <source>&amp;BiggerFont</source>
         <translation type="unfinished">放大字体(&amp;B)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="142"/>
+        <location filename="../../ui/mainwinbase.py" line="142"/>
         <source>Bigger Font</source>
         <translation type="unfinished">放大字体</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="144"/>
+        <location filename="../../ui/mainwinbase.py" line="144"/>
         <source>&amp;SmallerFont</source>
         <translation type="unfinished">缩写字体(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="144"/>
+        <location filename="../../ui/mainwinbase.py" line="144"/>
         <source>Smaller Font</source>
         <translation type="unfinished">缩小字体</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="146"/>
+        <location filename="../../ui/mainwinbase.py" line="146"/>
         <source>&amp;Space</source>
         <translation type="unfinished">空格(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="146"/>
+        <location filename="../../ui/mainwinbase.py" line="146"/>
         <source>Show Spaces</source>
         <translation type="unfinished">显示空格</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="148"/>
+        <location filename="../../ui/mainwinbase.py" line="148"/>
         <source>&amp;Eol</source>
         <translation type="unfinished">换行符(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="148"/>
+        <location filename="../../ui/mainwinbase.py" line="148"/>
         <source>Show Eol</source>
         <translation type="unfinished">显示换行符</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="150"/>
+        <location filename="../../ui/mainwinbase.py" line="150"/>
         <source>&amp;AutoWrap</source>
         <translation type="unfinished">自动换行(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="150"/>
+        <location filename="../../ui/mainwinbase.py" line="150"/>
         <source>Auto wrap text</source>
         <translation type="unfinished">自动换行</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="156"/>
+        <location filename="../../ui/mainwinbase.py" line="156"/>
         <source>&amp;DisableQss</source>
         <translation type="unfinished">禁用Qss(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="156"/>
+        <location filename="../../ui/mainwinbase.py" line="156"/>
         <source>DisableQss</source>
         <translation type="unfinished">禁用Qss</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="159"/>
+        <location filename="../../ui/mainwinbase.py" line="159"/>
         <source>&amp;ColorPanel</source>
         <translation type="unfinished">颜色面板(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="159"/>
+        <location filename="../../ui/mainwinbase.py" line="159"/>
         <source>ShowColorPanel</source>
         <translation type="unfinished">显示颜色面板</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="166"/>
+        <location filename="../../ui/mainwinbase.py" line="166"/>
         <source>&amp;PreviewPanel</source>
         <translation type="unfinished">预览面板(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="166"/>
+        <location filename="../../ui/mainwinbase.py" line="166"/>
         <source>ShowPreviewPanel</source>
         <translation type="unfinished">显示预览面板</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="174"/>
+        <location filename="../../ui/mainwinbase.py" line="174"/>
         <source>&amp;Config</source>
         <translation type="unfinished">设置(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="174"/>
+        <location filename="../../ui/mainwinbase.py" line="174"/>
         <source>settings.</source>
         <translation type="unfinished">设置.</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="176"/>
+        <location filename="../../ui/mainwinbase.py" line="176"/>
         <source>&amp;About</source>
         <translation type="unfinished">关于(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="176"/>
+        <location filename="../../ui/mainwinbase.py" line="176"/>
         <source>About</source>
         <translation type="unfinished">关于</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="182"/>
+        <location filename="../../ui/mainwinbase.py" line="182"/>
         <source>&amp;File</source>
         <translation type="unfinished">文件(&amp;F)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="183"/>
+        <location filename="../../ui/mainwinbase.py" line="183"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">编译(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="184"/>
+        <location filename="../../ui/mainwinbase.py" line="184"/>
         <source>&amp;View</source>
         <translation type="unfinished">视图(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="185"/>
+        <location filename="../../ui/mainwinbase.py" line="185"/>
         <source>&amp;Tool</source>
         <translation type="unfinished">工具(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="186"/>
+        <location filename="../../ui/mainwinbase.py" line="186"/>
         <source>&amp;Help</source>
         <translation type="unfinished">帮助(&amp;H)</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="188"/>
+        <location filename="../../ui/mainwinbase.py" line="188"/>
         <source>Recent</source>
         <translation type="unfinished">最近打开的文件</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="191"/>
+        <location filename="../../ui/mainwinbase.py" line="191"/>
         <source>Text</source>
         <translation type="unfinished">文本</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="272"/>
+        <location filename="../../ui/mainwinbase.py" line="272"/>
         <source>Search</source>
         <translation type="unfinished">搜索</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="265"/>
+        <location filename="../../ui/mainwinbase.py" line="265"/>
         <source>Edit</source>
         <translation type="unfinished">编辑</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="238"/>
+        <location filename="../../ui/mainwinbase.py" line="238"/>
         <source>DisableQSS</source>
         <translation type="unfinished">禁用Qss</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="240"/>
+        <location filename="../../ui/mainwinbase.py" line="240"/>
         <source>Using system style, disable qss.</source>
         <translation type="unfinished">不使用qss，用系统主题样式预览。</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="241"/>
+        <location filename="../../ui/mainwinbase.py" line="241"/>
         <source>Select system style.</source>
         <translation type="unfinished">选择系统主题。</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="254"/>
+        <location filename="../../ui/mainwinbase.py" line="254"/>
         <source>Main</source>
         <comment>toolbar</comment>
         <translation type="unfinished">常用</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="258"/>
+        <location filename="../../ui/mainwinbase.py" line="258"/>
         <source>File</source>
         <translation type="unfinished">文件</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="276"/>
+        <location filename="../../ui/mainwinbase.py" line="276"/>
         <source>View</source>
         <translation type="unfinished">视图</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="280"/>
+        <location filename="../../ui/mainwinbase.py" line="280"/>
         <source>Echo</source>
         <translation type="unfinished">显示</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="291"/>
+        <location filename="../../ui/mainwinbase.py" line="291"/>
         <source>Ready</source>
         <translation type="unfinished">就绪</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="298"/>
+        <location filename="../../ui/mainwinbase.py" line="298"/>
         <source>line:0 pos:0</source>
         <translation type="unfinished">行:0  列:0</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="299"/>
+        <location filename="../../ui/mainwinbase.py" line="299"/>
         <source>select: none</source>
         <translation type="unfinished">选择: 无</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="300"/>
+        <location filename="../../ui/mainwinbase.py" line="300"/>
         <source>coding</source>
         <translation type="unfinished">编码</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="301"/>
+        <location filename="../../ui/mainwinbase.py" line="301"/>
         <source>lines:0</source>
         <translation type="unfinished">行数:0</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="314"/>
+        <location filename="../../ui/mainwinbase.py" line="314"/>
         <source>Colors</source>
         <translation type="unfinished">颜色</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_mainwin.py" line="315"/>
+        <location filename="../../ui/mainwinbase.py" line="315"/>
         <source>Preview</source>
         <translation type="unfinished">预览</translation>
     </message>
@@ -667,14 +673,6 @@
         <location filename="../../ui/editor/search.py" line="213"/>
         <source>reach </source>
         <translation type="unfinished">已经到达</translation>
-    </message>
-</context>
-<context>
-    <name>self.self</name>
-    <message>
-        <location filename="../../ui/mainwin.py" line="430"/>
-        <source>Save before close?</source>
-        <translation type="unfinished">文件未保存，是否保存?</translation>
     </message>
 </context>
 </TS>

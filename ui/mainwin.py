@@ -11,15 +11,15 @@ from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize, QTranslator
 # import sip
 
-from ui import Ui_Mainwin
+from ui import MainWinBase
 from ui.flow_layout import QFlowLayout
 from qss_template import Qsst
 from .recent import Recent
 from config import Config, ConfDialog
 
-class MainWin(QMainWindow, Ui_Mainwin):
+class MainWin(MainWinBase):
     def __init__(self, parent=None):
-        super(QMainWindow, self).__init__(parent)
+        super().__init__()
         self.ver = "v1.40"
         self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
@@ -32,7 +32,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.confDialog=None
         #ui
         self.setAcceptDrops(True)
-        self.setupUi(self)
+        #self.setupUi()
         self.setupActions()
         self.recent=Recent(self.open, self.submenus["recent"])
         if self.tr("LTR") == "RTL":

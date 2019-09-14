@@ -3,7 +3,7 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from .ui_mainwin import Ui_Mainwin
+from .mainwinbase import MainWinBase
 
 
 def preload():
