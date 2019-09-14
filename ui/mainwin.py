@@ -330,7 +330,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             ret = QMessageBox.question(
                 self,
                 self.title,
-                self.tr("当前文件尚未保存，是否要保存文件？"),
+                self.tr("Current file is not saved，do you want to save?"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
             if(ret == QMessageBox.Yes):
@@ -352,7 +352,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             ret = QMessageBox.question(
                 self,
                 self.title,
-                self.tr("当前文件尚未保存，是否要保存文件？"),
+                self.tr("Current file is not saved，do you want to save?"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
             if(ret == QMessageBox.Yes):
@@ -427,14 +427,14 @@ class MainWin(QMainWindow, Ui_Mainwin):
                     QMessageBox.Question,
                     self.title,
                     self.tr(
-                        self.tr("是否将更改保存到") +
+                        self.tr("Save before close?") +
                         os.path.basename(
                             self.file)),
                     QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Cancel)
-                msg.button(QMessageBox.Save).setText(self.tr("保存"))
-                msg.button(QMessageBox.Discard).setText(self.tr("放弃"))
-                msg.button(QMessageBox.Cancel).setText(self.tr("取消"))
+                msg.button(QMessageBox.Save).setText(self.tr("Save"))
+                msg.button(QMessageBox.Discard).setText(self.tr("Discard"))
+                msg.button(QMessageBox.Cancel).setText(self.tr("Cancel"))
                 ret = msg.exec_()
                 # ret=QMessageBox.information(self,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                 #                             QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel,QMessageBox.Yes)

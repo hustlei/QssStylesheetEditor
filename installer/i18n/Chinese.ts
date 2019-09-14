@@ -140,7 +140,7 @@
     </message>
     <message>
         <location filename="../../ui/mainwin.py" line="356"/>
-        <source>å½åæä»¶å°æªä¿å­ï¼æ¯å¦è¦ä¿å­æä»¶ï¼</source>
+        <source>Current file is not saved，do you want to save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

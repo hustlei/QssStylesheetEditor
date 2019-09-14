@@ -36,7 +36,7 @@ class SplashScreen(QSplashScreen):
 
     def setProgressText(self, percent, delay=0.1):
         time.sleep(delay)  # 延时，给查看splashscreen更新数值
-        self.showMessage(self.tr("加载... {0}%").format(percent))
+        self.showMessage(self.tr("Loading... {0}%").format(percent))
 
     def loadProgress(self):
         self.setProgressText(0, 0)
