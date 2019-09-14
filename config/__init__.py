@@ -4,3 +4,4 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 from .config import Config
+from .dialog import ConfDialog

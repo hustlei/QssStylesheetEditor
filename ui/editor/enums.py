@@ -11,7 +11,7 @@ class BadEnum(Exception):
         super(BadEnum, self).__init__("Enumeration unknown: '%s'" % name)
 
 
-class EditorEnums():
+class EditorEnums:
     types = {
         # annotation display styles
         QsciScintilla.AnnotationDisplay: (
@@ -139,6 +139,7 @@ class EditorEnums():
         else:
             return cls.dict[name]
 
+    @classmethod
     def getName(cls, value):
         """Return the string version of the given enumeration getValue,
         or raise `BadEnum` if there's no such enumeration getValue.

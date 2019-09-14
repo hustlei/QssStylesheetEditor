@@ -293,15 +293,15 @@ _other_color_settings = (
 
 import os
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import (QWidget,QGroupBox,QVBoxLayout,QPushButton,QLabel,QHBoxLayout,QSpinBox,QCheckBox,QComboBox)
 from PyQt5.QtCore import Qt, QVariant
 
 
-class EditorSettings (QDialog):
+class EditorSettings (QWidget):
     """A dialog window for configuring a QsciScintilla editor.
     """
     def __init__(self, editor):
-        QDialog.__init__(self, editor)
+        super().__init__()
         self.editor = editor
 
         layout = self._create_layout()
@@ -356,9 +356,9 @@ class EditorSettings (QDialog):
         main_layout.addLayout(columns_layout)
 
         # OK button at the bottom
-        ok = QPushButton('OK', self)
-        ok.clicked.connect(self.accept)
-        main_layout.addWidget(ok)
+        #ok = QPushButton('OK', self)
+        #ok.clicked.connect(self.accept)
+        #main_layout.addWidget(ok)
 
         return main_layout
 
@@ -460,7 +460,7 @@ class EditorSettings (QDialog):
 
         # Set default background color
         color = self.editor.get_config(name)
-        button.setStyleSheet("background-color: %s" % color.getName())
+        button.setStyleSheet("background-color: %s" % color.name())
 
         return button
 
@@ -509,7 +509,7 @@ if __name__ == "__main__":
     from PyQt5.QtWidgets import *
     import sys
 
-    from Editor import CodeEditor
+    from ui.editor import CodeEditor
     app = QApplication(sys.argv)
     win = QWidget()
     ed = CodeEditor()

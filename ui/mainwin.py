@@ -15,13 +15,12 @@ from ui import Ui_Mainwin
 from ui.flow_layout import QFlowLayout
 from qss_template import Qsst
 from .recent import Recent
-from config import Config
-
+from config import Config, ConfDialog
 
 class MainWin(QMainWindow, Ui_Mainwin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
-        self.ver = "v1.35"
+        self.ver = "v1.40"
         self.title = self.tr("QssStylesheet Editor " + self.ver)
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))
@@ -30,7 +29,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
-        self.config=Config()
+        self.confDialog=None
         #ui
         self.setAcceptDrops(True)
         self.setupUi(self)
@@ -39,6 +38,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         if self.tr("LTR") == "RTL":
             self.setLayoutDirection(Qt.RightToLeft)
         #conf
+        self.config=Config()
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
         self.loadConfig()
         #init
@@ -109,7 +109,8 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.editor.drop.connect(self.dropEvent)
 
         # setting
-        self.actions["config"].triggered.connect(self.config.showDialog)
+        self.confDialog=ConfDialog(self)
+        self.actions["config"].triggered.connect(self.confDialog.show)
 
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
