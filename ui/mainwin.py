@@ -126,7 +126,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
 
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
-        aboutText += self.tr("This software is a advanced editor for QtWidget stylesheet(Qss)，<br>support custom variable and real-time preview.<br><br>")
+        aboutText += self.tr("This software is a advanced editor for QtWidget stylesheet(Qss), <br>support custom variable and real-time preview.<br><br>")
         aboutText += self.tr("author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>welcom communicate with me: hustlei@sina.cn")
         aboutText += "<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(
@@ -330,7 +330,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
             ret = QMessageBox.question(
                 self,
                 self.title,
-                self.tr("Current file is not saved，do you want to save?"),
+                self.tr("Current file is not saved, do you want to save?"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
             if(ret == QMessageBox.Yes):

@@ -83,11 +83,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/mainwin.py" line="130"/>
-        <source>This software is a advanced editor for QtWidget stylesheet(Qss)&#xef;&#xbc;&#x8c;&lt;br&gt;support custom variable and real-time preview.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../ui/mainwin.py" line="131"/>
         <source>author: lileilei&lt;br&gt;website: &lt;a href=&apos;https://blog.csdn.net/hustlei/article/details/87887369&apos;&gt;https://blog.csdn.net/hustlei&lt;/a&gt;&lt;br&gt;&lt;br&gt;welcom communicate with me: hustlei@sina.cn</source>
         <translation type="unfinished"></translation>
@@ -139,7 +134,7 @@
     </message>
     <message>
         <location filename="../../ui/mainwin.py" line="356"/>
-        <source>&#xe5;&#xbd;&#x93;&#xe5;&#x89;&#x8d;&#xe6;&#x96;&#x87;&#xe4;&#xbb;&#xb6;&#xe5;&#xb0;&#x9a;&#xe6;&#x9c;&#xaa;&#xe4;&#xbf;&#x9d;&#xe5;&#xad;&#x98;&#xef;&#xbc;&#x8c;&#xe6;&#x98;&#xaf;&#xe5;&#x90;&#xa6;&#xe8;&#xa6;&#x81;&#xe4;&#xbf;&#x9d;&#xe5;&#xad;&#x98;&#xe6;&#x96;&#x87;&#xe4;&#xbb;&#xb6;&#xef;&#xbc;&#x9f;</source>
+        <source>Current file is not saved&#xef;&#xbc;&#x8c;do you want to save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -164,17 +159,27 @@
     </message>
     <message>
         <location filename="../../ui/mainwin.py" line="439"/>
-        <source>&#xe4;&#xbf;&#x9d;&#xe5;&#xad;&#x98;</source>
+        <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/mainwin.py" line="440"/>
-        <source>&#xe6;&#x94;&#xbe;&#xe5;&#xbc;&#x83;</source>
+        <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/mainwin.py" line="441"/>
-        <source>&#xe5;&#x8f;&#x96;&#xe6;&#xb6;&#x88;</source>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/mainwin.py" line="130"/>
+        <source>This software is a advanced editor for QtWidget stylesheet(Qss), &lt;br&gt;support custom variable and real-time preview.&lt;br&gt;&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/mainwin.py" line="333"/>
+        <source>Current file is not saved, do you want to save?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -182,7 +187,7 @@
     <name>SplashScreen</name>
     <message>
         <location filename="../../ui/splash.py" line="39"/>
-        <source>&#xe5;&#x8a;&#xa0;&#xe8;&#xbd;&#xbd;... {0}%</source>
+        <source>Loading... {0}%</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -539,39 +544,39 @@
     <name>previewWidget</name>
     <message>
         <location filename="../../ui/preview.py" line="23"/>
-        <source>&#xe5;&#xb8;&#xb8;&#xe7;&#x94;&#xa8;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Basic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/preview.py" line="24"/>
-        <source>&#xe7;&#x89;&#xb9;&#xe5;&#x88;&#xab;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Special</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/preview.py" line="25"/>
-        <source>&#xe7;&#xbb;&#x98;&#xe5;&#x9b;&#xbe;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Drawing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/preview.py" line="26"/>
-        <source>&#xe5;&#xb8;&#x83;&#xe5;&#xb1;&#x80;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Layout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/preview.py" line="27"/>
-        <source>&#xe5;&#xae;&#xb9;&#xe5;&#x99;&#xa8;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Container</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/preview.py" line="28"/>
-        <source>&#xe9;&#xab;&#x98;&#xe7;&#xba;&#xa7;&#xe7;&#xbb;&#x84;&#xe4;&#xbb;&#xb6;</source>
+        <source>Advance</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>searchDialog</name>
     <message>
-        <location filename="../../ui/editor/search.py" line="64"/>
+        <location filename="../../ui/editor/search.py" line="140"/>
         <source>Replace</source>
         <translation type="unfinished"></translation>
     </message>
@@ -581,89 +586,84 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="98"/>
-        <source>&#xe5;&#x8f;&#x8d;&#xe5;&#x90;&#x91;&#xe6;&#x9f;&#xa5;&#xe6;&#x89;&#xbe;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/editor/search.py" line="99"/>
-        <source>&#xe5;&#x8c;&#xb9;&#xe9;&#x85;&#x8d;&#xe5;&#xa4;&#xa7;&#xe5;&#xb0;&#x8f;&#xe5;&#x86;&#x99;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../ui/editor/search.py" line="100"/>
-        <source>&#xe5;&#x8d;&#x95;&#xe8;&#xaf;&#x8d;&#xe5;&#x8c;&#xb9;&#xe9;&#x85;&#x8d;</source>
+        <source>reverse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="101"/>
-        <source>&#xe6;&#x94;&#xaf;&#xe6;&#x8c;&#x81;&#xe5;&#x8f;&#x8d;&#xe4;&#xb9;&#x89;&#xe5;&#xad;&#x97;&#xe7;&#xac;&#xa6;&quot;
-,<byte value="xd"/>,<byte value="x9"/>,</source>
+        <source>case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="102"/>
-        <source>&#xe6;&#xad;&#xa3;&#xe5;&#x88;&#x99;&#xe8;&#xa1;&#xa8;&#xe8;&#xbe;&#xbe;&#xe5;&#xbc;&#x8f;</source>
+        <source>match word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="103"/>
-        <source>&#xe6;&#x9f;&#xa5;&#xe6;&#x89;&#xbe;&#xe5;&#x86;&#x85;&#xe5;&#xae;&#xb9;&#xef;&#xbc;&#x9a;</source>
+        <source>support escape char&apos;
+,<byte value="xd"/>,<byte value="x9"/>,</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="104"/>
-        <source>&#xe6;&#x9b;&#xbf;&#xe6;&#x8d;&#xa2;&#xe4;&#xb8;&#xba;&#xef;&#xbc;&#x9a;</source>
+        <source>regular expression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="133"/>
-        <source>&#xe6;&#x9f;&#xa5;&#xe6;&#x89;&#xbe;&#xe4;&#xb8;&#x8b;&#xe4;&#xb8;&#x80;&#xe4;&#xb8;&#xaa;</source>
+        <location filename="../../ui/editor/search.py" line="105"/>
+        <source>Search Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="134"/>
-        <source>&#xe6;&#x9f;&#xa5;&#xe6;&#x89;&#xbe;&#xe4;&#xb8;&#x8a;&#xe4;&#xb8;&#x80;&#xe4;&#xb8;&#xaa;</source>
+        <location filename="../../ui/editor/search.py" line="106"/>
+        <source>Replace to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/editor/search.py" line="135"/>
+        <source>Find Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="136"/>
-        <source>&#xe8;&#xae;&#xa1;&#xe6;&#x95;&#xb0;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../../ui/editor/search.py" line="137"/>
-        <source>&#xe5;&#x8f;&#x96;&#xe6;&#xb6;&#x88;</source>
+        <source>Find previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="138"/>
-        <source>&#xe6;&#x9b;&#xbf;&#xe6;&#x8d;&#xa2;</source>
+        <source>Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../ui/editor/search.py" line="139"/>
-        <source>&#xe6;&#x9b;&#xbf;&#xe6;&#x8d;&#xa2;&#xe5;&#x85;&#xa8;&#xe9;&#x83;&#xa8;</source>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="203"/>
-        <source>&#xe6;&#x9c;&#xaa;&#xe6;&#x9f;&#xa5;&#xe6;&#x89;&#xbe;&#xe5;&#x88;&#xb0;&#xe3;&#x80;&#x82;</source>
+        <location filename="../../ui/editor/search.py" line="141"/>
+        <source>Replace All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="210"/>
-        <source>&#xe5;&#xba;&#x95;&#xe9;&#x83;&#xa8;</source>
+        <location filename="../../ui/editor/search.py" line="205"/>
+        <source>Nothing finded.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="210"/>
-        <source>&#xe9;&#xa1;&#xb6;&#xe9;&#x83;&#xa8;</source>
+        <location filename="../../ui/editor/search.py" line="212"/>
+        <source>bottom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/editor/search.py" line="211"/>
-        <source>&#xe5;&#xb7;&#xb2;&#xe7;&#xbb;&#x8f;&#xe5;&#x88;&#xb0;&#xe8;&#xbe;&#xbe;</source>
+        <location filename="../../ui/editor/search.py" line="212"/>
+        <source>top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/editor/search.py" line="213"/>
+        <source>reach </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -671,7 +671,7 @@
     <name>self.self</name>
     <message>
         <location filename="../../ui/mainwin.py" line="430"/>
-        <source>&#xe6;&#x98;&#xaf;&#xe5;&#x90;&#xa6;&#xe5;&#xb0;&#x86;&#xe6;&#x9b;&#xb4;&#xe6;&#x94;&#xb9;&#xe4;&#xbf;&#x9d;&#xe5;&#xad;&#x98;&#xe5;&#x88;&#xb0;</source>
+        <source>Save before close?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
