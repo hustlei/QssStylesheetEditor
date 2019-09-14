@@ -34,10 +34,11 @@ class ConfBase:
     def save(self,cfgFile=None):
         if cfgFile!=None:
             self.file=cfgFile
-        with open(self.file, 'w', newline='') as outfile:
+        with open(self.file, 'w', newline='',encoding='utf-8') as outfile:
             # 不指定newline，则换行符自动转换为各系统默认的换行符（\n, \r, or \r\n, ）
             # newline=''表示不转换
-            toml.dump(self.dict,outfile)
+            s=toml.dumps(self.dict)
+            outfile.write(s)
             print("config file saved.")
 
     # def addSec(self, secName, dict={}):

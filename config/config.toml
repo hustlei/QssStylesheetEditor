@@ -4,3 +4,6 @@ recentcount = 8
 
 [editor]
 fontsize = 11
+
+[general]
+language = "简体中文"

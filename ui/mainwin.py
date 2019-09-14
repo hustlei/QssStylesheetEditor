@@ -8,7 +8,7 @@ import re
 from PyQt5.QtWidgets import (qApp, QMainWindow, QWidget, QLabel, QPushButton,
                              QColorDialog, QFileDialog, QMessageBox, QAction)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
-from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtCore import Qt, QSize, QTranslator
 # import sip
 
 from ui import Ui_Mainwin
@@ -21,7 +21,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
     def __init__(self, parent=None):
         super(QMainWindow, self).__init__(parent)
         self.ver = "v1.40"
-        self.title = self.tr("QssStylesheet Editor " + self.ver)
+        self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("img/colorize.ico"))
         self.qsst = Qsst()
@@ -30,6 +30,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.lastSavedText = ""
         self.newIndex = 0
         self.confDialog=None
+        self.trans = QTranslator()
         #ui
         self.setAcceptDrops(True)
         self.setupUi(self)
@@ -41,6 +42,17 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.config=Config()
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
         self.loadConfig()
+        #lang
+        lang=self.config.getSec("general").get("language","English")
+        try:
+            if lang.lower()=="english":
+                pass
+                #QApplication.instance().removeTranslator(self.trans)
+            else:
+                self.trans.load("config/i18n/i18n-"+lang+".qm")
+                qApp.installTranslator(self.trans)
+        except Exception as Argument:
+            print(Argument)
         #init
         self.__isNewFromTemplate=False
         self.newWithTemplate()
