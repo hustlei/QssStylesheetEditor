@@ -30,7 +30,6 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.lastSavedText = ""
         self.newIndex = 0
         self.confDialog=None
-        self.trans = QTranslator()
         #ui
         self.setAcceptDrops(True)
         self.setupUi(self)
@@ -41,18 +40,11 @@ class MainWin(QMainWindow, Ui_Mainwin):
         #conf
         self.config=Config()
         self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
-        self.loadConfig()
+        self.useConfig()
         #lang
-        lang=self.config.getSec("general").get("language","English")
-        try:
-            if lang.lower()=="english":
-                pass
-                #QApplication.instance().removeTranslator(self.trans)
-            else:
-                self.trans.load("config/i18n/i18n-"+lang+".qm")
-                qApp.installTranslator(self.trans)
-        except Exception as Argument:
-            print(Argument)
+        # from i18n.language import Language as Lang
+        # Lang.getConfigLang(self)
+        # Lang.setLang()
         #init
         self.__isNewFromTemplate=False
         self.newWithTemplate()
@@ -456,7 +448,7 @@ class MainWin(QMainWindow, Ui_Mainwin):
         self.config.getSec("file")["recentcount"]=self.recent.maxcount
         self.config.getSec("editor")["fontsize"]=self.editor.font().pointSize()
 
-    def loadConfig(self):
+    def useConfig(self):
         self.config.read()
         recentlist=self.config.getSec("file")["recent"]
         self.recent.setList(recentlist)

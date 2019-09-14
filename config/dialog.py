@@ -86,7 +86,7 @@ class ConfDialog(QWidget):
 
     def findLang(self):
         langs=["English"]
-        dir=os.path.join(os.path.dirname(__file__),"i18n")
+        dir=os.path.join(os.path.dirname(__file__),"../i18n")
         for f in os.listdir(dir):
             if(f.startswith("i18n-") and f.endswith(".qm")):#os.path.isfile(file) and
                 langs.append(f[5:-3])

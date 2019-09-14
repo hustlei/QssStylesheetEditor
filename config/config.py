@@ -8,8 +8,10 @@ from .base import ConfBase
 from .dialog import ConfDialog
 
 class Config(ConfBase):
-    def __init__(self):
+    def __init__(self,cfgfile=None):
         super().__init__()
+        if(cfgfile!=None):
+            self.read(self.file)
 
 if __name__=="__main__":
     cfgfile="config.toml"

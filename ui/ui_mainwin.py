@@ -64,7 +64,7 @@ class Ui_Mainwin(object):
             ("(", QKeySequence(standardkey).toString(), ")"))
 
         self.actions["new"] = createAct(
-            self.tr("&New"),
+            qApp.tr("&New"),
             self.tr("new") +
             keys2str(
                 QKeySequence.New),

@@ -12,12 +12,15 @@ import sys
 import os
 os.chdir(os.path.dirname(__file__))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+from i18n.language import Language
 
 
 def main():
     # sys.setrecursionlimit(1500)
     app = QApplication(sys.argv)
     print("starting...")
+    Language.getConfigLang()
+    Language.setLang()
     from ui.splash import SplashScreen
     splash = SplashScreen("img/splash.png")
     splash.loadProgress()
