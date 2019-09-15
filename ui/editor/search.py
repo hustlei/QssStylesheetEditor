@@ -14,7 +14,7 @@ from PyQt5.QtWidgets import (
     QLabel,
     QLineEdit,
     QSpacerItem,
-    QStatusBar)
+    QStatusBar,QSizePolicy)
 from PyQt5.QtCore import Qt
 
 
@@ -24,16 +24,10 @@ class searchDialog(QMainWindow):
         self.__editor = editor
         self.isReplace = replace
         self.setWindowFlags(Qt.Tool)
-        self.setMinimumWidth(350)
-        self.setFixedSize(350, 200)
-
-        if replace:
-            self.setWindowTitle(self.tr("Replace"))
-        else:
-            self.setWindowTitle(self.tr("Find"))
-        self.setupUi()
-        self.searchText = ""
-        self.replaceText = ""
+        self.setMinimumWidth(320)
+        self.setMinimumHeight(200)
+        self.statusbar = self.statusBar()
+        self.statusbar.setSizeGripEnabled(False)
 
         self.__re = False  # 正则表达式
         self.__case = False  # 大小写
@@ -48,6 +42,15 @@ class searchDialog(QMainWindow):
 
         self.__start = True
         self.__escape = False
+        self.searchText = ""
+        self.replaceText = ""
+
+        if replace:
+            self.setWindowTitle(self.tr("Replace"))
+        else:
+            self.setWindowTitle(self.tr("Find"))
+        self.setupUi()
+        self.setFixedSize(self.sizeHint())
 
     def setReplaceMode(self, isReplace):
         self.isReplace = isReplace
@@ -90,7 +93,6 @@ class searchDialog(QMainWindow):
         layout.addLayout(lay2)
         mainw.setLayout(layout)
         self.setCentralWidget(mainw)
-        self.statusbar = self.statusBar()
         self.statusbar.setSizeGripEnabled(False)
 
         # from PyQt5.QtCore import QTextCodec
@@ -104,8 +106,7 @@ class searchDialog(QMainWindow):
         self.__label2 = QLabel(self.tr("Replace to"))#,"替换为："))
         self.__searchTextBox = QLineEdit()
         self.__replaceTextBox = QLineEdit()
-        self.__searchTextBox.setMinimumWidth(160)
-        self.__searchTextBox.setMinimumWidth(160)
+        # self.__searchTextBox.setMinimumWidth(120)
         grid.addWidget(label1, 0, 0, 1, 1, Qt.AlignRight)
         grid.addWidget(self.__label2, 1, 0, 1, 1, Qt.AlignRight)
         grid.addWidget(self.__searchTextBox, 0, 1)
@@ -133,6 +134,8 @@ class searchDialog(QMainWindow):
         findNextBtn = QPushButton(self.tr("Find Next"))#,"查找下一个"))
         self.__findPreBtn = QPushButton(self.tr("Find previous"))#,"查找上一个"))
         self.__findPreBtn.setMinimumWidth(150)
+        self.__findPreBtn.setSizePolicy(QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding))
+        self.__findPreBtn.resize(self.__findPreBtn.sizeHint())
         countBtn = QPushButton(self.tr("Count"))#,"计数"))
         cancelBtn = QPushButton(self.tr("Cancel"))#,"取消"))
         self.__replaceBtn = QPushButton(self.tr("Replace"))#,"替换"))
