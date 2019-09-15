@@ -93,7 +93,7 @@ class searchDialog(QMainWindow):
         layout.addLayout(lay2)
         mainw.setLayout(layout)
         self.setCentralWidget(mainw)
-        self.statusbar.setSizeGripEnabled(False)
+        mainw.setFixedHeight(200)
 
         # from PyQt5.QtCore import QTextCodec
         # QTextCodec.setCodecForTr(QTextCodec.codecForName("UTF-8"))无效
@@ -132,6 +132,7 @@ class searchDialog(QMainWindow):
         regCheckbox.stateChanged.connect(self.setRe)
 
         findNextBtn = QPushButton(self.tr("Find Next"))#,"查找下一个"))
+        findNextBtn.setShortcut(Qt.Key_Return)
         self.__findPreBtn = QPushButton(self.tr("Find previous"))#,"查找上一个"))
         self.__findPreBtn.setMinimumWidth(150)
         self.__findPreBtn.setSizePolicy(QSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding))
@@ -164,8 +165,9 @@ class searchDialog(QMainWindow):
         self.__replaceBtn.clicked.connect(lambda: self.findreplace(True))
 
         cancelBtn.clicked.connect(self.close)
+        cancelBtn.setShortcut(Qt.Key_Escape)
 
-    def show(self):
+    def showEvent(self, e):
         self.__searchTextBox.setText(self.searchText)
         self.__replaceTextBox.setText(self.replaceText)
         self.__reverseCheckbox.setChecked(False)
@@ -173,7 +175,9 @@ class searchDialog(QMainWindow):
         self.__line = -1
         self.__index = -1
         self.__ok = False
-        super().show()
+        self.__searchTextBox.setFocus()
+        self.activateWindow()
+        e.accept()
 
     def chText(self):
         self.searchText = self.__searchTextBox.text()
