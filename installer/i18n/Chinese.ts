@@ -199,7 +199,7 @@
     </message>
 </context>
 <context>
-    <name>MainwinBase</name>
+    <name>MainWin</name>
     <message>
         <location filename="../../ui/mainwinbase.py" line="66"/>
         <source>&amp;New</source>
