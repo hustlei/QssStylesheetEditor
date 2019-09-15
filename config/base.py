@@ -11,25 +11,26 @@ import toml
 class ConfBase:
     def __init__(self):
         self.dict={}
-        self.file=os.path.join(os.path.dirname(__file__),"config.toml")
+        self.file=None
 
     def read(self,cfgFile=None):
         """ read a toml config file
         :param cfgFile:  config file path
         :return:  true if read success
         """
-        if cfgFile!=None:
-            self.file=cfgFile
-        if not os.path.exists(self.file):
-            print("config self.file"+ os.path.basename(self.file) + ' not found')
-            return False
-        with open(self.file, mode='rb') as f:
-            content = f.read()
-        if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
-            content = content[3:]
-        self.dict = toml.loads(content.decode('utf8'))
-        print('config file load successed!')
-        return True
+        self.file=cfgFile
+        if self.file!=None:
+            if not os.path.exists(self.file):
+                print("config self.file"+ os.path.basename(self.file) + ' not found')
+                return False
+            with open(self.file, mode='rb') as f:
+                content = f.read()
+            if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
+                content = content[3:]
+            self.dict = toml.loads(content.decode('utf8'))
+            print('config file load successed!')
+            return True
+        return False
 
     def save(self,cfgFile=None):
         if cfgFile!=None:

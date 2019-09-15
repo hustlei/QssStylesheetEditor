@@ -4,14 +4,25 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+import os
 from .base import ConfBase
 from .dialog import ConfDialog
 
 class Config(ConfBase):
     def __init__(self,cfgfile=None):
         super().__init__()
-        if(cfgfile!=None):
-            self.read(self.file)
+        default=os.path.join(os.path.dirname(__file__),"config.toml")
+        if(cfgfile==None):
+            cfgfile=default
+        if(not os.path.exists(cfgfile)):
+            s="""[general]
+            
+            [editor]
+            
+            """
+            with open(cfgfile,"w",newline="") as newf:
+                newf.write(s)
+        self.read(cfgfile)
 
 if __name__=="__main__":
     cfgfile="config.toml"

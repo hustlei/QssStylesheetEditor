@@ -450,7 +450,10 @@ class MainWin(MainWinBase):
 
     def useConfig(self):
         self.config.read()
-        recentlist=self.config.getSec("file")["recent"]
-        self.recent.setList(recentlist)
-        self.recent.maxcount=self.config.getSec("file")["recentcount"]
-        self.editor.font().setPointSize(self.config.getSec("editor")["fontsize"])
+        recentlist=self.config.getSec("file").get("recent")
+        if(recentlist!=None):
+            self.recent.setList(recentlist)
+        maxcount=self.config.getSec("file").get("recentcount")
+        if(maxcount!=None):
+            self.recent.maxcount=maxcount
+        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize",11))

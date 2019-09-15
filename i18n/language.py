@@ -22,8 +22,10 @@ class Language():
                 # qApp.removeTranslator(self.trans_sys)
                 pass
             else:
-                Language.trans.load("i18n/i18n-"+Language.lang+".qm")
-                QApplication.installTranslator(Language.trans)
+                lang="i18n/i18n-"+Language.lang+".qm"
+                if(os.path.exists(lang)):
+                    Language.trans.load(lang)
+                    QApplication.installTranslator(Language.trans)
 
             if Language.trans_sys.load("qt_" + QLocale.system().name(),
                                    QLibraryInfo.location(QLibraryInfo.TranslationsPath)):
