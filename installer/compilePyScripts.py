@@ -83,6 +83,7 @@ copyfiles(os.path.join(root,r"dist/libs"),distroot)#copy app.exe
 
 # compile python 脚本并copy到目标文件夹
 print("\ncompile all scripts and copy to dist/build.")
+copyexts=(".zip",".bat",".qm",".toml",".conf")
 def compile_copy(path, distdir):
     list = os.listdir(path)
     copyfiles = False
@@ -93,7 +94,7 @@ def compile_copy(path, distdir):
                 print("  compile "+name)
                 compile(file, optimize=2, cfile=os.path.join(distdir,name+"c"))
                 copyfiles = True
-            elif file.endswith(".zip") or file.endswith(".bat"):
+            elif os.path.splitext(file)[-1] in copyexts:
                 shutil.copy(file, distdir)
                 print("  copy "+name)
                 copyfiles = True

@@ -19,8 +19,7 @@ def main():
     # sys.setrecursionlimit(1500)
     app = QApplication(sys.argv)
     print("starting...")
-    Language.getConfigLang()
-    Language.setLang()
+    Language.setTrans()
     from ui.splash import SplashScreen
     splash = SplashScreen("img/splash.png")
     splash.loadProgress()

@@ -11,19 +11,17 @@ import toml
 class ConfBase:
     def __init__(self):
         self.dict={}
-        self.file=None
 
     def read(self,cfgFile=None):
         """ read a toml config file
         :param cfgFile:  config file path
         :return:  true if read success
         """
-        self.file=cfgFile
-        if self.file!=None:
-            if not os.path.exists(self.file):
-                print("config self.file"+ os.path.basename(self.file) + ' not found')
+        if cfgFile!=None:
+            if not os.path.exists(cfgFile):
+                print("config cfgFile"+ os.path.basename(cfgFile) + ' not found')
                 return False
-            with open(self.file, mode='rb') as f:
+            with open(cfgFile, mode='rb') as f:
                 content = f.read()
             if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
                 content = content[3:]
@@ -34,13 +32,12 @@ class ConfBase:
 
     def save(self,cfgFile=None):
         if cfgFile!=None:
-            self.file=cfgFile
-        with open(self.file, 'w', newline='',encoding='utf-8') as outfile:
-            # 不指定newline，则换行符自动转换为各系统默认的换行符（\n, \r, or \r\n, ）
-            # newline=''表示不转换
-            s=toml.dumps(self.dict)
-            outfile.write(s)
-            print("config file saved.")
+            with open(cfgfile, 'w', newline='', encoding='utf-8') as outfile:
+                # 不指定newline，则换行符自动转换为各系统默认的换行符(\n, \r, or \r\n,)
+                # newline=''表示不转换
+                s=toml.dumps(self.dict)
+                outfile.write(s)
+                print("config file saved.")
 
     # def addSec(self, secName, dict={}):
     #     if (secName not in self.dict or type(self.dict[secName])!=dict):

@@ -46,7 +46,7 @@ class ConfDialog(QWidget):
         glayout=QFormLayout()
         label1=QLabel(self.tr("select UI language:"))
         self.langCombo=QComboBox()
-        self.langCombo.addItems(self.findLang())
+        self.langCombo.addItems(self.getLangList())
         self.langCombo.setMinimumWidth(150)
         label2=QLabel(self.tr("Number of recent files:"))
         self.recentcountspin=QSpinBox()
@@ -84,13 +84,13 @@ class ConfDialog(QWidget):
         self.recentcountspin.valueChanged.connect(setCount)
         self.langCombo.currentTextChanged.connect(self.chLang)
 
-    def findLang(self):
-        langs=["English"]
-        dir=os.path.join(os.path.dirname(__file__),"../i18n")
-        for f in os.listdir(dir):
-            if(f.startswith("i18n-") and f.endswith(".qm")):#os.path.isfile(file) and
-                langs.append(f[5:-3])
-        return langs
+    def getLangList(self):
+        from i18n.language import Language
+        langs=Language.getLangs()
+        ls=[]
+        for l in langs:
+            ls.append(l["name"])
+        return ls
 
     def chLang(self,lang):
         # print("Change language to "+lang)
@@ -114,6 +114,6 @@ class ConfDialog(QWidget):
         lang=self.win.config.getSec("general").get("language",None)
         if lang==None:
             lang="English"
-        if(lang in self.findLang()):
+        if(lang in self.getLangList()):
             self.langCombo.setCurrentText(lang)
         super().show()
