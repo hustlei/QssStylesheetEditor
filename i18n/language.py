@@ -72,7 +72,7 @@ class Language():
                     Language.trans.load(trans,Language.transdir)
                     QApplication.installTranslator(Language.trans)
 
-            if Language.trans_sys.load(systrans,Language.systransdir):
+            if Language.systrans.load(systrans,Language.systransdir):
                     #"qt_" + QLocale.system().name(),QLibraryInfo.location(QLibraryInfo.TranslationsPath)):
                 QApplication.installTranslator(Language.systrans)
         except Exception as Argument:
