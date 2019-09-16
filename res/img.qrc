@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-<qresource>
+<qresource prefix="img">
     <file alias="autowrap.png">img/autowrap.png</file>
     <file alias="bold.png">img/bold.png</file>
     <file alias="book_address.png">img/book_address.png</file>
@@ -14,6 +14,7 @@
     <file alias="colorize.png">img/colorize.png</file>
     <file alias="config.png">img/config.png</file>
     <file alias="copy.png">img/copy.png</file>
+    <file alias="cup.jpg">img/cup.jpg</file>
     <file alias="cut.png">img/cut.png</file>
     <file alias="delete.png">img/delete.png</file>
     <file alias="delete_black.png">img/delete_black.png</file>
@@ -74,6 +75,7 @@
     <file alias="SaveAllHS.png">img/SaveAllHS.png</file>
     <file alias="SaveAs.png">img/SaveAs.png</file>
     <file alias="space.png">img/space.png</file>
+    <file alias="texture.jpg">img/texture.jpg</file>
     <file alias="texture.png">img/texture.png</file>
     <file alias="undo.png">img/undo.png</file>
     <file alias="view.png">img/view.png</file>

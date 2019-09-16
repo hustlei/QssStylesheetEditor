@@ -9,7 +9,7 @@ from PyQt5.QtCore import *
 from .editor import CodeEditor
 from .preview import previewWidget
 from .flow_layout import QFlowLayout
-
+from res.img_rc import *
 
 class MainWinBase(QMainWindow):
     def __init__(self):
@@ -72,88 +72,88 @@ class MainWinBase(QMainWindow):
             keys2str(
                 QKeySequence.New),
             QKeySequence.New,
-            'img/NewDocument.png')
+            ':img/NewDocument.png')
         self.actions["open"] = createAct(
             self.tr("&Open"),
             self.tr("Open") +
             keys2str(
                 QKeySequence.Open),
             QKeySequence.Open,
-            'img/openHS.png')
+            ':img/openHS.png')
         self.actions["save"] = createAct(
             self.tr("&Save"),
             self.tr("Save") +
             keys2str(
                 QKeySequence.Save),
             QKeySequence.Save,
-            'img/save.png')
+            ':img/save.png')
         self.actions["saveas"] = createAct(
-            self.tr("&Save as..."), self.tr("Save as..."), None, 'img/saveas.png')
+            self.tr("&Save as..."), self.tr("Save as..."), None, ':img/SaveAs.png')
         self.actions["export"] = createAct(
-            self.tr("&ExportQss"), self.tr("ExportQss"), "Ctrl+Alt+E", 'img/export5.png')
+            self.tr("&ExportQss"), self.tr("ExportQss"), "Ctrl+Alt+E", ':img/export5.png')
         self.actions["exit"] = createAct(
-            self.tr("&Exit"), self.tr("Exit"), "Ctrl+Q", 'img/close.png')
+            self.tr("&Exit"), self.tr("Exit"), "Ctrl+Q", ':img/close.png')
         self.actions["undo"] = createAct(
             self.tr("&Undo"),
             self.tr("Undo") +
             keys2str(
                 QKeySequence.Undo),
             QKeySequence.Undo,
-            'img/undo.png')
+            ':img/undo.png')
         self.actions["redo"] = createAct(
             self.tr("&Redo"),
             self.tr("Redo") +
             keys2str(
                 QKeySequence.Redo),
             QKeySequence.Redo,
-            'img/redo.png')
+            ':img/redo.png')
         self.actions["cut"] = createAct(
             self.tr("&Cut"),
             self.tr("Cut") +
             keys2str(
                 QKeySequence.Cut),
             QKeySequence.Cut,
-            'img/cut.png')
+            ':img/cut.png')
         self.actions["copy"] = createAct(
             self.tr("&Copy"),
             self.tr("Copy") +
             keys2str(
                 QKeySequence.Copy),
             QKeySequence.Copy,
-            'img/copy.png')
+            ':img/copy.png')
         self.actions["paste"] = createAct(
             self.tr("&Paste"),
             self.tr("Paste") +
             keys2str(
                 QKeySequence.Paste),
             QKeySequence.Paste,
-            'img/paste.png')
+            ':img/paste.png')
         self.actions["find"] = createAct(
             self.tr("&Find"),
             self.tr("Find") +
             keys2str(
                 QKeySequence.Find),
             QKeySequence.Find,
-            'img/find.png')
+            ':img/find.png')
         self.actions["replace"] = createAct(
             self.tr("&Replace"),
             self.tr("Replace") +
             keys2str(
                 QKeySequence.Replace),
             QKeySequence.Replace,
-            'img/replace.png')
+            ':img/replace.png')
         self.actions["fontup"] = createAct(
-            self.tr("&BiggerFont"), self.tr("Bigger Font"), None, 'img/fontup.png')
+            self.tr("&BiggerFont"), self.tr("Bigger Font"), None, ':img/fontup.png')
         self.actions["fontdown"] = createAct(
-            self.tr("&SmallerFont"),self.tr("Smaller Font"), None, 'img/fontdown.png')
+            self.tr("&SmallerFont"),self.tr("Smaller Font"), None, ':img/fontdown.png')
         self.actions["echospace"] = createAct(
-            self.tr("&Space"), self.tr("Show Spaces"), None, 'img/space.png')
+            self.tr("&Space"), self.tr("Show Spaces"), None, ':img/space.png')
         self.actions["echoeol"] = createAct(
-            self.tr("&Eol"), self.tr("Show Eol"), None, 'img/eol.png')
+            self.tr("&Eol"), self.tr("Show Eol"), None, ':img/eol.png')
         self.actions["autowrap"] = createAct(
-            self.tr("&AutoWrap"), self.tr("Auto wrap text"), None, "img/autowrap.png")
+            self.tr("&AutoWrap"), self.tr("Auto wrap text"), None, ":img/autowrap.png")
 
-        # self.fontcolorAct=QAction(QIcon("img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
+        # self.fontcolorAct=QAction(QIcon(":img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
         # self.fontcolorAct.setStatusTip("FontColor")
         self.actions["DisableQss"] = createAct(
@@ -163,18 +163,18 @@ class MainWinBase(QMainWindow):
             self.tr("&ColorPanel"),
             self.tr("ShowColorPanel"),
             None,
-            "img/color.png",
+            ":img/color.png",
             checkable=True)
         self.actions["ShowColor"].setChecked(True)
         self.actions["ShowPreview"] = createAct(
             self.tr("&PreviewPanel"),
             self.tr("ShowPreviewPanel"),
             None,
-            "img/view.png",
+            ":img/view.png",
             checkable=True)
         self.actions["ShowPreview"].setChecked(True)
 
-        self.actions["config"]=createAct(self.tr("&Config"),self.tr("settings."),None,"img/config.png")
+        self.actions["config"]=createAct(self.tr("&Config"),self.tr("settings."),None,":img/config.png")
 
         self.actions["about"] = createAct(self.tr("&About"), self.tr("About"))
 
@@ -189,10 +189,10 @@ class MainWinBase(QMainWindow):
         self.menus["Help"] = QMenu(self.tr("&Help"))
 
         recentMenu = QMenu(self.tr("Recent"), self.menus["File"])
-        recentMenu.setIcon(QIcon("img/none.png"))
+        recentMenu.setIcon(QIcon(":img/none.png"))
 
         editMenu = QMenu(self.tr("Text"), self.menus["Edit"])
-        editMenu.setIcon(QIcon("img/edit_whitepage.png"))
+        editMenu.setIcon(QIcon(":img/edit_whitepage.png"))
         editMenu.addAction(self.actions["undo"])
         editMenu.addAction(self.actions["redo"])
         editMenu.addSeparator()
@@ -201,7 +201,7 @@ class MainWinBase(QMainWindow):
         editMenu.addAction(self.actions["paste"])
 
         searchMenu = QMenu(self.tr("Search"), self.menus["Edit"])
-        searchMenu.setIcon(QIcon("img/findnext.png"))
+        searchMenu.setIcon(QIcon(":img/findnext.png"))
         searchMenu.addAction(self.actions["find"])
         searchMenu.addAction(self.actions["replace"])
 

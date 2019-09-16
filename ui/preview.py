@@ -9,6 +9,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from res.img_rc import *
 
 
 class previewWidget(QTabWidget):
@@ -85,7 +86,7 @@ class previewWidget(QTabWidget):
         label5.setOpenExternalLinks(True)
         label6 = QLabel("图标标签：")
         label7 = QLabel("图标")
-        label7.setPixmap(QPixmap("img/Flag_BlueHS.png"))
+        label7.setPixmap(QPixmap(":img/Flag_BlueHS.png"))
         layoutCol1.addRow(label1, text1)
         layoutCol1.addRow(label2, text2)
         layoutCol1.addRow(lebel3, text3)
@@ -152,7 +153,7 @@ class previewWidget(QTabWidget):
 
         btn1 = QPushButton("Button")
         btn2 = QPushButton("IconBtn")
-        btn2.setIcon(QIcon("img/yes.png"))
+        btn2.setIcon(QIcon(":img/yes.png"))
         btn3 = QPushButton("Disabled")
         btn3.setEnabled(False)
         btn4 = QPushButton("Default")
@@ -191,14 +192,14 @@ class previewWidget(QTabWidget):
         group3.setCheckable(True)
         ch1 = QRadioButton("Radio")
         ch2 = QRadioButton("Iconradio")
-        ch2.setIcon(QIcon("img/Flag_blueHS.png"))
+        ch2.setIcon(QIcon(":img/Flag_blueHS.png"))
         ch3 = QRadioButton("Iconradio")
-        ch3.setIcon(QIcon("img/Flag_greenHS.png"))
+        ch3.setIcon(QIcon(":img/Flag_greenHS.png"))
         ch4 = QRadioButton("Disable")
         ch4.setEnabled(False)
         ch5 = QCheckBox("CheckBox")
         ch6 = QCheckBox("CheckBox")
-        ch6.setIcon(QIcon("img/Flag_blueHS.png"))
+        ch6.setIcon(QIcon(":img/Flag_blueHS.png"))
         ch7 = QCheckBox("TriState")
         ch7.setTristate(True)
         ch7.setCheckState(Qt.PartiallyChecked)
@@ -522,7 +523,7 @@ class previewWidget(QTabWidget):
                 p.drawRect(300, 130, 40, 30)
 
                 brush = QBrush()
-                brush.setTexture(QPixmap("img/texture.jpg"))
+                brush.setTexture(QPixmap(":img/texture.jpg"))
                 p.setBrush(brush)
                 pen.setColor(Qt.transparent)
                 p.setPen(pen)
@@ -545,7 +546,7 @@ class previewWidget(QTabWidget):
         layout.addWidget(group2)
 
         pic1 = QLabel()
-        pic1.setPixmap(QPixmap("img/cup.jpg"))
+        pic1.setPixmap(QPixmap(":img/cup.jpg"))
         group2Layout.addWidget(pic1)
         group2Layout.addStretch(1)
 
@@ -557,10 +558,10 @@ class previewWidget(QTabWidget):
             def paintEvent(self, QPaintEvent):
                 p = QPainter()
                 p.begin(self)
-                img = QPixmap("img/cup.jpg")
+                img = QPixmap(":img/cup.jpg")
                 s = QRect(0, 0, img.width(), img.height())
                 self.setFixedSize(img.size())
-                # img=QImag("img/cup.jpg")
+                # img=QImag(":img/cup.jpg")
                 # p.drawImage(0,0,img)
                 p.drawPixmap(s, img, s)
                 p.end()
@@ -780,9 +781,9 @@ class previewWidget(QTabWidget):
         list1 = QListWidget()
         list1.addItems(["aaa", "bbb", "ccc"])
         list2 = QListWidget()
-        list2.addItem(QListWidgetItem(QIcon("img/Flag_blueHS.png"), "blue"))
-        list2.addItem(QListWidgetItem(QIcon("img/Flag_redHS.png"), "red"))
-        list2.addItem(QListWidgetItem(QIcon("img/Flag_greenHS.png"), "green"))
+        list2.addItem(QListWidgetItem(QIcon(":img/Flag_blueHS.png"), "blue"))
+        list2.addItem(QListWidgetItem(QIcon(":img/Flag_redHS.png"), "red"))
+        list2.addItem(QListWidgetItem(QIcon(":img/Flag_greenHS.png"), "green"))
         list2.setViewMode(QListWidget.IconMode)
         lay.addWidget(list1)
         lay.addWidget(list2)
@@ -834,12 +835,12 @@ class previewWidget(QTabWidget):
         node1 = QTreeWidgetItem()
         node1.setText(0, "root")
         node1.setText(1, "0")
-        node1.setIcon(0, QIcon("img/home.png"))
+        node1.setIcon(0, QIcon(":img/home.png"))
         tree1.addTopLevelItem(node1)
         node11 = QTreeWidgetItem()
         node11.setText(0, "child1")
-        icon = QIcon("img/book_angle.png")
-        icon.addPixmap(QPixmap("img/book_open.png"), QIcon.Normal, QIcon.On)
+        icon = QIcon(":img/book_angle.png")
+        icon.addPixmap(QPixmap(":img/book_open.png"), QIcon.Normal, QIcon.On)
         node11.setIcon(0, icon)
         nodea = QTreeWidgetItem()
         nodea.setText(0, "red")

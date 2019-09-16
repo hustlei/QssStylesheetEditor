@@ -23,7 +23,7 @@ class MainWin(MainWinBase):
         self.ver = "v1.40"
         self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
-        self.setWindowIcon(QIcon("img/colorize.ico"))
+        self.setWindowIcon(QIcon("res/colorize.ico"))
         self.qsst = Qsst()
         self.clrBtnDict = {}
         self.file = None
