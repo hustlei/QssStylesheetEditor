@@ -8,7 +8,7 @@
  ******************************/
 #!define tst ;表示测试，不打包大文件，节约时间
 #!define bind "bind" ;调试版本
-!define bind "bin" ;正式生成版本;程序文件目录bind(debug版),bin(release版)
+#!define bind "bin" ;正式生成版本;程序文件目录bind(debug版),bin(release版)
 
 /******************************
  *  以下是安装变量            *
@@ -18,8 +18,8 @@
 !define Project "QssStylesheetEditor"     																#### please change
 !define PRODUCT_NAME ${Project}																						#### please change
 !define Exe_Name "AppStart"                                               #### please change
-!define PRODUCT_VERSION "1.35" 																						#### please change
-!define ProjectIcon "..\img\colorize.ico"	                              	#### please change
+!define PRODUCT_VERSION "1.40" 																						#### please change
+!define ProjectIcon "..\res\colorize.ico"	                              	#### please change
 !define PRODUCT_PUBLISHER "lileilei"              												#### please change
 !define PRODUCT_WEB_SITE "https://blog.csdn.net/hustlei/article/details/87887369"                       #### please change
 !define PRODUCt_BRAND_TEXT "hustlei,2015 @wuhan"                          #### please change
@@ -57,7 +57,7 @@ RequestExecutionLevel admin
 ; 修改Head图片
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP "..\img\colorize.ico"                  #### please change
+!define MUI_HEADERIMAGE_BITMAP "..\res\colorize.ico"                  #### please change
 #!define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 #!define MUI_HEADERIMAGE_UNBITMAP "${NSISDIR}\Contrib\Graphics\Header\orange-uninstall.bmp"
 
@@ -147,7 +147,7 @@ SectionEnd
 Section "关联epub文件" SEC1                                     	#### please change
 	SectionIn 1 RO
 	!insertmacro Assoc "qss,qsst" "qss" "qss样式文件" "$INSTDIR\${Exe_Name}.exe" \
-											 "$INSTDIR\scripts\img\qss.ico"
+											 "$INSTDIR\scripts\res\qss.ico"
 		System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 		Sleep 500
 SectionEnd
