@@ -11,7 +11,7 @@ pydir=os.path.join(root,"dist/libs/libpython")
 dlldir=os.path.join(root,r"dist/libs/DLLs")
 libdir=os.path.join(root,"dist/libs/Lib")
 datadir = os.path.join(root, "data")
-imgdir = os.path.join(root, "img")
+resdir = os.path.join(root, "res")
 distroot = os.path.join(root, "dist/build")
 # 不编译的文件夹，文件后缀
 excludedir = (
@@ -63,20 +63,24 @@ def copypath(path, distdir):
             p=os.path.join(path,f)
             copypath(p, out)
 
-def copyfiles(path, distdir):
+def copyfiles(path, distdir,exclude=[".py"]):
     files = os.listdir(path)
+    if(not os.path.exists(distdir)):
+        os.mkdir(distdir)
     for fname in files:
         f=os.path.join(path,fname)
-        if os.path.isfile(f) and not f.endswith(".py"):
-            shutil.copy(f, distdir)
-            print("  copy "+os.path.relpath(path,root))
+        if os.path.isfile(f):
+            ext=os.path.splitext(f)[1]
+            if(ext not in exclude):
+                shutil.copy(f, distdir)
+                print("  copy "+os.path.relpath(path,root))
 
 
 copypath(datadir, os.path.join(distroot,"scripts"))
-copypath(imgdir, os.path.join(distroot,"scripts"))
 copypath(libdir,distroot)
 copypath(pydir, distroot)
 
+copyfiles(resdir, os.path.join(distroot,"scripts/res"),[".py",".qrc"])
 copyfiles(dlldir,distroot)
 copyfiles(os.path.join(root,r"dist/libs"),distroot)#copy app.exe
 #shutil.copy(os.path.join(root,"dist/libs/QssStylesheetEditor.exe"),distroot)
@@ -84,13 +88,15 @@ copyfiles(os.path.join(root,r"dist/libs"),distroot)#copy app.exe
 # compile python 脚本并copy到目标文件夹
 print("\ncompile all scripts and copy to dist/build.")
 copyexts=(".zip",".bat",".qm",".toml",".conf")
+import re 
+pexclude=re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$')
 def compile_copy(path, distdir):
     list = os.listdir(path)
     copyfiles = False
     for name in list:
         file=os.path.join(path,name)
         if os.path.isfile(file):
-            if name.endswith(".py"):
+            if name.endswith(".py") and pexclude.search(name)==None:
                 print("  compile "+name)
                 compile(file, optimize=2, cfile=os.path.join(distdir,name+"c"))
                 copyfiles = True
@@ -102,7 +108,8 @@ def compile_copy(path, distdir):
             if name in excludedir:
                 continue
             out = os.path.join(distdir,name)
-            os.makedirs(out)
+            if(not os.path.exists(out)):
+                os.makedirs(out)
             empty=compile_copy(file, out)
             if empty:
                 os.rmdir(out)

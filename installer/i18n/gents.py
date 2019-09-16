@@ -14,7 +14,7 @@ excludedir = (
     "font",
      "installer")
 
-p=re.compile(r'_[vV][1-9.\-_]+[.]py$$|[.]old[.]py$')
+p=re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$')
 
 def getsrclist(dir=None):
     if dir==None:
