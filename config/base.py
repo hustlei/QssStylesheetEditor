@@ -26,7 +26,6 @@ class ConfBase:
             if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
                 content = content[3:]
             self.dict = toml.loads(content.decode('utf8'))
-            print('config file load successed!')
             return True
         return False
 

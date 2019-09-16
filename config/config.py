@@ -23,7 +23,8 @@ class Config(ConfBase):
             with open(cfgfile,"w",newline="") as newf:
                 newf.write(s)
         self.file=cfgfile
-        self.read(cfgfile)
+        if(self.read(cfgfile)):
+            print('config file load successed!')
     def save(self):
         super()._save(self.file)
 
