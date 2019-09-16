@@ -1,9 +1,9 @@
 [file]
-recent = [ "E:/Working/Coding/Python/QssStylesheetEditor/data/default.qss",]
+recent = [ "E:/Working/Coding/Python/QssStylesheetEditor/data/default.qsst", "E:/Working/Coding/Python/QssStylesheetEditor/data/default.qss",]
 recentcount = 8
 
 [editor]
 fontsize = 11
 
 [general]
-language = "简体中文"
+language = "English"

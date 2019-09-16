@@ -61,6 +61,8 @@ class SplashScreen(QSplashScreen):
             qGray)
         #(Base64, Base64url,Bigfloat,DateTimeString,Decimal,QDir,QRegExp,QRegularExpression,QTimer,QUrl)
         self.setProgressText(10)
+        import res.img_rc
+        from res.img_rc import qt_resource_data
         # QtWidgets 常用控件
         from PyQt5 import QtWidgets
         from PyQt5.QtWidgets import (

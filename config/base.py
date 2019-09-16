@@ -30,9 +30,9 @@ class ConfBase:
             return True
         return False
 
-    def save(self,cfgFile=None):
+    def _save(self,cfgFile=None):
         if cfgFile!=None:
-            with open(cfgfile, 'w', newline='', encoding='utf-8') as outfile:
+            with open(cfgFile, 'w', newline='', encoding='utf-8') as outfile:
                 # 不指定newline，则换行符自动转换为各系统默认的换行符(\n, \r, or \r\n,)
                 # newline=''表示不转换
                 s=toml.dumps(self.dict)

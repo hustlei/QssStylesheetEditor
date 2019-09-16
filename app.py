@@ -21,7 +21,7 @@ def main():
     print("starting...")
     Language.setTrans()
     from ui.splash import SplashScreen
-    splash = SplashScreen("img/splash.png")
+    splash = SplashScreen("res/splash.png")
     splash.loadProgress()
     from ui.mainwin import MainWin
     win = MainWin()
