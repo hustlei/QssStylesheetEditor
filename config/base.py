@@ -36,7 +36,8 @@ class ConfBase:
                 # newline=''表示不转换
                 s=toml.dumps(self.dict)
                 outfile.write(s)
-                print("config file saved.")
+                return True
+        return False
 
     # def addSec(self, secName, dict={}):
     #     if (secName not in self.dict or type(self.dict[secName])!=dict):

@@ -26,7 +26,8 @@ class Config(ConfBase):
         if(self.read(cfgfile)):
             print('config file load successed!')
     def save(self):
-        super()._save(self.file)
+        if(super()._save(self.file)):
+            print("config file saved.")
 
 if __name__=="__main__":
     cfgfile="config.toml"
