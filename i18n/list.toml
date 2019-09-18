@@ -1,12 +1,12 @@
 [languages]
-English =["English",  "en", ""]             #英语
-Chinese =["简体中文", "zh", "i18n_zh.qm"]   #汉语
-French  =["Fran?ais", "fr", "i18n-fr.qm"]   #法语
-Russian =["Русский",  "ru", "i18_ru.qm"]    #俄语
-spanish =["Español",  "es", "i18_es.qm"]    #西班牙语
-Japanese=["日本語",   "ja", "i18_ja.qm"]    #日语
-Korean  =["한국어",      "ko", "i18_ko.qm"]    #韩语
-German  =["Deutsch",  "de", "i18_de.qm"]    #德语            
-Italian =["Italiano", "it", "i18_it.qm"]    #意大利语
+English =["en",    "",              "English"]  #英语
+Chinese =["zh-CN", "i18n_zh.qm",    "简体中文"]  #汉语
+French  =["fr",    "i18n-fr.qm",    "Fran?ais"]  #法语
+Russian =["ru",    "i18_ru.qm",     "Русский"]   #俄语
+spanish =["es",    "i18_es.qm",     "Español"]    #西班牙语
+Japanese=["ja",    "i18_ja.qm",     "日本語", ]    #日语
+Korean  =["ko",    "i18_ko.qm",     "한국어", ]    #韩语
+German  =["de",    "i18_de.qm",     "Deutsch" ]    #德语
+Italian =["it",    "i18_it.qm",     "Italiano"]    #意大利语
 
-#englishname   nativename qtbase_de.qm  i18_xx.qm
+#englishname=[QLocale().name(),qmfile,nativename(can be "")]

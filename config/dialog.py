@@ -46,7 +46,7 @@ class ConfDialog(QWidget):
         glayout=QFormLayout()
         label1=QLabel(self.tr("select UI language:"))
         self.langCombo=QComboBox()
-        self.langCombo.addItems(self.getLangList())
+        self.setLangItems(self.langCombo) #.addItems(self.getLangList())
         self.langCombo.setMinimumWidth(150)
         label2=QLabel(self.tr("Number of recent files:"))
         self.recentcountspin=QSpinBox()
@@ -82,17 +82,16 @@ class ConfDialog(QWidget):
         def setCount(x):
             self.win.recent.maxcount=x
         self.recentcountspin.valueChanged.connect(setCount)
-        self.langCombo.currentTextChanged.connect(self.chLang)
+        self.langCombo.currentIndexChanged.connect(self.chLang)
 
-    def getLangList(self):
+    def setLangItems(self,combo):
         from i18n.language import Language
         langs=Language.getLangs()
-        ls=[]
         for l in langs:
-            ls.append(l["name"])
-        return ls
+            combo.addItem(l["nativename"],l["lang"])
+        return True
 
-    def chLang(self,lang):
+    def chLang(self,i):
         # print("Change language to "+lang)
         # try:
         #     if lang.lower()=="english":
@@ -103,6 +102,7 @@ class ConfDialog(QWidget):
         #     #self._app.retranslateUi(self)# 重新翻译界面
         # except Exception as Argument:
         #     print(Argument)
+        lang=self.langCombo.currentData()
         print("Setting Language to "+lang)
         self.win.config.getSec("general")["language"]=lang
         print("restart soft to enable.")
@@ -113,7 +113,10 @@ class ConfDialog(QWidget):
         self.recentcountspin.setValue(self.win.recent.maxcount)
         lang=self.win.config.getSec("general").get("language",None)
         if lang==None:
-            lang="English"
-        if(lang in self.getLangList()):
-            self.langCombo.setCurrentText(lang)
+            lang="en"
+        from i18n.language import Language
+        for l in Language.getLangs():
+            if(l["lang"]==lang):
+                self.langCombo.setCurrentText(l["nativename"])
+                break
         super().show()
