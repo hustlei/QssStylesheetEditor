@@ -1,86 +1,86 @@
 /****************************
 
-ÓÃ·¨:
-* ±ØĞëÈÏÕæÔÄ¶Á!Èç¹ûÄãÒªÓÃÕâ¶«Î÷µÄ»°:-p
+ç”¨æ³•:
+* å¿…é¡»è®¤çœŸé˜…è¯»!å¦‚æœä½ è¦ç”¨è¿™ä¸œè¥¿çš„è¯:-p
 
-1. ÔÚÄãµÄ½Å±¾¿ªÍ·°üº¬Í·ÎÄ¼ş
+1. åœ¨ä½ çš„è„šæœ¬å¼€å¤´åŒ…å«å¤´æ–‡ä»¶
 	!include "Assoc.nsh"
 
-	¶¨ÒåÄãµÄ¹¤³ÌÃû³Æ,ÕâÊÇÎªÁË±æÈÏÊÇ·ñ¹ØÁªÒÔ¼°¸³Óè±¸·İµÄÖ÷¼üÖµ,²»¿É¿Õ!
-	!define Project ¹¤³ÌÃû³Æ
-	Èç
+	å®šä¹‰ä½ çš„å·¥ç¨‹åç§°,è¿™æ˜¯ä¸ºäº†è¾¨è®¤æ˜¯å¦å…³è”ä»¥åŠèµ‹äºˆå¤‡ä»½çš„ä¸»é”®å€¼,ä¸å¯ç©º!
+	!define Project å·¥ç¨‹åç§°
+	å¦‚
 	!define Project MPlayerc
 
-	Èç¹ûĞèÒª»ØÏÔÃ¿¸ö¹ØÁªµÄ¶¯×÷(¼´ÒÔDetailPrintÏÔÊ¾)µÄ,ÔÚ½Å±¾¿ªÍ·°üº¬ÏÂÃæĞĞ:
+	å¦‚æœéœ€è¦å›æ˜¾æ¯ä¸ªå…³è”çš„åŠ¨ä½œ(å³ä»¥DetailPrintæ˜¾ç¤º)çš„,åœ¨è„šæœ¬å¼€å¤´åŒ…å«ä¸‹é¢è¡Œ:
 	!define Echo ""
 
-	Èç¹ûĞèÒª»ØÏÔÃ¿¸öÈ¡Ïû¹ØÁªµÄ¶¯×÷(¼´ÒÔDetailPrintÏÔÊ¾)µÄ,ÔÚ½Å±¾¿ªÍ·°üº¬ÏÂÃæĞĞ:
+	å¦‚æœéœ€è¦å›æ˜¾æ¯ä¸ªå–æ¶ˆå…³è”çš„åŠ¨ä½œ(å³ä»¥DetailPrintæ˜¾ç¤º)çš„,åœ¨è„šæœ¬å¼€å¤´åŒ…å«ä¸‹é¢è¡Œ:
 	!define UnEcho ""
 
-	ÔöÇ¿¹¦ÄÜ:ÌîĞ´ºÃ¹ØÁª´úÂëºó×Ô¶¯Êä³öÈ¡Ïû¹ØÁªµÄ´úÂë,ÔÚ½Å±¾¿ªÍ·°üº¬ÏÂÃæĞĞ:
+	å¢å¼ºåŠŸèƒ½:å¡«å†™å¥½å…³è”ä»£ç åè‡ªåŠ¨è¾“å‡ºå–æ¶ˆå…³è”çš„ä»£ç ,åœ¨è„šæœ¬å¼€å¤´åŒ…å«ä¸‹é¢è¡Œ:
 	!define EchoUnSources ""
 
-2. ÔÚSection»òÕßFunctionÀïÃæĞèÒªµÄµØ·½²åÈë:
+2. åœ¨Sectionæˆ–è€…Functioné‡Œé¢éœ€è¦çš„åœ°æ–¹æ’å…¥:
 
-	# Òª¹ØÁªÆÕÍ¨ÎÄ¼şÓÃ:
-	!macro Assoc ÎÄ¼şÀ©Õ¹ÃûÁĞ±í ÎÄ¼şÀàĞÍ ÃèÊö ´ò¿ª·½Ê½ Ä¬ÈÏÍ¼±ê ¶ÔÏóÀàĞÍ
-	# ÀıÈç:
-	!insertmacro Assoc "jpg" "jpgfile" "JPEGÍ¼Ïñ" "$INSTDIR\ACDSee.exe" "$INSTDIR\Icon.ico"
-	!insertmacro Assoc "rar,zip,7z,gz" "rarfile" "WinRAR Ñ¹ËõÎÄ¼ş" "$INSTDIR\WinRAR.exe" "$INSTDIR\Icon.ico"
+	# è¦å…³è”æ™®é€šæ–‡ä»¶ç”¨:
+	!macro Assoc æ–‡ä»¶æ‰©å±•ååˆ—è¡¨ æ–‡ä»¶ç±»å‹ æè¿° æ‰“å¼€æ–¹å¼ é»˜è®¤å›¾æ ‡ å¯¹è±¡ç±»å‹
+	# ä¾‹å¦‚:
+	!insertmacro Assoc "jpg" "jpgfile" "JPEGå›¾åƒ" "$INSTDIR\ACDSee.exe" "$INSTDIR\Icon.ico"
+	!insertmacro Assoc "rar,zip,7z,gz" "rarfile" "WinRAR å‹ç¼©æ–‡ä»¶" "$INSTDIR\WinRAR.exe" "$INSTDIR\Icon.ico"
 
-	# Òª¹ØÁªÒ»¸öÃ½ÌåÎÄ¼şÓÃ:
-	!macro Assoc_Media ÎÄ¼şÀ©Õ¹ÃûÁĞ±í ÎÄ¼şÀàĞÍ ÃèÊö ´ò¿ª·½Ê½ Ä¬ÈÏÍ¼±ê ¶ÔÏóÀàĞÍ ¶ÔÏóCLSID
-	# ÀıÈç:
-	!insertmacro Assoc_Media "rmvb" "rmvbfile" "Real Ã½ÌåÎÄ¼ş "$INSTDIR\KMPlayer.exe" "$INSTDIR\Icon.ico" "video/vnd.rn-realmedia" "{CFCDAA03-8BE4-11CF-B84B-0020AFBBCCFA}"
-	!insertmacro Assoc_Media "rmvb,rm,ra,rv" "rmvbfile" "Real Ã½ÌåÎÄ¼ş "$INSTDIR\KMPlayer.exe" "$INSTDIR\Icon.ico" "video/vnd.rn-realmedia" "{CFCDAA03-8BE4-11CF-B84B-0020AFBBCCFA}"
+	# è¦å…³è”ä¸€ä¸ªåª’ä½“æ–‡ä»¶ç”¨:
+	!macro Assoc_Media æ–‡ä»¶æ‰©å±•ååˆ—è¡¨ æ–‡ä»¶ç±»å‹ æè¿° æ‰“å¼€æ–¹å¼ é»˜è®¤å›¾æ ‡ å¯¹è±¡ç±»å‹ å¯¹è±¡CLSID
+	# ä¾‹å¦‚:
+	!insertmacro Assoc_Media "rmvb" "rmvbfile" "Real åª’ä½“æ–‡ä»¶ "$INSTDIR\KMPlayer.exe" "$INSTDIR\Icon.ico" "video/vnd.rn-realmedia" "{CFCDAA03-8BE4-11CF-B84B-0020AFBBCCFA}"
+	!insertmacro Assoc_Media "rmvb,rm,ra,rv" "rmvbfile" "Real åª’ä½“æ–‡ä»¶ "$INSTDIR\KMPlayer.exe" "$INSTDIR\Icon.ico" "video/vnd.rn-realmedia" "{CFCDAA03-8BE4-11CF-B84B-0020AFBBCCFA}"
 
-	×¢:ÎÄ¼şÀàĞÍÁĞ±íÓÃ¶ººÅ","·Ö¸ô.
+	æ³¨:æ–‡ä»¶ç±»å‹åˆ—è¡¨ç”¨é€—å·","åˆ†éš”.
 
-	# È¡Ïû¹ØÁªÎÄ¼şÓÃ:
-	!macro UnAssoc ÎÄ¼şÀ©Õ¹ÃûÁĞ±í
-	# ÀıÈç:
+	# å–æ¶ˆå…³è”æ–‡ä»¶ç”¨:
+	!macro UnAssoc æ–‡ä»¶æ‰©å±•ååˆ—è¡¨
+	# ä¾‹å¦‚:
 	!insertmacro UnAssoc "jpg"
 	!insertmacro UnAssoc "rmvb,rm,ra,rv"
 
-	×¢:ÎÄ¼şÀàĞÍÁĞ±íÓÃ¶ººÅ","·Ö¸ô.
+	æ³¨:æ–‡ä»¶ç±»å‹åˆ—è¡¨ç”¨é€—å·","åˆ†éš”.
 
-3.ËùÓĞ¹ØÁª²Ù×÷Íê±Ïºó¼ÓÒ»ĞĞË¢ÆÁº¯Êı:
+3.æ‰€æœ‰å…³è”æ“ä½œå®Œæ¯•ååŠ ä¸€è¡Œåˆ·å±å‡½æ•°:
 	System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
-	ÒÔÁ¢¼´ÏÔÊ¾¸ü¸Ä.
+	ä»¥ç«‹å³æ˜¾ç¤ºæ›´æ”¹.
 
-4.CheckSection:¼ì²éµ±Ç°¹ØÁªµÄ
-ÓÃ·¨²½Öè:
-	1.  ¿´¿´¿ªÍ·ÓĞÃ»!include "Assoc.nsh",Ã»ÓĞ¾Í¼ÓÉÏ.
+4.CheckSection:æ£€æŸ¥å½“å‰å…³è”çš„
+ç”¨æ³•æ­¥éª¤:
+	1.  çœ‹çœ‹å¼€å¤´æœ‰æ²¡!include "Assoc.nsh",æ²¡æœ‰å°±åŠ ä¸Š.
 
-	2.	ÔÚÄãµÄ´úÂë¿ªÍ·¼ÓInstType¼ÓÒ»ĞĞ:
-			InstType µ±Ç°¹ØÁª
-		ÒÔ±ã¼ÆÊı,È»ºóÊä³ö"InstType µ±Ç°¹ØÁªµÄÎÄ¼şÀàĞÍ"ÕâĞĞÊÇµÚ¼¸ĞĞ(ÓÉ1¿ªÊ¼Êı),Èç
-		    InstType ¹ØÁªËùÓĞ¸ñÊ½ÎÄ¼ş
-			InstType ¹ØÁªËùÓĞÊÓÆµÎÄ¼ş
-			InstType ¹ØÁªËùÓĞÒôÆµÎÄ¼ş
-			InstType È¡Ïû¹ØÁªËùÓĞÎÄ¼ş
-			InstType µ±Ç°¹ØÁªµÄÎÄ¼şÀàĞÍ-----ÕâÀïÊÇµÚ5ĞĞ
+	2.	åœ¨ä½ çš„ä»£ç å¼€å¤´åŠ InstTypeåŠ ä¸€è¡Œ:
+			InstType å½“å‰å…³è”
+		ä»¥ä¾¿è®¡æ•°,ç„¶åè¾“å‡º"InstType å½“å‰å…³è”çš„æ–‡ä»¶ç±»å‹"è¿™è¡Œæ˜¯ç¬¬å‡ è¡Œ(ç”±1å¼€å§‹æ•°),å¦‚
+		    InstType å…³è”æ‰€æœ‰æ ¼å¼æ–‡ä»¶
+			InstType å…³è”æ‰€æœ‰è§†é¢‘æ–‡ä»¶
+			InstType å…³è”æ‰€æœ‰éŸ³é¢‘æ–‡ä»¶
+			InstType å–æ¶ˆå…³è”æ‰€æœ‰æ–‡ä»¶
+			InstType å½“å‰å…³è”çš„æ–‡ä»¶ç±»å‹-----è¿™é‡Œæ˜¯ç¬¬5è¡Œ
 
-	3.  Èô"InstType µ±Ç°¹ØÁª"ÊÇµÚ3ĞĞ,¾Í½«´ËÍ·ÎÄ¼şÀïÃæµÄ!macro CheckSection ÀïµÄIntOp $0 $0 | 16ÕâĞĞ¸ÄÎª"IntOp $0 $0 | 4",¾ÍÊÇ½«$0µÄ¶ş½øÖÆÖµ»ò4µÄ¶ş½øÖÆÖµ100,¾ÍÊÇ½«µÚÈıĞĞInstTypeÖÃ1,Ñ¡ÖĞËü.
-		Èô"InstType µ±Ç°¹ØÁª"ÊÇµÚ4ĞĞ,¾Í½«´ËÍ·ÎÄ¼şÀïÃæµÄ!macro CheckSection ÀïµÄIntOp $0 $0 | 16ÕâĞĞ¸ÄÎª"IntOp $0 $0 | 8",8¾ÍÊÇ¶ş½øÖÆ1000,¾ÍÊÇÑ¡ÖĞ1000µÄµÚ4ĞĞ.
-		ÈôÊÇµÚ5ĞĞ¾ÍÊÇ16(10000),µÚÁùĞĞ¾ÍÊÇ32(100000)....
+	3.  è‹¥"InstType å½“å‰å…³è”"æ˜¯ç¬¬3è¡Œ,å°±å°†æ­¤å¤´æ–‡ä»¶é‡Œé¢çš„!macro CheckSection é‡Œçš„IntOp $0 $0 | 16è¿™è¡Œæ”¹ä¸º"IntOp $0 $0 | 4",å°±æ˜¯å°†$0çš„äºŒè¿›åˆ¶å€¼æˆ–4çš„äºŒè¿›åˆ¶å€¼100,å°±æ˜¯å°†ç¬¬ä¸‰è¡ŒInstTypeç½®1,é€‰ä¸­å®ƒ.
+		è‹¥"InstType å½“å‰å…³è”"æ˜¯ç¬¬4è¡Œ,å°±å°†æ­¤å¤´æ–‡ä»¶é‡Œé¢çš„!macro CheckSection é‡Œçš„IntOp $0 $0 | 16è¿™è¡Œæ”¹ä¸º"IntOp $0 $0 | 8",8å°±æ˜¯äºŒè¿›åˆ¶1000,å°±æ˜¯é€‰ä¸­1000çš„ç¬¬4è¡Œ.
+		è‹¥æ˜¯ç¬¬5è¡Œå°±æ˜¯16(10000),ç¬¬å…­è¡Œå°±æ˜¯32(100000)....
 
-		È»ºóÔÙ¸Ä"IntOp $0 $0 & 31"ÕâĞĞ,Èç¹û"InstType µ±Ç°¹ØÁª"ÊÇµÚ3ĞĞ¾Í¸ÄÎª"IntOp $0 $0 & 3",¾ÍÊÇ$0 &(Âß¼­ÓëµÄ·ûºÅ) 011,¾ÍÊÇÆäËûInstType²»±ä,µ±Ç°¹ØÁªÄÇ¸öÉè0È¡ÏûÑ¡Ôñ
-		ÊÇµÚ4ĞĞ¾Í¸ÄÎª"IntOp $0 $0 & 7"(7¾ÍÊÇ0111);µÚ5ĞĞ¾Í¸ÄÎª"IntOp $0 $0 & 15"(15¾ÍÊÇ01111);µÚ6ĞĞ¾Í¸ÄÎª"IntOp $0 $0 & 31"
+		ç„¶åå†æ”¹"IntOp $0 $0 & 31"è¿™è¡Œ,å¦‚æœ"InstType å½“å‰å…³è”"æ˜¯ç¬¬3è¡Œå°±æ”¹ä¸º"IntOp $0 $0 & 3",å°±æ˜¯$0 &(é€»è¾‘ä¸çš„ç¬¦å·) 011,å°±æ˜¯å…¶ä»–InstTypeä¸å˜,å½“å‰å…³è”é‚£ä¸ªè®¾0å–æ¶ˆé€‰æ‹©
+		æ˜¯ç¬¬4è¡Œå°±æ”¹ä¸º"IntOp $0 $0 & 7"(7å°±æ˜¯0111);ç¬¬5è¡Œå°±æ”¹ä¸º"IntOp $0 $0 & 15"(15å°±æ˜¯01111);ç¬¬6è¡Œå°±æ”¹ä¸º"IntOp $0 $0 & 31"
 
-	4.  ¼ÇÏÂÄãÒª¼ì²éµÄSectionËùÔÚ¿ªÍ·µÄ"Section "Real ÊÓÆµ" REAL_V"µÄµÚ¶ş²ÎÊıREAL_V,¸ÄÎª${REAL_V}×÷ÎªCheckSectionÀïµÄµÚÒ»¸ö²ÎÊı
+	4.  è®°ä¸‹ä½ è¦æ£€æŸ¥çš„Sectionæ‰€åœ¨å¼€å¤´çš„"Section "Real è§†é¢‘" REAL_V"çš„ç¬¬äºŒå‚æ•°REAL_V,æ”¹ä¸º${REAL_V}ä½œä¸ºCheckSectioné‡Œçš„ç¬¬ä¸€ä¸ªå‚æ•°
 
-	5.  È»ºó½«Òª¼ì²âµÄÀ©Õ¹ÃûÁĞ±íÈç(rmvb,rm,rmx,rm33j,rms,rv,rvx)×÷ÎªµÚ¶ş²ÎÊı,Èç¹û´Ë³ÌĞò¹ØÁªÁËÆäÖĞÈÎºÎÒ»¸öÀ©Õ¹Ãû¾Í»áÈÏÎª
-		¹ØÁªÁËÕâ¸öSection,¾Í»á¹´ÉÏÕâ¸öSection.
+	5.  ç„¶åå°†è¦æ£€æµ‹çš„æ‰©å±•ååˆ—è¡¨å¦‚(rmvb,rm,rmx,rm33j,rms,rv,rvx)ä½œä¸ºç¬¬äºŒå‚æ•°,å¦‚æœæ­¤ç¨‹åºå…³è”äº†å…¶ä¸­ä»»ä½•ä¸€ä¸ªæ‰©å±•åå°±ä¼šè®¤ä¸º
+		å…³è”äº†è¿™ä¸ªSection,å°±ä¼šå‹¾ä¸Šè¿™ä¸ªSection.
 
-	6.  È»ºóÔÚFunction .onInitÇø¶Î¼ÓÈëÏÂÃæ´úÂë:
+	6.  ç„¶ååœ¨Function .onInitåŒºæ®µåŠ å…¥ä¸‹é¢ä»£ç :
 	*****************************
-	ReadRegStr $0 HKCR "Back.${Project}" ""
+	ReadRegStr $0 HKCR "Back.${ProductName}" ""
 	StrCmp $0 "" check_skip
-	InstTypeSetText 4 "µ±Ç°¹ØÁªµÄÎÄ¼şÀàĞÍ"
-	!insertmacro CheckSection ${REAL_V} rmvb,rm,rmx,rm33j,rms,rv,rvx    ;ÕâÀïÊÇ¼ì²éÎÄ¼şrmvb,rm,rmx,rm33j,rms,rv,rvx,È»ºó¾ö¶¨ÊÇ·ñ¹´ÉÏ "Section "Real ÊÓÆµ" REAL_V"
+	InstTypeSetText 4 "å½“å‰å…³è”çš„æ–‡ä»¶ç±»å‹"
+	!insertmacro CheckSection ${REAL_V} rmvb,rm,rmx,rm33j,rms,rv,rvx    ;è¿™é‡Œæ˜¯æ£€æŸ¥æ–‡ä»¶rmvb,rm,rmx,rm33j,rms,rv,rvx,ç„¶åå†³å®šæ˜¯å¦å‹¾ä¸Š "Section "Real è§†é¢‘" REAL_V"
 
-	;....ÕâÀï·Å¸ü¶àµÄCheckSection
+	;....è¿™é‡Œæ”¾æ›´å¤šçš„CheckSection
 
 	SetCurInstType 4
 	goto init_end
@@ -91,29 +91,29 @@
 *****************************/
 
 !ifndef Ass_Str
-!define Ass_Str "´ò¿ª(&O)"
+!define Ass_Str "æ‰“å¼€(&O)"
 !endif
 !ifndef Ass_Str_Media
-!define Ass_Str_Media "²¥·Å(&P)"
+!define Ass_Str_Media "æ’­æ”¾(&P)"
 !endif
 
 !include "logiclib.nsh"
 
 
-/*********¹ØÁªÒ»°ãÎÄ¼ş*********/
+/*********å…³è”ä¸€èˆ¬æ–‡ä»¶*********/
 !macro Assoc EXT TYPE DESC OPENEXE ICO
 Push $1
 Push $2
 !ifdef EchoUnSources
 DetailPrint '!insertmacro UnAssoc ${ext}'
 !endif
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯Êı*********
-Push $R0  ;ÊäÈë×Ö·û´®
-Push $R1  ;ÄÚÑ­»·¼ÆÊı
-Push $R2  ;ÓÉ´Ë¿ªÊ¼½ØÈ¡×Ö·û´®
-Push $R3  ;×Ö·û´®³¤¶È
-Push $R4  ;½Ø³öµ¥¸ö×Ö·û
-Push $R5  ;½Ø³ö×Ö·û´®(½á¹û)
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°*********
+Push $R0  ;è¾“å…¥å­—ç¬¦ä¸²
+Push $R1  ;å†…å¾ªç¯è®¡æ•°
+Push $R2  ;ç”±æ­¤å¼€å§‹æˆªå–å­—ç¬¦ä¸²
+Push $R3  ;å­—ç¬¦ä¸²é•¿åº¦
+Push $R4  ;æˆªå‡ºå•ä¸ªå­—ç¬¦
+Push $R5  ;æˆªå‡ºå­—ç¬¦ä¸²(ç»“æœ)
 StrCpy $R0 ${ext}
 StrCpy $R1 1
 StrCpy $R2 0
@@ -128,23 +128,23 @@ IntOp $R1 $R1 - 1
 IntOp $R6 $R1 - $R2
 StrCpy $R5 $R0 $R6 $R2
 
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö
-ReadRegStr $1 HKCR "Back.${Project}" ".$R5"
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º
+ReadRegStr $1 HKCR "Back.${ProductName}" ".$R5"
 ${if} "$1" == ""
 	ReadRegStr $2 HKCR ".$R5" ""
 	${if} "$2" == ""
-	WriteRegStr HKCR "Back.${Project}" ".$R5" "_Blank_"
+	WriteRegStr HKCR "Back.${ProductName}" ".$R5" "_Blank_"
 	${Else}
-	WriteRegStr HKCR "Back.${Project}" ".$R5" "$2"   ;±¸·İ¸ÃÀ©Õ¹Ãû
+	WriteRegStr HKCR "Back.${ProductName}" ".$R5" "$2"   ;å¤‡ä»½è¯¥æ‰©å±•å
 	${EndIf}
 ${EndIf}
-DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.${ext}" ;É¾³ı¾É¹ØÁª
-DeleteRegKey HKCR ".$R5" ;É¾³ı¾É¹ØÁª
+DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.${ext}" ;åˆ é™¤æ—§å…³è”
+DeleteRegKey HKCR ".$R5" ;åˆ é™¤æ—§å…³è”
 !ifdef Echo
-DetailPrint 'ÕıÔÚ¹ØÁª*.$R5ÎÄ¼şÀàĞÍÎª"${desc}"...'
+DetailPrint 'æ­£åœ¨å…³è”*.$R5æ–‡ä»¶ç±»å‹ä¸º"${desc}"...'
 !endif
-WriteRegStr HKCR ".$R5" "" "${Project}.${type}"
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö-Íê±Ï
+WriteRegStr HKCR ".$R5" "" "${ProductName}.${type}"
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º-å®Œæ¯•
 
 IntOp $R1 $R1 + 2
 IntOp $R2 $R1 - 1
@@ -156,37 +156,37 @@ Pop $R3
 Pop $R2
 Pop $R1
 Pop $R0
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯ÊıÍê±Ï*********
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°å®Œæ¯•*********
 
-WriteRegStr HKCR ".${ext}" "" "${Project}.${type}"
-WriteRegStr HKCR "${Project}.${type}" "" "${desc}"
-WriteRegStr HKCR "${Project}.${type}\shell" "" open
-WriteRegStr HKCR "${Project}.${type}\shell\open" "" "${Ass_Str}"
-WriteRegStr HKCR "${Project}.${type}\shell\open\command" "" '${openexe} "%1"'
-${if} "${ico}" == "" ;Èç¹û²»Ö¸¶¨Í¼±êÔòÊ¹ÓÃÄ¬ÈÏÍ¼±ê
-	WriteRegStr HKCR "${Project}.${type}\DefaultIcon" "" "${openexe}"
+WriteRegStr HKCR ".${ext}" "" "${ProductName}.${type}"
+WriteRegStr HKCR "${ProductName}.${type}" "" "${desc}"
+WriteRegStr HKCR "${ProductName}.${type}\shell" "" open
+WriteRegStr HKCR "${ProductName}.${type}\shell\open" "" "${Ass_Str}"
+WriteRegStr HKCR "${ProductName}.${type}\shell\open\command" "" '${openexe} "%1"'
+${if} "${ico}" == "" ;å¦‚æœä¸æŒ‡å®šå›¾æ ‡åˆ™ä½¿ç”¨é»˜è®¤å›¾æ ‡
+	WriteRegStr HKCR "${ProductName}.${type}\DefaultIcon" "" "${openexe}"
 ${Else}
-	WriteRegStr HKCR "${Project}.${type}\DefaultIcon" "" "${ico}"
+	WriteRegStr HKCR "${ProductName}.${type}\DefaultIcon" "" "${ico}"
 ${EndIf}
-WriteRegStr HKCR "Back.${Project}" "" "1"  ;±ê¼ÇÓĞ¹ØÁªÎÄ¼ş
+WriteRegStr HKCR "Back.${ProductName}" "" "1"  ;æ ‡è®°æœ‰å…³è”æ–‡ä»¶
 Pop $1
 Pop $2
 !macroend
 
-/*********¹ØÁªÃ½ÌåÎÄ¼ş*********/
+/*********å…³è”åª’ä½“æ–‡ä»¶*********/
 !macro Assoc_Media EXT TYPE DESC OPENEXE ICO CONTENTTYPE CLSID
 Push $1
 Push $2
 !ifdef EchoUnSources
 DetailPrint '!insertmacro UnAssoc ${ext}'
 !endif
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯Êı*********
-Push $R0  ;ÊäÈë×Ö·û´®
-Push $R1  ;ÄÚÑ­»·¼ÆÊı
-Push $R2  ;ÓÉ´Ë¿ªÊ¼½ØÈ¡×Ö·û´®
-Push $R3  ;×Ö·û´®³¤¶È
-Push $R4  ;½Ø³öµ¥¸ö×Ö·û
-Push $R5  ;½Ø³ö×Ö·û´®(½á¹û)
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°*********
+Push $R0  ;è¾“å…¥å­—ç¬¦ä¸²
+Push $R1  ;å†…å¾ªç¯è®¡æ•°
+Push $R2  ;ç”±æ­¤å¼€å§‹æˆªå–å­—ç¬¦ä¸²
+Push $R3  ;å­—ç¬¦ä¸²é•¿åº¦
+Push $R4  ;æˆªå‡ºå•ä¸ªå­—ç¬¦
+Push $R5  ;æˆªå‡ºå­—ç¬¦ä¸²(ç»“æœ)
 StrCpy $R0 ${ext}
 StrCpy $R1 1
 StrCpy $R2 0
@@ -201,23 +201,23 @@ IntOp $R1 $R1 - 1
 IntOp $R6 $R1 - $R2
 StrCpy $R5 $R0 $R6 $R2
 
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö
-ReadRegStr $1 HKCR "Back.${Project}" ".$R5"
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º
+ReadRegStr $1 HKCR "Back.${ProductName}" ".$R5"
 ${if} "$1" == ""
 	ReadRegStr $2 HKCR ".$R5" ""
 	${if} "$2" == ""
-	WriteRegStr HKCR "Back.${Project}" ".$R5" "_Blank_"
+	WriteRegStr HKCR "Back.${ProductName}" ".$R5" "_Blank_"
 	${Else}
-	WriteRegStr HKCR "Back.${Project}" ".$R5" "$2"   ;±¸·İ¸ÃÀ©Õ¹Ãû
+	WriteRegStr HKCR "Back.${ProductName}" ".$R5" "$2"   ;å¤‡ä»½è¯¥æ‰©å±•å
 	${EndIf}
 ${EndIf}
-DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.${ext}" ;É¾³ı¾É¹ØÁª
-DeleteRegKey HKCR ".$R5" ;É¾³ı¾É¹ØÁª
+DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.${ext}" ;åˆ é™¤æ—§å…³è”
+DeleteRegKey HKCR ".$R5" ;åˆ é™¤æ—§å…³è”
 !ifdef Echo
-DetailPrint 'ÕıÔÚ¹ØÁª*.$R5ÎÄ¼şÀàĞÍÎª"${desc}"...'
+DetailPrint 'æ­£åœ¨å…³è”*.$R5æ–‡ä»¶ç±»å‹ä¸º"${desc}"...'
 !endif
-WriteRegStr HKCR ".$R5" "" "${Project}.${type}"
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö-Íê±Ï
+WriteRegStr HKCR ".$R5" "" "${ProductName}.${type}"
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º-å®Œæ¯•
 
 IntOp $R1 $R1 + 2
 IntOp $R2 $R1 - 1
@@ -229,45 +229,45 @@ Pop $R3
 Pop $R2
 Pop $R1
 Pop $R0
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯ÊıÍê±Ï*********
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°å®Œæ¯•*********
 
-WriteRegStr HKCR "${Project}.${type}" "" "${desc}"
-WriteRegStr HKCR "${Project}.${type}\shell" "" open
-WriteRegStr HKCR "${Project}.${type}\shell\open" "" "${Ass_Str_Media}"
-WriteRegStr HKCR "${Project}.${type}\shell\open\command" "" '${openexe} "%1"'
-${if} "${ico}" == "" ;Èç¹û²»Ö¸¶¨Í¼±êÔòÊ¹ÓÃÄ¬ÈÏÍ¼±ê
-	WriteRegStr HKCR "${Project}.${type}\DefaultIcon" "" "${openexe}"
+WriteRegStr HKCR "${ProductName}.${type}" "" "${desc}"
+WriteRegStr HKCR "${ProductName}.${type}\shell" "" open
+WriteRegStr HKCR "${ProductName}.${type}\shell\open" "" "${Ass_Str_Media}"
+WriteRegStr HKCR "${ProductName}.${type}\shell\open\command" "" '${openexe} "%1"'
+${if} "${ico}" == "" ;å¦‚æœä¸æŒ‡å®šå›¾æ ‡åˆ™ä½¿ç”¨é»˜è®¤å›¾æ ‡
+	WriteRegStr HKCR "${ProductName}.${type}\DefaultIcon" "" "${openexe}"
 	${Else}
-	WriteRegStr HKCR "${Project}.${type}\DefaultIcon" "" "${ico}"
+	WriteRegStr HKCR "${ProductName}.${type}\DefaultIcon" "" "${ico}"
 ${EndIf}
 
 ${if} "${ContentType}" != ""
-	WriteRegStr HKCR "${Project}.${type}" "Content Type" "${ContentType}"
+	WriteRegStr HKCR "${ProductName}.${type}" "Content Type" "${ContentType}"
 	WriteRegStr HKCR "MIME\Database\Content Type\${ContentType}" "Extension" ".${ext}"
 	WriteRegStr HKCR "MIME\Database\Content Type\${ContentType}" "CLSID" "${CLSID}"
 ${EndIf}
-WriteRegStr HKCR "Back.${Project}" "" "1"  ;±ê¼ÇÓĞ¹ØÁªÎÄ¼ş
+WriteRegStr HKCR "Back.${ProductName}" "" "1"  ;æ ‡è®°æœ‰å…³è”æ–‡ä»¶
 Pop $1
 Pop $2
 !macroend
 
-/*********É¾³ıÎÄ¼ş¹ØÁª*********/
+/*********åˆ é™¤æ–‡ä»¶å…³è”*********/
 !macro UnAssoc EXT
 
-Push $1  ;${Project}.Back
+Push $1  ;${ProductName}.Back
 Push $2  ;type
 Push $3  ;Content Type
-Push $4  ;${Project}µÄ×Ö³¤¶È
-Push $5  ;type°´$4½Øºó
+Push $4  ;${ProductName}çš„å­—é•¿åº¦
+Push $5  ;typeæŒ‰$4æˆªå
 
-StrLen $4 ${Project}
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯Êı*********
-Push $R0  ;ÊäÈë×Ö·û´®
-Push $R1  ;ÄÚÑ­»·¼ÆÊı
-Push $R2  ;ÓÉ´Ë¿ªÊ¼½ØÈ¡×Ö·û´®
-Push $R3  ;×Ö·û´®³¤¶È
-Push $R4  ;½Ø³öµ¥¸ö×Ö·û
-Push $R5  ;½Ø³ö×Ö·û´®(½á¹û)
+StrLen $4 ${ProductName}
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°*********
+Push $R0  ;è¾“å…¥å­—ç¬¦ä¸²
+Push $R1  ;å†…å¾ªç¯è®¡æ•°
+Push $R2  ;ç”±æ­¤å¼€å§‹æˆªå–å­—ç¬¦ä¸²
+Push $R3  ;å­—ç¬¦ä¸²é•¿åº¦
+Push $R4  ;æˆªå‡ºå•ä¸ªå­—ç¬¦
+Push $R5  ;æˆªå‡ºå­—ç¬¦ä¸²(ç»“æœ)
 StrCpy $R0 ${ext}
 StrCpy $R1 1
 StrCpy $R2 0
@@ -282,43 +282,43 @@ IntOp $R1 $R1 - 1
 IntOp $R6 $R1 - $R2
 StrCpy $R5 $R0 $R6 $R2
 
-;**********ĞŞ¸ÄÒÔÏÂ´úÂëÒª½÷É÷!**********
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö
-ReadRegStr $1 HKCR "Back.${Project}" ".$R5"  ;¶Á±¸·İ
-ReadRegStr $2 HKCR ".$R5" ""  ;¶ÁÏÖÔÚµÄ
+;**********ä¿®æ”¹ä»¥ä¸‹ä»£ç è¦è°¨æ…!**********
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º
+ReadRegStr $1 HKCR "Back.${ProductName}" ".$R5"  ;è¯»å¤‡ä»½
+ReadRegStr $2 HKCR ".$R5" ""  ;è¯»ç°åœ¨çš„
 StrCpy $5 $2 $4
 ${if} "$1" == ""
 	!ifdef UnEcho
-	DetailPrint '´Ë³ÌĞòÃ»ÓĞ¹ØÁª*.$R5,²»ĞèÒªÈ¡Ïû...'
+	DetailPrint 'æ­¤ç¨‹åºæ²¡æœ‰å…³è”*.$R5,ä¸éœ€è¦å–æ¶ˆ...'
 	!endif
 ${Else}
 	!ifdef UnEcho
-	DetailPrint 'ÕıÔÚÈ¡ÏûÎÄ¼şÀàĞÍ*.$R5µÄ¹ØÁª...'
+	DetailPrint 'æ­£åœ¨å–æ¶ˆæ–‡ä»¶ç±»å‹*.$R5çš„å…³è”...'
 	!endif
-	ReadRegStr $3 HKCR "$2" "Content Type"  ;¶ÁÓĞÃ»¶ÔÏóÀàĞÍ
-	${if} "$5" == ${Project}
-		;Õâ¸ö${if}¼ì²â²»¿ÉÈ±ÉÙ,ÓĞÒ»´ÎÎÒ¾ÍÊÇÃ»ÓĞ¼ÓËü,ËùÒÔ½«ËùÓĞÀ©Õ¹ÃûµÄ×¢²á±íÏî¶¼É¾³ıÁË,ÒªÖØ×°²ÅĞĞ,²Ò!ºÃÔÚÖØ×°ÈİÒ×-_-!
-		DeleteRegValue HKCR ".$R5" "" ;É¾³ıÀ©Õ¹Ãû¹ØÁª(ĞŞ¸Ä´Ë´¦Òª½÷É÷!)
-		DeleteRegKey /ifempty HKCR ".$R5" ;É¾³ıÀ©Õ¹Ãû¹ØÁª(ĞŞ¸Ä´Ë´¦Òª½÷É÷!)
-		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$R5" ;É¾³ı¹ØÁª(ĞŞ¸Ä´Ë´¦Òª½÷É÷!)
-		DeleteRegKey HKCR "$2" ;É¾³ıÀ©Õ¹ÀàĞÍ¹ØÁª(ĞŞ¸Ä´Ë´¦Òª½÷É÷!)
-		DeleteRegKey HKCR "MIME\Database\Content Type\$3" ;É¾³ıMIME¹ØÁª(ĞŞ¸Ä´Ë´¦Òª½÷É÷!)
+	ReadRegStr $3 HKCR "$2" "Content Type"  ;è¯»æœ‰æ²¡å¯¹è±¡ç±»å‹
+	${if} "$5" == ${ProductName}
+		;è¿™ä¸ª${if}æ£€æµ‹ä¸å¯ç¼ºå°‘,æœ‰ä¸€æ¬¡æˆ‘å°±æ˜¯æ²¡æœ‰åŠ å®ƒ,æ‰€ä»¥å°†æ‰€æœ‰æ‰©å±•åçš„æ³¨å†Œè¡¨é¡¹éƒ½åˆ é™¤äº†,è¦é‡è£…æ‰è¡Œ,æƒ¨!å¥½åœ¨é‡è£…å®¹æ˜“-_-!
+		DeleteRegValue HKCR ".$R5" "" ;åˆ é™¤æ‰©å±•åå…³è”(ä¿®æ”¹æ­¤å¤„è¦è°¨æ…!)
+		DeleteRegKey /ifempty HKCR ".$R5" ;åˆ é™¤æ‰©å±•åå…³è”(ä¿®æ”¹æ­¤å¤„è¦è°¨æ…!)
+		DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.$R5" ;åˆ é™¤å…³è”(ä¿®æ”¹æ­¤å¤„è¦è°¨æ…!)
+		DeleteRegKey HKCR "$2" ;åˆ é™¤æ‰©å±•ç±»å‹å…³è”(ä¿®æ”¹æ­¤å¤„è¦è°¨æ…!)
+		DeleteRegKey HKCR "MIME\Database\Content Type\$3" ;åˆ é™¤MIMEå…³è”(ä¿®æ”¹æ­¤å¤„è¦è°¨æ…!)
 	${EndIf}
 	!ifdef Backup
-		${if} "$1" == "_Blank_"  ;Èç¹û±¸·İÓĞ"_Blank_",Ö¤Ã÷ÒÑ¾­¹ØÁª,µ«Ã»ÓĞ¾ÉÀàĞÍ.
+		${if} "$1" == "_Blank_"  ;å¦‚æœå¤‡ä»½æœ‰"_Blank_",è¯æ˜å·²ç»å…³è”,ä½†æ²¡æœ‰æ—§ç±»å‹.
 			WriteRegStr HKCR ".$R5" "" ""
 		${Else}
 			WriteRegStr HKCR ".$R5" "" "$1"
 		${EndIf}
 	!endif
-	DeleteRegValue HKCR "Back.${Project}" ".$R5"
+	DeleteRegValue HKCR "Back.${ProductName}" ".$R5"
 
 
 
 ${EndIf}
-;**********ĞŞ¸ÄÒÔÉÏ´úÂëÒª½÷É÷!**********
+;**********ä¿®æ”¹ä»¥ä¸Šä»£ç è¦è°¨æ…!**********
 
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö-Íê±Ï
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º-å®Œæ¯•
 
 IntOp $R1 $R1 + 2
 IntOp $R2 $R1 - 1
@@ -330,7 +330,7 @@ Pop $R3
 Pop $R2
 Pop $R1
 Pop $R0
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯ÊıÍê±Ï*********
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°å®Œæ¯•*********
 Pop $5
 Pop $4
 Pop $3
@@ -340,17 +340,17 @@ Pop $1
 !macroend
 
 !macro CheckSection SECTION_NAME EXT
-Push $1  ;${Project}µÄ×Ö³¤¶È
-Push $2  ;ÕıÈ·¹ØÁªµÄ´ÎÊı
-StrLen $1 ${Project}
+Push $1  ;${ProductName}çš„å­—é•¿åº¦
+Push $2  ;æ­£ç¡®å…³è”çš„æ¬¡æ•°
+StrLen $1 ${ProductName}
 StrCpy $2 0
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯Êı*********
-Push $R0  ;ÊäÈë×Ö·û´®
-Push $R1  ;ÄÚÑ­»·¼ÆÊı
-Push $R2  ;ÓÉ´Ë¿ªÊ¼½ØÈ¡×Ö·û´®
-Push $R3  ;×Ö·û´®³¤¶È
-Push $R4  ;½Ø³öµ¥¸ö×Ö·û
-Push $R5  ;½Ø³ö×Ö·û´®(½á¹û)
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°*********
+Push $R0  ;è¾“å…¥å­—ç¬¦ä¸²
+Push $R1  ;å†…å¾ªç¯è®¡æ•°
+Push $R2  ;ç”±æ­¤å¼€å§‹æˆªå–å­—ç¬¦ä¸²
+Push $R3  ;å­—ç¬¦ä¸²é•¿åº¦
+Push $R4  ;æˆªå‡ºå•ä¸ªå­—ç¬¦
+Push $R5  ;æˆªå‡ºå­—ç¬¦ä¸²(ç»“æœ)
 StrCpy $R0 ${ext}
 StrCpy $R1 1
 StrCpy $R2 0
@@ -364,16 +364,16 @@ ${Do}
 IntOp $R1 $R1 - 1
 IntOp $R6 $R1 - $R2
 StrCpy $R5 $R0 $R6 $R2
-;**********ĞŞ¸ÄÒÔÏÂ´úÂëÒª½÷É÷!**********
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö
+;**********ä¿®æ”¹ä»¥ä¸‹ä»£ç è¦è°¨æ…!**********
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º
 Push $0
 ReadRegStr $0 HKCR ".$R5" ""
-StrCpy $0 $0 $1    ;-----------ÊÇÔÚ.${EXT}½ØÈ¡${Project}×ÖÑùµÄÒâË¼.
-StrCmp $0 ${Project} +1 +2
+StrCpy $0 $0 $1    ;-----------æ˜¯åœ¨.${EXT}æˆªå–${ProductName}å­—æ ·çš„æ„æ€.
+StrCmp $0 ${ProductName} +1 +2
 IntOp $2 $2 + 1
-;**********ĞŞ¸ÄÒÔÉÏ´úÂëÒª½÷É÷!**********
+;**********ä¿®æ”¹ä»¥ä¸Šä»£ç è¦è°¨æ…!**********
 
-;½Ø³ö×Ö·û´®½á¹ûÎª$R5ÔÚ´ËÊä³ö-Íê±Ï
+;æˆªå‡ºå­—ç¬¦ä¸²ç»“æœä¸º$R5åœ¨æ­¤è¾“å‡º-å®Œæ¯•
 
 IntOp $R1 $R1 + 2
 IntOp $R2 $R1 - 1
@@ -384,14 +384,14 @@ Pop $R3
 Pop $R2
 Pop $R1
 Pop $R0
-;*********·ÖÀë","ºÅ¸÷×Ö´®µÄº¯ÊıÍê±Ï*********
+;*********åˆ†ç¦»","å·å„å­—ä¸²çš„å‡½æ•°å®Œæ¯•*********
 StrCmp $2 0 +5
 SectionGetInstTypes "${SECTION_NAME}" $0
-IntOp $0 $0 | 16    	 ;-------------------------Òª¸ÄÕâÀï,¾ßÌå¿´ËµÃ÷
+IntOp $0 $0 | 16    	 ;-------------------------è¦æ”¹è¿™é‡Œ,å…·ä½“çœ‹è¯´æ˜
 SectionSetInstTypes "${SECTION_NAME}" $0
 Goto +4
 SectionGetInstTypes "${SECTION_NAME}" $0
-IntOp $0 $0 & 31    	 ;-------------------------Òª¸ÄÕâÀï,¾ßÌå¿´ËµÃ÷
+IntOp $0 $0 & 31    	 ;-------------------------è¦æ”¹è¿™é‡Œ,å…·ä½“çœ‹è¯´æ˜
 SectionSetInstTypes "${SECTION_NAME}" $0
 Pop $2
 Pop $1
