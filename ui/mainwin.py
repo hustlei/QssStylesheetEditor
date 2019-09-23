@@ -20,10 +20,10 @@ from config import Config, ConfDialog
 class MainWin(MainWinBase):
     def __init__(self, parent=None):
         super().__init__()
-        self.ver = "v1.40"
+        self.ver = "v1.50"
         self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
-        self.setWindowIcon(QIcon("res/colorize.ico"))
+        self.setWindowIcon(QIcon("res/app.ico"))
         self.qsst = Qsst()
         self.clrBtnDict = {}
         self.file = None

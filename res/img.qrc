@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-<qresource prefix="img">
+<qresource prefix="appres.img">
     <file alias="autowrap.png">img/autowrap.png</file>
     <file alias="bold.png">img/bold.png</file>
     <file alias="book_address.png">img/book_address.png</file>
@@ -38,6 +38,7 @@
     <file alias="fontdown.png">img/fontdown.png</file>
     <file alias="FontHS.png">img/FontHS.png</file>
     <file alias="fontup.png">img/fontup.png</file>
+    <file alias="GenerateResource.png">img/GenerateResource.png</file>
     <file alias="Help.png">img/Help.png</file>
     <file alias="History.png">img/History.png</file>
     <file alias="home.png">img/home.png</file>
@@ -71,6 +72,8 @@
     <file alias="refresh_green.png">img/refresh_green.png</file>
     <file alias="RepeatHS.png">img/RepeatHS.png</file>
     <file alias="replace.png">img/replace.png</file>
+    <file alias="resource.png">img/resource.png</file>
+    <file alias="resourcefile.png">img/resourcefile.png</file>
     <file alias="save.png">img/save.png</file>
     <file alias="SaveAllHS.png">img/SaveAllHS.png</file>
     <file alias="SaveAs.png">img/SaveAs.png</file>

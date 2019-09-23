@@ -2,7 +2,7 @@ import os
 dir=os.path.dirname(__file__)+"/img"
 os.chdir(os.path.dirname(__file__))
 
-s='<!DOCTYPE RCC>\n<RCC version="1.0">\n<qresource prefix="img">\n'
+s='<!DOCTYPE RCC>\n<RCC version="1.0">\n<qresource prefix="appres.img">\n'
 
 for f in os.listdir(dir):
     if(f.endswith(".png") or f.endswith(".jpg")
