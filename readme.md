@@ -13,7 +13,7 @@ QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开
 
 # screenshot
 
-![GUI(v1.3版本) screeshot](img/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
+![GUI(v1.3版本) screeshot](res/img/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
 
 # 使用
 
@@ -22,8 +22,8 @@ windows 64bit 操作系统可以下载exe，直接运行。
 
 下载地址：
 
-+ QssStylesheetEditor_1.35_win64_installer **[[Download]](https://pan.baidu.com/s/1jbCksYPrWM5yoVA5hEx8zw)**(secuirity code: 5u5s)
-+ QssStylesheetEditor_1.35_win64_portable  **[[Download]](https://pan.baidu.com/s/15bh_r84-NyhwOph_cV2rpw)**(secuirity code: 4hha)
++ QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1_Uf1lPHj14fs9iMG2SVXuQ)**(secuirity code: gwf8)
++ QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1kGLlpD52N5-wg9IFf0CHPA)**(secuirity code: ze32)
 
 
 ## 其他操作系统
@@ -64,17 +64,17 @@ QWidget
 
 在QssStylesheetEditor中自定义一个变量后，在软件的颜色栏会自动显示变量名字和颜色，点击颜色可以用通过颜色拾取框选取变量颜色。
 
-<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/ColorDlg_v1.3.png" height=180 />
+<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/ColorDlg_v1.3.png" height=180 />
 
 在QssStylesheetEditor中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
 
 # screenshot(old version)
 
 <div><span><b>QssStylesheetEditor GUI V1.2</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/img/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
 
 
