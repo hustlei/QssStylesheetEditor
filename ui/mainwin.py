@@ -159,7 +159,7 @@ class MainWin(MainWinBase):
             #     os.chdir(dir)
             path = os.path.dirname(self.file).replace("\\", "/")
             styleSheet = re.sub(
-                r'url\([\s]*[\"\']*[\s]*([^\/\s][^:\s\"\'\)]*)[\s]*[\"\']*[\s]*\)',
+                r'url\([\s]*[\"\']?[\s]*([^\s\/:\"\'\)]+)[\s]*[\"\']?[\s]*\)',
                 r'url("{}/\1")'.format(path).format(path),
                 self.qsst.qss)  # 不支持带空格路径
             qApp.setStyleSheet(styleSheet)
