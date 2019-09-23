@@ -4,6 +4,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 import os
 import re
+import sys
 
 from PyQt5.QtWidgets import (qApp, QMainWindow, QWidget, QLabel, QPushButton,
                              QColorDialog, QFileDialog, QMessageBox, QAction)
@@ -162,6 +163,18 @@ class MainWin(MainWinBase):
                 r'url\([\s]*[\"\']?[\s]*([^\s\/:\"\'\)]+)[\s]*[\"\']?[\s]*\)',
                 r'url("{}/\1")'.format(path).format(path),
                 self.qsst.qss)  # 不支持带空格路径
+            if(os.path.exists(self.file)):
+                name,_=os.path.splitext(self.file)
+                res=name+".py"
+                resp=os.path.dirname(res)
+                resn,_=os.path.splitext(os.path.basename(res))
+                if(os.path.exists(res)):
+                    if(resp not in sys.path):
+                        sys.path.append(resp)
+                    try:
+                        __import__(resn)
+                    except:
+                        pass
             qApp.setStyleSheet(styleSheet)
 
             #     self.statusbar.showMessage("")#不起作用
