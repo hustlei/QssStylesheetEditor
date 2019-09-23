@@ -7,6 +7,7 @@ QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开
 + 支持Qss关键字、属性、伪元素等的自动提示，自动补全。
 + 支持在Qss中自定义变量，在Qss中引用。
 + 自定义变量会自动显示在颜色编辑面板，可以通过颜色对话框中拾取变量的颜色。
++ 支持相对路径引用图片，以及引用资源文件中的图片
 + 支持切换不同的系统theme，如xp主题,vista主题等(不同theme下qss效果会略有差异)
 + 自带已编写好的qsst模板样式文件
 + 能够在windows，linux，unix上运行
@@ -15,7 +16,7 @@ QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开
 
 ![GUI(v1.3版本) screeshot](res/img/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
 
-# 使用
+# 安装使用
 
 ## windows 64bit
 windows 64bit 操作系统可以下载exe，直接运行。
@@ -68,7 +69,34 @@ QWidget
 
 在QssStylesheetEditor中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
 
-# screenshot(old version)
+# 图片引用
+
+## 相对路径引用
+
+~~~css
+background-image: url("img/close.png");
+/* background-image: url(img/close.png); */
+~~~
+
+软件会在打开的xxx.qss文件所在的文件夹下查找img/close.png文件。
+
+## 资源文件引用
+
+~~~css
+background-image: url(":/img/close.png");
+/* background-image: url(:/img/close.png); */
+~~~
+
+软件会在当前打开的xxx.qss样式文件所在目录中搜索资源文件xxx.py并自动加载。
+
+# screenshot
+
+## 自动补全
+
+![AutoComplete screeshot](res/img/screenshot/AutoComplete.png "AutoComplete")
+
+
+## old version
 
 <div><span><b>QssStylesheetEditor GUI V1.2</b></span></div>
     <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
