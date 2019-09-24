@@ -24,7 +24,8 @@ excludedir = (
     "font",
     "img",
     "font",
-     "installer")
+    "old", "oldversion", "bak",
+    "installer")
 
 # 删除dist/build文件夹下所有文件
 print("remove all files in dist/build.")

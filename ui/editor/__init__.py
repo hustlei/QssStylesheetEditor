@@ -15,4 +15,3 @@ def preload():
     from .settings import EditorSettings, language_extensions, _settings, _setting_groups, _other_color_settings
     from ..editor import custom_lexer
     from .search import searchDialog
-    import chardet
