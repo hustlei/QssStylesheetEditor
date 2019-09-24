@@ -13,5 +13,5 @@ def preload():
     from PyQt5 import Qsci
     from .enums import BadEnum, EditorEnums
     from .settings import EditorSettings, language_extensions, _settings, _setting_groups, _other_color_settings
-    from ..editor import custom_lexer
+    from ..editor import lexer_qss
     from .search import searchDialog

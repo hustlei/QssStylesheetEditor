@@ -9,7 +9,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 import chardet
 
-from ..editor import custom_lexer
+from ..editor import lexer_qss
 from .settings import *
 from .search import searchDialog
 from .enums import BadEnum, EditorEnums
@@ -47,6 +47,13 @@ class CodeEditor(QsciScintilla):
     def replace(self):
         self.searchDialog.setReplaceMode(True)
         self.searchDialog.show()
+
+    def count(self, string: str, *, case: bool=False) -> int:
+        if case:
+            counter = self.text().count(string)
+        else:
+            counter = self.text().lower().count(string.lower())
+        return counter
 
     def keyPressEvent(self, event):
         super().keyPressEvent(event)
@@ -200,7 +207,7 @@ class CodeEditor(QsciScintilla):
         else:
             return 'None'
 
-    def setHighlightLanguage(self, language):
+    def setLanguage(self, language):
         """Set syntax highlighting to the given language.
         If ``language`` is ``None``, ``'None'`` or empty, then
         syntax highlighting is disabled.
@@ -211,7 +218,7 @@ class CodeEditor(QsciScintilla):
         else:
             print("%s syntax highlighting" % language)
             custom = False
-            for lexer in dir(custom_lexer):
+            for lexer in dir(lexer_qss):
                 if lexer[9:] == language:
                     custom = True
                     break
@@ -219,7 +226,7 @@ class CodeEditor(QsciScintilla):
             # try:
             if custom:
                 self.lexer = getattr(
-                    custom_lexer, 'QsciLexer' + language)(self)
+                    lexer_qss, 'QsciLexer' + language)(self)
             else:
                 self.lexer = getattr(
                     Qsci, 'QsciLexer' + language)(self)  # lexer = QsciLexerCSS()
@@ -270,7 +277,7 @@ class CodeEditor(QsciScintilla):
                 self.setEnabled(False)
                 return False
             self.setModified(False)
-            self.setHighlightLanguage(self.guessLang(filename))
+            self.setLanguage(self.guessLang(filename))
             return True
 
     def __byte2str(self, bytes, echoescape=True):

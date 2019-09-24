@@ -434,7 +434,7 @@ class EditorSettings (QWidget):
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            value = str(data.toString())
+            value = str(data) #.toString())
             self.editor.set_config(name, value)
 
         # Connect event handler
