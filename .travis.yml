@@ -5,19 +5,23 @@ language: python
 
 jobs:
     include:
-        # - name: "win"
-          # os: windows
-          # python:
-            # - "3.7"
-            # - "3.6"
-            # - "3.5"
         - name: "linux"
           os: linux
-          python: 3.7
+          python:
+            - 3.7
+            - 3.6
+            - 3.5
+        - name: "win"
+          os: windows           # Windows 10.0.17134 N/A Build 17134
+          language: shell       # 'language: python' is an error on Travis CI Windows
+          before_install:
+            - choco install python --version 3.7.4
+            - python -m pip install --upgrade pip
+          env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
         - name: "macOS"
           os: osx
-          #osx_image: xcode11
-          python: 3.6
+          osx_image: xcode11 #python 3.7
+          language: shell # 'language: python' is an error on Travis CI macOS
           
 #before_install: pip3 install --upgrade pip
 
@@ -26,4 +30,4 @@ install:
     - pip install Qscintilla
     
 script:
-    - app.py
+    - python app.py
