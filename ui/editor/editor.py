@@ -9,7 +9,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 import chardet
 
-from ..editor import lexer_qss
+from ui.editor.lexer import QsciLexerQSS
 from .settings import *
 from .search import searchDialog
 from .enums import BadEnum, EditorEnums
@@ -17,6 +17,7 @@ from PyQt5.QtGui import (QFont, QKeyEvent, QColor, QDropEvent)
 from PyQt5.QtCore import (pyqtSignal)
 from PyQt5.Qsci import *
 from PyQt5 import Qsci
+from .lexer import *
 
 
 class CodeEditor(QsciScintilla):
@@ -271,6 +272,9 @@ class CodeEditor(QsciScintilla):
                     else:
                         self.coding = "bin?"
                         self.setText(self.__byte2str(bytes))
+                        self.setReadOnly(True)
+                        self.setLanguage("None")
+                        self.setWrapMode(self.WrapWod)
             except BaseException:  # Exception:
                 self.coding = "none"
                 self.setText(self.tr("can't open this file, it may be a binary file."))
@@ -281,19 +285,17 @@ class CodeEditor(QsciScintilla):
             return True
 
     def __byte2str(self, bytes, echoescape=True):
-        # s=""
-        # if echoescape:
-        #     for b in bytes:#ord(chr(b))
-        #         c=chr(b)
-        #         if b < 0x30:#>= 0x80 or c.isalnum() or c == "-" or c == "_":
-        #             s+="x"
-        #         else:
-        #             s+="X"
-        # else:
-        #     for b in bytes:
-        #         s+=chr(b)
-        str_list = [chr(b) for b in bytes if b > 0x30]
-        s = "".join(str_list)
+        s=""
+        if echoescape and len(bytes) < 11*1024:
+            for b in bytes:#ord(chr(b))
+                if b < 0x30:#>= 0x80 or c.isalnum() or c == "-" or c == "_":
+                    s+=" NUL "
+                else:
+                    c=chr(b)
+                    s+=c
+        else:
+            str_list = [chr(b) for b in bytes if b > 0x30]
+            s = "".join(str_list)
         return s
 
     def __isBin(self, bytes):

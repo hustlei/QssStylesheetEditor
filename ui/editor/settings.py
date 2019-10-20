@@ -335,21 +335,9 @@ class EditorSettings (QWidget):
             groups[label].setLayout(group_layout)
             groups[label].setFlat(False)
 
-        # Create two columns
-        left_column = QVBoxLayout()
-        left_column.addWidget(groups['Indentation'])
-        left_column.addWidget(groups['Wrapping'])
-        left_column.addStretch(1)
-        right_column = QVBoxLayout()
-        right_column.addWidget(groups['Formatting'])
-        right_column.addWidget(groups['Colors'])
-        right_column.addWidget(groups['Coding aids'])
-        right_column.addStretch(1)
-
-        # Arrange both columns side-by-side in the middle
-        columns_layout = QHBoxLayout()
-        columns_layout.addLayout(left_column)
-        columns_layout.addLayout(right_column)
+        columns_layout=QVBoxLayout()
+        for g in groups.values():
+            columns_layout.addWidget(g)
 
         # Layout columns section and OK button vertically
         main_layout = QVBoxLayout()
