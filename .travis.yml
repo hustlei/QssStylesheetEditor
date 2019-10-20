@@ -1,7 +1,5 @@
 #sudo: true
-language: python
-# virtualenv:
-  # system_site_packages: true
+language: python # this works for Linux but is an error on macOS or Windows
 
 jobs:
     include:
@@ -30,4 +28,6 @@ install:
     - pip3 install Qscintilla
     
 script:
-    - python3 app.py
+    # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
+    # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
+    - python3 app.py || py app.py

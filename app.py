@@ -10,8 +10,11 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 from PyQt5.QtWidgets import QApplication
 import sys
 import os
-os.chdir(os.path.dirname(__file__))
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+try:
+    os.chdir(os.path.dirname(__file__))
+    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+except:
+    pass
 from i18n.language import Language
 
 
