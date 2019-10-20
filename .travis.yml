@@ -1,6 +1,9 @@
 #sudo: true
 language: python # this works for Linux but is an error on macOS or Windows
 
+env:
+    - TRAVIS-CI_TESTING=1 # app正常退出
+
 jobs:
     include:
         - name: "linux"
@@ -9,6 +12,10 @@ jobs:
             - 3.7
             - 3.6
             - 3.5
+          sudo: true
+          before_install:
+            - sudo apt-get install libx11-dev libxext-dev libxtst-dev
+            - sudo apt-get install xlibmesa-gl-dev libglu1-mesa-dev
         - name: "win"
           os: windows           # Windows 10.0.17134 N/A Build 17134
           language: shell       # 'language: python' is an error on Travis CI Windows
