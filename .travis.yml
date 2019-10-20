@@ -23,11 +23,11 @@ jobs:
           osx_image: xcode11 #python 3.7
           language: shell # 'language: python' is an error on Travis CI macOS
           
-#before_install: pip3 install --upgrade pip
+before_install: pip install --upgrade pip
 
 install:
-    - pip install PyQt5
-    - pip install Qscintilla
+    - pip3 install PyQt5
+    - pip3 install Qscintilla
     
 script:
-    - python app.py
+    - python3 app.py
