@@ -1,0 +1,15 @@
+sudo: true
+language: python
+python:
+    - "3.7"
+    - "3.6"
+    - "3.5"
+
+#before_install: pip install PyQt5
+
+install:
+    - sudo pip install PyQt5
+    - sudo pip install QsciScintilla
+    
+script:
+    - app.py
