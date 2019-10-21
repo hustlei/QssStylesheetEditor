@@ -38,6 +38,7 @@ install:
     - pip3 install PyQt5
     - pip3 install Qscintilla
     - pip3 install -U pytest
+    - pip3 install -U pytest-qt
     
 script: pytest || python3 -m pytest    # pytest command won't be found on osx
     # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
