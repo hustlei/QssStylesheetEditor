@@ -14,7 +14,7 @@ try:
     os.chdir(os.path.dirname(__file__))
     sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 except:
-    pass
+    print('__file__ of app.py load err')
 from i18n.language import Language
 
 

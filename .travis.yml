@@ -5,35 +5,44 @@ env: TRAVIS-CI_TESTING=1 # app正常退出
 
 jobs:
     include:
-        - name: "linux"
-          os: linux
+        - name: "linux" 
+          #os: linux
+          dist: xenial
           python:
             - 3.7
             - 3.6
             - 3.5
           sudo: true
-          before_install:
-            - sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
+          #before_install:#qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+            # - sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
+            
         - name: "win"
           os: windows           # Windows 10.0.17134 N/A Build 17134
           language: shell       # 'language: python' is an error on Travis CI Windows
           before_install:
-            - choco install python --version 3.7.4
-            - python -m pip install --upgrade pip
-          env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+            - choco install python3 #--version 3.7.4
+            - python -m pip install -U pip
+          # env:
+            # - PATH=/c/Python37:/c/Python37/Scripts:$PATH
+            # - TRAVIS-CI_TESTING=1
+            
         - name: "macOS"
           os: osx
-          osx_image: xcode11 #python 3.7
+          osx_image: xcode11 #python3.7
+          #xcode10.2 with py3.7.3 xcode9.4 with py3.6.5 xcode9.3 with py2.7.14_2
           language: shell # 'language: python' is an error on Travis CI macOS
-          env: TRAVIS-CI_TESTING=1
           
-before_install: pip install --upgrade pip
+before_install: 
+    - python3 --version
+    - pip3 install --upgrade pip
 
 install:
     - pip3 install PyQt5
     - pip3 install Qscintilla
+    - pip3 install -U pytest
     
-script:
+script: pytest || python3 -m pytest    # pytest command won't be found on osx
     # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
     # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
-    - python3 app.py || py app.py
+    #- python3 app.py || py app.py
+    
