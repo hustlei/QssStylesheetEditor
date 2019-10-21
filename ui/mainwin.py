@@ -50,8 +50,6 @@ class MainWin(MainWinBase):
         self.__isNewFromTemplate=False
         self.newWithTemplate()
         self.statusbar.showMessage(self.tr("Ready"))
-        if os.environ.get("TRAVIS-CI_TESTING"):
-            sys.exit(0)
 
     def setupActions(self):
         # theme  toolbarWidget

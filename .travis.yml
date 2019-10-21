@@ -1,8 +1,6 @@
 #sudo: true
 language: python # this works for Linux but is an error on macOS or Windows
 
-env: TRAVIS-CI_TESTING=1 # app正常退出
-
 jobs:
     include:
         - name: "linux" 
