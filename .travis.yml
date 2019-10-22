@@ -6,11 +6,12 @@ jobs:
           os: linux
           sudo: required
           dist: bionic
-          # python:
-            # - 3.7
+          python:
+            - 3.7
+          env: LIBGL_DEBUG=verbose
           before_install:
             - sudo apt-get -qq update
-            - sudo apt-get -y -qq install python3
+            # - sudo apt-get -y -qq install python3
             - python --version
             - pip3 install -U pip
             #- pip3 install chardet # can't import chardet from .zip
