@@ -1,31 +1,28 @@
-#sudo: true
 language: python # this works for Linux but is an error on macOS or Windows
 
 jobs:
     include:
         - name: "linux" 
-          #os: linux
+          os: linux
           sudo: required
-          dist: trusty
-          python:
+          dist: bionic
+          python: 
             - 3.7
-            - 3.6
-            - 3.5
-          virtualenv:
-            system_site_packages: true
           before_install:
-            - sudo apt-get update -qq
-            - sudo apt-get -y install python3-pyqt5 -qq
+            # - sudo apt-get -qq update
+            # - sudo apt-get 
+            # - sudo apt-get -y install python3-pyqt5 -qq
+            - python --version
             - pip3 install -U pip
             
         - name: "win"
           os: windows           # Windows 10.0.17134 N/A Build 17134
           language: shell       # 'language: python' is an error on Travis CI Windows
           before_install:
-            - choco install python3 #--version 3.7.4
+            - choco install python3 #--version 3.7.4 3.8.0
             - python -m pip install --upgrade pip
           env:
-            - PATH=/c/Python37:/c/Python37/Scripts:/c/Python38:/c/Python38/Scripts:$PATH
+            - PATH=/c/Python38:/c/Python38/Scripts:$PATH
             
         - name: "macOS"
           os: osx
@@ -43,7 +40,7 @@ install:
     - pip3 install -U pytest
     - pip3 install -U pytest-qt
     
-script: pytest || python3 -m pytest    # pytest command won't be found on osx
+script: py.test || python3 -m pytest    # pytest command won't be found on osx
     # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
     # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
     #- python3 app.py || py app.py

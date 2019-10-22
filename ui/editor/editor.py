@@ -7,6 +7,7 @@ __version__ = "1.0"
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
+print(__file__)
 import chardet
 
 from ui.editor.lexer import QsciLexerQSS
