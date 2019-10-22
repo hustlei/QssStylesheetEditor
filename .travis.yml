@@ -8,13 +8,14 @@ jobs:
           dist: bionic
           python:
             - 3.7
-          env: platform=eglfs #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+          env: QT_QPA_PLATFORM=eglfs #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
           before_install:
             - sudo apt-get -qq update
             # - sudo apt-get -y -qq install python3
             - python --version
             - pip3 install -U pip
             #- pip3 install chardet # can't import chardet from .zip
+            #-sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev
           script: python3 app.py
             
         - name: "win"
