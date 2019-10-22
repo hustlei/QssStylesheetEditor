@@ -8,7 +8,9 @@ jobs:
           dist: bionic
           python:
             - 3.7
-          env: QT_QPA_PLATFORM=eglfs #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+          env:
+            - QT_QPA_PLATFORM=vnc #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+            - QT_DEBUG_PLUGINS=1
           before_install:
             - sudo apt-get -qq update
             # - sudo apt-get -y -qq install python3
