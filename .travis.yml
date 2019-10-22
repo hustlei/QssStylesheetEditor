@@ -11,8 +11,7 @@ jobs:
             - 3.7
           before_install:
             - sudo apt-get -qq update
-            #- sudo apt-get -y -qq install python3
-            # - sudo apt-get -y install python3-pyqt5 -qq
+            - sudo apt-get -y -qq install python3
             - python --version
             - pip3 install -U pip
             - pip3 install chardet # can't import chardet from .zip
