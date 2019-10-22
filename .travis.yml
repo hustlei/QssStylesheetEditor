@@ -6,14 +6,14 @@ jobs:
           os: linux
           sudo: required
           dist: bionic
-          python:
-            - 3.7
+          # python:
+            # - 3.7
           before_install:
             - sudo apt-get -qq update
             - sudo apt-get -y -qq install python3
             - python --version
             - pip3 install -U pip
-            - pip3 install chardet # can't import chardet from .zip
+            #- pip3 install chardet # can't import chardet from .zip
             
         - name: "win"
           os: windows           # Windows 10.0.17134 N/A Build 17134
