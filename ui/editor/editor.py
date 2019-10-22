@@ -7,14 +7,15 @@ __version__ = "1.0"
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
+print(sys.path)
 try:
     import chardet
 except:
-    import zipimport
-    importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
-    chardet = importer.load_module('chardet')
+    pass
+    # import zipimport
+    # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
+    # chardet = importer.load_module('chardet')
 
-print(sys.path)
 
 from ui.editor.lexer import QsciLexerQSS
 from .settings import *
