@@ -7,7 +7,6 @@ __version__ = "1.0"
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
-print(sys.path)
 try:
     import chardet
 except:

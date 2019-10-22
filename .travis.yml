@@ -13,11 +13,8 @@ jobs:
             #- QT_DEBUG_PLUGINS=1 #for testing
           before_install:
             - sudo apt-get -qq update
-            # - sudo apt-get -y -qq install python3
             - python --version
             - pip3 install -U pip
-            #- pip3 install chardet # can't import chardet from .zip
-            # -sudo apt-get install "^libxcb.*" libx11-xcb-dev libglu1-mesa-dev libxrender-dev  # not tested
             
         - name: "win"
           os: windows           # Windows 10.0.17134 N/A Build 17134
