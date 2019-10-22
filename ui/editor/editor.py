@@ -14,6 +14,8 @@ except:
     importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
     chardet = importer.load_module('chardet')
 
+print(sys.path)
+
 from ui.editor.lexer import QsciLexerQSS
 from .settings import *
 from .search import searchDialog
