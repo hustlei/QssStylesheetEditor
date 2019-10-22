@@ -8,7 +8,7 @@ jobs:
           dist: bionic
           python:
             - 3.7
-          env: LIBGL_DEBUG=verbose
+          env: platform=eglfs #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
           before_install:
             - sudo apt-get -qq update
             # - sudo apt-get -y -qq install python3
