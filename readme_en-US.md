@@ -1,51 +1,50 @@
 QssStylesheetEditor
 
-简体中文 | [English](readme_en-US.md)
+English | [简体中文](readme.md)
 
 [![Build Status]("https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master")](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-green)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 <hr>
 
-QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开源。
+QssStylesheetEditor is a powerful qt stylesheet(QSS) editor, it's opensource and free.
 
-# 功能简介
+# introduction
 
-+ 编辑Qss，实时预览Qss样式效果(可以预览几乎所有的qtwidget控件效果)。
-+ 支持代码高亮，代码折叠。
-+ 支持Qss关键字、属性、伪元素等的自动提示，自动补全。
-+ 支持在Qss中自定义变量，在Qss中引用。
-+ 自定义变量会自动显示在颜色编辑面板，可以通过颜色对话框中拾取变量的颜色。
-+ 支持相对路径引用图片，以及引用资源文件中的图片
-+ 支持切换不同的系统theme，如xp主题,vista主题等(不同theme下qss效果会略有差异)
-+ 自带已编写好的qsst模板样式文件
-+ 能够在windows，linux，unix上运行
++ Qss editor, preview Qss(qt stylesheet) in-time(almost all the qtwidgets can be previewed in the soft).
++ support code highlighting and code folding.
++ automatic prompt and completion the QSS keywords, attributes, pseudo elements, etc.
++ support to customize variables and reference them in QSS.
++ custom variable will be automatically displayed in the color panel, and your can change the color through the color dialog box.
++ reference image by relative path, image in resource files can be referenced too.
++ Support switching different system themes, such as xp theme, vista theme, etc. 
++ Support windows, Linux, UNIX and macos
 
 # screenshot
 
 ![GUI(v1.3版本) screeshot](res/img/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
 
-# 安装使用
+# download and install
 
 ## windows 64bit
-windows 64bit 操作系统可以下载exe，直接运行。
+installer for windows 64bit is available.
 
-下载地址：
+Download：
 
 + QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1_Uf1lPHj14fs9iMG2SVXuQ)**(secuirity code: gwf8)
 + QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1kGLlpD52N5-wg9IFf0CHPA)**(secuirity code: ze32)
 
 
-## 其他操作系统
+## other os
 
-其他操作系统暂时没有编译好的二进制软件包，需要在python环境下运行，并且依赖PyQt5和Qscintilla。具体安装使用步骤如下：
+there is no bin installer for other os. you can run QssStylesheetEditor following these steps：
 
-+ 安装python3
-+ 安装PyQt5:`pip instll PyQt5`
-+ 安装Qscintilla：`pip instll Qscintilla`
-+ 解压本软件源码，直接双击app.py即可运行
++ install python3: following <http://python.org/>
++ install PyQt5:`pip instll PyQt5`
++ install Qscintilla：`pip instll Qscintilla`
++ Download and unzip QssStylesheetEditor, double click app.py or `python app.py`
 
-# 变量定义
+# variable
 
 本软件支持在qss中自定义变量，变量定义方式如下：
 
