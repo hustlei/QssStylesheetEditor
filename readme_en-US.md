@@ -1,11 +1,10 @@
-QssStylesheetEditor
-
-English | [简体中文](readme.md)
-
-[![Build Status]("https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master")](https://travis-ci.com/hustlei/QssStylesheetEditor)
+[![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-green)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 <hr>
+English | [简体中文](readme.md)
+
+# QssStylesheetEditor
 
 QssStylesheetEditor is a powerful qt stylesheet(QSS) editor, it's opensource and free.
 
