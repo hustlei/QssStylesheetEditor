@@ -1,10 +1,11 @@
+English | [简体中文](readme.md)
+
+# QssStylesheetEditor
+
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-green)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 <hr>
-English | [简体中文](readme.md)
-
-# QssStylesheetEditor
 
 QssStylesheetEditor is a powerful qt stylesheet(QSS) editor, it's opensource and free.
 
@@ -45,7 +46,7 @@ there is no bin installer for other os. you can run QssStylesheetEditor followin
 
 # variable
 
-本软件支持在qss中自定义变量，变量定义方式如下：
+In QssStylesheetEditor, users can define and use custome variables in QSS. Folowing this steps to define variable:
 
 ~~~
 $background = #fff;
@@ -53,7 +54,7 @@ $border     = red;
 ~~~
 
 
-变量引用方法：通过“$变量名”方式引用。参考如下：
+Variable name following $ to reference variable, such as "$variable name". sample as follows:
 
 ~~~
 QWidget
@@ -63,42 +64,41 @@ QWidget
 }
 ~~~
 
-> qss中颜色等有很多相同的，使用变量后会大大减少工作量，方便修改。
-> + 定义了变量的qss文件在QssStylesheetEditor中扩展名定义为qsst
-> + 可以通过软件的导出功能，将qsst导出为qss文件
-> > 当然也可以直接在QssStylesheetEditor软件中编辑qss样式
+> + qss that used custom variable in QssStylesheetEditor will be saved as qsst file
+> + user can export qsst to qss file in QssStylesheetEditor
+> > directly edit qss in QssStylesheetEditor is ok too
 
-**QssStylesheetEditor自动识别添加变量,颜色拾取功能**
+**QssStylesheetEditor Automatic recognition add variable**
 
-在QssStylesheetEditor中自定义一个变量后，在软件的颜色栏会自动显示变量名字和颜色，点击颜色可以用通过颜色拾取框选取变量颜色。
+When you customizing a variable in QssStylesheetEditor, the variable name and color will be automatically displayed in the color p of the software. Click the color to select the variable color through the color pick-up box.
 
 <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/ColorDlg_v1.3.png" height=180 />
 
-在QssStylesheetEditor中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
+If an undefined variable is referenced in Qssstylesheeteditor, the software will automatically recognize it and display the variable name in the color panel. If a color is selected for the variable through the color pick box, the software automatically adds the variable definition to the document.
 
-# 图片引用
+# image reference
 
-## 相对路径引用
+## relative path
 
 ~~~css
 background-image: url("img/close.png");
 /* background-image: url(img/close.png); */
 ~~~
 
-软件会在打开的xxx.qss文件所在的文件夹下查找img/close.png文件。
+The software will find the img/close.png file in the folder where the xxx.qss file is opened.
 
-## 资源文件引用
+## image in resource file
 
 ~~~css
 background-image: url(":/img/close.png");
 /* background-image: url(:/img/close.png); */
 ~~~
 
-软件会在当前打开的xxx.qss样式文件所在目录中搜索资源文件xxx.py并自动加载。
+The software searches for the resource file xxx.py in the directory of the currently opened xxx.qss style file and loads it automatically.
 
 # screenshot
 
-## 自动补全
+## AutoComplete
 
 ![AutoComplete screeshot](res/img/screenshot/AutoComplete.png "AutoComplete")
 

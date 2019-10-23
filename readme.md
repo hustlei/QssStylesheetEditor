@@ -1,11 +1,11 @@
+简体中文 | [English](readme_en-US.md)
+
+# QssStylesheetEditor
+
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-green)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 <hr>
-
-简体中文 | [English](readme_en-US.md)
-
-# QssStylesheetEditor
 
 QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开源。
 
