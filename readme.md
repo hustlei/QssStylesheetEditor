@@ -5,7 +5,7 @@
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Platform](https://img.shields.io/badge/platform-windows%20%7C%20macos%20%7C%20linux-green)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
-<hr>
+<br>
 
 QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开源。
 
@@ -20,6 +20,7 @@ QssStylesheetEditor是一个功能强大的Qt样式表(QSS)编辑器，免费开
 + 支持切换不同的系统theme，如xp主题,vista主题等(不同theme下qss效果会略有差异)
 + 自带已编写好的qsst模板样式文件
 + 能够在windows，linux，unix上运行
++ 支持多国语言（中文，英文）
 
 # screenshot
 
