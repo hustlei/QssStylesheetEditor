@@ -1,9 +1,9 @@
 import shutil
 import os
-import py_compile
+# import py_compile
 # import compileall as com
 # com.compile_dir(dir,optimize=2)
-from py_compile import compile
+from py_compile import compilepy
 
 # 源代码根文件夹 数据文件夹
 root = os.path.join(os.path.dirname(__file__), "..")
@@ -99,7 +99,7 @@ def compile_copy(path, distdir):
         if os.path.isfile(file):
             if name.endswith(".py") and pexclude.search(name)==None:
                 print("  compile "+name)
-                compile(file, optimize=2, cfile=os.path.join(distdir,name+"c"))
+                compilepy(file, optimize=2, cfile=os.path.join(distdir,name+"c"))
                 copyfiles = True
             elif os.path.splitext(file)[-1] in copyexts:
                 shutil.copy(file, distdir)

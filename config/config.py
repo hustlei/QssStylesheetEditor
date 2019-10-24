@@ -6,7 +6,6 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 import os
 from .base import ConfBase
-from .dialog import ConfDialog
 
 class Config(ConfBase):
     def __init__(self,cfgfile=None):

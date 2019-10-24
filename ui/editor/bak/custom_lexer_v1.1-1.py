@@ -74,7 +74,8 @@ class QsciLexerQSS(QsciLexerCSS):
         # SendEditor(SCI_MARKERSETBACK, SC_MARKNUM_FOLDERTAIL, 0xa0a0a0);
         # SendEditor(SCI_SETFOLDFLAGS, 16 | 4, 0); // 如果折叠就在折叠行的上下各画一条横线
 
-    def language(self):
+    @staticmethod
+    def language():
         return "QSS"
 
     # def setDefaultFont(self, font):

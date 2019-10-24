@@ -402,13 +402,13 @@ class MainWindow(QMainWindow):
     def fileOpen(self):
         if not self.okToContinue():
             return
-        dir = (os.path.dirname(self.filename)
+        folder = (os.path.dirname(self.filename)
                if self.filename is not None else ".")
         fname = str(
             QFileDialog.getOpenFileName(
                 self,
                 "Python Editor - Choose File",
-                dir,
+                folder,
                 "Python files (*.py *.pyw);;All files (*.*)")[0])
         if fname:
             self.filename = fname
@@ -464,7 +464,7 @@ class MainWindow(QMainWindow):
 
     def fileSaveAs(self):
         filename = self.filename if self.filename is not None else "."
-        filename, filetype = QFileDialog.getSaveFileName(
+        filename, __ = QFileDialog.getSaveFileName(  #__ is filetype
             self, "Python Editor -- Save File As", filename, "Python files (*.py *.pyw)")
         if filename:
             self.filename = filename

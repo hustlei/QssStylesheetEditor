@@ -1,6 +1,5 @@
 from PyQt5.QtCore import QTranslator, QLibraryInfo, QLocale
 from PyQt5.QtWidgets import QApplication
-from config import Config
 import os
 from config.base import ConfBase
 
@@ -32,7 +31,7 @@ class Language():
                     l["nativename"]=QLocale(l["name"]).nativeLanguageName()
                 if(l["lang"]!=""):
                     Language.__listInToml.append(l)
-        except Exception as e:
+        except Exception:
             Language.__listInToml = [{"lang": "en", "qmfile": "", "nativename": "English", "englishname": "English"}, ]
         Language.__inited=True
         return Language.__listInToml

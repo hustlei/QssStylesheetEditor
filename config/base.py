@@ -59,7 +59,7 @@ class ConfBase:
         return self.dict[secName]
 
     def _getSubSec(self, sec, subName):
-        if(type(sec)==dict):
+        if(isinstance(sec,dict)):
             if(subName not in sec):
                 sec[subName]={}
             return sec[subName]

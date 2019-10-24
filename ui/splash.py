@@ -42,7 +42,6 @@ class SplashScreen(QSplashScreen):
         self.setProgressText(0, 0)
         # QtCore QtGui 常用组件
         import PyQt5
-        from PyQt5 import QtCore, QtGui
         from PyQt5.QtCore import Qt, QDate, QDateTime
         from PyQt5.QtGui import (
             QBrush,
@@ -64,7 +63,6 @@ class SplashScreen(QSplashScreen):
         import res.img_rc
         from res.img_rc import qt_resource_data
         # QtWidgets 常用控件
-        from PyQt5 import QtWidgets
         from PyQt5.QtWidgets import (
             QAction,
             QActionGroup,

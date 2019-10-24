@@ -44,7 +44,8 @@ class QsciLexerQSS(QsciLexerCSS):
         """
         return style in [QsciLexerCSS.Comment]
 
-    def isStringStyle(self, style):
+    @staticmethod
+    def isStringStyle(style):
         """
         Public method to check, if a style is a string style.
 

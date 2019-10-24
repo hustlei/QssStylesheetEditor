@@ -9,7 +9,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 try:
     import chardet
-except:
+except Exception:
     pass
     # import zipimport
     # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
@@ -291,7 +291,8 @@ class CodeEditor(QsciScintilla):
             self.setLanguage(self.guessLang(filename))
             return True
 
-    def __byte2str(self, bytes, echoescape=True):
+    @staticmethod
+    def __byte2str(bytes, echoescape=True):
         s=""
         if echoescape and len(bytes) < 11*1024:
             for b in bytes:#ord(chr(b))
@@ -305,10 +306,10 @@ class CodeEditor(QsciScintilla):
             s = "".join(str_list)
         return s
 
-    def __isBin(self, bytes):
-        chr_list = [b for b in bytes if b > 0x30]
+    def __isBin(self, strbytes):
+        chr_list = [b for b in strbytes if b > 0x30]
         count = len(chr_list)
-        f = count / len(bytes)
+        f = count / len(strbytes)
         return True if f > 0.7 else False
 
     def save(self, filename):

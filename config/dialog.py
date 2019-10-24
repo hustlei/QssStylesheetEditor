@@ -4,7 +4,6 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import os
 from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
                              QLabel, QLineEdit, QSpinBox, QPushButton, QComboBox, QFormLayout)
 from PyQt5.QtCore import Qt

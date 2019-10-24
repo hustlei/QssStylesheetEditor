@@ -406,10 +406,10 @@ class MainWin(MainWinBase):
         else:
             # f=self.file[:-1]
             f = os.path.splitext(self.file)[0]
-        file, _ = QFileDialog.getSaveFileName(
+        savefile, _ = QFileDialog.getSaveFileName(
             self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
-        if file:
-            with open(file, 'w', newline='') as f:
+        if savefile:
+            with open(savefile, 'w', newline='') as f:
                 f.write(self.qsst.qss)
 
     def dragEnterEvent(self, qDragEnterEvent):

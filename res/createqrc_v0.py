@@ -15,7 +15,7 @@ s+="</qresource>\n</RCC>\n"
 print("\ncreate qrcfile")
 with open("img.qrc","w",newline="") as out:
     out.write(s)
-   
+
 print("\ncompile qrc to py")
 
 import os

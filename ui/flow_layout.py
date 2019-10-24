@@ -40,7 +40,8 @@ class QFlowLayout(QLayout):
     def expandingDirections(self):
         return Qt.Orientations(Qt.Orientation(0))
 
-    def hasHeightForWidth(self):
+    @staticmethod
+    def hasHeightForWidth():
         return True
 
     def heightForWidth(self, width):

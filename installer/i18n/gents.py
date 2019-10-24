@@ -16,15 +16,15 @@ excludedir = (
 
 p=re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$')
 
-def getsrclist(dir=None):
-    if dir==None:
-        dir=root
+def getsrclist(folder=None):
+    if folder==None:
+        folder=root
     rst=[]
-    lst = os.listdir(dir)
+    lst = os.listdir(folder)
     for f in lst:
         if f in excludedir:
             continue
-        file=os.path.join(dir,f)
+        file=os.path.join(folder, f)
         if os.path.isfile(file):
             if f.endswith(".py"):
                 if(p.search(f)==None):

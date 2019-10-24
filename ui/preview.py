@@ -640,7 +640,6 @@ class previewWidget(QTabWidget):
                        QDockWidget.DockWidgetVerticalTitleBar)
         d2.setFeatures(QDockWidget.DockWidgetVerticalTitleBar)
         d3 = QDockWidget("dock3", w2)
-        d4 = QDockWidget("dock4", w2)
         d3.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.TopDockWidgetArea)
         w1.resize(120, 120)
         splitter2.addWidget(w1)
@@ -866,8 +865,8 @@ class previewWidget(QTabWidget):
         tree1.expand(tree1.model().index(0, 0))
         tree1.expandItem(node11)
         tree2 = QTreeView()
-        dir = QDirModel()
-        tree2.setModel(dir)
+        folder = QDirModel()
+        tree2.setModel(folder)
         lay.addWidget(tree1)
         lay.addWidget(tree2)
 

@@ -184,7 +184,7 @@ class QsciLexerQSS(QsciLexerCustom):
         # lastStateS = -1  # before single-quoted/double-quoted string
         # lastStateVar = -1  # before variable (SCSS)
         # lastStateVal = -1  # before value (SCSS)
-        op = ' '  # last operator
+        # op = ' '  # last operator
         opPrev = ' '  # last operator
         # nestedLevel=0 #1在{}内，2在{{}}内
         inBrace = False
@@ -194,7 +194,7 @@ class QsciLexerQSS(QsciLexerCustom):
 
         ###
         # 4.2 Style the text in a loop
-        for i, tokeni in enumerate(token_list):
+        for tokeni in token_list:
             token, count = tokeni
 
             # 任意位置都可以注释，除注释外其他任何位置字符串都识别
