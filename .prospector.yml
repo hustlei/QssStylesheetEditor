@@ -1,17 +1,19 @@
 allow-shorthand: false
 
-inherits:
-  - strictness_veryhigh
+# inherits:
+  # - strictness_veryhigh
 
 ignore-patterns:
+  - (^|\/)\..+
   - ^setup.py$
   - __init__.py$
   - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
 
-pylint:
-    run: false
-    
+pylint-config-file: .pylintrc
+# pylint:    
   # disable:
+    # - fixme
+    # - bad-continuation
     # - trailing-whitespace
     # - missing-final-newline
     # - too-few-public-methods
@@ -31,11 +33,13 @@ pylint:
     # max-statements: 60
     # min-public-methods: 1
     # max-public-methods: 20
+    # max-module-lines: 1000
     # max-line-length: 99
 
 pep8:
   options:
     max-line-length: 99
+    single-line-if-stmt: n
   disable:
     - E304
     - E265
@@ -47,14 +51,31 @@ pep8:
     - N812
     - N813
     - N814
+    
+pyflakes:
+  disable:
+    - F403
+    - F810
 
+frosted:
+  disable:
+    - E103
+    - E306
+    
 pyroma:
   disable:
     - PYR15
-    - PYR18
+    - PYR16
     - PYR17
+    - PYR18
+    - PYR19
+    
+mccabe:
+  options:
+    max-complexity: 10
 
 pep257:
   disable:
+    - D000
     - D400
     - D401
