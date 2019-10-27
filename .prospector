@@ -1,0 +1,58 @@
+allow-shorthand: false
+
+inherits:
+  - strictness_veryhigh
+
+ignore-patterns:
+  - ^setup.py$
+  - __init__.py$
+  - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
+
+pylint:
+  disable:
+    - trailing-whitespace
+    - missing-final-newline
+    - too-few-public-methods
+    - too-many-public-methods
+    - deprecated-lambda
+    - bad-builtin
+    - star-args
+    - global-statement
+    - assignment-from-none
+    - unused-format-string-key
+    - W5103
+
+  options:
+    max-locals: 15
+    max-returns: 6
+    max-branches: 15
+    max-statements: 60
+    min-public-methods: 1
+    max-public-methods: 20
+    max-line-length: 99
+
+pep8:
+  options:
+    max-line-length: 99
+  disable:
+    - E304
+    - E265
+    - E266
+    - W291
+    - W292
+    - W391
+    - N811
+    - N812
+    - N813
+    - N814
+
+pyroma:
+  disable:
+    - PYR15
+    - PYR18
+    - PYR17
+
+pep257:
+  disable:
+    - D400
+    - D401
