@@ -6,9 +6,23 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+import os
+from PyQt5.QtCore import Qt, QVariant
+from PyQt5.QtWidgets import (
+    QWidget,
+    QGroupBox,
+    QVBoxLayout,
+    QPushButton,
+    QLabel,
+    QHBoxLayout,
+    QSpinBox,
+    QCheckBox,
+    QComboBox,
+    QColorDialog)
+
 language_extensions = (
     ('None', '.txt'),
-    #('Custom', ''),
+    # ('Custom', ''),
     ('QSS', '.qss .qsst'),
     ('Bash', '.sh .bashrc .bash_history'),
     ('Batch', '.bat .cmd'),
@@ -16,7 +30,7 @@ language_extensions = (
     ('CPP', '.c++ .cpp .cxx .cc .hh .hxx .hpp .c .h'),
     ('CSharp', '.cs'),
     ('CSS', '.css'),
-    ('CoffeeScript','.coffee'),
+    ('CoffeeScript', '.coffee'),
     ('D', '.d'),
     ('Diff', '.diff'),
     ('Fortran', '.f'),
@@ -99,7 +113,7 @@ _settings = {
         'label': 'Tab width',
         'type': 'number',
         'help': 'Width of tabs in characters, or the number of'
-            ' spaces to insert when tab is pressed',
+                ' spaces to insert when tab is pressed',
     },
 
     # Multiple-selection settings
@@ -139,7 +153,7 @@ _settings = {
         'help': 'What kind of icons to display for code-folding',
         'values': (
             ('None', 'NoFoldStyle'),
-            ('Plain','PlainFoldStyle'),
+            ('Plain', 'PlainFoldStyle'),
             ('Circled', 'CircledFoldStyle'),
             ('Boxed', 'BoxedFoldStyle'),
             ('Circled Tree', 'CircledTreeFoldStyle'),
@@ -177,40 +191,40 @@ _settings = {
 
     # TODO: Need a getter for this
     # 'caretWidth': {
-        #'label': 'Caret width (pixels)',
-    #},
+    # 'label': 'Caret width (pixels)',
+    # },
 
     # Stuff the user probably doesn't care about configuring
     # (or do you?)
     # 'annotationDisplay': {
-        #'label': 'Annotation Display',
-        #'type': 'combo',
-        #'values': (
-            #('Hidden', 'AnnotationHidden'),
-            #('Standard', 'AnnotationStandard'),
-            #('Boxed', 'AnnotationBoxed'),
-        #),
-    #},
+    # 'label': 'Annotation Display',
+    # 'type': 'combo',
+    # 'values': (
+    #('Hidden', 'AnnotationHidden'),
+    #('Standard', 'AnnotationStandard'),
+    #('Boxed', 'AnnotationBoxed'),
+    # ),
+    # },
     # 'autoCompletionSource': {
-        #'label': 'Auto Completion Source',
-        #'type': 'combo',
-        #'values': (
-            #('None', 'AcsNone'),
-            #('All', 'AcsAll'),
-            #('Document', 'AcsDocument'),
-            #('APIs', 'AcsAPIs'),
-        #),
-    #},
+    # 'label': 'Auto Completion Source',
+    # 'type': 'combo',
+    # 'values': (
+    #('None', 'AcsNone'),
+    #('All', 'AcsAll'),
+    #('Document', 'AcsDocument'),
+    #('APIs', 'AcsAPIs'),
+    # ),
+    # },
     # 'callTipsStyle': {
-        #'label': 'Call Tips Style',
-        #'type': 'combo',
-        #'values': (
-            #('None', 'CallTipsNone'),
-            #('No Context', 'CallTipsNoContext'),
-            #('No Auto-completion Context', 'CallTipsNoAutoCompletionContext'),
-            #('Context', 'CallTipsContext'),
-        #),
-    #},
+    # 'label': 'Call Tips Style',
+    # 'type': 'combo',
+    # 'values': (
+    #('None', 'CallTipsNone'),
+    #('No Context', 'CallTipsNoContext'),
+    #('No Auto-completion Context', 'CallTipsNoAutoCompletionContext'),
+    #('Context', 'CallTipsContext'),
+    # ),
+    # },
 
 }
 
@@ -221,7 +235,7 @@ _setting_groups = (
             'color',
             'paper',
         )
-    ),
+     ),
 
     ('Indentation',
         (
@@ -232,7 +246,7 @@ _setting_groups = (
             'indentationGuides',
             'indentationsUseTabs',
         )
-    ),
+     ),
 
     ('Wrapping',
         (
@@ -240,7 +254,7 @@ _setting_groups = (
             'wrapMode',
             'edgeColumn',
         )
-    ),
+     ),
 
     ('Formatting',
         (
@@ -248,7 +262,7 @@ _setting_groups = (
             'eolMode',
             'eolVisibility',
         )
-    ),
+     ),
 
     ('Coding aids',
         (
@@ -256,7 +270,7 @@ _setting_groups = (
             'folding',
             'braceMatching',
         )
-    ),
+     ),
 )
 
 
@@ -291,28 +305,23 @@ _other_color_settings = (
     'callTipsHighlightColor',
 )
 
-import os
-from PyQt5 import QtGui
-from PyQt5.QtWidgets import (QWidget,QGroupBox,QVBoxLayout,QPushButton,QLabel,QHBoxLayout,QSpinBox,QCheckBox,QComboBox)
-from PyQt5.QtCore import Qt, QVariant
 
-
-class EditorSettings (QWidget):
+class EditorSettings(QWidget):
     """A dialog window for configuring a QsciScintilla editor.
     """
+
     def __init__(self, editor):
         super().__init__()
         self.editor = editor
+        self.setLayout(self._create_layout())
 
-        layout = self._create_layout()
-        self.setLayout(layout)
-
+    @classmethod
     def guess_language(cls, filename):
         """Guess the language based on the given filename's extension, and return
         the name of the language, or the string 'None' if no extension matches.
         """
         # Get the file's extension
-        root, ext = os.path.splitext(filename)
+        _, ext = os.path.splitext(filename)
         # See if any known language extensions match
         for language, extensions in language_extensions:
             if ext in extensions.split(' '):
@@ -335,7 +344,7 @@ class EditorSettings (QWidget):
             groups[label].setLayout(group_layout)
             groups[label].setFlat(False)
 
-        columns_layout=QVBoxLayout()
+        columns_layout = QVBoxLayout()
         for g in groups.values():
             columns_layout.addWidget(g)
 
@@ -345,8 +354,8 @@ class EditorSettings (QWidget):
 
         # OK button at the bottom
         #ok = QPushButton('OK', self)
-        #ok.clicked.connect(self.accept)
-        #main_layout.addWidget(ok)
+        # ok.clicked.connect(self.accept)
+        # main_layout.addWidget(ok)
 
         return main_layout
 
@@ -374,12 +383,12 @@ class EditorSettings (QWidget):
             widget.setToolTip(setting['help'])
 
         # Add label and widget
-        layout = QHBoxLayout()
-        layout.addWidget(label)
-        layout.addStretch(1)
-        layout.addWidget(widget)
+        hbox = QHBoxLayout()
+        hbox.addWidget(label)
+        hbox.addStretch(1)
+        hbox.addWidget(widget)
 
-        return layout
+        return hbox
 
     def _create_checkbox(self, name):
         """Return a ``QCheckBox`` for the given setting.
@@ -422,7 +431,7 @@ class EditorSettings (QWidget):
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            value = str(data) #.toString())
+            value = str(data)  # .toString())
             self.editor.set_config(name, value)
 
         # Connect event handler
@@ -494,7 +503,7 @@ class EditorSettings (QWidget):
 
 
 if __name__ == "__main__":
-    from PyQt5.QtWidgets import *
+    from PyQt5.QtWidgets import QApplication
     import sys
 
     from ui.editor import CodeEditor

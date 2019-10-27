@@ -3,7 +3,6 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import sys
 import re
 
 
@@ -36,7 +35,7 @@ class Qsst():
             self.varDict[var] = val
         self.varUndefined = []
         for varused in self.varUsed:
-            if(varused not in self.varDict.keys()):
+            if varused not in self.varDict.keys():
                 self.varDict[varused] = ''
                 self.varUndefined.append(varused)
 
@@ -54,7 +53,7 @@ class Qsst():
         qssStr = varsDefined.sub("", qssStr)
 
         for v in self.varDict:
-            if(v in varDict.keys()):
+            if v in varDict.keys():
                 qssStr = qssStr.replace("$" + v, varDict[v])
             else:
                 self.varUndefined.append(v)
@@ -71,7 +70,7 @@ class Qsst():
     def writeVars(self):
         varDictNew = self.varDict
         self.loadVars()
-        if(self.varDict):  # 如果文件中变量不为空，更新变量值
+        if self.varDict:  # 如果文件中变量不为空，更新变量值
             self.srctext = re.sub(
                 r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
                 lambda m: '${} = {};'.format(
@@ -80,10 +79,10 @@ class Qsst():
                         m.group(1),
                         "")),
                 self.srctext)
-            if(self.varUndefined):  # 在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
+            if self.varUndefined:  # 在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
                 s = ''
                 for var, val in varDictNew.items():
-                    if(var in self.varUndefined):
+                    if var in self.varUndefined:
                         s += "$" + var + " = " + val + ";\n"
                 self.srctext = re.sub(
                     r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',

@@ -131,13 +131,13 @@ class EditorEnums:
         for (name, value) in name_values
     )
 
+    @classmethod
     def getValue(cls, name):
         """Return the Qsci.QsciScintilla getValue for the given enumeration getName.
         """
         if name not in cls.dict:
             raise BadEnum(name)
-        else:
-            return cls.dict[name]
+        return cls.dict[name]
 
     @classmethod
     def getName(cls, value):

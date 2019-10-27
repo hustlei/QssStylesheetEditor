@@ -22,12 +22,9 @@ class SplashScreen(QSplashScreen):
         QApplication.flush()
 
     def showMessage(self, msg):
-        super(
-            SplashScreen,
-            self).showMessage(
-            msg,
-            self.labelAlignment,
-            Qt.white)
+        super(SplashScreen, self).showMessage(msg,
+                                              self.labelAlignment,
+                                              Qt.white)
         QApplication.processEvents()
 
     def clearMessage(self):
@@ -42,7 +39,7 @@ class SplashScreen(QSplashScreen):
         self.setProgressText(0, 0)
         # QtCore QtGui 常用组件
         import PyQt5
-        from PyQt5.QtCore import Qt, QDate, QDateTime
+        from PyQt5.QtCore import QDate, QDateTime
         from PyQt5.QtGui import (
             QBrush,
             QColor,
@@ -50,7 +47,6 @@ class SplashScreen(QSplashScreen):
             QIcon,
             QImage,
             QPicture,
-            QPixmap,
             QCursor,
             QPainter,
             QKeySequence,

@@ -6,20 +6,19 @@ import os
 import re
 import sys
 
-from PyQt5.QtWidgets import (qApp, QMainWindow, QWidget, QLabel, QPushButton,
-                             QColorDialog, QFileDialog, QMessageBox, QAction)
+from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog, QMessageBox)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
-from PyQt5.QtCore import Qt, QSize, QTranslator
+from PyQt5.QtCore import Qt, QSize
 # import sip
 
-from .mainwinbase import MainWinBase
-from .flow_layout import QFlowLayout
-from qss_template import Qsst
-from .recent import Recent
 from config import Config, ConfDialog
+from qss_template import Qsst
+from .mainwinbase import MainWinBase
+from .recent import Recent
+
 
 class MainWin(MainWinBase):
-    def __init__(self, parent=None):
+    def __init__(self):
         super().__init__()
         self.ver = "v1.50"
         self.title = "QssStylesheet Editor " + self.ver
@@ -30,24 +29,26 @@ class MainWin(MainWinBase):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
-        self.confDialog=None
-        #ui
+        self.confDialog = None
+        # ui
         self.setAcceptDrops(True)
-        #self.setupUi()
+        # self.setupUi()
         self.setupActions()
-        self.recent=Recent(self.open, self.submenus["recent"])
+        self.recent = Recent(self.open, self.submenus["recent"])
         if self.tr("LTR") == "RTL":
             self.setLayoutDirection(Qt.RightToLeft)
-        #conf
-        self.config=Config()
-        self.configfile=os.path.join(os.path.dirname(__file__),"../config/config.toml")
+        # conf
+        self.config = Config()
+        self.configfile = os.path.join(
+            os.path.dirname(__file__),
+            "../config/config.toml")
         self.useConfig()
-        #lang
+        # lang
         # from i18n.language import Language as Lang
         # Lang.getConfigLang(self)
         # Lang.setLang()
-        #init
-        self.__isNewFromTemplate=False
+        # init
+        self.__isNewFromTemplate = False
         self.newWithTemplate()
         self.statusbar.showMessage(self.tr("Ready"))
 
@@ -89,8 +90,9 @@ class MainWin(MainWinBase):
 
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
-            if(dockLoc == Qt.TopDockWidgetArea or dockLoc == Qt.BottomDockWidgetArea):
-                # self.colorPanelWidget.resize(self.docks["color"].width(),self.colorPanelLayout.minimumSize().height())
+            if dockLoc in (Qt.TopDockWidgetArea, Qt.BottomDockWidgetArea):
+                # self.colorPanelWidget.resize(self.docks["color"].width(),
+                #   self.colorPanelLayout.minimumSize().height())
                 self.docks["color"].widget().resize(
                     self.docks["color"].width(),
                     self.colorPanelLayout.minimumSize().height())
@@ -114,7 +116,7 @@ class MainWin(MainWinBase):
         self.editor.drop.connect(self.dropEvent)
 
         # setting
-        self.confDialog=ConfDialog(self)
+        self.confDialog = ConfDialog(self)
         self.actions["config"].triggered.connect(self.confDialog.show)
 
         # help
@@ -126,17 +128,18 @@ class MainWin(MainWinBase):
             lambda: QMessageBox.about(self, "about", aboutText))
 
     def __setSelectStatus(self):
-        linefrom, posfrom, lineto, posto = self.editor.getSelection()
+        linefrom, _, lineto, _ = self.editor.getSelection() #__ is posfrom posto
         linefrom += 1
         lineto += 1
         if(linefrom == 0 or lineto == 0):
             text = self.tr("select: none")
         else:
-            text = self.tr("select:ln") + str(linefrom) + self.tr(" - ln") + str(lineto)
+            text = self.tr("select:ln") + str(linefrom) + \
+                self.tr(" - ln") + str(lineto)
         self.status["select"].setText(text)
 
     def unuseQss(self, unuse):
-        if(unuse):
+        if unuse:
             qApp.setStyleSheet('')
         else:
             self.renderStyle()
@@ -148,7 +151,7 @@ class MainWin(MainWinBase):
         self.qsst.convertQss()
 
         norand = self.actions["DisableQss"].isChecked()
-        if(norand):
+        if norand:
             qApp.setStyleSheet('')
         else:
             # self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
@@ -163,17 +166,17 @@ class MainWin(MainWinBase):
                 r'url\([\s]*[\"\']?[\s]*([^\s\/:\"\'\)]+)[\s]*[\"\']?[\s]*\)',
                 r'url("{}/\1")'.format(path).format(path),
                 self.qsst.qss)  # 不支持带空格路径
-            if(os.path.exists(self.file)):
-                name,_=os.path.splitext(self.file)
-                res=name+".py"
-                resp=os.path.dirname(res)
-                resn,_=os.path.splitext(os.path.basename(res))
-                if(os.path.exists(res)):
-                    if(resp not in sys.path):
+            if os.path.exists(self.file):
+                name, _ = os.path.splitext(self.file)
+                res = name + ".py"
+                resp = os.path.dirname(res)
+                resn, _ = os.path.splitext(os.path.basename(res))
+                if os.path.exists(res):
+                    if resp not in sys.path:
                         sys.path.append(resp)
                     try:
                         __import__(resn)
-                    except:
+                    except BaseException:
                         pass
             qApp.setStyleSheet(styleSheet)
 
@@ -190,19 +193,19 @@ class MainWin(MainWinBase):
                     pass
 
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
-        # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005
-        # or e.key==Qt.Key_Delete):
-        if (e.key() == Qt.Key_Return or e.key() == Qt.Key_Enter  # 大键盘为Ret小键盘为Enter
-            or e.key() == Qt.Key_Semicolon or e.key() == Qt.Key_BraceRight or e.key() == Qt.Key_Tab
-                or e.key() == Qt.Key_Up or e.key() == Qt.Key_Down or e.key() == Qt.Key_Left or e.key() == Qt.Key_Right):
+        # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
+        # 大键盘为Ret小键盘为Enter
+        if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight,
+                        Qt.Key_Up, Qt.Key_Down, Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab,
+                        Qt.Key_Delete, Qt.Key_Backspace)):
             self.renderStyle()
             self.loadColorPanel()
 
         self.actions["undo"].setEnabled(self.editor.isUndoAvailable())
         self.actions["redo"].setEnabled(self.editor.isRedoAvailable())
 
-    def motifyChanged(self, e):
-        if(self.editor.isModified()):
+    def motifyChanged(self):#, e):
+        if self.editor.isModified():
             self.setWindowTitle(
                 self.title +
                 " - *" +
@@ -231,8 +234,8 @@ class MainWin(MainWinBase):
         # self.colorGridLayout.update()  # 不起作用
 
         # a,b=list(self.clrBtnDict.keys()),list(self.qsst.varDict.keys());a.sort();b.sort()
-        if(sorted(list(self.clrBtnDict.keys())) != sorted(list(self.qsst.varDict.keys()))):
-            while(self.colorPanelLayout.count() > 0):
+        if sorted(list(self.clrBtnDict.keys())) != sorted(list(self.qsst.varDict.keys())):
+            while self.colorPanelLayout.count() > 0:
                 self.colorPanelLayout.removeItem(
                     self.colorPanelLayout.itemAt(0))
             self.clrBtnDict = {}
@@ -254,10 +257,10 @@ class MainWin(MainWinBase):
         for varName, btn in self.clrBtnDict.items():
             clrStr = self.qsst.varDict[varName]
             btn.setText(clrStr)
-            if ("rgb" in clrStr):
+            if "rgb" in clrStr:
                 t = clrStr.strip(r" rgba()")
                 c = t.split(',')
-                if (len(c) > 3):
+                if len(c) > 3:
                     lable = c[3]
                 else:
                     lable = 255
@@ -265,7 +268,7 @@ class MainWin(MainWinBase):
             else:
                 color = QColor(clrStr)
             s = ''
-            if (qGray(color.rgb()) < 100):
+            if qGray(color.rgb()) < 100:
                 s += "color:white;"
             else:
                 s += "color:black;"
@@ -275,22 +278,22 @@ class MainWin(MainWinBase):
     def chclr(self, var):
         c = QColor()
         cstr = self.sender().text()
-        if(cstr):
+        if cstr:
             c.setNamedColor(cstr)
         else:
             c.setNamedColor("white")
         color = QColorDialog.getColor(
             c, self, self.tr("color pick"), QColorDialog.ShowAlphaChannel)
-        if (color.isValid()):
+        if color.isValid():
             s = ''
             clrstr = color.name()
-            if (color.alpha() == 255):
+            if color.alpha() == 255:
                 clrstr = color.name().upper()
             else:
                 # 'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
                 clrstr = color.name(QColor.HexArgb).upper()
             #     s = 'font-size:8px;'
-            if (qGray(color.rgb()) < 100):
+            if qGray(color.rgb()) < 100:
                 s += 'color:white;'
             self.clrBtnDict[var].setText(clrstr)
             self.clrBtnDict[var].setStyleSheet(s + "background:" + clrstr)
@@ -309,10 +312,10 @@ class MainWin(MainWinBase):
         self.open(file)
 
     def open(self, file=None):  # _参数用于接收action的event参数,bool类型
-        if (file is None):
-            file, _ = QFileDialog.getOpenFileName(
-                self, self.tr("Open File"), file, "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
-        if (os.path.exists(file)):
+        if file is None:
+            file, _ = QFileDialog.getOpenFileName(self, self.tr(
+                "Open File"), file, "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
+        if os.path.exists(file):
             self.file = file
             self.statusbar.showMessage(self.tr("opening file..."))
             self.lastSavedText = self.editor.text()
@@ -325,22 +328,22 @@ class MainWin(MainWinBase):
             self.loadColorPanel()
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
             self.status["coding"].setText(self.editor.coding)
-            if(not self.__isNewFromTemplate):
+            if not self.__isNewFromTemplate:
                 self.recent.addFile(self.file)
         else:
             self.statusbar.showMessage(self.tr("file not found."))
 
     def new(self):
-        if(self.editor.isModified()):
+        if self.editor.isModified():
             ret = QMessageBox.question(
                 self,
                 self.title,
                 self.tr("Current file is not saved, do you want to save?"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
-            if(ret == QMessageBox.Yes):
+            if ret == QMessageBox.Yes:
                 self.save()
-            elif(ret == QMessageBox.Cancel):
+            elif ret == QMessageBox.Cancel:
                 return
 
         self.newIndex = self.newIndex + 1
@@ -353,20 +356,20 @@ class MainWin(MainWinBase):
         self.editor.setModified(False)
 
     def newWithTemplate(self, templatefile="data/default.qsst"):
-        if(self.editor.isModified()):
+        if self.editor.isModified():
             ret = QMessageBox.question(
                 self,
                 self.title,
                 self.tr("Current file is not saved，do you want to save?"),
                 QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
                 QMessageBox.No)
-            if(ret == QMessageBox.Yes):
+            if ret == QMessageBox.Yes:
                 self.save()
-            elif(ret == QMessageBox.Cancel):
+            elif ret == QMessageBox.Cancel:
                 return
-        self.__isNewFromTemplate=True
+        self.__isNewFromTemplate = True
         self.open(file=templatefile)
-        self.__isNewFromTemplate=False
+        self.__isNewFromTemplate = False
         self.statusbar.showMessage(self.tr("new file created, using template"))
         self.newIndex = self.newIndex + 1
         self.file = self.tr("new{}.qsst").format(self.newIndex)
@@ -389,9 +392,9 @@ class MainWin(MainWinBase):
 
     def saveAs(self):
         # f="." if self.file==None else self.file
-        file, filefilter = QFileDialog.getSaveFileName(
-            self, self.tr("save file"), self.file, "qsst(*.qsst);;qss(*.qss);;all(*.*)")
-        if (file):
+        file, _ = QFileDialog.getSaveFileName(self, self.tr( # __ is filefilter
+            "save file"), self.file, "qsst(*.qsst);;qss(*.qss);;all(*.*)")
+        if file:
             self.file = file
             self.lastSavedText = self.editor.text()
             self.editor.save(self.file)
@@ -401,7 +404,7 @@ class MainWin(MainWinBase):
 
     def export(self):
         self.qsst.convertQss()
-        if(self.file is None):
+        if self.file is None:
             f = "."
         else:
             # f=self.file[:-1]
@@ -413,21 +416,21 @@ class MainWin(MainWinBase):
                 f.write(self.qsst.qss)
 
     def dragEnterEvent(self, qDragEnterEvent):
-        if(qDragEnterEvent.mimeData().hasUrls()):
+        if qDragEnterEvent.mimeData().hasUrls():
             qDragEnterEvent.acceptProposedAction()
             # print(qDragEnterEvent.possibleActions())
             # qDragEnterEvent.setDropAction(Qt::CopyAction Qt::MoveAction
             # Qt::LinkAction Qt::IgnoreAction Qt::TargetMoveAction)
 
     def dropEvent(self, QDropEvent):
-        if (QDropEvent.mimeData().hasUrls()):
+        if QDropEvent.mimeData().hasUrls():
             file = QDropEvent.mimeData().urls()[0].toLocalFile()
-            if(os.path.exists(file)):
+            if os.path.exists(file):
                 self.open(file=file)
 
     def closeEvent(self, e):
-        if(self.editor.isModified()):
-            if(self.lastSavedText != self.editor.text()):
+        if self.editor.isModified():
+            if self.lastSavedText != self.editor.text():
                 msg = QMessageBox(
                     QMessageBox.Question,
                     self.title,
@@ -443,10 +446,10 @@ class MainWin(MainWinBase):
                 ret = msg.exec_()
                 # ret=QMessageBox.information(self,"Qss Style Editor",self.tr("是否将更改保存到"+os.path.basename(self.file)),
                 #                             QMessageBox.Yes|QMessageBox.No|QMessageBox.Cancel,QMessageBox.Yes)
-                if(ret == QMessageBox.Save or ret == QMessageBox.Yes):
+                if ret in (QMessageBox.Save, QMessageBox.Yes):
                     self.save()
                     e.ignore()
-                elif(ret == QMessageBox.Discard or ret == QMessageBox.No):
+                elif ret in (QMessageBox.Discard, QMessageBox.No):
                     self.updateConfig()
                     self.config.save()
                     qApp.exit()
@@ -457,16 +460,17 @@ class MainWin(MainWinBase):
             self.config.save()
 
     def updateConfig(self):
-        self.config.getSec("file")["recent"]=self.recent.getList()
-        self.config.getSec("file")["recentcount"]=self.recent.maxcount
-        self.config.getSec("editor")["fontsize"]=self.editor.font().pointSize()
+        self.config.getSec("file")["recent"] = self.recent.getList()
+        self.config.getSec("file")["recentcount"] = self.recent.maxcount
+        self.config.getSec("editor")[
+            "fontsize"] = self.editor.font().pointSize()
 
     def useConfig(self):
         self.config.read()
-        recentlist=self.config.getSec("file").get("recent")
-        if(recentlist!=None):
+        recentlist = self.config.getSec("file").get("recent")
+        if recentlist is not None:
             self.recent.setList(recentlist)
-        maxcount=self.config.getSec("file").get("recentcount")
-        if(maxcount!=None):
-            self.recent.maxcount=maxcount
-        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize",11))
+        maxcount = self.config.getSec("file").get("recentcount")
+        if maxcount is not None:
+            self.recent.maxcount = maxcount
+        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize", 11))

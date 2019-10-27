@@ -4,13 +4,59 @@
 
 load preview widgets for view sytle effect
 
++ 常用组件:
+    - Label
+    - LineEdit,TextEdit
+    - PushButton,ToolButton,CommandlinkButton
+    - RadioButton, CheckButton
+    - Combobox,SpinBox,DoubleSpinBox
+    - DateEdit,TimeEdit,DateTimeEdit,Calendar
+    - Slider,ProgressBar,ScrollBar
+    - Dial,LCDNumber,KeySequenceEdit
+    - Graphics
++ 布局
+    - VBox,HBox
+    - Grid
+    - Form
+    - Spliter
+    - DockWidget,MDI
++ 容器组件
+    - ScrollArea
+    - GroupBox
+    - StackedWidget
+    - ToolBox
+    - TabWidget
++ 高级组件
+    - Dialog
+        * massagebox,input,file,color
+        * https://blog.csdn.net/taiyang1987912/article/details/31770757
+    - List
+    - Table
+    - Tree
+
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from res.img_rc import *
 
+from PyQt5.QtCore import Qt, QSize, QRect, QDate, QTime, QDateTime, QRegExp
+from PyQt5.QtGui import (QIcon, QPen, QBrush, QPixmap, QPainter,
+                         QLinearGradient, QRadialGradient, QConicalGradient,
+                         QDoubleValidator, QRegExpValidator, QStandardItemModel)
+from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QLineEdit, QTextEdit,
+                             QPushButton, QToolButton, QCommandLinkButton,
+                             QCheckBox, QRadioButton, QComboBox, QSpinBox, QDoubleSpinBox,
+                             QDateEdit, QTimeEdit, QDateTimeEdit, QCalendarWidget,
+                             QSlider, QProgressBar, QScrollBar,
+                             QDial, #QLCDNumber, QKeySequenceEdit,
+                             QHBoxLayout, QVBoxLayout, QGridLayout, QFormLayout,
+                             QGroupBox, QScrollArea, QStackedWidget, QToolBox, QTabWidget,
+                             QSplitter, QDockWidget, QMdiArea,
+                             QMessageBox, QInputDialog, QFileDialog, QFontDialog, QColorDialog,
+                             QListWidget, QTableWidget, QTreeView, QTreeWidget,
+                             QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QDirModel,
+                             QCompleter,
+                             QMenu,
+                             )
+#from res.img_rc import *
 
 class previewWidget(QTabWidget):
     def __init__(self):
@@ -21,12 +67,12 @@ class previewWidget(QTabWidget):
         tab4 = QWidget(self)
         tab5 = QWidget(self)
         tab6 = QWidget(self)
-        self.addTab(tab1, self.tr("Basic"))#,"常用组件"))
-        self.addTab(tab2, self.tr("Special"))#,"特别组件"))
-        self.addTab(tab3, self.tr("Drawing"))#,"绘图组件"))
-        self.addTab(tab4, self.tr("Layout"))#,"布局组件"))
-        self.addTab(tab5, self.tr("Container"))#,"容器组件"))
-        self.addTab(tab6, self.tr("Advance"))#,"高级组件"))
+        self.addTab(tab1, self.tr("Basic"))  # ,"常用组件"))
+        self.addTab(tab2, self.tr("Special"))  # ,"特别组件"))
+        self.addTab(tab3, self.tr("Drawing"))  # ,"绘图组件"))
+        self.addTab(tab4, self.tr("Layout"))  # ,"布局组件"))
+        self.addTab(tab5, self.tr("Container"))  # ,"容器组件"))
+        self.addTab(tab6, self.tr("Advance"))  # ,"高级组件"))
         self.setupTab1(tab1)
         self.setupTab2(tab2)
         self.setupTab3(tab3)
@@ -123,7 +169,7 @@ class previewWidget(QTabWidget):
         text9.setCompleter(completer)
 
         def textch(s):
-            if("@" in s):
+            if "@" in s:
                 return
             strList = [
                 "@163.com",
@@ -597,9 +643,9 @@ class previewWidget(QTabWidget):
         l.addWidget(QLabel("第三行数据："), 2, 0)
         l.addWidget(QLineEdit(), 0, 1)
         l.addWidget(QLineEdit("0"), 1, 1)
-        input = QLineEdit()
-        input.setPlaceholderText("请输入：")
-        l.addWidget(input, 2, 1)
+        inputText = QLineEdit()
+        inputText.setPlaceholderText("请输入：")
+        l.addWidget(inputText, 2, 1)
         text = QTextEdit("这是一个文本框，在QGridLayout中占三行两列。")
         l.addWidget(text, 0, 2, 3, 2)
         group2.setLayout(l)
@@ -611,7 +657,9 @@ class previewWidget(QTabWidget):
         l.addRow("请输入数据：", QLineEdit())
         l.addRow(QLabel("请选择数据："), QSpinBox())
         box = QComboBox()
-        box.addItem("Item1"), box.addItem("Item2"), box.addItem("Item3")
+        box.addItem("Item1")
+        box.addItem("Item2")
+        box.addItem("Item3")
         l.addRow("请选择选项：", box)
         group3.setLayout(l)
         layout.addWidget(group3)
@@ -671,14 +719,14 @@ class previewWidget(QTabWidget):
         group = QGroupBox("StackLayout布局")
         l = QHBoxLayout()
         group.setLayout(l)
-        list = QListWidget()
+        listWidget = QListWidget()
         stack = QStackedWidget()
-        l.addWidget(list)
+        l.addWidget(listWidget)
         l.addWidget(stack)
-        list.currentRowChanged.connect(stack.setCurrentIndex)
-        list.addItem("stack1")
-        list.addItem("stack2")
-        list.addItem("stack3")
+        listWidget.currentRowChanged.connect(stack.setCurrentIndex)
+        listWidget.addItem("stack1")
+        listWidget.addItem("stack2")
+        listWidget.addItem("stack3")
         s1 = QGroupBox("stack1")
         s2 = QGroupBox("stack2")
         s3 = QGroupBox("stack3")
@@ -780,9 +828,18 @@ class previewWidget(QTabWidget):
         list1 = QListWidget()
         list1.addItems(["aaa", "bbb", "ccc"])
         list2 = QListWidget()
-        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_blueHS.png"), "blue"))
-        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_redHS.png"), "red"))
-        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_greenHS.png"), "green"))
+        list2.addItem(
+            QListWidgetItem(
+                QIcon(":appres.img/Flag_blueHS.png"),
+                "blue"))
+        list2.addItem(
+            QListWidgetItem(
+                QIcon(":appres.img/Flag_redHS.png"),
+                "red"))
+        list2.addItem(
+            QListWidgetItem(
+                QIcon(":appres.img/Flag_greenHS.png"),
+                "green"))
         list2.setViewMode(QListWidget.IconMode)
         lay.addWidget(list1)
         lay.addWidget(list2)
@@ -839,7 +896,10 @@ class previewWidget(QTabWidget):
         node11 = QTreeWidgetItem()
         node11.setText(0, "child1")
         icon = QIcon(":appres.img/book_angle.png")
-        icon.addPixmap(QPixmap(":appres.img/book_open.png"), QIcon.Normal, QIcon.On)
+        icon.addPixmap(
+            QPixmap(":appres.img/book_open.png"),
+            QIcon.Normal,
+            QIcon.On)
         node11.setIcon(0, icon)
         nodea = QTreeWidgetItem()
         nodea.setText(0, "red")
@@ -870,38 +930,6 @@ class previewWidget(QTabWidget):
         lay.addWidget(tree1)
         lay.addWidget(tree2)
 
-
-"""
-+ 常用组件:
-    - Label
-    - LineEdit,TextEdit
-    - PushButton,ToolButton,CommandlinkButton
-    - RadioButton, CheckButton
-    - Combobox,SpinBox,DoubleSpinBox
-    - DateEdit,TimeEdit,DateTimeEdit,Calendar
-    - Slider,ProgressBar,ScrollBar
-    - Dial,LCDNumber,KeySequenceEdit
-    - Graphics
-+ 布局
-    - VBox,HBox
-    - Grid
-    - Form
-    - Spliter
-    - DockWidget,MDI
-+ 容器组件
-    - ScrollArea
-    - GroupBox
-    - StackedWidget
-    - ToolBox
-    - TabWidget
-+ 高级组件
-    - Dialog
-        * massagebox,input,file,color
-        * https://blog.csdn.net/taiyang1987912/article/details/31770757
-    - List
-    - Table
-    - Tree
-"""
 
 if __name__ == "__main__":
     import sys

@@ -2,14 +2,27 @@
 """
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
+from PyQt5.QtCore import Qt, QSize
+from PyQt5.QtGui import QKeySequence, QIcon
+from PyQt5.QtWidgets import (
+    QMainWindow,
+    QApplication,
+    QStyleFactory,
+    QAction,
+    QMenu,
+    QToolBar,
+    QWidget,
+    QLabel,
+    QCheckBox,
+    QComboBox,
+    QTabWidget,
+    QDockWidget)
 
+#from res.img_rc import *
 from .editor import CodeEditor
 from .preview import previewWidget
 from .flow_layout import QFlowLayout
-from res.img_rc import *
+
 
 class MainWinBase(QMainWindow):
     def __init__(self):
@@ -33,10 +46,12 @@ class MainWinBase(QMainWindow):
         self.documents = {}
 
         self.createActions()
+        self.themeCombo = QComboBox()
         self.createMenubar()
         self.createContexMenus()
         self.createToolbars()
         self.createStatusBar()
+        self.colorPanelLayout = QFlowLayout()
         self.createDocks()
         self.createMainWidget()
 
@@ -63,11 +78,12 @@ class MainWinBase(QMainWindow):
                 action.triggered.connect(slot)
             return action
 
-        def keys2str(standardkey): return "".join(
-            ("(", QKeySequence(standardkey).toString(), ")"))
+        def keys2str(standardkey):
+            return "".join(
+                ("(", QKeySequence(standardkey).toString(), ")"))
 
         self.actions["new"] = createAct(
-            self.tr("&New","&New"),
+            self.tr("&New", "&New"),
             self.tr("new") +
             keys2str(
                 QKeySequence.New),
@@ -88,11 +104,20 @@ class MainWinBase(QMainWindow):
             QKeySequence.Save,
             ':appres.img/save.png')
         self.actions["saveas"] = createAct(
-            self.tr("&Save as..."), self.tr("Save as..."), None, ':appres.img/SaveAs.png')
+            self.tr("&Save as..."),
+            self.tr("Save as..."),
+            None,
+            ':appres.img/SaveAs.png')
         self.actions["export"] = createAct(
-            self.tr("&ExportQss"), self.tr("ExportQss"), "Ctrl+Alt+E", ':appres.img/export5.png')
+            self.tr("&ExportQss"),
+            self.tr("ExportQss"),
+            "Ctrl+Alt+E",
+            ':appres.img/export5.png')
         self.actions["exit"] = createAct(
-            self.tr("&Exit"), self.tr("Exit"), "Ctrl+Q", ':appres.img/close.png')
+            self.tr("&Exit"),
+            self.tr("Exit"),
+            "Ctrl+Q",
+            ':appres.img/close.png')
         self.actions["undo"] = createAct(
             self.tr("&Undo"),
             self.tr("Undo") +
@@ -143,15 +168,27 @@ class MainWinBase(QMainWindow):
             QKeySequence.Replace,
             ':appres.img/replace.png')
         self.actions["fontup"] = createAct(
-            self.tr("&BiggerFont"), self.tr("Bigger Font"), None, ':appres.img/fontup.png')
+            self.tr("&BiggerFont"),
+            self.tr("Bigger Font"),
+            None,
+            ':appres.img/fontup.png')
         self.actions["fontdown"] = createAct(
-            self.tr("&SmallerFont"),self.tr("Smaller Font"), None, ':appres.img/fontdown.png')
+            self.tr("&SmallerFont"),
+            self.tr("Smaller Font"),
+            None,
+            ':appres.img/fontdown.png')
         self.actions["echospace"] = createAct(
-            self.tr("&Space"), self.tr("Show Spaces"), None, ':appres.img/space.png')
+            self.tr("&Space"),
+            self.tr("Show Spaces"),
+            None,
+            ':appres.img/space.png')
         self.actions["echoeol"] = createAct(
             self.tr("&Eol"), self.tr("Show Eol"), None, ':appres.img/eol.png')
         self.actions["autowrap"] = createAct(
-            self.tr("&AutoWrap"), self.tr("Auto wrap text"), None, ":appres.img/autowrap.png")
+            self.tr("&AutoWrap"),
+            self.tr("Auto wrap text"),
+            None,
+            ":appres.img/autowrap.png")
 
         # self.fontcolorAct=QAction(QIcon(":appres.img/broadcast_send_fontcolor_normal.bmp"),"&FontColor",self)
         # self.fontcolorAct.setShortcut("Ctr+Shit+C")
@@ -174,7 +211,11 @@ class MainWinBase(QMainWindow):
             checkable=True)
         self.actions["ShowPreview"].setChecked(True)
 
-        self.actions["config"]=createAct(self.tr("&Config"),self.tr("settings."),None,":appres.img/config.png")
+        self.actions["config"] = createAct(
+            self.tr("&Config"),
+            self.tr("settings."),
+            None,
+            ":appres.img/config.png")
 
         self.actions["about"] = createAct(self.tr("&About"), self.tr("About"))
 
@@ -205,9 +246,9 @@ class MainWinBase(QMainWindow):
         searchMenu.addAction(self.actions["find"])
         searchMenu.addAction(self.actions["replace"])
 
-        self.submenus["recent"]=recentMenu
-        self.submenus["text"]=editMenu
-        self.submenus["search"]=searchMenu
+        self.submenus["recent"] = recentMenu
+        self.submenus["text"] = editMenu
+        self.submenus["search"] = searchMenu
 
         self.menus["File"].addAction(self.actions["new"])
         self.menus["File"].addAction(self.actions["open"])
@@ -239,7 +280,7 @@ class MainWinBase(QMainWindow):
 
     def createToolbars(self):
         checkbox = QCheckBox(self.tr("DisableQSS"))
-        self.themeCombo = QComboBox()
+        #self.themeCombo = QComboBox()
         checkbox.setToolTip(self.tr("Using system style, disable qss."))
         self.themeCombo.setToolTip(self.tr("Select system style."))
         self.themeCombo.addItems(QStyleFactory.keys())
@@ -254,7 +295,7 @@ class MainWinBase(QMainWindow):
         checkbox.stateChanged.connect(self.actions["DisableQss"].setChecked)
         #checkbox.stateChanged.connect(lambda x:self.actions["DisableQss"].setChecked(checkbox.isChecked()))
 
-        self.toolbars["Main"] = QToolBar(self.tr("Main","toolbar"))
+        self.toolbars["Main"] = QToolBar(self.tr("Main", "toolbar"))
         self.toolbars["Main"].addWidget(checkbox)
         self.toolbars["Main"].addWidget(self.themeCombo)
 
@@ -327,13 +368,10 @@ class MainWinBase(QMainWindow):
         self.addDockWidget(Qt.RightDockWidgetArea, self.docks["preview"])
 
         class ColorPanelWidget(QWidget):
-            def __init__(self):
-                super().__init__()
-
             def sizeHint(self):
                 return self.layout().sizeHint()
         colorPanelWidget = ColorPanelWidget()
-        self.colorPanelLayout = QFlowLayout()
+        #self.colorPanelLayout = QFlowLayout()
         colorPanelWidget.setLayout(self.colorPanelLayout)
         self.docks["color"].setWidget(colorPanelWidget)
         self.docks["preview"].setWidget(previewWidget())
@@ -344,4 +382,6 @@ class MainWinBase(QMainWindow):
     def createMainWidget(self):
         self.setCentralWidget(self.mainWidget)
         self.mainWidget.setTabBarAutoHide(True)
-        self.mainWidget.addTab(self.editor, self.tr("main","editor tab in tabwidget of mainwidget"))
+        self.mainWidget.addTab(
+            self.editor, self.tr(
+                "main", "editor tab in tabwidget of mainwidget"))

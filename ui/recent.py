@@ -6,43 +6,44 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 import os
 from PyQt5.QtWidgets import QAction
 
+
 class Recent():
     def __init__(self, openfn, menu=None):
         super().__init__()
-        self._pathes=[]
-        self.maxcount=4
-        self.open=openfn
-        self.menu=menu
+        self._pathes = []
+        self.maxcount = 4
+        self.open = openfn
+        self.menu = menu
 
     def _updateMenu(self, recentMenu=None):
-        if(recentMenu==None): recentMenu=self.menu
-        if(recentMenu!=None):
+        if recentMenu is None:
+            recentMenu = self.menu
+        if recentMenu is not None:
             recentMenu.clear()
             for path in self._pathes:
-                f=os.path.basename(path)
-                action=QAction(f,recentMenu)
+                f = os.path.basename(path)
+                action = QAction(f, recentMenu)
                 action.setToolTip(path)
                 action.setStatusTip(path)
-                action.triggered.connect(lambda _,p=path:self._recentact(p))
+                action.triggered.connect(lambda _, p=path: self._recentact(p))
                 recentMenu.addAction(action)
 
-    def _recentact(self,path):
-        self._isact=True
+    def _recentact(self, path):
         self.open(path)
 
-    def addFile(self,filePath):
-        if(filePath in self._pathes):
+    def addFile(self, filePath):
+        if filePath in self._pathes:
             self._pathes.remove(filePath)
         self._pathes.insert(0, filePath)
-        if(len(self._pathes)>self.maxcount):
+        if len(self._pathes) > self.maxcount:
             self._pathes.pop()
-        if(self.menu!=None):
+        if self.menu is not None:
             self._updateMenu()
 
     def setList(self, filelist):
-        self._pathes=filelist
-        if filelist==None:
-            self._pathes=[]
+        self._pathes = filelist
+        if filelist is None:
+            self._pathes = []
         self._updateMenu()
 
     def getList(self):

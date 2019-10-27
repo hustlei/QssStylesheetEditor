@@ -141,7 +141,7 @@ class QsciLexerQSS(QsciLexerCustom):
         return "QSS"
 
     def setDefaultFont(self, font):
-        for i in self.namelist.keys():
+        for i in self.namelist:
             self.setFont(font, i)
 
     def description(self, style):
@@ -158,8 +158,7 @@ class QsciLexerQSS(QsciLexerCustom):
         while start > 0:
             if(t[start] == "{" or start == 0):
                 break
-            else:
-                start -= 1
+            start -= 1
 
         # 2. Initialize the styling procedure
         # ------------------------------------
@@ -226,7 +225,6 @@ class QsciLexerQSS(QsciLexerCustom):
             elif self.isOperator(token):
                 opStyle = True  # 是否显示为Operator
 
-                op = token
                 lastState = state
                 if token == "/*":  # 注释
                     state = self.Comment
@@ -278,7 +276,7 @@ class QsciLexerQSS(QsciLexerCustom):
                     state = lastState
                     inParentheses = False
                 elif token == ",":
-                    if(not inBrace):
+                    if not inBrace:
                         lastState, state = state, self.Tag
                 elif token == ";":
                     if opPrev == "=":
@@ -493,88 +491,6 @@ class QsciLexerQSS(QsciLexerCustom):
             "text-decoration",
             "top",
             "width")
-        subcontrols0 = (
-            "::add-line",
-            "::add-page",
-            "::branch",
-            "::chunk",
-            "::close-button",
-            "::corner",
-            "::down-arrow",
-            "::down-button",
-            "::drop-down",
-            "::float-button",
-            "::groove",
-            "::indicator",
-            "::handle",
-            "::icon",
-            "::item",
-            "::left-arrow",
-            "::left-corner",
-            "::menu-arrow",
-            "::menu-button",
-            "::menu-indicator",
-            "::right-arrow",
-            "::pane",
-            "::right-corner",
-            "::scroller",
-            "::section",
-            "::separator",
-            "::sub-line",
-            "::sub-page",
-            "::tab",
-            "::tab-bar",
-            "::tear",
-            "::tearoff",
-            "::text",
-            "::title",
-            "::up-arrow",
-            "::up-button")
-        pseudostates0 = (
-            ":active",
-            ":adjoins-item",
-            ":alternate",
-            ":bottom",
-            ":checked",
-            ":closable",
-            ":closed",
-            ":default",
-            ":disabled",
-            ":editable",
-            ":edit-focus",
-            ":enabled",
-            ":exclusive",
-            ":first",
-            ":flat",
-            ":floatable",
-            ":focus",
-            ":has-children",
-            ":has-siblings",
-            ":horizontal",
-            ":hover",
-            ":indeterminate",
-            ":last",
-            ":left",
-            ":maximized",
-            ":middle",
-            ":minimized",
-            ":movable",
-            ":no-frame",
-            ":non-exclusive",
-            ":off",
-            ":on",
-            ":only-one",
-            ":open",
-            ":next-selected",
-            ":pressed",
-            ":previous-selected",
-            ":read-only",
-            ":right",
-            ":selected",
-            ":top",
-            ":unchecked",
-            ":vertical",
-            ":window")
         subcontrols = (
             "add-line",
             "add-page",
@@ -665,9 +581,8 @@ class QsciLexerQSS(QsciLexerCustom):
 
 
 if __name__ == '__main__':
-    from PyQt5.QtWidgets import *
+    from PyQt5.QtWidgets import QApplication, QStyleFactory
     import sys
-    from PyQt5.Qsci import *
 
     myCodeSample = r"""
     /* author:lei

@@ -4,28 +4,40 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
-                             QLabel, QLineEdit, QSpinBox, QPushButton, QComboBox, QFormLayout)
+from PyQt5.QtWidgets import (
+    QApplication,
+    QWidget,
+    QHBoxLayout,
+    QVBoxLayout,
+    QListWidget,
+    QStackedWidget,
+    QGroupBox,
+    QLabel,
+    QSpinBox,
+    QPushButton,
+    QComboBox,
+    QFormLayout)
 from PyQt5.QtCore import Qt
+
 
 class ConfDialog(QWidget):
     def __init__(self, mainwin):
         super(ConfDialog, self).__init__()
         self._app = QApplication.instance()  # 获取app实例
-        self.setWindowFlags(Qt.Tool|Qt.WindowStaysOnTopHint)
-        self.win=mainwin
+        self.setWindowFlags(Qt.Tool | Qt.WindowStaysOnTopHint)
+        self.win = mainwin
         self.initUI()
 
     def initUI(self):
-        mainLayout=QVBoxLayout()
-        layH1=QHBoxLayout()
-        layH2=QHBoxLayout()
-        self.conflist=QListWidget()
-        self.stack=QStackedWidget()
+        mainLayout = QVBoxLayout()
+        layH1 = QHBoxLayout()
+        layH2 = QHBoxLayout()
+        self.conflist = QListWidget()
+        self.stack = QStackedWidget()
         layH1.addWidget(self.conflist)
         layH1.addWidget(self.stack)
-        self.okbtn=QPushButton(self.tr("OK"))
-        self.cancelbtn=QPushButton(self.tr("Cancel"))
+        self.okbtn = QPushButton(self.tr("OK"))
+        self.cancelbtn = QPushButton(self.tr("Cancel"))
         layH2.addStretch(1)
         layH2.addWidget(self.okbtn)
         layH2.addWidget(self.cancelbtn)
@@ -33,22 +45,22 @@ class ConfDialog(QWidget):
         mainLayout.addLayout(layH2)
         self.setLayout(mainLayout)
 
-        #list
+        # list
         self.conflist.addItem(self.tr("General"))
         self.conflist.addItem(self.tr("Editor"))
         self.conflist.setMaximumWidth(150)
-        #general
-        w=QWidget()
-        layw=QVBoxLayout()
+        # general
+        w = QWidget()
+        layw = QVBoxLayout()
 
-        g=QGroupBox(self.tr("General"))
-        glayout=QFormLayout()
-        label1=QLabel(self.tr("select UI language:"))
-        self.langCombo=QComboBox()
-        self.setLangItems(self.langCombo) #.addItems(self.getLangList())
+        g = QGroupBox(self.tr("General"))
+        glayout = QFormLayout()
+        label1 = QLabel(self.tr("select UI language:"))
+        self.langCombo = QComboBox()
+        self.setLangItems(self.langCombo)  # .addItems(self.getLangList())
         self.langCombo.setMinimumWidth(150)
-        label2=QLabel(self.tr("Number of recent files:"))
-        self.recentcountspin=QSpinBox()
+        label2 = QLabel(self.tr("Number of recent files:"))
+        self.recentcountspin = QSpinBox()
         self.recentcountspin.setMinimum(1)
         self.recentcountspin.setMaximum(30)
         label3 = QLabel(self.tr("Font Size:"))
@@ -56,9 +68,9 @@ class ConfDialog(QWidget):
         self.fontsizespin.setMinimum(1)
         self.fontsizespin.setMaximum(30)
 
-        glayout.addRow(label1,self.langCombo)
-        glayout.addRow(label2,self.recentcountspin)
-        glayout.addRow(label3,self.fontsizespin)
+        glayout.addRow(label1, self.langCombo)
+        glayout.addRow(label2, self.recentcountspin)
+        glayout.addRow(label3, self.fontsizespin)
         g.setLayout(glayout)
 
         layw.addWidget(g)
@@ -66,9 +78,9 @@ class ConfDialog(QWidget):
         w.setLayout(layw)
         self.stack.addWidget(w)
 
-        #editor
+        # editor
         from ui.editor.settings import EditorSettings
-        w=EditorSettings(self.win.editor)
+        w = EditorSettings(self.win.editor)
         self.stack.addWidget(w)
 
         self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)
@@ -76,21 +88,23 @@ class ConfDialog(QWidget):
         self.cancelbtn.setVisible(False)
         self.okbtn.clicked.connect(self.close)
 
-        #action
-        self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
+        # action
+        self.fontsizespin.valueChanged.connect(
+            self.win.editor.font().setPointSize)
+
         def setCount(x):
-            self.win.recent.maxcount=x
+            self.win.recent.maxcount = x
         self.recentcountspin.valueChanged.connect(setCount)
         self.langCombo.currentIndexChanged.connect(self.chLang)
 
-    def setLangItems(self,combo):
+    def setLangItems(self, combo):
         from i18n.language import Language
-        langs=Language.getLangs()
+        langs = Language.getLangs()
         for l in langs:
-            combo.addItem(l["nativename"],l["lang"])
+            combo.addItem(l["nativename"], l["lang"])
         return True
 
-    def chLang(self,i):
+    def chLang(self, i):
         # print("Change language to "+lang)
         # try:
         #     if lang.lower()=="english":
@@ -101,21 +115,21 @@ class ConfDialog(QWidget):
         #     #self._app.retranslateUi(self)# 重新翻译界面
         # except Exception as Argument:
         #     print(Argument)
-        lang=self.langCombo.currentData()
-        print("Setting Language to "+lang)
-        self.win.config.getSec("general")["language"]=lang
+        lang = self.langCombo.currentData()
+        print("Setting Language to " + lang)
+        self.win.config.getSec("general")["language"] = lang
         print("restart soft to enable.")
 
     def show(self):
-        #default value
+        # default value
         self.fontsizespin.setValue(self.win.editor.font().pointSize())
         self.recentcountspin.setValue(self.win.recent.maxcount)
-        lang=self.win.config.getSec("general").get("language",None)
-        if lang==None:
-            lang="en"
+        lang = self.win.config.getSec("general").get("language", None)
+        if lang is None:
+            lang = "en"
         from i18n.language import Language
         for l in Language.getLangs():
-            if(l["lang"]==lang):
+            if l["lang"] == lang:
                 self.langCombo.setCurrentText(l["nativename"])
                 break
         super().show()

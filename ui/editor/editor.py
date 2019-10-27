@@ -6,6 +6,16 @@ __version__ = "1.0"
 
 import sys
 import os
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
+from PyQt5 import Qsci
+from PyQt5.Qsci import QsciScintilla
+from .lexer import lexer_qss
+from .enums import BadEnum, EditorEnums
+from .search import searchDialog
+from .settings import language_extensions
+
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 try:
     import chardet
@@ -14,17 +24,6 @@ except Exception:
     # import zipimport
     # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
     # chardet = importer.load_module('chardet')
-
-
-from ui.editor.lexer import QsciLexerQSS
-from .settings import *
-from .search import searchDialog
-from .enums import BadEnum, EditorEnums
-from PyQt5.QtGui import (QFont, QKeyEvent, QColor, QDropEvent)
-from PyQt5.QtCore import (pyqtSignal)
-from PyQt5.Qsci import *
-from PyQt5 import Qsci
-from .lexer import *
 
 
 class CodeEditor(QsciScintilla):
@@ -56,7 +55,7 @@ class CodeEditor(QsciScintilla):
         self.searchDialog.setReplaceMode(True)
         self.searchDialog.show()
 
-    def count(self, string: str, *, case: bool=False) -> int:
+    def count(self, string: str, *, case: bool = False) -> int:
         if case:
             counter = self.text().count(string)
         else:
@@ -78,9 +77,9 @@ class CodeEditor(QsciScintilla):
         super().mousePressEvent(QMouseEvent)
         self.mousePress.emit()
 
-    def dropEvent(self, QDropEvent):
-        if(QDropEvent.mimeData().hasUrls()):
-            self.drop.emit(QDropEvent)
+    def dropEvent(self, QDropEventObj):
+        if QDropEventObj.mimeData().hasUrls():
+            self.drop.emit(QDropEventObj)
 
     def _setDefaultConfig(self):
         """Set default configuration settings.
@@ -196,7 +195,7 @@ class CodeEditor(QsciScintilla):
         # Adjust margin if line numbers are on
         if 'marginLineNumbers' in config:
             if config['marginLineNumbers'] == (0, True):
-                font_metrics = QtGui.QFontMetrics(
+                font_metrics = QFontMetrics(
                     self.settings['marginsFont'])  # self.marginsFont())
                 self.setMarginWidth(0, font_metrics.width('000') + 5)
             else:
@@ -212,8 +211,7 @@ class CodeEditor(QsciScintilla):
         lexer = self.lexer()
         if lexer:
             return lexer.language()
-        else:
-            return 'None'
+        return 'None'
 
     def setLanguage(self, language):
         """Set syntax highlighting to the given language.
@@ -245,7 +243,7 @@ class CodeEditor(QsciScintilla):
         self.setLexer(self.lexer)
 
     def setBackgroundColor(self, color):
-        if(self.lexer):
+        if self.lexer:
             try:
                 self.lexer.setPapers(color)
             except Exception:
@@ -263,28 +261,28 @@ class CodeEditor(QsciScintilla):
         with open(filename, 'rb') as f:
             self.setEnabled(True)
             # lm=os.path.getsize(filename)
-            bytes = f.read()
-            l = min(len(bytes), 1024)
+            strbytes = f.read()
+            l = min(len(strbytes), 1024)
             try:
-                rst = chardet.detect(bytes[:l])
-                if(rst["confidence"] < 0.8):
-                    l = min(len(bytes), 256 * 1024)
-                    rst = chardet.detect(bytes[:l])  # ['encoding']
+                rst = chardet.detect(strbytes[:l])
+                if rst["confidence"] < 0.8:
+                    l = min(len(strbytes), 256 * 1024)
+                    rst = chardet.detect(strbytes[:l])  # ['encoding']
                 self.coding = rst["encoding"]
-                if(rst["confidence"] > 0.8):
-                    self.setText(bytes.decode(self.coding))
+                if rst["confidence"] > 0.8:
+                    self.setText(strbytes.decode(self.coding))
                 else:
-                    if(self.__isBin(bytes)):
+                    if self.__isBin(strbytes):
                         raise Exception
-                    else:
-                        self.coding = "bin?"
-                        self.setText(self.__byte2str(bytes))
-                        self.setReadOnly(True)
-                        self.setLanguage("None")
-                        self.setWrapMode(self.WrapWod)
+                    self.coding = "bin?"
+                    self.setText(self.__byte2str(strbytes))
+                    self.setReadOnly(True)
+                    self.setLanguage("None")
+                    self.setWrapMode(self.WrapWod)
             except BaseException:  # Exception:
                 self.coding = "none"
-                self.setText(self.tr("can't open this file, it may be a binary file."))
+                self.setText(
+                    self.tr("can't open this file, it may be a binary file."))
                 self.setEnabled(False)
                 return False
             self.setModified(False)
@@ -292,17 +290,17 @@ class CodeEditor(QsciScintilla):
             return True
 
     @staticmethod
-    def __byte2str(bytes, echoescape=True):
-        s=""
-        if echoescape and len(bytes) < 11*1024:
-            for b in bytes:#ord(chr(b))
-                if b < 0x30:#>= 0x80 or c.isalnum() or c == "-" or c == "_":
-                    s+=" NUL "
+    def __byte2str(strbytes, echoescape=True):
+        s = ""
+        if echoescape and len(strbytes) < 11 * 1024:
+            for b in strbytes:  # ord(chr(b))
+                if b < 0x30:  # >= 0x80 or c.isalnum() or c == "-" or c == "_":
+                    s += " NUL "
                 else:
-                    c=chr(b)
-                    s+=c
+                    c = chr(b)
+                    s += c
         else:
-            str_list = [chr(b) for b in bytes if b > 0x30]
+            str_list = [chr(b) for b in strbytes if b > 0x30]
             s = "".join(str_list)
         return s
 
@@ -310,7 +308,7 @@ class CodeEditor(QsciScintilla):
         chr_list = [b for b in strbytes if b > 0x30]
         count = len(chr_list)
         f = count / len(strbytes)
-        return True if f > 0.7 else False
+        return f > 0.7
 
     def save(self, filename):
         """Save the editor contents to the given filename.
@@ -325,12 +323,13 @@ class CodeEditor(QsciScintilla):
     # Tools
     ###
 
+    @classmethod
     def guessLang(cls, filename):
         """Guess the language based on the given filename's extension, and return
         the getName of the language, or the string 'None' if no extension matches.
         """
         # Get the file's extension
-        root, ext = os.path.splitext(filename)
+        _, ext = os.path.splitext(filename)
 
         # See if any known language extensions match
         for language, extensions in language_extensions:
@@ -338,7 +337,7 @@ class CodeEditor(QsciScintilla):
                 return language
 
         # No match -- asume plain text
-        if(ext == ".txt" or ext == ".text"):
+        if ext in (".txt", ".text"):
             return 'None'
         return "QSS"
 
@@ -359,6 +358,7 @@ class CodeEditor(QsciScintilla):
         r, g, b = self.__BGRint2RGB(bgr_int)
         return QColor(r, g, b)
 
+    @classmethod
     def __BGRint2RGB(cls, bgr_int):
         """Convert an integer in BGR format to an ``(r, g, b)`` tuple.
 
