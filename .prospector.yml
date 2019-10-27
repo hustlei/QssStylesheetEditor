@@ -8,6 +8,17 @@ ignore-patterns:
   - ^setup.py$
   - __init__.py$
   - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
+  
+ignore-paths:
+  - data
+  - font
+  - img
+  - bak  
+  - installer
+  - tests
+  - toml
+  - __init__.py
+  - splash.py
 
 pylint-config-file: .pylintrc
 # pylint:    
@@ -72,7 +83,7 @@ pyroma:
     
 mccabe:
   options:
-    max-complexity: 10
+    max-complexity: 15
 
 pep257:
   disable:
