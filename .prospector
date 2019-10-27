@@ -9,27 +9,29 @@ ignore-patterns:
   - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
 
 pylint:
-  disable:
-    - trailing-whitespace
-    - missing-final-newline
-    - too-few-public-methods
-    - too-many-public-methods
-    - deprecated-lambda
-    - bad-builtin
-    - star-args
-    - global-statement
-    - assignment-from-none
-    - unused-format-string-key
-    - W5103
+    run: false
+    
+  # disable:
+    # - trailing-whitespace
+    # - missing-final-newline
+    # - too-few-public-methods
+    # - too-many-public-methods
+    # - deprecated-lambda
+    # - bad-builtin
+    # - star-args
+    # - global-statement
+    # - assignment-from-none
+    # - unused-format-string-key
+    # - W5103
 
-  options:
-    max-locals: 15
-    max-returns: 6
-    max-branches: 15
-    max-statements: 60
-    min-public-methods: 1
-    max-public-methods: 20
-    max-line-length: 99
+  # options:
+    # max-locals: 15
+    # max-returns: 6
+    # max-branches: 15
+    # max-statements: 60
+    # min-public-methods: 1
+    # max-public-methods: 20
+    # max-line-length: 99
 
 pep8:
   options:
