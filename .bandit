@@ -1,0 +1,2 @@
+[bandit]
+exclude: .git, .github, .idea, installer, data, dist
