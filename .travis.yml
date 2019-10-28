@@ -42,9 +42,10 @@ install:
     - pip3 install -U pytest
     - pip3 install -U pytest-qt
     - pip3 install -U coveralls
+    - pip3 install -U pytest-cov
     
 script:
-    - pytest || python3 -m pytest    # pytest command won't be found on osx
+    - pytest --cov=. || python3 -m pytest --cov=. # pytest command won't be found on osx
     # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
     # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
     #- python3 app.py || py app.py
