@@ -74,9 +74,9 @@ class Language():
             "../config/config.toml")
         config = ConfBase()
         config.read(configfile)
-        Language.lang = config.getSec("general").get("language", None)
+        Language.lang = config.getSec("general").get("language", "")
 
-        if Language.lang is None:
+        if Language.lang.strip() == "":
             # import locale
             # lang,country=locale.getdefaultlocale()
             Language.lang = QLocale.system().name()  # 语言_国家”形式形成的字符串，比如zh_CN。
@@ -93,7 +93,7 @@ class Language():
         lang = Language.getLang()
         qmfile = None
         for l in langs:
-            if l["lang"] == lang:
+            if lang in (l["lang"], l["lang"].replace("-", "_")):
                 qmfile = l["qmfile"]
                 break
         if qmfile is None:

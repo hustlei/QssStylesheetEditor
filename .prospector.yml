@@ -20,6 +20,10 @@ ignore-paths:
   - __init__.py
   - splash.py
 
+uses:
+  - PyQt5
+  - Qscintilla
+
 pylint-config-file: .pylintrc
 # pylint:    
   # disable:
