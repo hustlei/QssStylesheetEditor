@@ -5,9 +5,8 @@
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/220d511b3ab146d0b03fef0245e00525)](https://www.codacy.com/manual/hustlei/QssStylesheetEditor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hustlei/QssStylesheetEditor&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/hustlei/QssStylesheetEditor/badge.svg?branch=master)](https://coveralls.io/github/hustlei/QssStylesheetEditor?branch=master)
-[![Platform](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/.badge/platform.svg)](https://travis-ci.com/hustlei/QssStylesheetEditor)
+[![Platform](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/res/img/badge/platform.svg)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
-![Platform](https://img.shields.io/static/v1?label=plateform&message=windows&logo=apple)
 
 <br>
 QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，免费开源。
