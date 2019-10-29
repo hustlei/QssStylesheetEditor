@@ -1,28 +1,30 @@
 allow-shorthand: false
 
-# inherits:
-  # - strictness_veryhigh
+strictness: medium
+
+inherits:
+    - strictness_high
 
 ignore-patterns:
-  - (^|\/)\..+
-  - ^setup.py$
-  - __init__.py$
-  - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
+    - (^|\/)\..+
+    - ^setup.py$
+    - ^__init__.py$
+    - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
+    - (^|/)bak(/|$)
+    - (^|/)toml(/|$)
+    - ^splash.py$
   
 ignore-paths:
-  - data
-  - font
-  - img
-  - bak  
-  - installer
-  - tests
-  - toml
-  - __init__.py
-  - splash.py
+    - docs
+    - data
+    - font 
+    - installer
+    - tests
 
 uses:
-  - PyQt5
-  - Qscintilla
+    - PyQt5
+    - Qscintilla
+    - chardet
 
 pylint-config-file: .pylintrc
 # pylint:    
@@ -52,45 +54,45 @@ pylint-config-file: .pylintrc
     # max-line-length: 99
 
 pep8:
-  options:
-    max-line-length: 99
-    single-line-if-stmt: n
-  disable:
-    - E304
-    - E265
-    - E266
-    - W291
-    - W292
-    - W391
-    - N811
-    - N812
-    - N813
-    - N814
+    options:
+        max-line-length: 99
+        single-line-if-stmt: n
+    disable:
+        - E304
+        - E265
+        - E266
+        - W291
+        - W292
+        - W391
+        - N811
+        - N812
+        - N813
+        - N814
     
 pyflakes:
-  disable:
-    - F403
-    - F810
+    disable:
+        - F403
+        - F810
 
 frosted:
-  disable:
-    - E103
-    - E306
+    disable:
+        - E103
+        - E306
     
 pyroma:
-  disable:
-    - PYR15
-    - PYR16
-    - PYR17
-    - PYR18
-    - PYR19
+    disable:
+        - PYR15
+        - PYR16
+        - PYR17
+        - PYR18
+        - PYR19
     
 mccabe:
-  options:
-    max-complexity: 15
+    options:
+        max-complexity: 15
 
 pep257:
-  disable:
-    - D000
-    - D400
-    - D401
+    disable:
+        - D000
+        - D400
+        - D401
