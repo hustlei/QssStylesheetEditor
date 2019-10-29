@@ -19,21 +19,26 @@ except Exception:
     print('__file__ of app.py load err')
 
 
+class App(QApplication):
+    def __init__(self):
+        super().__init__(sys.argv)
+        # sys.setrecursionlimit(1500)
+
+    def run(self):
+        print("starting...")
+        Language.setTrans()
+        splash = SplashScreen("res/splash.png")
+        splash.loadProgress()
+        from ui.mainwin import MainWin
+        win = MainWin()
+        win.show()
+        splash.finish(win)
+        sys.exit(self.exec_())
+
 def main():
     """
     main function for start QssStylesheetEditor
     """
-    # sys.setrecursionlimit(1500)
-    app = QApplication(sys.argv)
-    print("starting...")
-    Language.setTrans()
-    splash = SplashScreen("res/splash.png")
-    splash.loadProgress()
-    from ui.mainwin import MainWin
-    win = MainWin()
-    win.show()
-    splash.finish(win)
-    sys.exit(app.exec_())
-
+    App().run()
 
 main()
