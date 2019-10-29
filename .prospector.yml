@@ -1,57 +1,30 @@
-allow-shorthand: false
-
-strictness: medium
-
 inherits:
     - strictness_high
 
 ignore-patterns:
-    - (^|\/)\..+
-    - ^setup.py$
-    - ^__init__.py$
-    - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$
-    - (^|/)bak(/|$)
-    - (^|/)toml(/|$)
-    - ^splash.py$
+    - (^|\/|\\)\..+
+    - (^|\/|\\)setup.py$
+    - (^|\/|\\)__init__.py$     #reimported modules in __init__, but not used
+    - (^|\/|\\)splash.py$       #imported many modules in splash, but not used
+    - _[vV][0-9.\-_]+[.]py$$|[.]old[.]py$  #old version scripts
+    - (^|\/|\\)bak(\/|\\|$).*   #old version scripts
+    - (^|\/|\\)toml(\/|\\|$).*  #3rdparty scripts
   
 ignore-paths:
     - docs
     - data
-    - font 
-    - installer
-    - tests
+    - font
+    - installer     #scripts for installer binary
+    - tests         #tests scripts
 
-uses:
-    - PyQt5
-    - Qscintilla
-    - chardet
+# uses: uses must be name of django, celery, flask
+
+# default tools: profile-validator pep8 pyflakes mccabe dodgy
+# without tools: pylint pydocstyle
 
 pylint-config-file: .pylintrc
-# pylint:    
-  # disable:
-    # - fixme
-    # - bad-continuation
-    # - trailing-whitespace
-    # - missing-final-newline
-    # - too-few-public-methods
-    # - too-many-public-methods
-    # - deprecated-lambda
-    # - bad-builtin
-    # - star-args
-    # - global-statement
-    # - assignment-from-none
-    # - unused-format-string-key
-    # - W5103
-
-  # options:
-    # max-locals: 15
-    # max-returns: 6
-    # max-branches: 15
-    # max-statements: 60
-    # min-public-methods: 1
-    # max-public-methods: 20
-    # max-module-lines: 1000
-    # max-line-length: 99
+# pylint:
+    # run: false
 
 pep8:
     options:
@@ -68,6 +41,9 @@ pep8:
         - N812
         - N813
         - N814
+        - N802
+        - N803
+        - N806
     
 pyflakes:
     disable:

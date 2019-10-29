@@ -30,9 +30,9 @@ class App(QApplication):
         splash = SplashScreen("res/splash.png")
         splash.loadProgress()
         from ui.mainwin import MainWin
-        win = MainWin()
-        win.show()
-        splash.finish(win)
+        self.mainwin = MainWin()
+        self.mainwin.show()
+        splash.finish(self.mainwin)
         sys.exit(self.exec_())
 
 def main():

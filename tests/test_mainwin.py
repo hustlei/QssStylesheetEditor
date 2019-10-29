@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-test for qsst module.
+test for ui module.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
