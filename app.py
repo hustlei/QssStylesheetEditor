@@ -24,7 +24,10 @@ class App(QApplication):
         super().__init__(sys.argv)
         # sys.setrecursionlimit(1500)
 
-    def run(self):
+    def run(self, pytest = False):
+        """
+        :param pytest: if run is true start event loop, else just for test
+        """
         print("starting...")
         Language.setTrans()
         splash = SplashScreen("res/splash.png")
@@ -33,12 +36,6 @@ class App(QApplication):
         self.mainwin = MainWin()
         self.mainwin.show()
         splash.finish(self.mainwin)
-        sys.exit(self.exec_())
+        if not pytest:
+            sys.exit(self.exec_())
 
-def main():
-    """
-    main function for start QssStylesheetEditor
-    """
-    App().run()
-
-main()
