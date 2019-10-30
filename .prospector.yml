@@ -20,9 +20,9 @@ ignore-paths:
 # default tools: profile-validator pep8 pyflakes mccabe dodgy
 # without tools: pylint pydocstyle
 
-pylint-config-file: .pylintrc
-# pylint:
-    # run: false
+#pylint-config-file: .pylintrc
+pylint: # run pylint in prospector will cause an error
+    run: false
 
 pep8:
     options:
