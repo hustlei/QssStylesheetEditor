@@ -16,14 +16,8 @@ sys.path.append(os.path.abspath('..'))
 @fixture
 def conf():
     obj = Config()
-    filesec = obj._getSec("file")
-    obj.listNodeAppend("recent", "eeee", filesec)
-    fontsec = obj._getSubSec(obj._getSec("editor"), "font")
-    fontsec["size"] = 12
-    obj.rmSec("editor0")
-    return obj
-
-
+    return obj 
+    
 def test_sec(conf):
     conf.getSec("xx")
     assert "xx" in conf.dict
@@ -43,3 +37,4 @@ def test_list(conf):
     assert "child2" == conf.dict["node"][1]
     conf.listNodeInsert("node","ccc")
     assert "ccc" == conf.dict["node"][0]
+    

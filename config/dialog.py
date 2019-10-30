@@ -133,3 +133,11 @@ class ConfDialog(QWidget):
                 self.langCombo.setCurrentText(l["nativename"])
                 break
         super().show()
+
+if __name__ == "__main__":
+    import sys
+    app = QApplication(sys.argv)
+    win = QWidget()
+    dialog = ConfDialog(win)
+    dialog.show()
+    sys.exit(app.exec())
