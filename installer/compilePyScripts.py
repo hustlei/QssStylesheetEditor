@@ -41,6 +41,9 @@ if not os.path.exists(distroot):
 
 
 def clearDir(path):
+    """
+    remove all files and subdirectory in dist directory
+    """
     delList = os.listdir(path)
     for f in delList:
         filePath = os.path.join(path, f)
@@ -99,7 +102,7 @@ copyfiles(os.path.join(root, r"dist/libs"), distroot)  # copy app.exe
 # compile python 脚本并copy到目标文件夹
 print("\ncompile all scripts and copy to dist/build.")
 copyexts = (".zip", ".bat", ".qm", ".toml", ".conf")
-pexclude = re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$')
+pexclude = re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$|_bak[.]py$')
 
 
 def compile_copy(path, distdir):

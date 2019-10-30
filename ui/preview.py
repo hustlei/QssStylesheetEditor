@@ -4,7 +4,7 @@
 
 load preview widgets for view sytle effect
 
-+ 常用组件:
++ general(常用组件):
     - Label
     - LineEdit,TextEdit
     - PushButton,ToolButton,CommandlinkButton
@@ -14,19 +14,19 @@ load preview widgets for view sytle effect
     - Slider,ProgressBar,ScrollBar
     - Dial,LCDNumber,KeySequenceEdit
     - Graphics
-+ 布局
++ layout(布局)
     - VBox,HBox
     - Grid
     - Form
     - Spliter
     - DockWidget,MDI
-+ 容器组件
++ container(容器组件)
     - ScrollArea
     - GroupBox
     - StackedWidget
     - ToolBox
     - TabWidget
-+ 高级组件
++ advanced(高级组件)
     - Dialog
         * massagebox,input,file,color
         * https://blog.csdn.net/taiyang1987912/article/details/31770757
@@ -59,6 +59,9 @@ from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QLineEdit, QTextEdit
 #from res.img_rc import *
 
 class previewWidget(QTabWidget):
+    """
+    widget that preview qss effect in previewpannel
+    """
     def __init__(self):
         super().__init__()
         tab1 = QWidget(self)
@@ -96,6 +99,7 @@ class previewWidget(QTabWidget):
     #         self.modeLabel.setText("配色模式")
 
     def setupTab1(self, tab1):
+        """Basic widgets for preview panel"""
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
         scrollArea.setWidgetResizable(True)
@@ -295,6 +299,7 @@ class previewWidget(QTabWidget):
         layout.addStretch(1)
 
     def setupTab2(self, tab2):
+        """Special widgets for preview panel"""
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
         scrollArea.setWidgetResizable(True)
@@ -474,6 +479,7 @@ class previewWidget(QTabWidget):
         layout.addStretch(1)
 
     def setupTab3(self, tab3):
+        """Drawing widgets for preview panel"""
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
         mainWidget = QWidget()
@@ -618,6 +624,7 @@ class previewWidget(QTabWidget):
         layout.addStretch(1)
 
     def setupTab4(self, tab4):
+        """Layout widgets for preview panel"""
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
         scrollArea.setWidgetResizable(True)
@@ -699,6 +706,7 @@ class previewWidget(QTabWidget):
         layout.addStretch(1)
 
     def setupTab5(self, tab):
+        """Container widgets for preview panel"""
         scrollContainer = QVBoxLayout()
         scrollArea = QScrollArea()
         mainWidget = QWidget()
@@ -811,6 +819,7 @@ class previewWidget(QTabWidget):
         lay2.addWidget(t4)
 
     def setupTab6(self, tab):
+        """Advance widgets for preview panel"""
         container = QHBoxLayout()
         scrollArea = QScrollArea()
         scrollArea.setWidgetResizable(True)
