@@ -17,7 +17,13 @@ def win():
     win = MainWin()
     return win
 
-
+def test_confDialog(qtbot, win):
+    win.confDialog.show()
+    qtbot.waitForWindowShown(win.confDialog)
+    
+def test_findDialog(qtbot, win):
+    win.editor.searchDialog.show()
+    qtbot.waitForWindowShown(win.editor.searchDialog)
 
 def test_mainwin(qtbot, win):
     win.show()
