@@ -4,16 +4,16 @@ inherits:
 ignore-patterns:
     - (^|\/|\\)\..+
     - (^|\/|\\)setup.py$
-    - (^|\/|\\)splash.py$       #imported many modules in splash, but not used
+    - .*(^|\/|\\)splash.py$       #imported many modules in splash, but not used
     # - (^|\/|\\)__init__.py$     #reimported modules in __init__, but not used
     - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$)  #old version scripts
-    - (^|\/|\\)bak(\/|\\|$).*   #old version scripts
-    - (^|\/|\\)toml(\/|\\|$).*  #3rdparty scripts
+    - .*(^|\/|\\)bak(\/|\\|$).*   #old version scripts
+    - .*(^|\/|\\)toml(\/|\\|$).*  #3rdparty scripts
   
 ignore-paths:
-    - res
-    - installer     #scripts for installer binary
-    - tests         #tests scripts
+    - /res
+    - /installer     #scripts for installer binary
+    - /tests         #tests scripts
 
 # uses: uses must be name of django, celery, flask
 

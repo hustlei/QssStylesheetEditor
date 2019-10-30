@@ -98,7 +98,7 @@ class ConfBase:
                 sec[node].remove(child)
         sec[node].append(child)
 
-    def listNodeInset(self, node, child, sec=None):
+    def listNodeInsert(self, node, child, sec=None):
         if sec is None:
             sec = self.dict
         if node not in sec or not isinstance(sec[node], list):
