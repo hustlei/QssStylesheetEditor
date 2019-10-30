@@ -9,21 +9,16 @@ extension-pkg-whitelist=PyQt5
 # paths.
 ignore=CVS,
        .git,
-       .github,
-       .idea,
        installer,
-       tests, 
-       data,
-       font,
-       img,
+       res,
        bak,
        toml,
-       #__init__.py, will cause err
        splash.py
+       #__init__.py, will cause err
 
 # Add files or directories matching the regex patterns to the blacklist. The
 # regex matches against base names, not paths.
-ignore-patterns=_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$|_bak[.]py$
+ignore-patterns=.*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$)
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
