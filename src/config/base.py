@@ -4,10 +4,10 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import toml
 import os
 import sys
-sys.path.append(os.path.dirname(__file__))
+#sys.path.append(os.path.dirname(__file__))
+from . import toml
 
 
 class ConfBase:

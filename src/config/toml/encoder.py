@@ -2,7 +2,7 @@ import datetime
 import re
 import sys
 
-from toml.decoder import InlineTableDict
+from .decoder import InlineTableDict
 
 if sys.version_info >= (3, ):
     unicode = str
