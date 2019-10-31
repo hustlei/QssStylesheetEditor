@@ -9,7 +9,6 @@ class QsciLexerQSS(QsciLexerCSS):
     """
     Subclass to implement some additional lexer dependent methods.
     """
-
     def __init__(self, parent=None):
         """
         Constructor
@@ -19,10 +18,7 @@ class QsciLexerQSS(QsciLexerCSS):
         QsciLexerCSS.__init__(self, parent)
 
         self.commentString = "#"
-        self.streamCommentString = {
-            'start': '/* ',
-            'end': ' */'
-        }
+        self.streamCommentString = {'start': '/* ', 'end': ' */'}
 
         self.keywordSetDescriptions = [
             self.tr("CSS1 Properties"),
@@ -52,8 +48,7 @@ class QsciLexerQSS(QsciLexerCSS):
         @param style style to check (integer)
         @return flag indicating a string style (boolean)
         """
-        return style in [QsciLexerCSS.DoubleQuotedString,
-                         QsciLexerCSS.SingleQuotedString]
+        return style in [QsciLexerCSS.DoubleQuotedString, QsciLexerCSS.SingleQuotedString]
 
     def defaultKeywords(self, kwSet):
         """

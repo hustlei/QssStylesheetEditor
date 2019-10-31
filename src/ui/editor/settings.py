@@ -8,17 +8,8 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 import os
 from PyQt5.QtCore import Qt, QVariant
-from PyQt5.QtWidgets import (
-    QWidget,
-    QGroupBox,
-    QVBoxLayout,
-    QPushButton,
-    QLabel,
-    QHBoxLayout,
-    QSpinBox,
-    QCheckBox,
-    QComboBox,
-    QColorDialog)
+from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout,
+                             QSpinBox, QCheckBox, QComboBox, QColorDialog)
 
 language_extensions = (
     ('None', '.txt'),
@@ -110,17 +101,23 @@ _settings = {
         'help': 'Number of characters per line before wrapping occurs',
     },
     'tabWidth': {
-        'label': 'Tab width',
-        'type': 'number',
-        'help': 'Width of tabs in characters, or the number of'
-                ' spaces to insert when tab is pressed',
+        'label':
+        'Tab width',
+        'type':
+        'number',
+        'help':
+        'Width of tabs in characters, or the number of'
+        ' spaces to insert when tab is pressed',
     },
 
     # Multiple-selection settings
     'braceMatching': {
-        'label': 'Brace Matching',
-        'type': 'combo',
-        'help': 'Whether and how to highlight matching {} [] () braces',
+        'label':
+        'Brace Matching',
+        'type':
+        'combo',
+        'help':
+        'Whether and how to highlight matching {} [] () braces',
         'values': (
             ('None', 'NoBraceMatch'),
             ('Strict', 'StrictBraceMatch'),
@@ -148,9 +145,12 @@ _settings = {
         ),
     },
     'folding': {
-        'label': 'Folding',
-        'type': 'combo',
-        'help': 'What kind of icons to display for code-folding',
+        'label':
+        'Folding',
+        'type':
+        'combo',
+        'help':
+        'What kind of icons to display for code-folding',
         'values': (
             ('None', 'NoFoldStyle'),
             ('Plain', 'PlainFoldStyle'),
@@ -161,9 +161,12 @@ _settings = {
         ),
     },
     'whitespaceVisibility': {
-        'label': 'Whitespace',
-        'type': 'combo',
-        'help': 'Whether whitespace is indicated with visible markers',
+        'label':
+        'Whitespace',
+        'type':
+        'combo',
+        'help':
+        'Whether whitespace is indicated with visible markers',
         'values': (
             ('Invisible', 'WsInvisible'),
             ('Visible', 'WsVisible'),
@@ -184,9 +187,7 @@ _settings = {
         'label': 'Language',
         'type': 'combo',
         'help': 'Syntax highlighting language',
-        'values': [
-            (lang, lang) for (lang, ext) in language_extensions
-        ],
+        'values': [(lang, lang) for (lang, ext) in language_extensions],
     },
 
     # TODO: Need a getter for this
@@ -200,79 +201,63 @@ _settings = {
     # 'label': 'Annotation Display',
     # 'type': 'combo',
     # 'values': (
-    #('Hidden', 'AnnotationHidden'),
-    #('Standard', 'AnnotationStandard'),
-    #('Boxed', 'AnnotationBoxed'),
+    # ('Hidden', 'AnnotationHidden'),
+    # ('Standard', 'AnnotationStandard'),
+    # ('Boxed', 'AnnotationBoxed'),
     # ),
     # },
     # 'autoCompletionSource': {
     # 'label': 'Auto Completion Source',
     # 'type': 'combo',
     # 'values': (
-    #('None', 'AcsNone'),
-    #('All', 'AcsAll'),
-    #('Document', 'AcsDocument'),
-    #('APIs', 'AcsAPIs'),
+    # ('None', 'AcsNone'),
+    # ('All', 'AcsAll'),
+    # ('Document', 'AcsDocument'),
+    # ('APIs', 'AcsAPIs'),
     # ),
     # },
     # 'callTipsStyle': {
     # 'label': 'Call Tips Style',
     # 'type': 'combo',
     # 'values': (
-    #('None', 'CallTipsNone'),
-    #('No Context', 'CallTipsNoContext'),
-    #('No Auto-completion Context', 'CallTipsNoAutoCompletionContext'),
-    #('Context', 'CallTipsContext'),
+    # ('None', 'CallTipsNone'),
+    # ('No Context', 'CallTipsNoContext'),
+    # ('No Auto-completion Context', 'CallTipsNoAutoCompletionContext'),
+    # ('Context', 'CallTipsContext'),
     # ),
     # },
-
 }
 
 # Setting groups
 _setting_groups = (
-    ('Colors',
-        (
-            'color',
-            'paper',
-        )
-     ),
-
-    ('Indentation',
-        (
-            'tabWidth',
-            'tabIndents',
-            'backspaceUnindents',
-            'autoIndent',
-            'indentationGuides',
-            'indentationsUseTabs',
-        )
-     ),
-
-    ('Wrapping',
-        (
-            'edgeMode',
-            'wrapMode',
-            'edgeColumn',
-        )
-     ),
-
-    ('Formatting',
-        (
-            'whitespaceVisibility',
-            'eolMode',
-            'eolVisibility',
-        )
-     ),
-
-    ('Coding aids',
-        (
-            'language',
-            'folding',
-            'braceMatching',
-        )
-     ),
+    ('Colors', (
+        'color',
+        'paper',
+    )),
+    ('Indentation', (
+        'tabWidth',
+        'tabIndents',
+        'backspaceUnindents',
+        'autoIndent',
+        'indentationGuides',
+        'indentationsUseTabs',
+    )),
+    ('Wrapping', (
+        'edgeMode',
+        'wrapMode',
+        'edgeColumn',
+    )),
+    ('Formatting', (
+        'whitespaceVisibility',
+        'eolMode',
+        'eolVisibility',
+    )),
+    ('Coding aids', (
+        'language',
+        'folding',
+        'braceMatching',
+    )),
 )
-
 
 # Write-only color settings.
 # FIXME: Can't effectively include these until getters are written.
@@ -309,7 +294,6 @@ _other_color_settings = (
 class EditorSettings(QWidget):
     """A dialog window for configuring a QsciScintilla editor.
     """
-
     def __init__(self, editor):
         super().__init__()
         self.editor = editor
@@ -353,7 +337,7 @@ class EditorSettings(QWidget):
         main_layout.addLayout(columns_layout)
 
         # OK button at the bottom
-        #ok = QPushButton('OK', self)
+        # ok = QPushButton('OK', self)
         # ok.clicked.connect(self.accept)
         # main_layout.addWidget(ok)
 
@@ -431,7 +415,7 @@ class EditorSettings(QWidget):
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            value = str(data)  # .toString())
+            value = str(data)    # .toString())
             self.editor.set_config(name, value)
 
         # Connect event handler
@@ -480,6 +464,7 @@ class EditorSettings(QWidget):
     def _create_line_number_checkbox(self):
         """Return a widget for enabling/disabling line numbers.
         """
+
         # Line numbers
         def checkbox_changed(state):
             """Event handler for the given setting.
@@ -507,6 +492,7 @@ if __name__ == "__main__":
     import sys
 
     from ui.editor import CodeEditor
+
     app = QApplication(sys.argv)
     win = QWidget()
     ed = CodeEditor()

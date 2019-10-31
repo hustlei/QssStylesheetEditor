@@ -4,8 +4,7 @@
 """
 
 from PyQt5.QtCore import QPoint, QRect, QSize, Qt
-from PyQt5.QtWidgets import (QApplication, QLayout, QPushButton, QSizePolicy,
-                             QWidget)
+from PyQt5.QtWidgets import (QApplication, QLayout, QPushButton, QSizePolicy, QWidget)
 
 
 class QFlowLayout(QLayout):
@@ -74,10 +73,10 @@ class QFlowLayout(QLayout):
         lineHeight = 0
         for item in self.itemList:
             wid = item.widget()
-            spaceX = self.spacing() + wid.style().layoutSpacing(QSizePolicy.PushButton,
-                                                                QSizePolicy.PushButton, Qt.Horizontal)
-            spaceY = self.spacing() + wid.style().layoutSpacing(QSizePolicy.PushButton,
-                                                                QSizePolicy.PushButton, Qt.Vertical)
+            spaceX = self.spacing() + wid.style().layoutSpacing(
+                QSizePolicy.PushButton, QSizePolicy.PushButton, Qt.Horizontal)
+            spaceY = self.spacing() + wid.style().layoutSpacing(
+                QSizePolicy.PushButton, QSizePolicy.PushButton, Qt.Vertical)
             nextX = x + item.sizeHint().width() + spaceX
             if nextX - spaceX > rect.right() and lineHeight > 0:
                 x = rect.x()
@@ -92,6 +91,7 @@ class QFlowLayout(QLayout):
 
 
 if __name__ == '__main__':
+
     class Window(QWidget):
         def __init__(self):
             super(Window, self).__init__()
@@ -103,6 +103,7 @@ if __name__ == '__main__':
             flowLayout.addWidget(QPushButton("Even longer button text"))
             self.setLayout(flowLayout)
             self.setWindowTitle("Flow Layout")
+
     import sys
     app = QApplication(sys.argv)
     mainWin = Window()

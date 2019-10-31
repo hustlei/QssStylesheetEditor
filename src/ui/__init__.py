@@ -3,11 +3,13 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+
 def redirect():
     """
     redirect classes in submodule to current module
     """
     from .mainwinbase import MainWinBase
+
 
 def preload():
     """
@@ -16,5 +18,6 @@ def preload():
     """
     from .preview import previewWidget
     from .flow_layout import QFlowLayout
+
 
 redirect()

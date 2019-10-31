@@ -6,6 +6,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 from .editor import CodeEditor
 from .settings import EditorSettings
 
+
 def preload():
     """
     import all modules, user can call this method in splash to accelorate app.

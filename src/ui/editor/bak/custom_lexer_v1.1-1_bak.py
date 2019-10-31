@@ -10,12 +10,12 @@ class QsciLexerQSS(QsciLexerCSS):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setDefault()
-        if(parent is not None):
+        if (parent is not None):
             font = parent.font()
             font.setBold(False)
             # QFont::Light 25 Normal 50 DemiBold 63 Bold 75 Black 87
             font.setWeight(font.Light)
-            self.setFont(font, QsciLexerQSS.Comment)  # QsciLexerQSS.Comment=9
+            self.setFont(font, QsciLexerQSS.Comment)    # QsciLexerQSS.Comment=9
 
     def setDefault(self):
         # high light code

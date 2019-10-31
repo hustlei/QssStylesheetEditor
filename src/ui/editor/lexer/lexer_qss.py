@@ -9,48 +9,41 @@ from PyQt5.QtGui import QColor, QFont
 
 
 class QsciLexerQSS(QsciLexerCustom):
-    Default = 0  # 默认
-    Tag = 1  # 控件
-    IDSelector = 2  # #选择器
-    ClassSelector = 3  # .类选择器
-    PseudoElement = 4  # ::子控件，伪元素选择器
-    PseudoClass = 5  # 伪类hover等选择器
-    Attribute = 6  # []选择器
-    Operator = 7  # {}：；等语法标记
-    Property = 8  # 属性
-    Value = 9  # 属性值
-    Comment = 10  # 注释
-    DoubleQuotedString = 11  # 字符串
-    SingleQuotedString = 12  # 字符串
-    Variable = 13  # qsst变量$引用
-    Param = 14  # 括号内参数
+    Default = 0    # 默认
+    Tag = 1    # 控件
+    IDSelector = 2    # #选择器
+    ClassSelector = 3    # .类选择器
+    PseudoElement = 4    # ::子控件，伪元素选择器
+    PseudoClass = 5    # 伪类hover等选择器
+    Attribute = 6    # []选择器
+    Operator = 7    # {}：；等语法标记
+    Property = 8    # 属性
+    Value = 9    # 属性值
+    Comment = 10    # 注释
+    DoubleQuotedString = 11    # 字符串
+    SingleQuotedString = 12    # 字符串
+    Variable = 13    # qsst变量$引用
+    Param = 14    # 括号内参数
 
     namelist = {
-        0: 'Default', 1: 'Tag', 2: 'IDSelector', 3: 'ClassSelector',
-        4: 'PseudoElement', 5: 'PseudoClass', 6: 'Attribute', 7: 'Operator',
-        8: 'Property', 9: 'Value', 10: 'Comment', 11: 'DoubleQuotedString',
-        12: 'SingleQuotedString', 13: 'Variable', 14: 'Param'}
-    operatorList = (
-        '{',
-        '}',
-        '[',
-        ']',
-        '(',
-        ')',
-        '::',
-        '.',
-        ':',
-        ';',
-        ',',
-        '/*',
-        '*/',
-        '#',
-        '$',
-        '=',
-        '"',
-        "'",
-        '\r',
-        '\n')  # '!' * @ > + ~ |
+        0: 'Default',
+        1: 'Tag',
+        2: 'IDSelector',
+        3: 'ClassSelector',
+        4: 'PseudoElement',
+        5: 'PseudoClass',
+        6: 'Attribute',
+        7: 'Operator',
+        8: 'Property',
+        9: 'Value',
+        10: 'Comment',
+        11: 'DoubleQuotedString',
+        12: 'SingleQuotedString',
+        13: 'Variable',
+        14: 'Param'
+    }
+    operatorList = ('{', '}', '[', ']', '(', ')', '::', '.', ':', ';', ',', '/*', '*/', '#', '$',
+                    '=', '"', "'", '\r', '\n')    # '!' * @ > + ~ |
     unitList = ('pt', 'px', 'ex', 'em')
 
     def __init__(self, codeEditor):
@@ -69,20 +62,20 @@ class QsciLexerQSS(QsciLexerCustom):
         # Initialize colors per style
         # ----------------------------
         self.setColor(QColor("#000"), self.Default)
-        self.setColor(QColor("#099"), self.Tag)  # 青色
-        self.setColor(QColor("#a11"), self.IDSelector)  # 紫红969
+        self.setColor(QColor("#099"), self.Tag)    # 青色
+        self.setColor(QColor("#a11"), self.IDSelector)    # 紫红969
         self.setColor(QColor("#a11"), self.ClassSelector)
         self.setColor(QColor("#a11"), self.PseudoElement)
         self.setColor(QColor("#a11"), self.PseudoClass)
-        self.setColor(QColor("#aaa"), self.Attribute)  # 浅灰
+        self.setColor(QColor("#aaa"), self.Attribute)    # 浅灰
         self.setColor(QColor("gray"), self.Operator)
-        self.setColor(QColor("#04e"), self.Property)  # 浅蓝03c
-        self.setColor(QColor("#808"), self.Value)  # 深红 a11
-        self.setColor(QColor("gray"), self.Comment)  # 灰
-        self.setColor(QColor("#690"), self.DoubleQuotedString)  # 浅绿
+        self.setColor(QColor("#04e"), self.Property)    # 浅蓝03c
+        self.setColor(QColor("#808"), self.Value)    # 深红 a11
+        self.setColor(QColor("gray"), self.Comment)    # 灰
+        self.setColor(QColor("#690"), self.DoubleQuotedString)    # 浅绿
         self.setColor(QColor("#690"), self.SingleQuotedString)
-        self.setColor(QColor("#a60"), self.Variable)  # 05a深蓝
-        self.setColor(QColor("#aaa"), self.Param)  # 浅灰
+        self.setColor(QColor("#a60"), self.Variable)    # 05a深蓝
+        self.setColor(QColor("#aaa"), self.Param)    # 浅灰
 
         # Initialize paper colors per style
         # ----------------------------------
@@ -96,23 +89,17 @@ class QsciLexerQSS(QsciLexerCustom):
 
         SC = QsciScintilla
         # 折叠标签颜色
-        self.__editor.SendScintilla(
-            SC.SCI_MARKERSETBACK,
-            SC.SC_MARKNUM_FOLDERSUB,
-            QColor("0xa0a0a0"))
-        self.__editor.SendScintilla(
-            SC.SCI_MARKERSETBACK,
-            SC.SC_MARKNUM_FOLDERMIDTAIL,
-            QColor("0xa0a0a0"))
-        self.__editor.SendScintilla(
-            SC.SCI_MARKERSETBACK,
-            SC.SC_MARKNUM_FOLDERTAIL,
-            QColor("0xa0a0a0"))
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERSUB,
+                                    QColor("0xa0a0a0"))
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERMIDTAIL,
+                                    QColor("0xa0a0a0"))
+        self.__editor.SendScintilla(SC.SCI_MARKERSETBACK, SC.SC_MARKNUM_FOLDERTAIL,
+                                    QColor("0xa0a0a0"))
 
         # if (self.__editor.folding() == QsciScintilla.BoxedTreeFoldStyle):
         # 显示这些标记的掩码是0xFE000000，同样头文件里已经定义好了
         # define SC_MASK_FOLDERS 0xFE000000
-        # //self.__editor..SendScintilla(SC.SCI_SETMARGINMASKN, SC.MARGIN_FOLD_INDEX, SC.SC_MASK_FOLDERS)# 页边掩码
+        # self.__editor..SendScintilla(SC.SCI_SETMARGINMASKN, SC.MARGIN_FOLD_INDEX, SC.SC_MASK_FOLDERS)# 页边掩码
         # self.__editor..setMarginMarkerMask(2,0x7e000000)#fold margin只显示25-31的图标
         # 折叠标签样式
         # self.__editor.markerDefine(65,SC.SC_MARKNUM_FOLDEROPEN)
@@ -154,9 +141,9 @@ class QsciLexerQSS(QsciLexerCustom):
         text = self.__editor.text()
 
         # 扩大着色范围，避免修改文件过程中局部着色出错。
-        t = str.encode(text)  # start end是byte字节数，如果有非注意和len(text)长度不一样
+        t = str.encode(text)    # start end是byte字节数，如果有非注意和len(text)长度不一样
         while start > 0:
-            if(t[start] == "{" or start == 0):
+            if (t[start] == "{" or start == 0):
                 break
             start -= 1
 
@@ -167,28 +154,26 @@ class QsciLexerQSS(QsciLexerCustom):
 
         # 3. Tokenize the text
         # ---------------------
-        p = re.compile(
-            r"\/[*]|[*]\/|\/\/|::|\r|\n|\s+|[*]+|=+|\"|'|\W|\w+|[\u0080-\uffff]+")
+        p = re.compile(r"\/[*]|[*]\/|\/\/|::|\r|\n|\s+|[*]+|=+|\"|'|\W|\w+|[\u0080-\uffff]+")
 
         # 'token_list' is a list of tuples: (token_name, token_len)
-        token_list = [(token, len(bytearray(token, "utf-8")))
-                      for token in p.findall(text)]
+        token_list = [(token, len(bytearray(token, "utf-8"))) for token in p.findall(text)]
 
         # 4. Style the text
         # ------------------
         # 4.1 multiline token flag
         state = -1
-        lastState = -1  # before operator
+        lastState = -1    # before operator
         # lastStateC = -1  # before comment
         # lastStateS = -1  # before single-quoted/double-quoted string
         # lastStateVar = -1  # before variable (SCSS)
         # lastStateVal = -1  # before value (SCSS)
         # op = ' '  # last operator
-        opPrev = ' '  # last operator
+        opPrev = ' '    # last operator
         # nestedLevel=0 #1在{}内，2在{{}}内
         inBrace = False
         inBracket = False
-        inParentheses = False  # true if currently in a CSS url() or similar construct
+        inParentheses = False    # true if currently in a CSS url() or similar construct
         # varPrefix = '$'
 
         ###
@@ -223,10 +208,10 @@ class QsciLexerQSS(QsciLexerCustom):
                     self.setStyling(count, self.Param)
 
             elif self.isOperator(token):
-                opStyle = True  # 是否显示为Operator
+                opStyle = True    # 是否显示为Operator
 
                 lastState = state
-                if token == "/*":  # 注释
+                if token == "/*":    # 注释
                     state = self.Comment
                 elif token == "*/":
                     lastState = self.Comment
@@ -237,7 +222,7 @@ class QsciLexerQSS(QsciLexerCustom):
                 elif token == "'":
                     state = self.SingleQuotedString
                     opStyle = False
-                elif token == "$":  # 变量
+                elif token == "$":    # 变量
                     state = self.Variable
                     opStyle = False
                 elif token == "=":
@@ -281,7 +266,7 @@ class QsciLexerQSS(QsciLexerCustom):
                 elif token == ";":
                     if opPrev == "=":
                         state = self.Tag
-                    else:  # opPrev == ":":#inBrace:
+                    else:    # opPrev == ":":#inBrace:
                         state = self.Property
                 elif "\r" in token or "\n" in token:
                     if opPrev == "=":
@@ -335,7 +320,7 @@ class QsciLexerQSS(QsciLexerCustom):
             # l=(level & ~HEADERFLAG)-LEVELBASE
             # print("{}:{}".format(index+1,l))
         # Reset the fold level of the last line
-        #editor.SendScintilla(QsciScintilla.SCI_SETFOLDLEVEL, len(lines), 0)
+        # editor.SendScintilla(QsciScintilla.SCI_SETFOLDLEVEL, len(lines), 0)
         # editor.SendScintilla(QsciScintilla.SCI_SETFOLDFLAGS, 16 | 4, 0)# //
         # 如果折叠就在折叠行的上下各画一条横线
 
@@ -354,225 +339,53 @@ class QsciLexerQSS(QsciLexerCustom):
 
     def setQssAutocomplete(self):
         api = QsciAPIs(self)
-        widgets = (
-            "QAbstractScrollArea",
-            "QCheckBox",
-            "QColumnView",
-            "QComboBox",
-            "QDateEdit",
-            "QDateTimeEdit",
-            "QDialog",
-            "QDialogButtonBox",
-            "QDockWidget",
-            "QDoubleSpinBox",
-            "QFrame",
-            "QGroupBox",
-            "QHeaderView",
-            "QLabel",
-            "QLineEdit",
-            "QListView",
-            "QListWidget",
-            "QMainWindow",
-            "QMenu",
-            "QMenuBar",
-            "QMessageBox",
-            "QProgressBar",
-            "QPushButton",
-            "QRadioButton",
-            "QScrollBar",
-            "QSizeGrip",
-            "QSlider",
-            "QSpinBox",
-            "QSplitter",
-            "QStatusBar",
-            "QTabBar",
-            "QTabWidget",
-            "QTableView",
-            "QTableWidget",
-            "QTextEdit",
-            "QTimeEdit",
-            "QToolBar",
-            "QToolButton",
-            "QToolBox",
-            "QToolTip",
-            "QTreeView",
-            "QTreeWidget",
-            "QWidget")
+        widgets = ("QAbstractScrollArea", "QCheckBox", "QColumnView", "QComboBox", "QDateEdit",
+                   "QDateTimeEdit", "QDialog", "QDialogButtonBox", "QDockWidget", "QDoubleSpinBox",
+                   "QFrame", "QGroupBox", "QHeaderView", "QLabel", "QLineEdit", "QListView",
+                   "QListWidget", "QMainWindow", "QMenu", "QMenuBar", "QMessageBox",
+                   "QProgressBar", "QPushButton", "QRadioButton", "QScrollBar", "QSizeGrip",
+                   "QSlider", "QSpinBox", "QSplitter", "QStatusBar", "QTabBar", "QTabWidget",
+                   "QTableView", "QTableWidget", "QTextEdit", "QTimeEdit", "QToolBar",
+                   "QToolButton", "QToolBox", "QToolTip", "QTreeView", "QTreeWidget", "QWidget")
         properties = (
-            "alternate-background-color",
-            "background",
-            "background-color",
-            "background-image",
-            "background-repeat",
-            "background-position",
-            "background-attachment",
-            "background-clip",
-            "background-origin",
-            "border",
-            "border-top",
-            "border-right",
-            "border-bottom",
-            "border-left",
-            "border-color",
-            "border-top-color",
-            "border-right-color",
-            "border-bottom-color",
-            "border-left-color",
-            "border-image",
-            "border-radius",
-            "border-top-left-radius",
-            "border-top-right-radius",
-            "border-bottom-right-radius",
-            "border-bottom-left-radius",
-            "border-style",
-            "border-top-style",
-            "border-right-style",
-            "border-bottom-style",
-            "border-left-style",
-            "border-width",
-            "border-top-width",
-            "border-right-width",
-            "border-bottom-width",
-            "border-left-width",
-            "bottom",
-            "button-layout",
-            "color",
-            "dialogbuttonbox-buttons-have-icons",
-            "font",
-            "font-family",
-            "font-size",
-            "font-style",
-            "font-weight",
-            "gridline-color",
-            "height",
-            "icon-size",
-            "image",
-            "image-position",
-            "left",
-            "lineedit-password-character",
-            "lineedit-password-mask-delay",
-            "margin",
-            "margin-top",
-            "margin-right",
-            "margin-bottom",
-            "margin-left",
-            "max-height",
-            "max-width",
-            "messagebox-text-interaction-flags",
-            "min-height",
-            "min-width",
-            "opacity*",
-            "outline",
-            "outline-color",
-            "outline-offset",
-            "outline-style",
-            "outline-radius",
-            "outline-bottom-left-radius",
-            "outline-bottom-right-radius",
-            "outline-top-left-radius",
-            "outline-top-right-radius",
-            "padding",
-            "padding-top",
-            "padding-right",
-            "padding-bottom",
-            "padding-left",
-            "paint-alternating-row-colors-for-empty-area",
-            "position",
-            "right",
-            "selection-background-color",
-            "selection-color",
-            "show-decoration-selected",
-            "spacing",
-            "subcontrol-origin",
-            "subcontrol-position",
-            "titlebar-show-tooltips-on-buttons",
-            "widget-animation-duration",
-            "text-align",
-            "text-decoration",
-            "top",
-            "width")
-        subcontrols = (
-            "add-line",
-            "add-page",
-            "branch",
-            "chunk",
-            "close-button",
-            "corner",
-            "down-arrow",
-            "down-button",
-            "drop-down",
-            "float-button",
-            "groove",
-            "indicator",
-            "handle",
-            "icon",
-            "item",
-            "left-arrow",
-            "left-corner",
-            "menu-arrow",
-            "menu-button",
-            "menu-indicator",
-            "right-arrow",
-            "pane",
-            "right-corner",
-            "scroller",
-            "section",
-            "separator",
-            "sub-line",
-            "sub-page",
-            "tab",
-            "tab-bar",
-            "tear",
-            "tearoff",
-            "text",
-            "title",
-            "up-arrow",
-            "up-button")
-        pseudostates = (
-            "active",
-            "adjoins-item",
-            "alternate",
-            "bottom",
-            "checked",
-            "closable",
-            "closed",
-            "default",
-            "disabled",
-            "editable",
-            "edit-focus",
-            "enabled",
-            "exclusive",
-            "first",
-            "flat",
-            "floatable",
-            "focus",
-            "has-children",
-            "has-siblings",
-            "horizontal",
-            "hover",
-            "indeterminate",
-            "last",
-            "left",
-            "maximized",
-            "middle",
-            "minimized",
-            "movable",
-            "no-frame",
-            "non-exclusive",
-            "off",
-            "on",
-            "only-one",
-            "open",
-            "next-selected",
-            "pressed",
-            "previous-selected",
-            "read-only",
-            "right",
-            "selected",
-            "top",
-            "unchecked",
-            "vertical",
-            "window")
+            "alternate-background-color", "background", "background-color", "background-image",
+            "background-repeat", "background-position", "background-attachment", "background-clip",
+            "background-origin", "border", "border-top", "border-right", "border-bottom",
+            "border-left", "border-color", "border-top-color", "border-right-color",
+            "border-bottom-color", "border-left-color", "border-image", "border-radius",
+            "border-top-left-radius", "border-top-right-radius", "border-bottom-right-radius",
+            "border-bottom-left-radius", "border-style", "border-top-style", "border-right-style",
+            "border-bottom-style", "border-left-style", "border-width", "border-top-width",
+            "border-right-width", "border-bottom-width", "border-left-width", "bottom",
+            "button-layout", "color", "dialogbuttonbox-buttons-have-icons", "font", "font-family",
+            "font-size", "font-style", "font-weight", "gridline-color", "height", "icon-size",
+            "image", "image-position", "left", "lineedit-password-character",
+            "lineedit-password-mask-delay", "margin", "margin-top", "margin-right",
+            "margin-bottom", "margin-left", "max-height", "max-width",
+            "messagebox-text-interaction-flags", "min-height", "min-width", "opacity*", "outline",
+            "outline-color", "outline-offset", "outline-style", "outline-radius",
+            "outline-bottom-left-radius", "outline-bottom-right-radius", "outline-top-left-radius",
+            "outline-top-right-radius", "padding", "padding-top", "padding-right",
+            "padding-bottom", "padding-left", "paint-alternating-row-colors-for-empty-area",
+            "position", "right", "selection-background-color", "selection-color",
+            "show-decoration-selected", "spacing", "subcontrol-origin", "subcontrol-position",
+            "titlebar-show-tooltips-on-buttons", "widget-animation-duration", "text-align",
+            "text-decoration", "top", "width")
+        subcontrols = ("add-line", "add-page", "branch", "chunk", "close-button", "corner",
+                       "down-arrow", "down-button", "drop-down", "float-button", "groove",
+                       "indicator", "handle", "icon", "item", "left-arrow", "left-corner",
+                       "menu-arrow", "menu-button", "menu-indicator", "right-arrow", "pane",
+                       "right-corner", "scroller", "section", "separator", "sub-line", "sub-page",
+                       "tab", "tab-bar", "tear", "tearoff", "text", "title", "up-arrow",
+                       "up-button")
+        pseudostates = ("active", "adjoins-item", "alternate", "bottom", "checked", "closable",
+                        "closed", "default", "disabled", "editable", "edit-focus", "enabled",
+                        "exclusive", "first", "flat", "floatable", "focus", "has-children",
+                        "has-siblings", "horizontal", "hover", "indeterminate", "last", "left",
+                        "maximized", "middle", "minimized", "movable", "no-frame", "non-exclusive",
+                        "off", "on", "only-one", "open", "next-selected", "pressed",
+                        "previous-selected", "read-only", "right", "selected", "top", "unchecked",
+                        "vertical", "window")
         kwset = (widgets, properties, subcontrols, pseudostates)
         for ks in kwset:
             for k in ks:
@@ -615,8 +428,8 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = QsciScintilla()
     win.setText(myCodeSample)
-    l = QsciLexerQSS(win)
-    win.setLexer(l)
+    lexer = QsciLexerQSS(win)
+    win.setLexer(lexer)
     win.show()
     QApplication.setStyle(QStyleFactory.create('Fusion'))
     sys.exit(app.exec_())

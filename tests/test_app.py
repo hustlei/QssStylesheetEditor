@@ -12,5 +12,5 @@ from app import App
 
 def test_mainwin(qtbot):
     app = App()
-    app.run(pytest = True)
+    app.run(pytest=True)
     qtbot.waitForWindowShown(app.mainwin)

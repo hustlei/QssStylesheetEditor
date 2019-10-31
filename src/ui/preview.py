@@ -38,25 +38,60 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 from PyQt5.QtCore import Qt, QSize, QRect, QDate, QTime, QDateTime, QRegExp
-from PyQt5.QtGui import (QIcon, QPen, QBrush, QPixmap, QPainter,
-                         QLinearGradient, QRadialGradient, QConicalGradient,
-                         QDoubleValidator, QRegExpValidator, QStandardItemModel)
-from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QLineEdit, QTextEdit,
-                             QPushButton, QToolButton, QCommandLinkButton,
-                             QCheckBox, QRadioButton, QComboBox, QSpinBox, QDoubleSpinBox,
-                             QDateEdit, QTimeEdit, QDateTimeEdit, QCalendarWidget,
-                             QSlider, QProgressBar, QScrollBar,
-                             QDial, #QLCDNumber, QKeySequenceEdit,
-                             QHBoxLayout, QVBoxLayout, QGridLayout, QFormLayout,
-                             QGroupBox, QScrollArea, QStackedWidget, QToolBox, QTabWidget,
-                             QSplitter, QDockWidget, QMdiArea,
-                             QMessageBox, QInputDialog, QFileDialog, QFontDialog, QColorDialog,
-                             QListWidget, QTableWidget, QTreeView, QTreeWidget,
-                             QListWidgetItem, QTableWidgetItem, QTreeWidgetItem, QDirModel,
-                             QCompleter,
-                             QMenu,
-                             )
+from PyQt5.QtGui import (QIcon, QPen, QBrush, QPixmap, QPainter, QLinearGradient, QRadialGradient,
+                         QConicalGradient, QDoubleValidator, QRegExpValidator, QStandardItemModel)
+from PyQt5.QtWidgets import (
+    QWidget,
+    QApplication,
+    QLabel,
+    QLineEdit,
+    QTextEdit,
+    QPushButton,
+    QToolButton,
+    QCommandLinkButton,
+    QCheckBox,
+    QRadioButton,
+    QComboBox,
+    QSpinBox,
+    QDoubleSpinBox,
+    QDateEdit,
+    QTimeEdit,
+    QDateTimeEdit,
+    QCalendarWidget,
+    QSlider,
+    QProgressBar,
+    QScrollBar,
+    QDial,    #QLCDNumber, QKeySequenceEdit,
+    QHBoxLayout,
+    QVBoxLayout,
+    QGridLayout,
+    QFormLayout,
+    QGroupBox,
+    QScrollArea,
+    QStackedWidget,
+    QToolBox,
+    QTabWidget,
+    QSplitter,
+    QDockWidget,
+    QMdiArea,
+    QMessageBox,
+    QInputDialog,
+    QFileDialog,
+    QFontDialog,
+    QColorDialog,
+    QListWidget,
+    QTableWidget,
+    QTreeView,
+    QTreeWidget,
+    QListWidgetItem,
+    QTableWidgetItem,
+    QTreeWidgetItem,
+    QDirModel,
+    QCompleter,
+    QMenu,
+)
 #from res.img_rc import *
+
 
 class previewWidget(QTabWidget):
     """
@@ -70,12 +105,12 @@ class previewWidget(QTabWidget):
         tab4 = QWidget(self)
         tab5 = QWidget(self)
         tab6 = QWidget(self)
-        self.addTab(tab1, self.tr("Basic"))  # ,"常用组件"))
-        self.addTab(tab2, self.tr("Special"))  # ,"特别组件"))
-        self.addTab(tab3, self.tr("Drawing"))  # ,"绘图组件"))
-        self.addTab(tab4, self.tr("Layout"))  # ,"布局组件"))
-        self.addTab(tab5, self.tr("Container"))  # ,"容器组件"))
-        self.addTab(tab6, self.tr("Advance"))  # ,"高级组件"))
+        self.addTab(tab1, self.tr("Basic"))    # ,"常用组件"))
+        self.addTab(tab2, self.tr("Special"))    # ,"特别组件"))
+        self.addTab(tab3, self.tr("Drawing"))    # ,"绘图组件"))
+        self.addTab(tab4, self.tr("Layout"))    # ,"布局组件"))
+        self.addTab(tab5, self.tr("Container"))    # ,"容器组件"))
+        self.addTab(tab6, self.tr("Advance"))    # ,"高级组件"))
         self.setupTab1(tab1)
         self.setupTab2(tab2)
         self.setupTab3(tab3)
@@ -131,8 +166,7 @@ class previewWidget(QTabWidget):
         text3 = QLineEdit("******")
         text3.setEchoMode(QLineEdit.Password)
         label4 = QLabel("网址标签：")
-        label5 = QLabel(
-            "<a href='https://blog.csdn.net/hustlei/'>hustlei.ml</a>")
+        label5 = QLabel("<a href='https://blog.csdn.net/hustlei/'>hustlei.ml</a>")
         label5.setOpenExternalLinks(True)
         label6 = QLabel("图标标签：")
         label7 = QLabel("图标")
@@ -175,16 +209,12 @@ class previewWidget(QTabWidget):
         def textch(s):
             if "@" in s:
                 return
-            strList = [
-                "@163.com",
-                "@qq.com",
-                "@gmail.com",
-                "@hotmail.com",
-                "@126.com"]
+            strList = ["@163.com", "@qq.com", "@gmail.com", "@hotmail.com", "@126.com"]
             model.removeRows(0, model.rowCount())
             for i in strList:
                 model.insertRow(0)
                 model.setData(model.index(0, 0), s + i)
+
         text9.textChanged.connect(textch)
         text10 = QLineEdit("ReadOnly")
         text10.setReadOnly(True)
@@ -322,56 +352,30 @@ class previewWidget(QTabWidget):
         layout.addWidget(group0)
 
         b1 = QPushButton("信息对话框")
-        b1.clicked.connect(
-            lambda: QMessageBox.information(
-                self,
-                "Info",
-                "这是一条消息",
-                QMessageBox.Ok,
-                QMessageBox.Ok))
+        b1.clicked.connect(lambda: QMessageBox.information(self, "Info", "这是一条消息", QMessageBox.Ok,
+                                                           QMessageBox.Ok))
         b2 = QPushButton("提问对话框")
-        b2.clicked.connect(
-            lambda: QMessageBox.question(
-                self,
-                "question",
-                "确定要执行该操作吗？",
-                QMessageBox.No | QMessageBox.Yes,
-                QMessageBox.Yes))
+        b2.clicked.connect(lambda: QMessageBox.question(self, "question", "确定要执行该操作吗？", QMessageBox
+                                                        .No | QMessageBox.Yes, QMessageBox.Yes))
         b3 = QPushButton("警告对话框")
-        b3.clicked.connect(
-            lambda: QMessageBox.warning(
-                self,
-                "warning",
-                "这是一个警告消息",
-                QMessageBox.No | QMessageBox.Yes,
-                QMessageBox.Yes))
+        b3.clicked.connect(lambda: QMessageBox.warning(self, "warning", "这是一个警告消息", QMessageBox.No
+                                                       | QMessageBox.Yes, QMessageBox.Yes))
         b4 = QPushButton("出错对话框")
-        b4.clicked.connect(
-            lambda: QMessageBox.critical(
-                self,
-                "error",
-                "这是一个出错提示",
-                QMessageBox.No | QMessageBox.Yes,
-                QMessageBox.Yes))
+        b4.clicked.connect(lambda: QMessageBox.critical(self, "error", "这是一个出错提示", QMessageBox.No |
+                                                        QMessageBox.Yes, QMessageBox.Yes))
         b5 = QPushButton("关于对话框")
-        b5.clicked.connect(
-            lambda: QMessageBox.about(
-                self, "about", "关于本程序的信息"))
+        b5.clicked.connect(lambda: QMessageBox.about(self, "about", "关于本程序的信息"))
         b6 = QPushButton("输入对话框")
         b6.clicked.connect(lambda: QInputDialog.getInt(self, "输入", "请输入整数"))
         b6.clicked.connect(lambda: QInputDialog.getDouble(self, "输入", "请输入实数"))
-        b6.clicked.connect(
-            lambda: QInputDialog.getItem(
-                self, "输入", "请选择", [
-                    "aaa", "bbb"]))
+        b6.clicked.connect(lambda: QInputDialog.getItem(self, "输入", "请选择", ["aaa", "bbb"]))
         b7 = QPushButton("颜色对话框")
         b7.clicked.connect(lambda: QColorDialog.getColor())
         b8 = QPushButton("字体对话框")
         b8.clicked.connect(lambda: QFontDialog.getFont())
         b9 = QPushButton("打开对话框")
         b9.clicked.connect(
-            lambda: QFileDialog.getOpenFileName(
-                self, "open", "", "Text(*.txt *.text)"))
+            lambda: QFileDialog.getOpenFileName(self, "open", "", "Text(*.txt *.text)"))
         b10 = QPushButton("保存对话框")
         b10.clicked.connect(lambda: QFileDialog.getSaveFileName())
         layoutRow1.addWidget(b1)
@@ -448,8 +452,10 @@ class previewWidget(QTabWidget):
             # p=QPalette()
             # p.setColor(QPalette.Background,clr)
             # c.setPalette(p)
-            c.setStyleSheet("background: rgba({},{},{},100);".format(
-                scroll1.value(), scroll2.value(), scroll3.value()))
+            c.setStyleSheet("background: rgba({},{},{},100);".format(scroll1.value(),
+                                                                     scroll2.value(),
+                                                                     scroll3.value()))
+
         scroll1.valueChanged.connect(clr)
         scroll2.valueChanged.connect(clr)
         scroll3.valueChanged.connect(clr)
@@ -691,8 +697,7 @@ class previewWidget(QTabWidget):
         d1 = QDockWidget("dock1", w1)
         d2 = QDockWidget("dock2", w1)
         d1.setAllowedAreas(Qt.LeftDockWidgetArea)
-        d1.setFeatures(QDockWidget.AllDockWidgetFeatures |
-                       QDockWidget.DockWidgetVerticalTitleBar)
+        d1.setFeatures(QDockWidget.AllDockWidgetFeatures | QDockWidget.DockWidgetVerticalTitleBar)
         d2.setFeatures(QDockWidget.DockWidgetVerticalTitleBar)
         d3 = QDockWidget("dock3", w2)
         d3.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.TopDockWidgetArea)
@@ -837,18 +842,9 @@ class previewWidget(QTabWidget):
         list1 = QListWidget()
         list1.addItems(["aaa", "bbb", "ccc"])
         list2 = QListWidget()
-        list2.addItem(
-            QListWidgetItem(
-                QIcon(":appres.img/Flag_blueHS.png"),
-                "blue"))
-        list2.addItem(
-            QListWidgetItem(
-                QIcon(":appres.img/Flag_redHS.png"),
-                "red"))
-        list2.addItem(
-            QListWidgetItem(
-                QIcon(":appres.img/Flag_greenHS.png"),
-                "green"))
+        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_blueHS.png"), "blue"))
+        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_redHS.png"), "red"))
+        list2.addItem(QListWidgetItem(QIcon(":appres.img/Flag_greenHS.png"), "green"))
         list2.setViewMode(QListWidget.IconMode)
         lay.addWidget(list1)
         lay.addWidget(list2)
@@ -885,8 +881,8 @@ class previewWidget(QTabWidget):
         t2.setCellWidget(1, 1, c)
         t2.setItem(1, 2, QTableWidgetItem("11"))
         t2.resizeColumnsToContents()
-        t2.setEditTriggers(QTableWidget.EditKeyPressed | QTableWidget.SelectedClicked |
-                           QTableWidget.AnyKeyPressed | QTableWidget.DoubleClicked)
+        t2.setEditTriggers(QTableWidget.EditKeyPressed | QTableWidget.SelectedClicked
+                           | QTableWidget.AnyKeyPressed | QTableWidget.DoubleClicked)
 
         lay.addWidget(t1)
         lay.addWidget(t2)
@@ -905,10 +901,7 @@ class previewWidget(QTabWidget):
         node11 = QTreeWidgetItem()
         node11.setText(0, "child1")
         icon = QIcon(":appres.img/book_angle.png")
-        icon.addPixmap(
-            QPixmap(":appres.img/book_open.png"),
-            QIcon.Normal,
-            QIcon.On)
+        icon.addPixmap(QPixmap(":appres.img/book_open.png"), QIcon.Normal, QIcon.On)
         node11.setIcon(0, icon)
         nodea = QTreeWidgetItem()
         nodea.setText(0, "red")
