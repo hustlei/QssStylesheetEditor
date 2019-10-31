@@ -24,7 +24,7 @@ class App(QApplication):
         super().__init__(sys.argv)
         # sys.setrecursionlimit(1500)
 
-    def run(self, pytest = False):
+    def run(self, pytest=False):
         """
         :param pytest: if run is true start event loop, else just for test
         """
@@ -38,4 +38,3 @@ class App(QApplication):
         splash.finish(self.mainwin)
         if not pytest:
             sys.exit(self.exec_())
-
