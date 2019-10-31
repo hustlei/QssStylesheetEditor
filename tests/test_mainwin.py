@@ -10,8 +10,6 @@ import os
 from pytest import fixture
 from ui.mainwin import MainWin
 
-sys.path.append(os.path.abspath('..'))
-
 
 @fixture
 def win():

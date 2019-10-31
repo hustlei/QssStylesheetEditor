@@ -9,8 +9,6 @@ import os
 import sys
 from pytest import fixture
 
-sys.path.append(os.path.abspath('..'))
-
 
 @fixture
 def qsst():

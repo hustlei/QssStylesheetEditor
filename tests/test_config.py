@@ -10,8 +10,6 @@ import sys
 from pytest import fixture
 from config import Config
 
-sys.path.append(os.path.abspath('..'))
-
 
 @fixture
 def conf():
