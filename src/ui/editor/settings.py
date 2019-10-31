@@ -8,8 +8,8 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 import os
 from PyQt5.QtCore import Qt, QVariant
-from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout,
-                             QSpinBox, QCheckBox, QComboBox, QColorDialog)
+from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
+                             QComboBox, QColorDialog)
 
 language_extensions = (
     ('None', '.txt'),
@@ -101,23 +101,17 @@ _settings = {
         'help': 'Number of characters per line before wrapping occurs',
     },
     'tabWidth': {
-        'label':
-        'Tab width',
-        'type':
-        'number',
-        'help':
-        'Width of tabs in characters, or the number of'
+        'label': 'Tab width',
+        'type': 'number',
+        'help': 'Width of tabs in characters, or the number of'
         ' spaces to insert when tab is pressed',
     },
 
     # Multiple-selection settings
     'braceMatching': {
-        'label':
-        'Brace Matching',
-        'type':
-        'combo',
-        'help':
-        'Whether and how to highlight matching {} [] () braces',
+        'label': 'Brace Matching',
+        'type': 'combo',
+        'help': 'Whether and how to highlight matching {} [] () braces',
         'values': (
             ('None', 'NoBraceMatch'),
             ('Strict', 'StrictBraceMatch'),
@@ -415,7 +409,7 @@ class EditorSettings(QWidget):
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            value = str(data)    # .toString())
+            value = str(data)  # .toString())
             self.editor.set_config(name, value)
 
         # Connect event handler

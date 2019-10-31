@@ -3,8 +3,8 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 from PyQt5.Qsci import QsciScintilla
-from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QGridLayout, QVBoxLayout,
-                             QCheckBox, QPushButton, QLabel, QLineEdit, QSpacerItem, QSizePolicy)
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QGridLayout, QVBoxLayout, QCheckBox, QPushButton,
+                             QLabel, QLineEdit, QSpacerItem, QSizePolicy)
 from PyQt5.QtCore import Qt
 
 
@@ -19,14 +19,14 @@ class searchDialog(QMainWindow):
         self.statusbar = self.statusBar()
         self.statusbar.setSizeGripEnabled(False)
 
-        self.__re = False    # 正则表达式
-        self.__case = False    # 大小写
-        self.__word = False    # 单词匹配
+        self.__re = False  # 正则表达式
+        self.__case = False  # 大小写
+        self.__word = False  # 单词匹配
         self.__wrap = False
-        self.__forward = True    # 向下查找
-        self.__line = -1    # 起始搜索的行号
-        self.__index = -1    # 起始搜索的位置
-        self.__show = True    # 搜索所有位置包括折叠代码
+        self.__forward = True  # 向下查找
+        self.__line = -1  # 起始搜索的行号
+        self.__index = -1  # 起始搜索的位置
+        self.__show = True  # 搜索所有位置包括折叠代码
         self.__posix = True
         self.__cxx11 = False
 
@@ -87,14 +87,14 @@ class searchDialog(QMainWindow):
 
         # from PyQt5.QtCore import QTextCodec
         # QTextCodec.setCodecForTr(QTextCodec.codecForName("UTF-8"))无效
-        self.__reverseCheckbox = QCheckBox(self.tr("reverse"))    # ,"反向查找"))
-        caseSensitiveCheckbox = QCheckBox(self.tr("case sensitive"))    # ,"匹配大小写"))
-        wordCheckbox = QCheckBox(self.tr("match word"))    # ,"单词匹配"))
+        self.__reverseCheckbox = QCheckBox(self.tr("reverse"))  # ,"反向查找"))
+        caseSensitiveCheckbox = QCheckBox(self.tr("case sensitive"))  # ,"匹配大小写"))
+        wordCheckbox = QCheckBox(self.tr("match word"))  # ,"单词匹配"))
         # ,r'支持反义字符"\n,\r,\t,\0,\x..."'))
         escapeCheckbox = QCheckBox(self.tr(r"support escape char'\n,\r,\t,\0,\x...'"))
-        regCheckbox = QCheckBox(self.tr("regular expression"))    # ,"正则表达式"))
-        label1 = QLabel(self.tr("Search Text"))    # ,"查找内容："))
-        self.__label2 = QLabel(self.tr("Replace to"))    # ,"替换为："))
+        regCheckbox = QCheckBox(self.tr("regular expression"))  # ,"正则表达式"))
+        label1 = QLabel(self.tr("Search Text"))  # ,"查找内容："))
+        self.__label2 = QLabel(self.tr("Replace to"))  # ,"替换为："))
         self.__searchTextBox = QLineEdit()
         self.__replaceTextBox = QLineEdit()
         # self.__searchTextBox.setMinimumWidth(120)
@@ -122,16 +122,16 @@ class searchDialog(QMainWindow):
         escapeCheckbox.stateChanged.connect(self.setEscape)
         regCheckbox.stateChanged.connect(self.setRe)
 
-        findNextBtn = QPushButton(self.tr("Find Next"))    # ,"查找下一个"))
+        findNextBtn = QPushButton(self.tr("Find Next"))  # ,"查找下一个"))
         findNextBtn.setShortcut(Qt.Key_Return)
-        self.__findPreBtn = QPushButton(self.tr("Find previous"))    # ,"查找上一个"))
+        self.__findPreBtn = QPushButton(self.tr("Find previous"))  # ,"查找上一个"))
         self.__findPreBtn.setMinimumWidth(150)
         self.__findPreBtn.setSizePolicy(QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding))
         self.__findPreBtn.resize(self.__findPreBtn.sizeHint())
-        countBtn = QPushButton(self.tr("Count"))    # ,"计数"))
-        cancelBtn = QPushButton(self.tr("Cancel"))    # ,"取消"))
-        self.__replaceBtn = QPushButton(self.tr("Replace"))    # ,"替换"))
-        self.__replaceAllBtn = QPushButton(self.tr("Replace All"))    # ,"替换全部"))
+        countBtn = QPushButton(self.tr("Count"))  # ,"计数"))
+        cancelBtn = QPushButton(self.tr("Cancel"))  # ,"取消"))
+        self.__replaceBtn = QPushButton(self.tr("Replace"))  # ,"替换"))
+        self.__replaceAllBtn = QPushButton(self.tr("Replace All"))  # ,"替换全部"))
         self.__replaceAllBtn.setVisible(False)
         lay2.addWidget(findNextBtn)
         lay2.addWidget(self.__findPreBtn)
@@ -176,13 +176,13 @@ class searchDialog(QMainWindow):
 
     def findreplace(self, replace=False):
         if self.__start:
-            state = (self.__re, self.__case, self.__word, self.__wrap, self.__forward, self.__line,
-                     self.__index, self.__show, self.__posix, self.__cxx11)
+            state = (self.__re, self.__case, self.__word, self.__wrap, self.__forward, self.__line, self.__index,
+                     self.__show, self.__posix, self.__cxx11)
             self.__finded = self.__editor.findFirst(self.searchText, *state)
             if self.__finded:
                 self.__start = False
             else:
-                self.statusbar.showMessage(self.tr("Nothing finded."))    # ,"未查找到。"))
+                self.statusbar.showMessage(self.tr("Nothing finded."))  # ,"未查找到。"))
         else:
             if replace and self.__finded:
                 self.__editor.replaceSelectedText(self.replaceText)

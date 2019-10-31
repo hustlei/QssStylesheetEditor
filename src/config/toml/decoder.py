@@ -6,7 +6,7 @@ import sys
 
 from toml.tz import TomlTz
 
-if sys.version_info < (3,):
+if sys.version_info < (3, ):
     _range = xrange  # noqa: F821
 else:
     unicode = str
@@ -43,13 +43,11 @@ try:
 except NameError:
     FNFError = IOError
 
-
-TIME_RE = re.compile("([0-9]{2}):([0-9]{2}):([0-9]{2})(\.([0-9]{3,6}))?")
+TIME_RE = re.compile(r"([0-9]{2}):([0-9]{2}):([0-9]{2})(\.([0-9]{3,6}))?")
 
 
 class TomlDecodeError(ValueError):
     """Base toml Exception / Error."""
-
     def __init__(self, msg, doc, pos):
         lineno = doc.count('\n', 0, pos) + 1
         colno = pos - doc.rfind('\n', 0, pos)
@@ -116,8 +114,7 @@ def load(f, _dict=dict, decoder=None):
         if not [path for path in f if op.exists(path)]:
             error_msg = "Load expects a list to contain filenames only."
             error_msg += linesep
-            error_msg += ("The list needs to contain the path of at least one "
-                          "existing file.")
+            error_msg += ("The list needs to contain the path of at least one " "existing file.")
             raise FNFError(error_msg)
         if decoder is None:
             decoder = TomlDecoder()
@@ -126,15 +123,13 @@ def load(f, _dict=dict, decoder=None):
             if op.exists(l):
                 d.update(load(l, _dict, decoder))
             else:
-                warn("Non-existent filename in list with at least one valid "
-                     "filename")
+                warn("Non-existent filename in list with at least one valid " "filename")
         return d
     else:
         try:
             return loads(f.read(), _dict, decoder)
         except AttributeError:
-            raise TypeError("You can only load a file descriptor, filename or "
-                            "list")
+            raise TypeError("You can only load a file descriptor, filename or " "list")
 
 
 _groupname_re = re.compile(r'^[A-Za-z0-9_-]+$')
@@ -183,8 +178,7 @@ def loads(s, _dict=dict, decoder=None):
             continue
         if keyname:
             if item == '\n':
-                raise TomlDecodeError("Key name found without value."
-                                      " Reached end of line.", original, i)
+                raise TomlDecodeError("Key name found without value." " Reached end of line.", original, i)
             if openstring:
                 if item == openstrchar:
                     keyname = 2
@@ -200,8 +194,7 @@ def loads(s, _dict=dict, decoder=None):
                     continue
                 elif item.isalnum() or item == '_' or item == '-':
                     continue
-                elif (dottedkey and sl[i - 1] == '.' and
-                      (item == '"' or item == "'")):
+                elif (dottedkey and sl[i - 1] == '.' and (item == '"' or item == "'")):
                     openstring = True
                     openstrchar = item
                     continue
@@ -222,8 +215,7 @@ def loads(s, _dict=dict, decoder=None):
                 keyname = 0
                 dottedkey = False
             else:
-                raise TomlDecodeError("Found invalid character in key name: '" +
-                                      item + "'. Try quoting the key name.",
+                raise TomlDecodeError("Found invalid character in key name: '" + item + "'. Try quoting the key name.",
                                       original, i)
         if item == "'" and openstrchar != '"':
             k = 1
@@ -269,8 +261,7 @@ def loads(s, _dict=dict, decoder=None):
                 openstrchar = '"'
             else:
                 openstrchar = ""
-        if item == '#' and (not openstring and not keygroup and
-                            not arrayoftables):
+        if item == '#' and (not openstring and not keygroup and not arrayoftables):
             j = i
             try:
                 while sl[j] != '\n':
@@ -278,8 +269,7 @@ def loads(s, _dict=dict, decoder=None):
                     j += 1
             except IndexError:
                 break
-        if item == '[' and (not openstring and not keygroup and
-                            not arrayoftables):
+        if item == '[' and (not openstring and not keygroup and not arrayoftables):
             if beginline:
                 if len(sl) > i + 1 and sl[i + 1] == '[':
                     arrayoftables = True
@@ -299,8 +289,7 @@ def loads(s, _dict=dict, decoder=None):
             if openstring or multilinestr:
                 if not multilinestr:
                     raise TomlDecodeError("Unbalanced quotes", original, i)
-                if ((sl[i - 1] == "'" or sl[i - 1] == '"') and (
-                        sl[i - 2] == sl[i - 1])):
+                if ((sl[i - 1] == "'" or sl[i - 1] == '"') and (sl[i - 2] == sl[i - 1])):
                     sl[i] = sl[i - 1]
                     if sl[i - 3] == sl[i - 1]:
                         sl[i - 3] = ' '
@@ -333,9 +322,8 @@ def loads(s, _dict=dict, decoder=None):
             else:
                 multilinestr += line
             multibackslash = False
-            if len(line) > 2 and (line[-1] == multilinestr[0] and
-                                  line[-2] == multilinestr[0] and
-                                  line[-3] == multilinestr[0]):
+            if len(line) > 2 and (line[-1] == multilinestr[0] and line[-2] == multilinestr[0]
+                                  and line[-3] == multilinestr[0]):
                 try:
                     value, vtype = decoder.load_value(multilinestr)
                 except ValueError as err:
@@ -356,8 +344,7 @@ def loads(s, _dict=dict, decoder=None):
         if line[0] == '[':
             arrayoftables = False
             if len(line) == 1:
-                raise TomlDecodeError("Opening key group bracket on line by "
-                                      "itself.", original, pos)
+                raise TomlDecodeError("Opening key group bracket on line by " "itself.", original, pos)
             if line[1] == '[':
                 arrayoftables = True
                 line = line[2:]
@@ -375,54 +362,43 @@ def loads(s, _dict=dict, decoder=None):
                 quoted = not quoted
             line = line.split(splitstr, i)
             if len(line) < i + 1 or line[-1].strip() != "":
-                raise TomlDecodeError("Key group not on a line by itself.",
-                                      original, pos)
+                raise TomlDecodeError("Key group not on a line by itself.", original, pos)
             groups = splitstr.join(line[:-1]).split('.')
             i = 0
             while i < len(groups):
                 groups[i] = groups[i].strip()
-                if len(groups[i]) > 0 and (groups[i][0] == '"' or
-                                           groups[i][0] == "'"):
+                if len(groups[i]) > 0 and (groups[i][0] == '"' or groups[i][0] == "'"):
                     groupstr = groups[i]
                     j = i + 1
                     while not groupstr[0] == groupstr[-1]:
                         j += 1
                         if j > len(groups) + 2:
-                            raise TomlDecodeError("Invalid group name '" +
-                                                  groupstr + "' Something " +
-                                                  "went wrong.", original, pos)
+                            raise TomlDecodeError("Invalid group name '" + groupstr + "' Something " + "went wrong.",
+                                                  original, pos)
                         groupstr = '.'.join(groups[i:j]).strip()
                     groups[i] = groupstr[1:-1]
                     groups[i + 1:j] = []
                 else:
                     if not _groupname_re.match(groups[i]):
-                        raise TomlDecodeError("Invalid group name '" +
-                                              groups[i] + "'. Try quoting it.",
-                                              original, pos)
+                        raise TomlDecodeError("Invalid group name '" + groups[i] + "'. Try quoting it.", original, pos)
                 i += 1
             currentlevel = retval
             for i in _range(len(groups)):
                 group = groups[i]
                 if group == "":
-                    raise TomlDecodeError("Can't have a keygroup with an empty "
-                                          "name", original, pos)
+                    raise TomlDecodeError("Can't have a keygroup with an empty " "name", original, pos)
                 try:
                     currentlevel[group]
                     if i == len(groups) - 1:
                         if group in implicitgroups:
                             implicitgroups.remove(group)
                             if arrayoftables:
-                                raise TomlDecodeError("An implicitly defined "
-                                                      "table can't be an array",
-                                                      original, pos)
+                                raise TomlDecodeError("An implicitly defined " "table can't be an array", original, pos)
                         elif arrayoftables:
-                            currentlevel[group].append(decoder.get_empty_table()
-                                                       )
+                            currentlevel[group].append(decoder.get_empty_table())
                         else:
-                            raise TomlDecodeError("What? " + group +
-                                                  " already exists?" +
-                                                  str(currentlevel),
-                                                  original, pos)
+                            raise TomlDecodeError("What? " + group + " already exists?" + str(currentlevel), original,
+                                                  pos)
                 except TypeError:
                     currentlevel = currentlevel[-1]
                     if group not in currentlevel:
@@ -443,17 +419,14 @@ def loads(s, _dict=dict, decoder=None):
                         pass
         elif line[0] == "{":
             if line[-1] != "}":
-                raise TomlDecodeError("Line breaks are not allowed in inline"
-                                      "objects", original, pos)
+                raise TomlDecodeError("Line breaks are not allowed in inline" "objects", original, pos)
             try:
-                decoder.load_inline_object(line, currentlevel, multikey,
-                                           multibackslash)
+                decoder.load_inline_object(line, currentlevel, multikey, multibackslash)
             except ValueError as err:
                 raise TomlDecodeError(str(err), original, pos)
         elif "=" in line:
             try:
-                ret = decoder.load_line(line, currentlevel, multikey,
-                                        multibackslash)
+                ret = decoder.load_line(line, currentlevel, multikey, multibackslash)
             except ValueError as err:
                 raise TomlDecodeError(str(err), original, pos)
             if ret is not None:
@@ -485,8 +458,7 @@ def _load_date(val):
                         subsecondval = subsecondvalandtz
                 if tzval is not None:
                     tz = TomlTz(tzval)
-                microsecond = int(int(subsecondval) *
-                                  (10 ** (6 - len(subsecondval))))
+                microsecond = int(int(subsecondval) * (10**(6 - len(subsecondval))))
             else:
                 tz = TomlTz(val[19:])
     except ValueError:
@@ -495,14 +467,10 @@ def _load_date(val):
         return None
     try:
         if len(val) == 10:
-            d = datetime.date(
-                int(val[:4]), int(val[5:7]),
-                int(val[8:10]))
+            d = datetime.date(int(val[:4]), int(val[5:7]), int(val[8:10]))
         else:
-            d = datetime.datetime(
-                int(val[:4]), int(val[5:7]),
-                int(val[8:10]), int(val[11:13]),
-                int(val[14:16]), int(val[17:19]), microsecond, tz)
+            d = datetime.datetime(int(val[:4]), int(val[5:7]), int(val[8:10]), int(val[11:13]), int(val[14:16]),
+                                  int(val[17:19]), microsecond, tz)
     except ValueError:
         return None
     return d
@@ -533,8 +501,7 @@ def _load_unicode_escapes(v, hexbytes, prefix):
         if hxb.strip('0123456789abcdef'):
             raise ValueError("Invalid escape sequence: " + hxb)
         if hxb[0] == "d" and hxb[1].strip('01234567'):
-            raise ValueError("Invalid escape sequence: " + hxb +
-                             ". Only scalar unicode points are allowed.")
+            raise ValueError("Invalid escape sequence: " + hxb + ". Only scalar unicode points are allowed.")
         v += unichr(int(hxb, 16))
         v += unicode(hx[len(hxb):])
     return v
@@ -577,7 +544,6 @@ class InlineTableDict(object):
 
 
 class TomlDecoder(object):
-
     def __init__(self, _dict=dict):
         self._dict = _dict
 
@@ -595,8 +561,7 @@ class TomlDecoder(object):
 
         return DynamicInlineTableDict()
 
-    def load_inline_object(self, line, currentlevel, multikey=False,
-                           multibackslash=False):
+    def load_inline_object(self, line, currentlevel, multikey=False, multibackslash=False):
         candidate_groups = line[1:-1].split(",")
         groups = []
         if len(candidate_groups) == 1 and not candidate_groups[0].strip():
@@ -608,20 +573,16 @@ class TomlDecoder(object):
             except ValueError:
                 raise ValueError("Invalid inline table encountered")
             value = value.strip()
-            if ((value[0] == value[-1] and value[0] in ('"', "'")) or (
-                    value[0] in '-0123456789' or
-                    value in ('true', 'false') or
-                    (value[0] == "[" and value[-1] == "]") or
-                    (value[0] == '{' and value[-1] == '}'))):
+            if ((value[0] == value[-1] and value[0] in ('"', "'"))
+                    or (value[0] in '-0123456789' or value in ('true', 'false') or
+                        (value[0] == "[" and value[-1] == "]") or (value[0] == '{' and value[-1] == '}'))):
                 groups.append(candidate_group)
             elif len(candidate_groups) > 0:
-                candidate_groups[0] = (candidate_group + "," +
-                                       candidate_groups[0])
+                candidate_groups[0] = (candidate_group + "," + candidate_groups[0])
             else:
                 raise ValueError("Invalid inline table value encountered")
         for group in groups:
-            status = self.load_line(group, currentlevel, multikey,
-                                    multibackslash)
+            status = self.load_line(group, currentlevel, multikey, multibackslash)
             if status is not None:
                 break
 
@@ -636,8 +597,7 @@ class TomlDecoder(object):
                 singlequotesplits[-1] += '"' + doublequotesplits[0]
                 doublequotesplits = doublequotesplits[1:]
                 if "'" in singlequotesplits[-1]:
-                    singlequotesplits = (singlequotesplits[:-1] +
-                                         singlequotesplits[-1].split("'"))
+                    singlequotesplits = (singlequotesplits[:-1] + singlequotesplits[-1].split("'"))
             quotesplits += singlequotesplits
         for doublequotesplit in doublequotesplits:
             if quoted:
@@ -660,10 +620,9 @@ class TomlDecoder(object):
         strictly_valid = _strictly_valid_num(pair[-1])
         if _number_with_underscores.match(pair[-1]):
             pair[-1] = pair[-1].replace('_', '')
-        while len(pair[-1]) and (pair[-1][0] != ' ' and pair[-1][0] != '\t' and
-                                 pair[-1][0] != "'" and pair[-1][0] != '"' and
-                                 pair[-1][0] != '[' and pair[-1][0] != '{' and
-                                 pair[-1] != 'true' and pair[-1] != 'false'):
+        while len(pair[-1]) and (pair[-1][0] != ' ' and pair[-1][0] != '\t' and pair[-1][0] != "'"
+                                 and pair[-1][0] != '"' and pair[-1][0] != '[' and pair[-1][0] != '{'
+                                 and pair[-1] != 'true' and pair[-1] != 'false'):
             try:
                 float(pair[-1])
                 break
@@ -688,8 +647,7 @@ class TomlDecoder(object):
                     if quoted:
                         levels.append(quotesplit)
                     else:
-                        levels += [level.strip() for level in
-                                   quotesplit.split('.')]
+                        levels += [level.strip() for level in quotesplit.split('.')]
                     quoted = not quoted
             else:
                 levels = pair[0].split('.')
@@ -705,13 +663,10 @@ class TomlDecoder(object):
         elif (pair[0][0] == '"' or pair[0][0] == "'") and \
                 (pair[0][-1] == pair[0][0]):
             pair[0] = pair[0][1:-1]
-        if len(pair[1]) > 2 and ((pair[1][0] == '"' or pair[1][0] == "'") and
-                                 pair[1][1] == pair[1][0] and
-                                 pair[1][2] == pair[1][0] and
-                                 not (len(pair[1]) > 5 and
-                                      pair[1][-1] == pair[1][0] and
-                                      pair[1][-2] == pair[1][0] and
-                                      pair[1][-3] == pair[1][0])):
+        if len(pair[1]) > 2 and ((pair[1][0] == '"' or pair[1][0] == "'") and pair[1][1] == pair[1][0]
+                                 and pair[1][2] == pair[1][0]
+                                 and not (len(pair[1]) > 5 and pair[1][-1] == pair[1][0] and pair[1][-2] == pair[1][0]
+                                          and pair[1][-3] == pair[1][0])):
             k = len(pair[1]) - 1
             while k > -1 and pair[1][k] == '\\':
                 multibackslash = not multibackslash
@@ -782,20 +737,16 @@ class TomlDecoder(object):
                     if i == '':
                         backslash = not backslash
                     else:
-                        if i[0] not in _escapes and (i[0] != 'u' and
-                                                     i[0] != 'U' and
-                                                     not backslash):
+                        if i[0] not in _escapes and (i[0] != 'u' and i[0] != 'U' and not backslash):
                             raise ValueError("Reserved escape sequence used")
                         if backslash:
                             backslash = False
                 for prefix in ["\\u", "\\U"]:
                     if prefix in v:
                         hexbytes = v.split(prefix)
-                        v = _load_unicode_escapes(hexbytes[0], hexbytes[1:],
-                                                  prefix)
+                        v = _load_unicode_escapes(hexbytes[0], hexbytes[1:], prefix)
                 v = _unescape(v)
-            if len(v) > 1 and v[1] == quotechar and (len(v) < 3 or
-                                                     v[1] == v[2]):
+            if len(v) > 1 and v[1] == quotechar and (len(v) < 3 or v[1] == v[2]):
                 v = v[2:-2]
             return (v[1:-1], "str")
         elif v[0] == '[':
@@ -813,8 +764,7 @@ class TomlDecoder(object):
             if parsed_date is not None:
                 return (parsed_date, "date")
             if not strictly_valid:
-                raise ValueError("Weirdness with leading zeroes or "
-                                 "underscores in your number.")
+                raise ValueError("Weirdness with leading zeroes or " "underscores in your number.")
             itype = "int"
             neg = False
             if v[0] == '-':
@@ -826,11 +776,9 @@ class TomlDecoder(object):
             lowerv = v.lower()
             if '.' in v or ('x' not in v and ('e' in v or 'E' in v)):
                 if '.' in v and v.split('.', 1)[1] == '':
-                    raise ValueError("This float is missing digits after "
-                                     "the point")
+                    raise ValueError("This float is missing digits after " "the point")
                 if v[0] not in '0123456789':
-                    raise ValueError("This float doesn't have a leading "
-                                     "digit")
+                    raise ValueError("This float doesn't have a leading " "digit")
                 v = float(v)
                 itype = "float"
             elif len(lowerv) == 3 and (lowerv == 'inf' or lowerv == 'nan'):
@@ -879,8 +827,7 @@ class TomlDecoder(object):
                     if a[end_group_index] == '"' or a[end_group_index] == "'":
                         if in_str:
                             backslash_index = end_group_index - 1
-                            while (backslash_index > -1 and
-                                   a[backslash_index] == '\\'):
+                            while (backslash_index > -1 and a[backslash_index] == '\\'):
                                 in_str = not in_str
                                 backslash_index -= 1
                         in_str = not in_str
@@ -897,8 +844,7 @@ class TomlDecoder(object):
                     # bracket, a closing bracket can be followed by a comma
                     # since we are in an array.
                     start_group_index = end_group_index + 1
-                    while (start_group_index < len(a[1:]) and
-                           a[start_group_index] != '{'):
+                    while (start_group_index < len(a[1:]) and a[start_group_index] != '{'):
                         start_group_index += 1
                     end_group_index = start_group_index + 1
                 a = new_a
@@ -906,11 +852,8 @@ class TomlDecoder(object):
             if strarray:
                 while b < len(a) - 1:
                     ab = a[b].strip()
-                    while (not self.bounded_string(ab) or
-                           (len(ab) > 2 and
-                            ab[0] == ab[1] == ab[2] and
-                            ab[-2] != ab[0] and
-                            ab[-3] != ab[0])):
+                    while (not self.bounded_string(ab)
+                           or (len(ab) > 2 and ab[0] == ab[1] == ab[2] and ab[-2] != ab[0] and ab[-3] != ab[0])):
                         a[b] = a[b] + ',' + a[b + 1]
                         ab = a[b].strip()
                         if b < len(a) - 2:

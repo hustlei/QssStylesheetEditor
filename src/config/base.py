@@ -4,10 +4,10 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+import toml
 import os
 import sys
 sys.path.append(os.path.dirname(__file__))
-import toml
 
 
 class ConfBase:
@@ -21,15 +21,11 @@ class ConfBase:
         """
         if cfgFile is not None:
             if not os.path.exists(cfgFile):
-                print(
-                    "config cfgFile" +
-                    os.path.basename(cfgFile) +
-                    ' not found')
+                print("config cfgFile" + os.path.basename(cfgFile) + ' not found')
                 return False
             with open(cfgFile, mode='rb') as f:
                 content = f.read()
-            if content.startswith(
-                    b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
+            if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
                 content = content[3:]
             self.dict = toml.loads(content.decode('utf8'))
             return True

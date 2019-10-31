@@ -4,19 +4,8 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from PyQt5.QtWidgets import (
-    QApplication,
-    QWidget,
-    QHBoxLayout,
-    QVBoxLayout,
-    QListWidget,
-    QStackedWidget,
-    QGroupBox,
-    QLabel,
-    QSpinBox,
-    QPushButton,
-    QComboBox,
-    QFormLayout)
+from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
+                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout)
 from PyQt5.QtCore import Qt
 
 
@@ -89,11 +78,11 @@ class ConfDialog(QWidget):
         self.okbtn.clicked.connect(self.close)
 
         # action
-        self.fontsizespin.valueChanged.connect(
-            self.win.editor.font().setPointSize)
+        self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
 
         def setCount(x):
             self.win.recent.maxcount = x
+
         self.recentcountspin.valueChanged.connect(setCount)
         self.langCombo.currentIndexChanged.connect(self.chLang)
 
@@ -133,6 +122,7 @@ class ConfDialog(QWidget):
                 self.langCombo.setCurrentText(l["nativename"])
                 break
         super().show()
+
 
 if __name__ == "__main__":
     import sys

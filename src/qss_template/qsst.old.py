@@ -41,7 +41,7 @@ class Qsst():
         self.varUndefined = []
         vars = self.scanVarsUsed(qssStr)
         for v in vars:
-            if(v in varDict.keys()):
+            if (v in varDict.keys()):
                 qssStr = qssStr.replace("$" + v, varDict[v])
             else:
                 self.varUndefined.append(v)
@@ -52,20 +52,16 @@ class Qsst():
     def writeVarList(self):
         varlist = self.varDict
         self.loadVarDict()
-        if(self.varDict):
+        if (self.varDict):
             self.srctext = re.sub(r'[\t ]*([^;\s=/*]+)\s*={1}[\t ]*([^;\s=/*]*)[\t ]*',
-                                  lambda m: r'{}={}'.format(m.group(1), varlist[m.group(1)]),
-                                  self.srctext)
-            if(len(varlist) > len(self.varDict)):
+                                  lambda m: r'{}={}'.format(m.group(1), varlist[m.group(1)]), self.srctext)
+            if (len(varlist) > len(self.varDict)):
                 s = ''
                 for var, val in varlist.items():
-                    if(var not in self.varDict.keys()):
+                    if (var not in self.varDict.keys()):
                         s += var + "=" + val + "\n"
-                self.srctext = re.sub(
-                    r'[\t ]*([^;\s=/*]+\s*={1}[\t ]*[^;\s=/*]*)[\t ]*',
-                    r'{}\1'.format(s),
-                    self.srctext,
-                    1)
+                self.srctext = re.sub(r'[\t ]*([^;\s=/*]+\s*={1}[\t ]*[^;\s=/*]*)[\t ]*', r'{}\1'.format(s),
+                                      self.srctext, 1)
         else:
             s = '/*'
             for var, val in varlist.items():

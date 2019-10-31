@@ -6,8 +6,7 @@ import os
 import re
 import sys
 
-from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog,
-                             QMessageBox)
+from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog, QMessageBox)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize
 # import sip
@@ -75,12 +74,10 @@ class MainWin(MainWinBase):
         self.actions["replace"].triggered.connect(self.editor.replace)
         self.actions["echospace"].triggered.connect(
             lambda: self.editor.setWhitespaceVisibility(not self.editor.whitespaceVisibility()))
-        self.actions["echoeol"].triggered.connect(
-            lambda: self.editor.setEolVisibility(not self.editor.eolVisibility()))
+        self.actions["echoeol"].triggered.connect(lambda: self.editor.setEolVisibility(not self.editor.eolVisibility()))
         self.actions["fontup"].triggered.connect(self.editor.zoomIn)
         self.actions["fontdown"].triggered.connect(self.editor.zoomOut)
-        self.actions["autowrap"].triggered.connect(
-            lambda: self.editor.setWrapMode(0 if self.editor.wrapMode() else 2))
+        self.actions["autowrap"].triggered.connect(lambda: self.editor.setWrapMode(0 if self.editor.wrapMode() else 2))
 
         # contianerWidget.setSizePolicy(QSizePolicy.Maximum,QSizePolicy.Minimum)
         def sizeDock(dockLoc):
@@ -104,8 +101,8 @@ class MainWin(MainWinBase):
         self.editor.mousePress.connect(rend)
         self.editor.linesChanged.connect(
             lambda: self.status["lines"].setText(self.tr("lines:") + str(self.editor.lines())))
-        self.editor.cursorPositionChanged.connect(lambda l, p: self.status["line"].setText(
-            self.tr("line:") + str(l + 1) + self.tr("  pos:") + str(p)))
+        self.editor.cursorPositionChanged.connect(
+            lambda l, p: self.status["line"].setText(self.tr("line:") + str(l + 1) + self.tr("  pos:") + str(p)))
         self.editor.selectionChanged.connect(self.__setSelectStatus)
         self.editor.modificationChanged.connect(self.motifyChanged)
         self.editor.drop.connect(self.dropEvent)
@@ -117,24 +114,22 @@ class MainWin(MainWinBase):
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
         aboutText += self.tr(
-            "This software is a advanced editor for QtWidget stylesheet(Qss), <br>support custom variable and real-time preview.<br><br>"
-        )
+            "This software is a advanced editor for QtWidget stylesheet(Qss), <br>support custom variable and "
+            "real-time preview.<br><br> ")
         aboutText += self.tr(
-            "author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https://blog.csdn.net/hustlei</a><br><br>welcom communicate with me: hustlei@sina.cn"
-        )
+            "author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https"
+            "://blog.csdn.net/hustlei</a><br><br>welcom communicate with me: hustlei@sina.cn ")
         aboutText += "<br>copyright &copy; 2019, lilei."
-        self.actions["about"].triggered.connect(
-            lambda: QMessageBox.about(self, "about", aboutText))
+        self.actions["about"].triggered.connect(lambda: QMessageBox.about(self, "about", aboutText))
 
     def __setSelectStatus(self):
-        linefrom, _, lineto, _ = self.editor.getSelection()    #__ is posfrom posto
+        linefrom, _, lineto, _ = self.editor.getSelection()  # __ is posfrom posto
         linefrom += 1
         lineto += 1
         if (linefrom == 0 or lineto == 0):
             text = self.tr("select: none")
         else:
-            text = self.tr("select:ln") + str(linefrom) + \
-                self.tr(" - ln") + str(lineto)
+            text = self.tr("select:ln") + str(linefrom) + self.tr(" - ln") + str(lineto)
         self.status["select"].setText(text)
 
     def unuseQss(self, unuse):
@@ -162,8 +157,7 @@ class MainWin(MainWinBase):
             #     os.chdir(dir)
             path = os.path.dirname(self.file).replace("\\", "/")
             styleSheet = re.sub(r'url\([\s]*[\"\']?[\s]*([^\s\/:\"\'\)]+)[\s]*[\"\']?[\s]*\)',
-                                r'url("{}/\1")'.format(path).format(path),
-                                self.qsst.qss)    # 不支持带空格路径
+                                r'url("{}/\1")'.format(path).format(path), self.qsst.qss)  # 不支持带空格路径
             if os.path.exists(self.file):
                 name, _ = os.path.splitext(self.file)
                 res = name + ".py"
@@ -190,19 +184,18 @@ class MainWin(MainWinBase):
                 except Exception:
                     pass
 
-    def textChanged(self, e):    # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
+    def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         # 大键盘为Ret小键盘为Enter
-        if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight,
-                        Qt.Key_Up, Qt.Key_Down, Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab,
-                        Qt.Key_Delete, Qt.Key_Backspace)):
+        if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight, Qt.Key_Up, Qt.Key_Down,
+                        Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab, Qt.Key_Delete, Qt.Key_Backspace)):
             self.renderStyle()
             self.loadColorPanel()
 
         self.actions["undo"].setEnabled(self.editor.isUndoAvailable())
         self.actions["redo"].setEnabled(self.editor.isRedoAvailable())
 
-    def motifyChanged(self):    #, e):
+    def motifyChanged(self):  # , e):
         if self.editor.isModified():
             self.setWindowTitle(self.title + " - *" + os.path.basename(self.file))
             self.actions["save"].setEnabled(True)
@@ -213,7 +206,7 @@ class MainWin(MainWinBase):
     def loadColorPanel(self):
         self.qsst.srctext = self.editor.text()
         self.qsst.loadVars()
-        #item = self.colorGridLayout.itemAt(0)
+        # item = self.colorGridLayout.itemAt(0)
         # while (item != None):
         #     self.colorGridLayout.removeItem(item)
         #     # self.colorGridLayout.removeWidget(item.widget())
@@ -271,8 +264,7 @@ class MainWin(MainWinBase):
             c.setNamedColor(cstr)
         else:
             c.setNamedColor("white")
-        color = QColorDialog.getColor(c, self, self.tr("color pick"),
-                                      QColorDialog.ShowAlphaChannel)
+        color = QColorDialog.getColor(c, self, self.tr("color pick"), QColorDialog.ShowAlphaChannel)
         if color.isValid():
             s = ''
             clrstr = color.name()
@@ -291,7 +283,7 @@ class MainWin(MainWinBase):
             # 用setText之后undo redo堆栈全部消失，所以暂时用这种方法
             pos = self.editor.verticalScrollBar().sliderPosition()
             self.editor.selectAll()
-            self.editor.replaceSelectedText(self.qsst.srctext)    # setText(self.qsst.srctext)
+            self.editor.replaceSelectedText(self.qsst.srctext)  # setText(self.qsst.srctext)
             # self.editor.setCursorPosition(xp,yp)
             self.editor.verticalScrollBar().setSliderPosition(pos)
             self.renderStyle()
@@ -299,11 +291,11 @@ class MainWin(MainWinBase):
     def _openact(self, _=None, file=None):
         self.open(file)
 
-    def open(self, file=None):    # _参数用于接收action的event参数,bool类型
+    def open(self, file=None):  # _参数用于接收action的event参数,bool类型
         if file is None:
             file, _ = QFileDialog.getOpenFileName(
                 self, self.tr("Open File"), file,
-                "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")    # _是filefilter
+                "QSS(*.qss *.qsst);;qsst(*.qsst);;qss(*.qss);;all(*.*)")  # _是filefilter
         if os.path.exists(file):
             self.file = file
             self.statusbar.showMessage(self.tr("opening file..."))
@@ -324,10 +316,8 @@ class MainWin(MainWinBase):
 
     def new(self):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title,
-                                       self.tr("Current file is not saved, do you want to save?"),
-                                       QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
-                                       QMessageBox.No)
+            ret = QMessageBox.question(self, self.title, self.tr("Current file is not saved, do you want to save?"),
+                                       QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
             elif ret == QMessageBox.Cancel:
@@ -344,10 +334,8 @@ class MainWin(MainWinBase):
 
     def newWithTemplate(self, templatefile="data/default.qsst"):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title,
-                                       self.tr("Current file is not saved，do you want to save?"),
-                                       QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel,
-                                       QMessageBox.No)
+            ret = QMessageBox.question(self, self.title, self.tr("Current file is not saved，do you want to save?"),
+                                       QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
             elif ret == QMessageBox.Cancel:
@@ -375,7 +363,7 @@ class MainWin(MainWinBase):
         # f="." if self.file==None else self.file
         file, _ = QFileDialog.getSaveFileName(
             self,
-            self.tr(    # __ is filefilter
+            self.tr(  # __ is filefilter
                 "save file"),
             self.file,
             "qsst(*.qsst);;qss(*.qss);;all(*.*)")
@@ -394,8 +382,7 @@ class MainWin(MainWinBase):
         else:
             # f=self.file[:-1]
             f = os.path.splitext(self.file)[0]
-        savefile, _ = QFileDialog.getSaveFileName(self, self.tr("export Qss"), f,
-                                                  "Qss(*.qss);;all(*.*)")
+        savefile, _ = QFileDialog.getSaveFileName(self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
         if savefile:
             with open(savefile, 'w', newline='') as f:
                 f.write(self.qsst.qss)
@@ -416,10 +403,9 @@ class MainWin(MainWinBase):
     def closeEvent(self, e):
         if self.editor.isModified():
             if self.lastSavedText != self.editor.text():
-                msg = QMessageBox(
-                    QMessageBox.Question, self.title,
-                    self.tr(self.tr("Save before close?") + os.path.basename(self.file)),
-                    QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
+                msg = QMessageBox(QMessageBox.Question, self.title,
+                                  self.tr(self.tr("Save before close?") + os.path.basename(self.file)),
+                                  QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Cancel)
                 msg.button(QMessageBox.Save).setText(self.tr("Save"))
                 msg.button(QMessageBox.Discard).setText(self.tr("Discard"))

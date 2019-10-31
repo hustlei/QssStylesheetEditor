@@ -28,8 +28,7 @@ class Qsst():
         if qssStr is None:
             qssStr = self.srctext
         self.varUsed = re.findall(r':[ \t\w,.:()]*[$]([\w]+)', qssStr)
-        varsDefined = re.findall(
-            r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)
+        varsDefined = re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)
         self.varDict = {}
         for var, val in varsDefined:
             self.varDict[var] = val
@@ -48,8 +47,7 @@ class Qsst():
         varDict = self.varDict
         self.loadVars()
         # 删除变量定义
-        varsDefined = re.compile(
-            r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[ \t;]*[\r\n]{0,2}')
+        varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[ \t;]*[\r\n]{0,2}')
         qssStr = varsDefined.sub("", qssStr)
 
         for v in self.varDict:
@@ -71,24 +69,16 @@ class Qsst():
         varDictNew = self.varDict
         self.loadVars()
         if self.varDict:  # 如果文件中变量不为空，更新变量值
-            self.srctext = re.sub(
-                r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
-                lambda m: '${} = {};'.format(
-                    m.group(1),
-                    varDictNew.get(
-                        m.group(1),
-                        "")),
-                self.srctext)
+            self.srctext = re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
+                                  lambda m: '${} = {};'.format(m.group(1), varDictNew.get(m.group(1), "")),
+                                  self.srctext)
             if self.varUndefined:  # 在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
                 s = ''
                 for var, val in varDictNew.items():
                     if var in self.varUndefined:
                         s += "$" + var + " = " + val + ";\n"
-                self.srctext = re.sub(
-                    r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
-                    r'{}$\1 = \2;\n'.format(s),
-                    self.srctext,
-                    1)
+                self.srctext = re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?', r'{}$\1 = \2;\n'.format(s),
+                                      self.srctext, 1)
         else:
             s = ''
             for var, val in varDictNew.items():

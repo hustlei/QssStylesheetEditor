@@ -29,4 +29,3 @@ class Config(ConfBase):
     def save(self):
         if super()._save(self.file):
             print("config file saved.")
-

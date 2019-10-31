@@ -4,7 +4,7 @@ import sys
 
 from toml.decoder import InlineTableDict
 
-if sys.version_info >= (3,):
+if sys.version_info >= (3, ):
     unicode = str
 
 
@@ -49,8 +49,7 @@ def dumps(o, encoder=None):
     while sections:
         newsections = encoder.get_empty_table()
         for section in sections:
-            addtoretval, addtosections = encoder.dump_sections(
-                sections[section], section)
+            addtoretval, addtosections = encoder.dump_sections(sections[section], section)
 
             if addtoretval or (not addtoretval and not addtosections):
                 if retval and retval[-2:] != "\n\n":
@@ -65,7 +64,7 @@ def dumps(o, encoder=None):
 
 
 def _dump_str(v):
-    if sys.version_info < (3,) and hasattr(v, 'decode') and isinstance(v, str):
+    if sys.version_info < (3, ) and hasattr(v, 'decode') and isinstance(v, str):
         v = v.decode('utf-8')
     v = "%r" % v
     if v[0] == 'u':
@@ -108,7 +107,6 @@ def _dump_time(v):
 
 
 class TomlEncoder(object):
-
     def __init__(self, _dict=dict, preserve=False):
         self._dict = _dict
         self.preserve = preserve
@@ -192,12 +190,9 @@ class TomlEncoder(object):
                         while d:
                             newd = self._dict()
                             for dsec in d:
-                                s1, d1 = self.dump_sections(d[dsec], sup +
-                                                            qsection + "." +
-                                                            dsec)
+                                s1, d1 = self.dump_sections(d[dsec], sup + qsection + "." + dsec)
                                 if s1:
-                                    arraytabstr += ("[" + sup + qsection +
-                                                    "." + dsec + "]\n")
+                                    arraytabstr += ("[" + sup + qsection + "." + dsec + "]\n")
                                     arraytabstr += s1
                                 for s1 in d1:
                                     newd[dsec + "." + s1] = d1[s1]
@@ -205,11 +200,9 @@ class TomlEncoder(object):
                         arraystr += arraytabstr
                 else:
                     if o[section] is not None:
-                        retstr += (qsection + " = " +
-                                   unicode(self.dump_value(o[section])) + '\n')
+                        retstr += (qsection + " = " + unicode(self.dump_value(o[section])) + '\n')
             elif self.preserve and isinstance(o[section], InlineTableDict):
-                retstr += (qsection + " = " +
-                           self.dump_inline_table(o[section]))
+                retstr += (qsection + " = " + self.dump_inline_table(o[section]))
             else:
                 retdict[qsection] = o[section]
         retstr += arraystr
@@ -217,13 +210,11 @@ class TomlEncoder(object):
 
 
 class TomlPreserveInlineDictEncoder(TomlEncoder):
-
     def __init__(self, _dict=dict):
         super(TomlPreserveInlineDictEncoder, self).__init__(_dict, True)
 
 
 class TomlArraySeparatorEncoder(TomlEncoder):
-
     def __init__(self, _dict=dict, preserve=False, separator=","):
         super(TomlArraySeparatorEncoder, self).__init__(_dict, preserve)
         if separator.strip() == "":

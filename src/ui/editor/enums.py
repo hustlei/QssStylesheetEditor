@@ -12,47 +12,47 @@ class BadEnum(Exception):
 
 class EditorEnums:
     types = {
-    # annotation display styles
+        # annotation display styles
         QsciScintilla.AnnotationDisplay: (
             ('AnnotationHidden', QsciScintilla.AnnotationHidden),
             ('AnnotationStandard', QsciScintilla.AnnotationStandard),
             ('AnnotationBoxed', QsciScintilla.AnnotationBoxed),
         ),
-    # sources for auto-completion lists.
+        # sources for auto-completion lists.
         QsciScintilla.AutoCompletionSource: (
             ('AcsNone', QsciScintilla.AcsNone),
             ('AcsAll', QsciScintilla.AcsAll),
             ('AcsDocument', QsciScintilla.AcsDocument),
             ('AcsAPIs', QsciScintilla.AcsAPIs),
         ),
-    # brace matching modes. The character pairs (), [] and () are treated as
-    # braces. The Python lexer will also match a : with the end of the
-    # corresponding indented block.
+        # brace matching modes. The character pairs (), [] and () are treated as
+        # braces. The Python lexer will also match a : with the end of the
+        # corresponding indented block.
         QsciScintilla.BraceMatch: (
             ('NoBraceMatch', QsciScintilla.NoBraceMatch),
             ('StrictBraceMatch', QsciScintilla.StrictBraceMatch),
             ('SloppyBraceMatch', QsciScintilla.SloppyBraceMatch),
         ),
-    # call tip styles
+        # call tip styles
         QsciScintilla.CallTipsStyle: (
             ('CallTipsNone', QsciScintilla.CallTipsNone),
             ('CallTipsNoContext', QsciScintilla.CallTipsNoContext),
             ('CallTipsNoAutoCompletionContext', QsciScintilla.CallTipsNoAutoCompletionContext),
             ('CallTipsContext', QsciScintilla.CallTipsContext),
         ),
-    # edge modes for long lines
+        # edge modes for long lines
         QsciScintilla.EdgeMode: (
             ('EdgeNone', QsciScintilla.EdgeNone),
             ('EdgeLine', QsciScintilla.EdgeLine),
             ('EdgeBackground', QsciScintilla.EdgeBackground),
         ),
-    # end-of-line modes
+        # end-of-line modes
         QsciScintilla.EolMode: (
             ('EolWindows', QsciScintilla.EolWindows),
             ('EolUnix', QsciScintilla.EolUnix),
             ('EolMac', QsciScintilla.EolMac),
         ),
-    # styles for the folding margin
+        # styles for the folding margin
         QsciScintilla.FoldStyle: (
             ('NoFoldStyle', QsciScintilla.NoFoldStyle),
             ('PlainFoldStyle', QsciScintilla.PlainFoldStyle),
@@ -61,18 +61,16 @@ class EditorEnums:
             ('CircledTreeFoldStyle', QsciScintilla.CircledTreeFoldStyle),
             ('BoxedTreeFoldStyle', QsciScintilla.BoxedTreeFoldStyle),
         ),
-    # margin types
+        # margin types
         QsciScintilla.MarginType: (
             ('SymbolMargin', QsciScintilla.SymbolMargin),
-            ('SymbolMarginDefaultForegroundColor',
-             QsciScintilla.SymbolMarginDefaultForegroundColor),
-            ('SymbolMarginDefaultBackgroundColor',
-             QsciScintilla.SymbolMarginDefaultBackgroundColor),
+            ('SymbolMarginDefaultForegroundColor', QsciScintilla.SymbolMarginDefaultForegroundColor),
+            ('SymbolMarginDefaultBackgroundColor', QsciScintilla.SymbolMarginDefaultBackgroundColor),
             ('NumberMargin', QsciScintilla.NumberMargin),
             ('TextMargin', QsciScintilla.TextMargin),
             ('TextMarginRightJustified', QsciScintilla.TextMarginRightJustified),
         ),
-    # pre-defined marker symbols
+        # pre-defined marker symbols
         QsciScintilla.MarkerSymbol: (
             ('Circle', QsciScintilla.Circle),
             ('Rectangle', QsciScintilla.Rectangle),
@@ -99,25 +97,25 @@ class EditorEnums:
             ('Background', QsciScintilla.Background),
             ('ThreeDots', QsciScintilla.ThreeDots),
             ('ThreeRightArrows', QsciScintilla.ThreeRightArrows),
-    #('FullRectangle', QsciScintilla.FullRectangle),
-    #('LeftRectangle', QsciScintilla.LeftRectangle),
-    #('Underline', QsciScintilla.Underline),
+            # ('FullRectangle', QsciScintilla.FullRectangle),
+            # ('LeftRectangle', QsciScintilla.LeftRectangle),
+            # ('Underline', QsciScintilla.Underline),
         ),
-    # whitespace visibility modes. When whitespace is visible spaces are
-    # displayed as small centred dots and tabs are displayed as light arrows
-    # pointing to the right.
+        # whitespace visibility modes. When whitespace is visible spaces are
+        # displayed as small centred dots and tabs are displayed as light arrows
+        # pointing to the right.
         QsciScintilla.WhitespaceVisibility: (
             ('WsInvisible', QsciScintilla.WsInvisible),
             ('WsVisible', QsciScintilla.WsVisible),
             ('WsVisibleAfterIndent', QsciScintilla.WsVisibleAfterIndent),
         ),
-    # line wrap modes
+        # line wrap modes
         QsciScintilla.WrapMode: (
             ('WrapNone', QsciScintilla.WrapNone),
             ('WrapWord', QsciScintilla.WrapWord),
             ('WrapCharacter', QsciScintilla.WrapCharacter),
         ),
-    # line wrap visual flags
+        # line wrap visual flags
         QsciScintilla.WrapVisualFlag: (
             ('WrapFlagNone', QsciScintilla.WrapFlagNone),
             ('WrapFlagByText', QsciScintilla.WrapFlagByText),

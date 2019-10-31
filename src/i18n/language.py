@@ -29,18 +29,24 @@ class Language():
             conf.read(os.path.join(os.path.dirname(__file__), "list.toml"))
             languages = conf.getSec("languages")
             for k, v in languages.items():
-                l = {}
-                l["lang"] = v[0]
-                l["qmfile"] = v[1]
-                l["nativename"] = v[2]
-                l["englishname"] = k
-                if l["nativename"] == "":
-                    l["nativename"] = QLocale(l["name"]).nativeLanguageName()
-                if l["lang"] != "":
-                    Language.__listInToml.append(l)
+                langitem = {}
+                langitem["lang"] = v[0]
+                langitem["qmfile"] = v[1]
+                langitem["nativename"] = v[2]
+                langitem["englishname"] = k
+                if langitem["nativename"] == "":
+                    langitem["nativename"] = QLocale(langitem["name"]).nativeLanguageName()
+                if langitem["lang"] != "":
+                    Language.__listInToml.append(langitem)
         except Exception:
             Language.__listInToml = [
-                {"lang": "en", "qmfile": "", "nativename": "English", "englishname": "English"}, ]
+                {
+                    "lang": "en",
+                    "qmfile": "",
+                    "nativename": "English",
+                    "englishname": "English"
+                },
+            ]
         Language.__inited = True
         return Language.__listInToml
 
@@ -69,9 +75,7 @@ class Language():
         根据配置文件读取语言配置，如果没有找到当前系统配置
         :return:
         """
-        configfile = os.path.join(
-            os.path.dirname(__file__),
-            "../config/config.toml")
+        configfile = os.path.join(os.path.dirname(__file__), "../config/config.toml")
         config = ConfBase()
         config.read(configfile)
         Language.lang = config.getSec("general").get("language", "")
@@ -113,18 +117,12 @@ class Language():
 
         systransdir = QLibraryInfo.location(QLibraryInfo.TranslationsPath)
         try:
-            if Language.systrans.load(
-                "qt_" + QLocale(lang).name(),
-                    systransdir):
+            if Language.systrans.load("qt_" + QLocale(lang).name(), systransdir):
                 QApplication.installTranslator(Language.systrans)
-            if Language.systrans.load(
-                "qscintilla_" +
-                QLocale(lang).name(),
-                    systransdir):
+            if Language.systrans.load("qscintilla_" + QLocale(lang).name(), systransdir):
                 QApplication.installTranslator(Language.systrans)
         except Exception:
-            Language.systrans.load(
-                "qt_" + QLocale.system().name(), systransdir)
+            Language.systrans.load("qt_" + QLocale.system().name(), systransdir)
             QApplication.installTranslator(Language.systrans)
 
 
