@@ -16,8 +16,9 @@ root = os.path.join(os.path.dirname(__file__), "..")
 pydir = os.path.join(root, "dist/libs/libpython")
 dlldir = os.path.join(root, r"dist/libs/DLLs")
 libdir = os.path.join(root, "dist/libs/Lib")
-datadir = os.path.join(root, "data")
-resdir = os.path.join(root, "res")
+datadir = os.path.join(root, "src/data")
+resdir = os.path.join(root, "src/res")
+srcdir = os.path.join(root, "src")
 distroot = os.path.join(root, "dist/build")
 # 不编译的文件夹，文件后缀
 excludedir = (
@@ -134,7 +135,7 @@ def compile_copy(path, distdir):
     return nofilecompileandcopy
 
 
-compile_copy(root, os.path.join(distroot, "scripts"))
+compile_copy(srcdir, os.path.join(distroot, "scripts"))
 # compile main.py
 compile_copy(
     os.path.join(
