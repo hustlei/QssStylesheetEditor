@@ -1,7 +1,7 @@
 [MASTER]
 init-hook='base_dir="QssStylesheetEditor"; import sys,os,re; _re=re.search(r".+[\\\/]" + base_dir, os.getcwd()); project_dir = _re.group() if _re else os.path.join(os.getcwd(), base_dir); sys.path.append(project_dir); sys.path.append(project_dir+"/src")'
 
-extension-pkg-whitelist=PyQt5, sip
+extension-pkg-whitelist=PyQt5, PyQt5.QtCore, sip, pytest
 ignore=CVS, .git, dist, build, bak, toml, splash.py
 ignore-patterns=.*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)
 
@@ -47,7 +47,7 @@ disable= import-outside-toplevel, # some module need import inside function
         ; unsubscriptable-object, #error when you use pyqt# print-statement,
         ; redefined-variable-type, # base class type as function param will cause err
 
-enable=c-extension-no-member
+# enable=c-extension-no-member
 
 
 [REPORTS]
