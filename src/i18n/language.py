@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-get tranlations and set language for the app.
+"""get tranlations and set language for the app.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
@@ -11,6 +10,7 @@ from config.base import ConfBase
 
 
 class Language():
+    """i18n setting class"""
     trans = QTranslator()  # 必须定义为Language的变量，定义为局部变量不起作用
     systrans = QTranslator()
     __inited = False
@@ -18,8 +18,7 @@ class Language():
 
     @classmethod
     def loadList(cls):
-        """
-        加载list.toml中的内容
+        """加载list.toml中的内容
         :return: 返回一个列表，列表的每个元素是一个包含name,systrans,trans,englishname的字典。
                 systrans,trans,分别是qtbase_xx.qm文件和当前语言的qm文件
         """
@@ -34,9 +33,9 @@ class Language():
                 langitem["qmfile"] = v[1]
                 langitem["nativename"] = v[2]
                 langitem["englishname"] = k
-                if langitem["nativename"] == "":
+                if not langitem["nativename"]:
                     langitem["nativename"] = QLocale(langitem["name"]).nativeLanguageName()
-                if langitem["lang"] != "":
+                if langitem["lang"]:
                     Language.__listInToml.append(langitem)
         except Exception:
             Language.__listInToml = [
@@ -52,7 +51,7 @@ class Language():
 
     @staticmethod
     def getLangs():
-        """
+        """load avaiable languages
         :return: 可用的语言包列表
         """
         if not Language.__inited:
@@ -71,8 +70,7 @@ class Language():
 
     @classmethod
     def getLang(cls):
-        """
-        根据配置文件读取语言配置，如果没有找到当前系统配置
+        """根据配置文件读取语言配置，如果没有找到当前系统配置
         :return:
         """
         configfile = os.path.join(os.path.dirname(__file__), "../config/config.toml")
@@ -80,7 +78,7 @@ class Language():
         config.read(configfile)
         Language.lang = config.getSec("general").get("language", "")
 
-        if Language.lang.strip() == "":
+        if not Language.lang.strip():
             # import locale
             # lang,country=locale.getdefaultlocale()
             Language.lang = QLocale.system().name()  # 语言_国家”形式形成的字符串，比如zh_CN。
@@ -90,8 +88,7 @@ class Language():
 
     @classmethod
     def setTrans(cls):
-        """
-        根据配置文件(如果没有就根据当前系统语言)设置当前语言包
+        """根据配置文件(如果没有就根据当前系统语言)设置当前语言包
         """
         langs = Language.getLangs()
         lang = Language.getLang()

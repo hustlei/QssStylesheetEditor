@@ -5,12 +5,11 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
-import sys
-#sys.path.append(os.path.dirname(__file__))
 from . import toml
 
 
 class ConfBase:
+    """base class of Config"""
     def __init__(self):
         self.dict = {}
 
@@ -105,13 +104,13 @@ class ConfBase:
         sec[node].insert(0, child)
 
 
-if __name__ == "__main__":
-    cfgfile = "config.toml"
-    conf = ConfBase()
-    if conf.read(cfgfile):
-        filesec = conf._getSec("file")
-        conf.listNodeAppend("recent", "eeee", filesec)
-        fontsec = conf._getSubSec(conf._getSec("editor"), "font")
-        fontsec["size"] = 12
-        conf.rmSec("editor0")
-        conf.save()
+# if __name__ == "__main__":
+#     CFG_FILE = "config.toml"
+#     conf = ConfBase()
+#     if conf.read(CFG_FILE):
+#         filesec = conf.getSec("file")
+#         conf.listNodeAppend("recent", "eeee", filesec)
+#         fontsec = conf.getSubSec(conf.getSec("editor"), "font")
+#         fontsec["size"] = 12
+#         conf.rmSec("editor0")
+#         conf.save()

@@ -9,6 +9,7 @@ from config.base import ConfBase
 
 
 class Config(ConfBase):
+    """Config parser for config.toml"""
     def __init__(self, cfgfile=None):
         super().__init__()
         default = os.path.join(os.path.dirname(__file__), "config.toml")

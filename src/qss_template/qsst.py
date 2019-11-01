@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
+"""var operate for qss file
+
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
@@ -7,6 +8,7 @@ import re
 
 
 class Qsst():
+    """qss template"""
     def __init__(self, qssFile=None):
         if qssFile is None:
             self.srctext = ''  # qss template，qss with vars
@@ -19,8 +21,7 @@ class Qsst():
         self.varUndefined = []  # var used but not defined，these vars will be assign to ''
 
     def loadVars(self, qssStr=None):
-        """
-        扫描qsst模板文件中的所有变量定义，引用的变量；
+        """扫描qsst模板文件中的所有变量定义，引用的变量；
         把引用的变量放到varUsed列表中；
         把引用但未定义变量赋值为''放在varDict中；
         把定义的变量放到varDict中
@@ -39,8 +40,7 @@ class Qsst():
                 self.varUndefined.append(varused)
 
     def convertQss(self):
-        """
-        根据varDict中变量的值，把模板文件中引用的变量用值替换，转换为qss文件。
+        """根据varDict中变量的值，把模板文件中引用的变量用值替换，转换为qss文件。
         """
 
         qssStr = self.srctext

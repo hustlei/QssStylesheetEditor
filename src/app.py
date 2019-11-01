@@ -1,6 +1,5 @@
 ﻿#!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 """QssStylesheetEditor app start module
 
 Create QApplication and show splash. Include minimal module to accelerate spalsh load.
@@ -21,6 +20,7 @@ except Exception:
 
 
 class App(QApplication):
+    """Application to load splash and mainwindow"""
     def __init__(self):
         super().__init__(sys.argv)
         # sys.setrecursionlimit(1500)
@@ -39,6 +39,7 @@ class App(QApplication):
         splash.finish(self.mainwin)
         if not pytest:
             sys.exit(self.exec_())
+
 
 if __name__ == "__main__":
     App().run()

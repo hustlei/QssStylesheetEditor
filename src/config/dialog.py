@@ -10,6 +10,7 @@ from PyQt5.QtCore import Qt
 
 
 class ConfDialog(QWidget):
+    """config dialog"""
     def __init__(self, mainwin):
         super(ConfDialog, self).__init__()
         self._app = QApplication.instance()  # 获取app实例
@@ -80,6 +81,7 @@ class ConfDialog(QWidget):
         # action
         self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
 
+        @staticmethod
         def setCount(x):
             self.win.recent.maxcount = x
 
@@ -93,7 +95,7 @@ class ConfDialog(QWidget):
             combo.addItem(l["nativename"], l["lang"])
         return True
 
-    def chLang(self, i):
+    def chLang(self):
         # print("Change language to "+lang)
         # try:
         #     if lang.lower()=="english":

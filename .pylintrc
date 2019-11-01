@@ -32,21 +32,20 @@ unsafe-load-any-extension=no
 
 [MESSAGES CONTROL]
 
-disable=broad-except, #myself settings
-        import-outside-toplevel,
-        invalid-name,
-        no-self-use,
-        line-too-long,
-        missing-class-docstring,
-        missing-function-docstring,
-        too-many-locals,
-        unused-argument, # override must have unused-argument
-        unnecessary-lambda, # dialog.show must use lambda
+disable= import-outside-toplevel, # some module need import inside function
+         broad-except, # Catching too general exception, such as: Exception
+         no-self-use, # method didn't used 'self' param, change to static function is ugly too
+        ; invalid-name,
+         missing-function-docstring, # add later
+        ; too-many-locals,
+        ; unused-argument, # override must have unused-argument
+        ; unnecessary-lambda, # dialog.show must use lambda
         too-many-statements, # preview has many statements
-        too-many-public-methods,
-        eval-used,
-        bad-continuation, # not equal to pep8
-        unsubscriptable-object, #error when you use pyqt# print-statement,
+        ; too-many-public-methods,
+        ; eval-used,
+        ; bad-continuation, # not equal to pep8
+        ; unsubscriptable-object, #error when you use pyqt# print-statement,
+        ; redefined-variable-type, # base class type as function param will cause err
 
 enable=c-extension-no-member
 
@@ -77,7 +76,8 @@ argument-naming-style=camelCase
 
 function-naming-style=snake_case
 
-const-naming-style=UPPER_CASE
+# all var in module(such as all vars in __name__=="__main__") are treated as const
+const-naming-style= any #UPPER_CASE
 variable-naming-style=any
 inlinevar-naming-style=any
 
@@ -89,6 +89,9 @@ good-names=i,
            l,
            m,
            n,
+           x,
+           y,
+           z,
            ex,
            Run,
            _
@@ -131,7 +134,7 @@ allow-global-unused-variables=yes
 dummy-variables-rgx=_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_
 
 # whether check for unused import in __init__ files.
-init-import=no
+init-import = no
 
 
 [DESIGN]
@@ -141,6 +144,7 @@ max-args=8
 
 [IMPORTS]
 
+allow-any-import-level=True
 # Force import order to recognize a module as part of a third party library.
 known-third-party=enchant, PyQt5, sip
 
