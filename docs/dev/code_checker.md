@@ -88,3 +88,51 @@ yapf -i <python file> #直接修改源文件
 yapf -r <dir> # 递归格式化文件夹
 yapf --style-help > .style.yapf #导出配置文件
 ~~~
+
+> `autopep8 -aair src` 其实是和 `yapf -ri src` 很相似的
+> 
+> `pip install black` `black` 也可以，但是black可配置的选项不多
+
+
+# Pyflakes
+
+一个用于检查 Python 源文件错误的简单程序。Pyflakes 比 Pylint 和 Pychecker 也更快。 
+
+Pyflakes 分析程序并且检查各种错误。它通过解析源文件实现，无需导入它，因此在模块中使用是安全的，
+没有任何的副作用。
+
++ 不会检查代码风格
++ 由于它是单独检查各个文件，因此它也相当的快，当然检测范围也有一定的局限
+
+## 安装使用
+
+```
+pip install pyflakes
+pyflakes [ file name or directory name]
+```
+
+
+
+# Pylint
+
+PyLint 是 Python 源代码分析器，可以分析 Python 代码中的错误，
+查找不符合代码风格标准和有潜在问题的代码，是一个可以用于验证多个文件的模块和包的工具。
+
+缺省情况下，PyLint 启用许多规则。它具有高度可配置性，从代码内部处理程序控制它。另外，编写插件添加到自己的检查中是可能的。
+
+# 安装使用
+
+```
+pip install pylint
+pylint [options] module_or_package
+```
+
+
+如果运行两次 Pylint，它会同时显示出当前和上次的运行结果，从而可以看出代码质量是否得到了改进。
+
+错误代码含义
+C：惯例，违反了编码风格标准
+R：重构，代码非常糟糕
+W：警告，某些 Python 特定的问题
+E：错误，很可能是代码中的错误
+F：致命错误，阻止 Pylint 进一步运行的错误

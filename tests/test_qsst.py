@@ -1,12 +1,10 @@
+#!usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-test for qsst module.
+"""test for qsst module.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import os
-import sys
 from pytest import fixture
 
 

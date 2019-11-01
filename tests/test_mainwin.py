@@ -1,12 +1,10 @@
+#!usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-test for ui module.
+"""test for ui module.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import sys
-import os
 from pytest import fixture
 from ui.mainwin import MainWin
 

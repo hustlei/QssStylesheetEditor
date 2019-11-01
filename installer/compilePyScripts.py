@@ -1,6 +1,11 @@
+#!usr/bin/python
 # -*- coding: utf-8 -*-
-"""
+
+"""compile py code for distribute installer
+
 compile all py codings to pyc, and move pyc to dist directory.
+
+Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import re
@@ -42,9 +47,7 @@ if not os.path.exists(distroot):
 
 
 def clearDir(path):
-    """
-    remove all files and subdirectory in dist directory
-    """
+    """remove all files and subdirectory in dist directory"""
     delList = os.listdir(path)
     for f in delList:
         filePath = os.path.join(path, f)

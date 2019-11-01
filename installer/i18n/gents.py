@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-translate qm files in specify dir to ts.
+"""translate qm files in specify dir to ts.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """

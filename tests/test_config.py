@@ -1,12 +1,10 @@
+#!usr/bin/python
 # -*- coding: utf-8 -*-
-"""
-test for qsst module.
+"""test for qsst module.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import os
-import sys
 from pytest import fixture
 from config import Config
 
@@ -21,7 +19,7 @@ def test_sec(conf):
     conf.getSec("xx")
     assert "xx" in conf.dict
     conf.dict["xx"] = "aa"
-    assert "aa" == conf.dict["xx"]
+    assert conf.dict["xx"] == "aa"
 
 
 def test_rmsec(conf):
@@ -34,7 +32,7 @@ def test_rmsec(conf):
 def test_list(conf):
     conf.listNodeAppend("node", "child1")
     conf.listNodeAppend("node", "child2")
-    assert "child1" == conf.dict["node"][0]
-    assert "child2" == conf.dict["node"][1]
+    assert conf.dict["node"][0] == "child1"
+    assert conf.dict["node"][1] == "child2"
     conf.listNodeInsert("node", "ccc")
-    assert "ccc" == conf.dict["node"][0]
+    assert conf.dict["node"][0] == "ccc"

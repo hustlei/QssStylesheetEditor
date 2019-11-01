@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 try:
     import chardet
 except Exception:
-    pass
+    print("load chardet failed.")
     # import zipimport
     # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
     # chardet = importer.load_module('chardet')
