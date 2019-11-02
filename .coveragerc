@@ -13,6 +13,7 @@ omit =
     # omit this single file
     #utils/tirefire.py
     main.py
+    */chardet/*
 
 
 [report]

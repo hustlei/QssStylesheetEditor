@@ -1,6 +1,5 @@
 #!usr/bin/python
 # -*- coding: utf-8 -*-
-
 """compile py code for distribute installer
 
 compile all py codings to pyc, and move pyc to dist directory.
@@ -26,18 +25,8 @@ resdir = os.path.join(root, "src/res")
 srcdir = os.path.join(root, "src")
 distroot = os.path.join(root, "dist/build")
 # 不编译的文件夹，文件后缀
-excludedir = (
-    ".git",
-    ".github",
-    ".idea",
-    "__pycache__",
-    "data",
-    "dist",
-    "font",
-    "img",
-    "font",
-    "old", "oldversion", "bak", "tests",
-    "installer")
+excludedir = (".git", ".github", ".idea", "__pycache__", "data", "dist", "font", "img", "font", "old", "oldversion",
+              "bak", "tests", "installer")
 
 # 删除dist/build文件夹下所有文件
 print("remove all files in dist/build.")
@@ -117,9 +106,7 @@ def compile_copy(path, distdir):
         if os.path.isfile(file):
             if name.endswith(".py") and pexclude.search(name) is None:
                 print("  compile " + name)
-                compilepy(
-                    file, optimize=2, cfile=os.path.join(
-                        distdir, name + "c"))
+                compilepy(file, optimize=2, cfile=os.path.join(distdir, name + "c"))
                 filecompiled = True
             elif os.path.splitext(file)[-1] in copyexts:
                 shutil.copy(file, distdir)
@@ -140,13 +127,7 @@ def compile_copy(path, distdir):
 
 compile_copy(srcdir, os.path.join(distroot, "scripts"))
 # compile main.py
-compile_copy(
-    os.path.join(
-        pydir,
-        "../scripts"),
-    os.path.join(
-        distroot,
-        "scripts"))
+compile_copy(os.path.join(pydir, "../scripts"), os.path.join(distroot, "scripts"))
 
 # os.chdir(os.path.join(dir,"__pycache__"))
 # list=os.listdir(".")

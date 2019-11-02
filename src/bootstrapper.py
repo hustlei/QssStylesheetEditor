@@ -5,6 +5,5 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-
 from app import App
 App().run()
