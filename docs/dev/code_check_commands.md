@@ -29,7 +29,7 @@ coverage report
 3. yapf：修改代码格式。（类似于autopep8,black）
 
 4. pylint：源代码静态检查（codacy.com 支持）
-5. pyflakes：代码静态检查
+5. pyflakes：代码静态检查，速度比pylint快
 6. bandit：代码安全性检查（codacy.com 支持）
 7. prospector：（codacy.com 支持）
     + profile-validator：检查prospector配置文件格式
@@ -84,6 +84,16 @@ pip install coverage
     + <https://pypi.org/project/pylint/>
     + 帮助文档：<http://pylint.pycqa.org/en/latest/>
     + 配置文件：`.pylintrc`。pylint2.5以后版本会支持setup.cfg配置
+        + 目前pylint2.4.3 还不支持2.5的很多功能
+5. pyflakes:只有使用flake8才能配置
+6. bandit
+    + <https://pypi.org/project/bandit/>
+    + 帮助文档：<https://github.com/PyCQA/bandit>
+    + 配置文件：`.bandit`中[bandit]节。ini格式
+7. prospector
+    + <https://github.com/PyCQA/prospector>
+    + 帮助文档：<https://prospector.readthedocs.io/en/latest/index.html>
+    + 配置文件：`.prospector.yml`
     + 
     
 
@@ -100,3 +110,6 @@ pip install coverage
 + pylint: `.pylintrc`
     - `.git, dist, build, bak, toml, splash.py`
     - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)
+    
+    
+> 貌似在codacy.com上，这些配置文件里的ignore列表都不起作用，只有.codacy.yml配置里的ignore列表才起作用。

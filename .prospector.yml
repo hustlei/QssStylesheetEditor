@@ -1,6 +1,10 @@
 inherits:
     - strictness_high
 
+# ignore-paths: # not work
+    # - /dist
+    # - /installer     #scripts for installer binary
+    
 ignore-patterns:
     - (^|\/|\\)\..+
     - (^|\/|\\)setup.py$
@@ -9,64 +13,64 @@ ignore-patterns:
     - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$)  #old version scripts
     - .*(^|\/|\\)bak(\/|\\|$).*   #old version scripts
     - .*(^|\/|\\)toml(\/|\\|$).*  #3rdparty scripts
+    - dist
   
-ignore-paths:
-    - /res
-    - /installer     #scripts for installer binary
-    - /tests         #tests scripts
 
 # uses: uses must be name of django, celery, flask
 
-# default tools: profile-validator pep8 pyflakes mccabe dodgy
-# without tools: pylint pydocstyle
+# 7default: pylint, pep8, pyflakes, mccabe, dodgy, pydecstyle, profile-validator
+# 
+
 
 #pylint-config-file: .pylintrc
 pylint: # run pylint in prospector will cause an error
     run: false
 
 pep8:
+    full: true
+    disable:
+        - W503  # line break before binary operator
+        # pep8 not include N, but Nxxx is in prospector
+        - N802  # function name should be lowercase
+        - N803  # argument name should be lowercase
+        - N806  # variable in function should be lowercase
     options:
         max-line-length: 120
-        single-line-if-stmt: n
-    disable:
-        - E304
-        - E265
-        - E266
-        - W291
-        - W292
-        - W391
-        - N811
-        - N812
-        - N813
-        - N814
-        - N802
-        - N803
-        - N806
     
 pyflakes:
     disable:
-        - F403
-        - F810
+        - F401 # imported but unused
 
-frosted:
-    disable:
-        - E103
-        - E306
-    
-pyroma:
-    disable:
-        - PYR15
-        - PYR16
-        - PYR17
-        - PYR18
-        - PYR19
     
 mccabe:
+    run: true
     options:
         max-complexity: 15
 
 pep257:
+    run: false
     disable:
-        - D000
-        - D400
-        - D401
+        # - D000 # disable all
+        - D102 # Missing docstring in public method
+        - D103 # Missing docstring in public function
+        - D105 # Missing docstring in magic method
+        - D213 # Multi-line docstring summary should start at the second line. diffrent to pylint
+        # change later
+        - D104 # Missing docstring in public package
+        - D107 # Missing docstring in __init__
+        - D403 # First word of the first line should be properly capitalized ('Remove', not 'remove')
+        - D204 # 1 blank line required after class docstring
+        - D415 # First line should end with a period, question mark, or exclamation point
+                
+# frosted:
+    # disable:
+        # - E103
+        # - E306
+    
+# pyroma:
+    # disable:
+        # - PYR15
+        # - PYR16
+        # - PYR17
+        # - PYR18
+        # - PYR19

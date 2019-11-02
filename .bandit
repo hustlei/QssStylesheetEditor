@@ -1,7 +1,8 @@
-
 ### Bandit config file generated from:
 # 'D:\Program\Python37\Scripts\bandit-config-generator -s B101 -t B102 -o b.yml'
 
+[bandit]
+exclude: .git,/dist
 ### This config may optionally select a subset of tests to run or skip by
 ### filling out the 'tests' and 'skips' lists given below. If no tests are
 ### specified for inclusion then it is assumed all tests are desired. The skips
@@ -86,7 +87,7 @@
 # tests: ['B102']
 
 # (optional) list skipped test IDs here, eg '[B101, B406]':
-skips: ['B101', 'B102']
+skips: B101,B105,B307,B322,B605
 
 ### (optional) plugin settings - some test plugins require configuration data
 ### that may be given here, per-plugin. All bandit test plugins have a built in
