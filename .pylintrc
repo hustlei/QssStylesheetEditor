@@ -1,7 +1,9 @@
 [MASTER]
 init-hook='base_dir="QssStylesheetEditor"; import sys,os,re; _re=re.search(r".+[\\\/]" + base_dir, os.getcwd()); project_dir = _re.group() if _re else os.path.join(os.getcwd(), base_dir); sys.path.append(project_dir); sys.path.append(project_dir+"/src")'
 
-extension-pkg-whitelist=PyQt5, PyQt5.QtCore, sip, pytest
+extension-pkg-whitelist=PyQt5,
+                        sip,
+                        pytest
 ignore=.git, dist, build, bak, toml, splash.py
 ignore-patterns=.*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)
 
@@ -24,7 +26,7 @@ suggestion-mode=yes
 
 # Allow loading of arbitrary C extensions. Extensions are imported into the
 # active Python interpreter and may run arbitrary code.
-unsafe-load-any-extension=no
+unsafe-load-any-extension=yes
 
 
 [MESSAGES CONTROL]
