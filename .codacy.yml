@@ -31,7 +31,7 @@ exclude_paths:
   - 'tests/*' # ignores all files in the root of tests
   - 'tests/**/*' # ignores all files inside sub-folder of tests
   - '**._old.py'  #ignores all files with the same extension across all your repository
-  - '**._bak.py'
+  - '**/*._bak.py'
   - '**/*_rc.py' # Ignores all .ext in all folders and sub-folders
   - '**/toml/**'
   - '.*docs?/.*'
