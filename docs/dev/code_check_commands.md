@@ -10,7 +10,7 @@ yapf -ri .
 
 pylint src
 pyflakes .
-bandit -r .
+bandit -c .bandit -r . # 如果.bandit是ini格式文件可以直接用`bandit -r .`
 prospector  # or prospector .
 
 pytest --cov=.
@@ -90,6 +90,7 @@ pip install coverage
     + <https://pypi.org/project/bandit/>
     + 帮助文档：<https://github.com/PyCQA/bandit>
     + 配置文件：`.bandit`中[bandit]节。ini格式
+        + 由于在codacy上默认吧.bandit作为ymal格式配置文件，所以我个人把.bandit文件写作yaml格式，在自己电脑上用bandit -c .bandit -r .调用
 7. prospector
     + <https://github.com/PyCQA/prospector>
     + 帮助文档：<https://prospector.readthedocs.io/en/latest/index.html>

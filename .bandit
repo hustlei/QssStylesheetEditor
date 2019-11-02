@@ -1,7 +1,15 @@
-[bandit]
-exclude: .git, dist
+# on codacy.com .bandit is treated as yaml config file
+# use `bandit -c .bandit -r .` on command line
+exclude: [.git, dist]
 # tests: B102
-skips: B101,B105,B307,B322,B605
+skips: [B101,B105,B307,B322,B605]
+
+# ini format default config on command line
+# but didn't work on codacy.com
+# [bandit]
+# exclude: .git, dist
+# skips: B101,B105,B307,B322,B605
+
 
 # Available tests:
 # B101 : assert_used
