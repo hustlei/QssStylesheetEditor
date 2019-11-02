@@ -5,7 +5,7 @@ English | [简体中文](readme.md)
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/220d511b3ab146d0b03fef0245e00525)](https://www.codacy.com/manual/hustlei/QssStylesheetEditor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hustlei/QssStylesheetEditor&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/hustlei/QssStylesheetEditor/badge.svg?branch=master)](https://coveralls.io/github/hustlei/QssStylesheetEditor?branch=master)
-[<img alt="Platform" src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/src/res/img/badge/platform.png" height="20px"/>](https://travis-ci.com/hustlei/QssStylesheetEditor)
+[<img alt="Platform" src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/badge/platform.png" height="20px"/>](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 
 <br>
@@ -26,7 +26,7 @@ QssStylesheetEditor is a powerful qt stylesheet(QSS) editor, it's opensource and
 
 # screenshot
 
-![GUI(v1.3版本) screeshot](res/img/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
+![GUI(v1.3版本) screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
 
 # download and install
 
@@ -74,7 +74,7 @@ QWidget
 
 When you customizing a variable in QssStylesheetEditor, the variable name and color will be automatically displayed in the color p of the software. Click the color to select the variable color through the color pick-up box.
 
-<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/ColorDlg_v1.3.png" height=180 />
+<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/ColorDlg_v1.3.png" height=180 />
 
 If an undefined variable is referenced in Qssstylesheeteditor, the software will automatically recognize it and display the variable name in the color panel. If a color is selected for the variable through the color pick box, the software automatically adds the variable definition to the document.
 
@@ -102,16 +102,16 @@ The software searches for the resource file xxx.py in the directory of the curre
 
 ## AutoComplete
 
-![AutoComplete screeshot](res/img/screenshot/AutoComplete.png "AutoComplete")
+![AutoComplete screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/AutoComplete.png "AutoComplete")
 
 
 ## old version
 
 <div><span><b>QssStylesheetEditor GUI V1.2</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/res/img/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
 
 
