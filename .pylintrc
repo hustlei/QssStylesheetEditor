@@ -2,22 +2,19 @@
 init-hook='base_dir="QssStylesheetEditor"; import sys,os,re; _re=re.search(r".+[\\\/]" + base_dir, os.getcwd()); project_dir = _re.group() if _re else os.path.join(os.getcwd(), base_dir); sys.path.append(project_dir); sys.path.append(project_dir+"/src")'
 
 extension-pkg-whitelist=PyQt5, PyQt5.QtCore, sip, pytest
-ignore=CVS, .git, dist, build, bak, toml, splash.py
+ignore=.git, dist, build, bak, toml, splash.py
 ignore-patterns=.*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)
 
 jobs=0
-load-plugins=pylint.extensions.bad_builtin,
-             #deprecated_builtins,
+load-plugins=pylint.extensions.bad_builtin, # deprecated_builtins,
              pylint.extensions.check_elif,
              #pylint.extensions.docparams,
              pylint.extensions.docstyle,
              pylint.extensions.emptystring,
              pylint.extensions.comparetozero,
-             pylint.extensions.mccabe,
-             # design checker, for finding complexity issues 
+             pylint.extensions.mccabe,  # design checker, for finding complexity issues 
              pylint.extensions.overlapping_exceptions,
-             pylint.extensions.redefined_variable_type
-             # Multiple Types checker
+             # pylint.extensions.redefined_variable_type # Multiple Types checker
 
 persistent=yes
 
@@ -35,16 +32,14 @@ unsafe-load-any-extension=no
 disable= import-outside-toplevel, # some module need import inside function
          broad-except, # Catching too general exception, such as: Exception
          no-self-use, # method didn't used 'self' param, change to static function is ugly too
-        ; invalid-name,
          missing-function-docstring, # add later
-        ; too-many-locals,
+         missing-docstring, # for pylint 2.4 didn't support  missing-function-docstring
+         unused-import, # improve later
         ; unused-argument, # override must have unused-argument
         ; unnecessary-lambda, # dialog.show must use lambda
-        too-many-statements, # preview has many statements
-        ; too-many-public-methods,
         ; eval-used,
         ; bad-continuation, # not equal to pep8
-        ; unsubscriptable-object, #error when you use pyqt# print-statement,
+        ; unsubscriptable-object, #error when you use pyqt#
         ; redefined-variable-type, # base class type as function param will cause err
 
 # enable=c-extension-no-member
@@ -92,6 +87,7 @@ good-names=i,
            x,
            y,
            z,
+           e,
            ex,
            Run,
            _
@@ -103,12 +99,12 @@ docstring-min-length=-1
 
 [FORMAT]
 ignore-long-lines=^\s*(# )?<?https?://\S+>?$
-indent-after-paren=4
-indent-string='    '
+# indent-after-paren=4
+# indent-string='    '
 max-line-length=120
-max-module-lines=1000
-no-space-check=trailing-comma,
-               dict-separator
+# max-module-lines=1000
+; no-space-check=trailing-comma,
+               ; dict-separator
 single-line-if-stmt=yes
 
 
@@ -139,14 +135,24 @@ init-import = no
 
 [DESIGN]
 
-max-args=8
+max-args=10 # 8
+max-locals=20  #15
+; max-returns=6
+; max-branches=12
+max-statements=300 #50
+; max-parents=7
+max-attributes=20 # 7
+; min-public-methods=2
+; max-public-methods=20
+; max-bool-expr=5
 
 
 [IMPORTS]
 
-allow-any-import-level=True
+allow-any-import-level=yes
 # Force import order to recognize a module as part of a third party library.
 known-third-party=enchant, PyQt5, sip
+allow-wildcard-with-all=yes
 
 
 

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""
+"""CodeEditor
+
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 __version__ = "1.0"

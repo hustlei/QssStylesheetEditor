@@ -3,9 +3,9 @@
 常用命令
 
 ```shell
-metrics **/*
+metrics **   # or **/*
 
-pycodestyle .
+pycodestyle . -qq # --statistics 
 yapf -ri .
 
 pylint src
@@ -26,9 +26,9 @@ coverage report
     + McCabe：代码复杂度
 
 2. pycodestyle：检查代码格式是否符合pep8
-3. yapf：修改代码格式
+3. yapf：修改代码格式。（类似于autopep8,black）
 
-4. pylint：代码静态检查（codacy.com 支持）
+4. pylint：源代码静态检查（codacy.com 支持）
 5. pyflakes：代码静态检查
 6. bandit：代码安全性检查（codacy.com 支持）
 7. prospector：（codacy.com 支持）
@@ -72,3 +72,31 @@ pip install coverage
     + <https://pypi.org/project/metrics/>
     + 配置文件：metrics目前插件很少，因为我不用插件所以不需要配置
     + 结果文件：`.metrics`
+2. pycodestyle
+    + <https://pypi.org/project/pycodestyle/>
+    + 帮助文件：<https://pycodestyle.readthedocs.io/en/latest/>
+    + 配置文件：`setup.cfg`或`tox.ini`中的[pycodestyle]节
+3. yapf
+    + <https://pypi.org/project/yapf/>
+    + 配置文件：`.style.yapf`中的[style]节，`setup.cfg`中的[yapf]节
+        + .yapfignore文件中配置忽略文件列表
+4. pylint
+    + <https://pypi.org/project/pylint/>
+    + 帮助文档：<http://pylint.pycqa.org/en/latest/>
+    + 配置文件：`.pylintrc`。pylint2.5以后版本会支持setup.cfg配置
+    + 
+    
+
+# 本项目配置
+
+忽略的文件
+
++ *metrics*: no cofing
+    - None
++ pycodestyle: `setup.cfg`
+    - `.git, *old.py, *_bak.py, dist, toml`
++ *yapf*: `setup.cfg`
+    - None
++ pylint: `.pylintrc`
+    - `.git, dist, build, bak, toml, splash.py`
+    - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)

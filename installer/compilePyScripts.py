@@ -56,7 +56,7 @@ print("\ncopy data dir to dist/build.")
 
 def copypath(path, distdir):
     name = os.path.basename(path)
-    #print(path+ "is file?"+ str(os.path.isfile(path)))
+    # print(path+ "is file?"+ str(os.path.isfile(path)))
     if os.path.isfile(path):
         shutil.copy(path, distdir)
         print("  copy " + os.path.relpath(path, root))
