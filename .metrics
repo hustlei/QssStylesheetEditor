@@ -1,0 +1,2241 @@
+{
+    "files": {
+        ".codacy.yml": {
+            "block_positions": [],
+            "comments": 11,
+            "language": "YAML",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.34,
+            "sloc": 32
+        },
+        ".git\\refs\\tags\\v1.1": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Groff",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        ".git\\refs\\tags\\v1.2": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Groff",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        ".git\\refs\\tags\\v1.3": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Groff",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        ".git\\refs\\tags\\v1.4": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Groff",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        ".github\\FUNDING.yml": {
+            "block_positions": [],
+            "comments": 11,
+            "language": "YAML",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.92,
+            "sloc": 12
+        },
+        ".prospector.yml": {
+            "block_positions": [],
+            "comments": 12,
+            "language": "YAML",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.21,
+            "sloc": 56
+        },
+        ".travis.yml": {
+            "block_positions": [],
+            "comments": 14,
+            "language": "YAML",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.33,
+            "sloc": 42
+        },
+        "docs\\dev\\code_check_commands.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 2
+        },
+        "docs\\dev\\code_checker.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 14
+        },
+        "installer\\Assoc.nsh": {
+            "block_positions": [
+                {
+                    "end": 316,
+                    "name": "Call",
+                    "start": 42,
+                    "type": "Function"
+                }
+            ],
+            "comments": 166,
+            "language": "NSIS",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.76,
+            "sloc": 219
+        },
+        "installer\\compilePyScripts.py": {
+            "block_positions": [
+                {
+                    "end": 62,
+                    "name": "clearDir",
+                    "start": 44,
+                    "type": "Function"
+                },
+                {
+                    "end": 76,
+                    "name": "copypath",
+                    "start": 63,
+                    "type": "Function"
+                },
+                {
+                    "end": 106,
+                    "name": "copyfiles",
+                    "start": 77,
+                    "type": "Function"
+                },
+                {
+                    "end": 153,
+                    "name": "compile_copy",
+                    "start": 107,
+                    "type": "Function"
+                }
+            ],
+            "comments": 25,
+            "language": "Python",
+            "mccabe": 21,
+            "ratio_comment_to_code": 0.23,
+            "sloc": 109
+        },
+        "installer\\i18n\\Chinese.ts": {
+            "block_positions": [
+                {
+                    "end": 92,
+                    "name": "select",
+                    "start": 45,
+                    "type": "Function"
+                },
+                {
+                    "end": 97,
+                    "name": "select",
+                    "start": 93,
+                    "type": "Function"
+                },
+                {
+                    "end": 525,
+                    "name": "select",
+                    "start": 98,
+                    "type": "Function"
+                },
+                {
+                    "end": 678,
+                    "name": "select",
+                    "start": 526,
+                    "type": "Function"
+                }
+            ],
+            "comments": 2,
+            "language": "TypoScript",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 677
+        },
+        "installer\\i18n\\gents.py": {
+            "block_positions": [
+                {
+                    "end": 49,
+                    "name": "getsrclist",
+                    "start": 24,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 8,
+            "ratio_comment_to_code": 0.13,
+            "sloc": 39
+        },
+        "installer\\i18n\\readme.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 4
+        },
+        "installer\\installer.nsi": {
+            "block_positions": [
+                {
+                    "end": 162,
+                    "name": "Call",
+                    "start": 120,
+                    "type": "Function"
+                },
+                {
+                    "end": 201,
+                    "name": "Call",
+                    "start": 163,
+                    "type": "Function"
+                },
+                {
+                    "end": 225,
+                    "name": "Call",
+                    "start": 202,
+                    "type": "Function"
+                }
+            ],
+            "comments": 312,
+            "language": "NSIS",
+            "mccabe": 0,
+            "ratio_comment_to_code": 2.29,
+            "sloc": 136
+        },
+        "installer\\installer_old.nsi": {
+            "block_positions": [
+                {
+                    "end": 102,
+                    "name": "Call",
+                    "start": 67,
+                    "type": "Function"
+                },
+                {
+                    "end": 132,
+                    "name": "Call",
+                    "start": 103,
+                    "type": "Function"
+                },
+                {
+                    "end": 137,
+                    "name": "Call",
+                    "start": 133,
+                    "type": "Function"
+                },
+                {
+                    "end": 139,
+                    "name": "LangDialog",
+                    "start": 138,
+                    "type": "Function"
+                },
+                {
+                    "end": 148,
+                    "name": "LangDialog",
+                    "start": 140,
+                    "type": "Function"
+                },
+                {
+                    "end": 155,
+                    "name": "Call",
+                    "start": 149,
+                    "type": "Function"
+                },
+                {
+                    "end": 161,
+                    "name": "un.onInit",
+                    "start": 156,
+                    "type": "Function"
+                },
+                {
+                    "end": 165,
+                    "name": "un.onUninstSuccess",
+                    "start": 162,
+                    "type": "Function"
+                }
+            ],
+            "comments": 242,
+            "language": "NSIS",
+            "mccabe": 0,
+            "ratio_comment_to_code": 2.0,
+            "sloc": 121
+        },
+        "installer\\readme.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        "pytest.ini": {
+            "block_positions": [],
+            "comments": 2,
+            "language": "INI",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.5,
+            "sloc": 4
+        },
+        "readme.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 10
+        },
+        "readme_en-US.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 13
+        },
+        "setup.cfg": {
+            "block_positions": [],
+            "comments": 20,
+            "language": "INI",
+            "mccabe": 0,
+            "ratio_comment_to_code": 1.11,
+            "sloc": 18
+        },
+        "src\\app.py": {
+            "block_positions": [
+                {
+                    "end": 38,
+                    "methods": [
+                        {
+                            "end": 38,
+                            "name": "run",
+                            "start": 23,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "App",
+                    "start": 17,
+                    "type": "Class"
+                }
+            ],
+            "comments": 13,
+            "language": "Python",
+            "mccabe": 2,
+            "ratio_comment_to_code": 0.5,
+            "sloc": 26
+        },
+        "src\\bootstrapper.py": {
+            "block_positions": [],
+            "comments": 6,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 3.0,
+            "sloc": 2
+        },
+        "src\\config\\__init__.py": {
+            "block_positions": [],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 2.5,
+            "sloc": 2
+        },
+        "src\\config\\base.py": {
+            "block_positions": [
+                {
+                    "end": 110,
+                    "methods": [
+                        {
+                            "end": 26,
+                            "name": "read",
+                            "start": 13,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 48,
+                            "name": "_save",
+                            "start": 27,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 53,
+                            "name": "_getSec",
+                            "start": 49,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 59,
+                            "name": "_getSubSec",
+                            "start": 56,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 71,
+                            "name": "getSec",
+                            "start": 62,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 75,
+                            "name": "rmSec",
+                            "start": 72,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 79,
+                            "name": "rmSubSec",
+                            "start": 76,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 89,
+                            "name": "listNodeAppend",
+                            "start": 80,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 110,
+                            "name": "listNodeInsert",
+                            "start": 90,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "ConfBase",
+                    "start": 8,
+                    "type": "Class"
+                }
+            ],
+            "comments": 34,
+            "language": "Python",
+            "mccabe": 20,
+            "ratio_comment_to_code": 0.5,
+            "sloc": 68
+        },
+        "src\\config\\config.py": {
+            "block_positions": [
+                {
+                    "end": 25,
+                    "methods": [
+                        {
+                            "end": 25,
+                            "name": "save",
+                            "start": 23,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Config",
+                    "start": 8,
+                    "type": "Class"
+                }
+            ],
+            "comments": 6,
+            "language": "Python",
+            "mccabe": 4,
+            "ratio_comment_to_code": 0.33,
+            "sloc": 18
+        },
+        "src\\config\\dialog.py": {
+            "block_positions": [
+                {
+                    "end": 131,
+                    "methods": [
+                        {
+                            "end": 86,
+                            "name": "initUI",
+                            "start": 18,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 93,
+                            "name": "setLangItems",
+                            "start": 87,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 109,
+                            "name": "chLang",
+                            "start": 94,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 131,
+                            "name": "show",
+                            "start": 110,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "ConfDialog",
+                    "start": 9,
+                    "type": "Class"
+                }
+            ],
+            "comments": 23,
+            "language": "Python",
+            "mccabe": 6,
+            "ratio_comment_to_code": 0.24,
+            "sloc": 95
+        },
+        "src\\config\\toml\\__init__.py": {
+            "block_positions": [],
+            "comments": 4,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.31,
+            "sloc": 13
+        },
+        "src\\config\\toml\\decoder.py": {
+            "block_positions": [
+                {
+                    "end": 25,
+                    "name": "_detect_pathlib_path",
+                    "start": 18,
+                    "type": "Function"
+                },
+                {
+                    "end": 31,
+                    "name": "_ispath",
+                    "start": 26,
+                    "type": "Function"
+                },
+                {
+                    "end": 48,
+                    "name": "_getpath",
+                    "start": 32,
+                    "type": "Function"
+                },
+                {
+                    "end": 66,
+                    "name": "TomlDecodeError",
+                    "start": 49,
+                    "type": "Class"
+                },
+                {
+                    "end": 89,
+                    "name": "_strictly_valid_num",
+                    "start": 67,
+                    "type": "Function"
+                },
+                {
+                    "end": 122,
+                    "name": "load",
+                    "start": 90,
+                    "type": "Function"
+                },
+                {
+                    "end": 409,
+                    "name": "loads",
+                    "start": 123,
+                    "type": "Function"
+                },
+                {
+                    "end": 451,
+                    "name": "_load_date",
+                    "start": 410,
+                    "type": "Function"
+                },
+                {
+                    "end": 492,
+                    "name": "_load_unicode_escapes",
+                    "start": 452,
+                    "type": "Function"
+                },
+                {
+                    "end": 514,
+                    "name": "_unescape",
+                    "start": 493,
+                    "type": "Function"
+                },
+                {
+                    "end": 518,
+                    "name": "InlineTableDict",
+                    "start": 515,
+                    "type": "Class"
+                },
+                {
+                    "end": 856,
+                    "methods": [
+                        {
+                            "end": 525,
+                            "name": "get_empty_table",
+                            "start": 523,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 531,
+                            "name": "get_empty_inline_table",
+                            "start": 526,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 556,
+                            "name": "load_inline_object",
+                            "start": 532,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 577,
+                            "name": "_get_split_on_quotes",
+                            "start": 557,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 659,
+                            "name": "load_line",
+                            "start": 578,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 760,
+                            "name": "load_value",
+                            "start": 660,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 775,
+                            "name": "bounded_string",
+                            "start": 761,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 856,
+                            "name": "load_array",
+                            "start": 776,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "TomlDecoder",
+                    "start": 519,
+                    "type": "Class"
+                }
+            ],
+            "comments": 50,
+            "language": "Python",
+            "mccabe": 287,
+            "ratio_comment_to_code": 0.06,
+            "sloc": 787
+        },
+        "src\\config\\toml\\encoder.py": {
+            "block_positions": [
+                {
+                    "end": 20,
+                    "name": "dump",
+                    "start": 11,
+                    "type": "Function"
+                },
+                {
+                    "end": 45,
+                    "name": "dumps",
+                    "start": 21,
+                    "type": "Function"
+                },
+                {
+                    "end": 76,
+                    "name": "_dump_str",
+                    "start": 46,
+                    "type": "Function"
+                },
+                {
+                    "end": 80,
+                    "name": "_dump_float",
+                    "start": 77,
+                    "type": "Function"
+                },
+                {
+                    "end": 88,
+                    "name": "_dump_time",
+                    "start": 81,
+                    "type": "Function"
+                },
+                {
+                    "end": 187,
+                    "methods": [
+                        {
+                            "end": 107,
+                            "name": "get_empty_table",
+                            "start": 105,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 114,
+                            "name": "dump_list",
+                            "start": 108,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 127,
+                            "name": "dump_inline_table",
+                            "start": 115,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 135,
+                            "name": "dump_value",
+                            "start": 128,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 187,
+                            "name": "dump_sections",
+                            "start": 136,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "TomlEncoder",
+                    "start": 89,
+                    "type": "Class"
+                },
+                {
+                    "end": 192,
+                    "name": "TomlPreserveInlineDictEncoder",
+                    "start": 188,
+                    "type": "Class"
+                },
+                {
+                    "end": 217,
+                    "methods": [
+                        {
+                            "end": 217,
+                            "name": "dump_list",
+                            "start": 202,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "TomlArraySeparatorEncoder",
+                    "start": 193,
+                    "type": "Class"
+                }
+            ],
+            "comments": 31,
+            "language": "Python",
+            "mccabe": 56,
+            "ratio_comment_to_code": 0.17,
+            "sloc": 183
+        },
+        "src\\config\\toml\\ordered.py": {
+            "block_positions": [
+                {
+                    "end": 10,
+                    "name": "TomlOrderedDecoder",
+                    "start": 6,
+                    "type": "Class"
+                },
+                {
+                    "end": 13,
+                    "name": "TomlOrderedEncoder",
+                    "start": 11,
+                    "type": "Class"
+                }
+            ],
+            "comments": 0,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 9
+        },
+        "src\\config\\toml\\tz.py": {
+            "block_positions": [
+                {
+                    "end": 21,
+                    "methods": [
+                        {
+                            "end": 16,
+                            "name": "tzname",
+                            "start": 14,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 19,
+                            "name": "utcoffset",
+                            "start": 17,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 21,
+                            "name": "dst",
+                            "start": 20,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "TomlTz",
+                    "start": 4,
+                    "type": "Class"
+                }
+            ],
+            "comments": 0,
+            "language": "Python",
+            "mccabe": 4,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 16
+        },
+        "src\\i18n\\__init__.py": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        "src\\i18n\\language.py": {
+            "block_positions": [
+                {
+                    "end": 116,
+                    "methods": [
+                        {
+                            "end": 25,
+                            "name": "loadList",
+                            "start": 17,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 63,
+                            "name": "getLangs",
+                            "start": 47,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 79,
+                            "name": "getLang",
+                            "start": 64,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 116,
+                            "name": "setTrans",
+                            "start": 80,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Language",
+                    "start": 9,
+                    "type": "Class"
+                }
+            ],
+            "comments": 31,
+            "language": "Python",
+            "mccabe": 17,
+            "ratio_comment_to_code": 0.35,
+            "sloc": 88
+        },
+        "src\\qss_template\\__init__.py": {
+            "block_positions": [
+                {
+                    "end": 8,
+                    "name": "preload",
+                    "start": 7,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 1.67,
+            "sloc": 3
+        },
+        "src\\qss_template\\qsst.old.py": {
+            "block_positions": [
+                {
+                    "end": 77,
+                    "methods": [
+                        {
+                            "end": 27,
+                            "name": "loadVarDict",
+                            "start": 19,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 33,
+                            "name": "scanVarsUsed",
+                            "start": 28,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 49,
+                            "name": "replaceVars",
+                            "start": 34,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 77,
+                            "name": "writeVarList",
+                            "start": 50,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Qsst",
+                    "start": 7,
+                    "type": "Class"
+                }
+            ],
+            "comments": 9,
+            "language": "Python",
+            "mccabe": 17,
+            "ratio_comment_to_code": 0.14,
+            "sloc": 66
+        },
+        "src\\qss_template\\qsst.py": {
+            "block_positions": [
+                {
+                    "end": 92,
+                    "methods": [
+                        {
+                            "end": 34,
+                            "name": "loadVars",
+                            "start": 20,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 59,
+                            "name": "convertQss",
+                            "start": 35,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 92,
+                            "name": "writeVars",
+                            "start": 60,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Qsst",
+                    "start": 7,
+                    "type": "Class"
+                }
+            ],
+            "comments": 27,
+            "language": "Python",
+            "mccabe": 16,
+            "ratio_comment_to_code": 0.39,
+            "sloc": 69
+        },
+        "src\\res\\createqrc_v0.py": {
+            "block_positions": [],
+            "comments": 7,
+            "language": "Python",
+            "mccabe": 2,
+            "ratio_comment_to_code": 0.44,
+            "sloc": 16
+        },
+        "src\\res\\img_rc.py": {
+            "block_positions": [
+                {
+                    "end": 31,
+                    "name": "qInitResources",
+                    "start": 28,
+                    "type": "Function"
+                },
+                {
+                    "end": 36,
+                    "name": "qCleanupResources",
+                    "start": 32,
+                    "type": "Function"
+                }
+            ],
+            "comments": 6,
+            "language": "Python",
+            "mccabe": 3,
+            "ratio_comment_to_code": 0.35,
+            "sloc": 17
+        },
+        "src\\ui\\__init__.py": {
+            "block_positions": [
+                {
+                    "end": 9,
+                    "name": "redirect",
+                    "start": 5,
+                    "type": "Function"
+                },
+                {
+                    "end": 16,
+                    "name": "preload",
+                    "start": 10,
+                    "type": "Function"
+                }
+            ],
+            "comments": 11,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 1.83,
+            "sloc": 6
+        },
+        "src\\ui\\editor\\__init__.py": {
+            "block_positions": [
+                {
+                    "end": 13,
+                    "name": "preload",
+                    "start": 8,
+                    "type": "Function"
+                }
+            ],
+            "comments": 8,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 1.14,
+            "sloc": 7
+        },
+        "src\\ui\\editor\\bak\\custom_lexer_v1.1-1_bak.py": {
+            "block_positions": [
+                {
+                    "end": 87,
+                    "methods": [
+                        {
+                            "end": 75,
+                            "name": "setDefault",
+                            "start": 18,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 87,
+                            "name": "language",
+                            "start": 76,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "QsciLexerQSS",
+                    "start": 7,
+                    "type": "Class"
+                }
+            ],
+            "comments": 65,
+            "language": "Python",
+            "mccabe": 1,
+            "ratio_comment_to_code": 4.06,
+            "sloc": 16
+        },
+        "src\\ui\\editor\\bak\\custom_lexer_v1.1-2_bak.py": {
+            "block_positions": [
+                {
+                    "end": 112,
+                    "methods": [
+                        {
+                            "end": 32,
+                            "name": "isCommentStyle",
+                            "start": 28,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 36,
+                            "name": "isStringStyle",
+                            "start": 33,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 105,
+                            "name": "defaultKeywords",
+                            "start": 37,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 109,
+                            "name": "language",
+                            "start": 106,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 112,
+                            "name": "lexerName",
+                            "start": 110,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "QsciLexerQSS",
+                    "start": 8,
+                    "type": "Class"
+                }
+            ],
+            "comments": 37,
+            "language": "Python",
+            "mccabe": 2,
+            "ratio_comment_to_code": 0.4,
+            "sloc": 92
+        },
+        "src\\ui\\editor\\bak\\editor_v1.1_bak.py": {
+            "block_positions": [
+                {
+                    "end": 137,
+                    "methods": [
+                        {
+                            "end": 72,
+                            "name": "initializeFormats",
+                            "start": 57,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 131,
+                            "name": "highlightBlock",
+                            "start": 73,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 137,
+                            "name": "rehighlight",
+                            "start": 132,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Highlighter",
+                    "start": 14,
+                    "type": "Class"
+                },
+                {
+                    "end": 177,
+                    "methods": [
+                        {
+                            "end": 151,
+                            "name": "keyPressEvent",
+                            "start": 148,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 154,
+                            "name": "focusOutEvent",
+                            "start": 152,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 157,
+                            "name": "leaveEvent",
+                            "start": 155,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 170,
+                            "name": "mousePressEvent",
+                            "start": 158,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 177,
+                            "name": "dropEvent",
+                            "start": 171,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "CodeEditor",
+                    "start": 138,
+                    "type": "Class"
+                },
+                {
+                    "end": 413,
+                    "methods": [
+                        {
+                            "end": 245,
+                            "name": "updateUi",
+                            "start": 235,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 260,
+                            "name": "createAction",
+                            "start": 246,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 267,
+                            "name": "addActions",
+                            "start": 261,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 271,
+                            "name": "closeEvent",
+                            "start": 268,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 281,
+                            "name": "okToContinue",
+                            "start": 272,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 291,
+                            "name": "fileNew",
+                            "start": 282,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 302,
+                            "name": "fileOpen",
+                            "start": 292,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 319,
+                            "name": "loadFile",
+                            "start": 303,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 339,
+                            "name": "fileSave",
+                            "start": 320,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 349,
+                            "name": "fileSaveAs",
+                            "start": 340,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 375,
+                            "name": "editIndent",
+                            "start": 350,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 413,
+                            "name": "editUnindent",
+                            "start": 376,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "MainWindow",
+                    "start": 178,
+                    "type": "Class"
+                }
+            ],
+            "comments": 19,
+            "language": "Python",
+            "mccabe": 62,
+            "ratio_comment_to_code": 0.05,
+            "sloc": 346
+        },
+        "src\\ui\\editor\\bak\\properties.txt": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Text only",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        "src\\ui\\editor\\bak\\setProperty.txt": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Text only",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 0
+        },
+        "src\\ui\\editor\\editor.py": {
+            "block_positions": [
+                {
+                    "end": 363,
+                    "methods": [
+                        {
+                            "end": 46,
+                            "name": "getEditInfo",
+                            "start": 44,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 50,
+                            "name": "find",
+                            "start": 47,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 54,
+                            "name": "replace",
+                            "start": 51,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 61,
+                            "name": "count",
+                            "start": 55,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 65,
+                            "name": "keyPressEvent",
+                            "start": 62,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 69,
+                            "name": "focusOutEvent",
+                            "start": 66,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 72,
+                            "name": "leaveEvent",
+                            "start": 70,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 76,
+                            "name": "mousePressEvent",
+                            "start": 73,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 80,
+                            "name": "dropEvent",
+                            "start": 77,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 158,
+                            "name": "_setDefaultConfig",
+                            "start": 81,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 189,
+                            "name": "configure",
+                            "start": 159,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 196,
+                            "name": "language",
+                            "start": 190,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 220,
+                            "name": "setLanguage",
+                            "start": 197,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 227,
+                            "name": "setBackgroundColor",
+                            "start": 221,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 232,
+                            "name": "clear",
+                            "start": 228,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 265,
+                            "name": "load",
+                            "start": 233,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 279,
+                            "name": "__byte2str",
+                            "start": 266,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 285,
+                            "name": "__isBin",
+                            "start": 280,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 298,
+                            "name": "save",
+                            "start": 286,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 317,
+                            "name": "guessLang",
+                            "start": 299,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 321,
+                            "name": "caretLineVisible",
+                            "start": 318,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 329,
+                            "name": "caretLineBackgroundColor",
+                            "start": 322,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 342,
+                            "name": "__BGRint2RGB",
+                            "start": 330,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 350,
+                            "name": "setMarginWidthes",
+                            "start": 343,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 359,
+                            "name": "get_config",
+                            "start": 351,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 363,
+                            "name": "set_config",
+                            "start": 360,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "CodeEditor",
+                    "start": 26,
+                    "type": "Class"
+                }
+            ],
+            "comments": 154,
+            "language": "Python",
+            "mccabe": 36,
+            "ratio_comment_to_code": 0.67,
+            "sloc": 230
+        },
+        "src\\ui\\editor\\enums.py": {
+            "block_positions": [
+                {
+                    "end": 10,
+                    "name": "BadEnum",
+                    "start": 5,
+                    "type": "Class"
+                },
+                {
+                    "end": 154,
+                    "methods": [
+                        {
+                            "end": 134,
+                            "name": "getValue",
+                            "start": 128,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 154,
+                            "name": "getName",
+                            "start": 135,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "EditorEnums",
+                    "start": 11,
+                    "type": "Class"
+                }
+            ],
+            "comments": 32,
+            "language": "Python",
+            "mccabe": 7,
+            "ratio_comment_to_code": 0.28,
+            "sloc": 114
+        },
+        "src\\ui\\editor\\lexer\\__init__.py": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 1
+        },
+        "src\\ui\\editor\\lexer\\lexer_qss.py": {
+            "block_positions": [
+                {
+                    "end": 396,
+                    "methods": [
+                        {
+                            "end": 116,
+                            "name": "setDefaultStyle",
+                            "start": 53,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 121,
+                            "name": "setPapers",
+                            "start": 117,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 124,
+                            "name": "language",
+                            "start": 122,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 128,
+                            "name": "setDefaultFont",
+                            "start": 125,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 132,
+                            "name": "description",
+                            "start": 129,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 323,
+                            "name": "styleText",
+                            "start": 133,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 331,
+                            "name": "isOperator",
+                            "start": 324,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 334,
+                            "name": "isAWordChar",
+                            "start": 332,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 396,
+                            "name": "setQssAutocomplete",
+                            "start": 335,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "QsciLexerQSS",
+                    "start": 9,
+                    "type": "Class"
+                }
+            ],
+            "comments": 104,
+            "language": "Python",
+            "mccabe": 65,
+            "ratio_comment_to_code": 0.36,
+            "sloc": 288
+        },
+        "src\\ui\\editor\\search.py": {
+            "block_positions": [
+                {
+                    "end": 213,
+                    "methods": [
+                        {
+                            "end": 56,
+                            "name": "setReplaceMode",
+                            "start": 43,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 61,
+                            "name": "setReverse",
+                            "start": 57,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 64,
+                            "name": "setCase",
+                            "start": 62,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 67,
+                            "name": "setWord",
+                            "start": 65,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 70,
+                            "name": "setRe",
+                            "start": 68,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 74,
+                            "name": "setEscape",
+                            "start": 71,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 154,
+                            "name": "setupUi",
+                            "start": 75,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 166,
+                            "name": "showEvent",
+                            "start": 155,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 174,
+                            "name": "chText",
+                            "start": 167,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 213,
+                            "name": "findreplace",
+                            "start": 175,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "searchDialog",
+                    "start": 9,
+                    "type": "Class"
+                }
+            ],
+            "comments": 29,
+            "language": "Python",
+            "mccabe": 20,
+            "ratio_comment_to_code": 0.16,
+            "sloc": 181
+        },
+        "src\\ui\\editor\\settings.py": {
+            "block_positions": [
+                {
+                    "end": 481,
+                    "methods": [
+                        {
+                            "end": 301,
+                            "name": "guess_language",
+                            "start": 291,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 330,
+                            "name": "_create_layout",
+                            "start": 302,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 360,
+                            "name": "_create_widget",
+                            "start": 331,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 381,
+                            "name": "_create_checkbox",
+                            "start": 361,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 406,
+                            "name": "_create_combobox",
+                            "start": 382,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 427,
+                            "name": "_create_color_picker",
+                            "start": 407,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 442,
+                            "name": "_create_number_box",
+                            "start": 428,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 481,
+                            "name": "_create_line_number_checkbox",
+                            "start": 443,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "EditorSettings",
+                    "start": 283,
+                    "type": "Class"
+                }
+            ],
+            "comments": 110,
+            "language": "Python",
+            "mccabe": 21,
+            "ratio_comment_to_code": 0.33,
+            "sloc": 335
+        },
+        "src\\ui\\flow_layout.py": {
+            "block_positions": [
+                {
+                    "end": 110,
+                    "methods": [
+                        {
+                            "end": 24,
+                            "name": "addItem",
+                            "start": 22,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 29,
+                            "name": "removeItem",
+                            "start": 25,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 32,
+                            "name": "count",
+                            "start": 30,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 37,
+                            "name": "itemAt",
+                            "start": 33,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 42,
+                            "name": "takeAt",
+                            "start": 38,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 46,
+                            "name": "expandingDirections",
+                            "start": 43,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 49,
+                            "name": "hasHeightForWidth",
+                            "start": 47,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 53,
+                            "name": "heightForWidth",
+                            "start": 50,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 57,
+                            "name": "setGeometry",
+                            "start": 54,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 60,
+                            "name": "sizeHint",
+                            "start": 58,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 68,
+                            "name": "minimumSize",
+                            "start": 61,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 110,
+                            "name": "doLayout",
+                            "start": 69,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "QFlowLayout",
+                    "start": 9,
+                    "type": "Class"
+                }
+            ],
+            "comments": 3,
+            "language": "Python",
+            "mccabe": 9,
+            "ratio_comment_to_code": 0.03,
+            "sloc": 87
+        },
+        "src\\ui\\mainwin.py": {
+            "block_positions": [
+                {
+                    "end": 440,
+                    "methods": [
+                        {
+                            "end": 122,
+                            "name": "setupActions",
+                            "start": 51,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 132,
+                            "name": "__setSelectStatus",
+                            "start": 123,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 139,
+                            "name": "unuseQss",
+                            "start": 133,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 184,
+                            "name": "renderStyle",
+                            "start": 140,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 195,
+                            "name": "textChanged",
+                            "start": 185,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 203,
+                            "name": "motifyChanged",
+                            "start": 196,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 221,
+                            "name": "loadColorPanel",
+                            "start": 204,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 288,
+                            "name": "chclr",
+                            "start": 258,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 291,
+                            "name": "_openact",
+                            "start": 289,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 314,
+                            "name": "open",
+                            "start": 292,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 332,
+                            "name": "new",
+                            "start": 315,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 349,
+                            "name": "newWithTemplate",
+                            "start": 333,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 359,
+                            "name": "save",
+                            "start": 350,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 375,
+                            "name": "saveAs",
+                            "start": 360,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 387,
+                            "name": "export",
+                            "start": 376,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 394,
+                            "name": "dragEnterEvent",
+                            "start": 388,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 400,
+                            "name": "dropEvent",
+                            "start": 395,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 426,
+                            "name": "closeEvent",
+                            "start": 401,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 431,
+                            "name": "updateConfig",
+                            "start": 427,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 440,
+                            "name": "useConfig",
+                            "start": 432,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "MainWin",
+                    "start": 18,
+                    "type": "Class"
+                }
+            ],
+            "comments": 64,
+            "language": "Python",
+            "mccabe": 62,
+            "ratio_comment_to_code": 0.18,
+            "sloc": 347
+        },
+        "src\\ui\\mainwinbase.py": {
+            "block_positions": [
+                {
+                    "end": 276,
+                    "methods": [
+                        {
+                            "end": 44,
+                            "name": "setupUi",
+                            "start": 19,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 133,
+                            "name": "createActions",
+                            "start": 45,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 183,
+                            "name": "createMenubar",
+                            "start": 134,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 189,
+                            "name": "createContexMenus",
+                            "start": 184,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 240,
+                            "name": "createToolbars",
+                            "start": 190,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 263,
+                            "name": "createStatusBar",
+                            "start": 241,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 276,
+                            "name": "createDocks",
+                            "start": 264,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "MainWinBase",
+                    "start": 14,
+                    "type": "Class"
+                },
+                {
+                    "end": 291,
+                    "methods": [
+                        {
+                            "end": 291,
+                            "name": "createMainWidget",
+                            "start": 288,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "sizeHint",
+                    "start": 277,
+                    "type": "Function"
+                }
+            ],
+            "comments": 22,
+            "language": "Python",
+            "mccabe": 7,
+            "ratio_comment_to_code": 0.1,
+            "sloc": 230
+        },
+        "src\\ui\\preview.py": {
+            "block_positions": [
+                {
+                    "end": 464,
+                    "methods": [
+                        {
+                            "end": 294,
+                            "name": "setupTab1",
+                            "start": 100,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 446,
+                            "name": "setupTab2",
+                            "start": 295,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 464,
+                            "name": "setupTab3",
+                            "start": 447,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "previewWidget",
+                    "start": 62,
+                    "type": "Class"
+                },
+                {
+                    "end": 575,
+                    "name": "paintEvent",
+                    "start": 465,
+                    "type": "Function"
+                },
+                {
+                    "end": 905,
+                    "methods": [
+                        {
+                            "end": 672,
+                            "name": "setupTab4",
+                            "start": 592,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 785,
+                            "name": "setupTab5",
+                            "start": 673,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 905,
+                            "name": "setupTab6",
+                            "start": 786,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "paintEvent",
+                    "start": 576,
+                    "type": "Function"
+                }
+            ],
+            "comments": 90,
+            "language": "Python",
+            "mccabe": 6,
+            "ratio_comment_to_code": 0.12,
+            "sloc": 782
+        },
+        "src\\ui\\recent.py": {
+            "block_positions": [
+                {
+                    "end": 48,
+                    "methods": [
+                        {
+                            "end": 28,
+                            "name": "_updateMenu",
+                            "start": 16,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 31,
+                            "name": "_recentact",
+                            "start": 29,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 40,
+                            "name": "addFile",
+                            "start": 32,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 46,
+                            "name": "setList",
+                            "start": 41,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 48,
+                            "name": "getList",
+                            "start": 47,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "Recent",
+                    "start": 8,
+                    "type": "Class"
+                }
+            ],
+            "comments": 4,
+            "language": "Python",
+            "mccabe": 7,
+            "ratio_comment_to_code": 0.11,
+            "sloc": 38
+        },
+        "src\\ui\\splash.py": {
+            "block_positions": [
+                {
+                    "end": 81,
+                    "methods": [
+                        {
+                            "end": 24,
+                            "name": "showMessage",
+                            "start": 21,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 28,
+                            "name": "clearMessage",
+                            "start": 25,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 32,
+                            "name": "setProgressText",
+                            "start": 29,
+                            "type": "Function"
+                        },
+                        {
+                            "end": 81,
+                            "name": "loadProgress",
+                            "start": 33,
+                            "type": "Function"
+                        }
+                    ],
+                    "name": "SplashScreen",
+                    "start": 10,
+                    "type": "Class"
+                }
+            ],
+            "comments": 15,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.24,
+            "sloc": 62
+        },
+        "tests\\__init__.py": {
+            "block_positions": [],
+            "comments": 8,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 2.67,
+            "sloc": 3
+        },
+        "tests\\test_app.py": {
+            "block_positions": [
+                {
+                    "end": 11,
+                    "name": "test_mainwin",
+                    "start": 8,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 1.0,
+            "sloc": 5
+        },
+        "tests\\test_config.py": {
+            "block_positions": [
+                {
+                    "end": 14,
+                    "name": "conf",
+                    "start": 10,
+                    "type": "Function"
+                },
+                {
+                    "end": 21,
+                    "name": "test_sec",
+                    "start": 15,
+                    "type": "Function"
+                },
+                {
+                    "end": 28,
+                    "name": "test_rmsec",
+                    "start": 22,
+                    "type": "Function"
+                },
+                {
+                    "end": 35,
+                    "name": "test_list",
+                    "start": 29,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 7,
+            "ratio_comment_to_code": 0.22,
+            "sloc": 23
+        },
+        "tests\\test_mainwin.py": {
+            "block_positions": [
+                {
+                    "end": 14,
+                    "name": "win",
+                    "start": 10,
+                    "type": "Function"
+                },
+                {
+                    "end": 19,
+                    "name": "test_confDialog",
+                    "start": 15,
+                    "type": "Function"
+                },
+                {
+                    "end": 24,
+                    "name": "test_findDialog",
+                    "start": 20,
+                    "type": "Function"
+                },
+                {
+                    "end": 27,
+                    "name": "test_mainwin",
+                    "start": 25,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.33,
+            "sloc": 15
+        },
+        "tests\\test_qsst.py": {
+            "block_positions": [
+                {
+                    "end": 15,
+                    "name": "qsst",
+                    "start": 9,
+                    "type": "Function"
+                },
+                {
+                    "end": 23,
+                    "name": "test_loadvars",
+                    "start": 16,
+                    "type": "Function"
+                },
+                {
+                    "end": 31,
+                    "name": "test_writevars",
+                    "start": 24,
+                    "type": "Function"
+                },
+                {
+                    "end": 36,
+                    "name": "test_convertqss",
+                    "start": 32,
+                    "type": "Function"
+                }
+            ],
+            "comments": 5,
+            "language": "Python",
+            "mccabe": 7,
+            "ratio_comment_to_code": 0.21,
+            "sloc": 24
+        },
+        "todo.md": {
+            "block_positions": [],
+            "comments": 0,
+            "language": "markdown",
+            "mccabe": 0,
+            "ratio_comment_to_code": 0.0,
+            "sloc": 41
+        }
+    }
+}

@@ -1,0 +1,39 @@
+---
+engines:
+     # rubocop:
+         # enabled: true
+         # exclude_paths:
+            # - config/engines.yml
+         # base_sub_dir: test/baseDir
+    RemarkLint:
+        enabled: true
+    Bandit:
+        enabled: true
+    Pylint:
+        enabled: true
+    Prospector:
+        enabled: true
+    duplication:
+        enabled: true
+    metric: #  supported directly as a binary in our analysis servers and are not configurable in the UI
+        enabled: true
+    coverage:
+        enabled: true
+languages:
+    python:
+        extensions:
+            - '.py'
+            - '.py.old'
+exclude_paths:
+  - '.git/**' # ignores everything inside test
+  - 'dist/**'
+  - 'build/**'
+  - 'tests/*' # ignores all files in the root of tests
+  - 'tests/**/*' # ignores all files inside sub-folder of tests
+  - '**._old.py'  #ignores all files with the same extension across all your repository
+  - '**._bak.py'
+  - '**/*_rc.py' # Ignores all .ext in all folders and sub-folders
+  - '**/toml/**'
+  - '.*docs?/.*'
+  
+  # exclude_paths using [java glob syntax](https://docs.oracle.com/javase/7/docs/api/java/nio/file/FileSystem.html#getPathMatcher%28java.lang.String%29)

@@ -81,7 +81,6 @@ class ConfDialog(QWidget):
         # action
         self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
 
-        @staticmethod
         def setCount(x):
             self.win.recent.maxcount = x
 
