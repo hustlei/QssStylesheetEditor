@@ -5,7 +5,7 @@
 [![Build Status](https://api.travis-ci.com/hustlei/QssStylesheetEditor.svg?branch=master)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/220d511b3ab146d0b03fef0245e00525)](https://www.codacy.com/manual/hustlei/QssStylesheetEditor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hustlei/QssStylesheetEditor&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/hustlei/QssStylesheetEditor/badge.svg)](https://coveralls.io/github/hustlei/QssStylesheetEditor?branch=master)
-[![Platform:win|osx|linux](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/badge/platform.svg?sanitize=true)](https://travis-ci.com/hustlei/QssStylesheetEditor)
+[![Platform:win|osx|linux](https://hustlei.github.io/assets/badge/platform.svg)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 
 <br>
@@ -26,7 +26,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，免费
 
 # screenshot
 
-![GUI(v1.3版本) screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
+![GUI(v1.3版本) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
 
 # 安装使用
 
@@ -77,7 +77,7 @@ QWidget
 
 在 QssStylesheetEditor 中自定义一个变量后，在软件的颜色栏会自动显示变量名字和颜色，点击颜色可以用通过颜色拾取框选取变量颜色。
 
-<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/ColorDlg_v1.3.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/ColorDlg_v1.3.png" height=180 />
 
 在 QssStylesheetEditor 中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
 
@@ -105,16 +105,16 @@ background-image: url(":/img/close.png");
 
 ## 自动补全
 
-![AutoComplete screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/AutoComplete.png "AutoComplete")
+![AutoComplete screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/AutoComplete.png "AutoComplete")
 
 
 ## old version
 
 <div><span><b>QssStylesheetEditor GUI V1.2</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
 
 
