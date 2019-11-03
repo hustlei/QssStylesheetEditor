@@ -9,18 +9,18 @@
 [![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 
 <br>
-QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，免费开源。
+QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持实时预览，自动提示，自定义变量。
 
 # 功能简介
 
-+ 编辑 Qss，实时预览 Qss 样式效果(可以预览几乎所有的 qtwidget 控件效果)
-+ 支持代码高亮，代码折叠
-+ 支持 Qss 关键字、属性、伪元素等的自动提示，自动补全
-+ 支持在 Qss 中自定义变量，在 Qss 中引用
-+ 自定义变量会自动显示在颜色编辑面板，可以通过颜色对话框中拾取变量的颜色
++ Qss代码高亮，代码折叠
++ Qss代码自动提示，自动补全
++ 实时预览 Qss 样式效果
++ 可以预览几乎所有的 qtwidget 控件效果
++ 支持在 Qss 中自定义变量
++ 自定义变量可以在颜色对话框中拾取变量的颜色
 + 支持相对路径引用图片，以及引用资源文件中的图片
 + 支持切换不同的系统 theme，如 xp 主题，vista 主题等(不同 theme 下 qss 效果会略有差异)
-+ 自带已编写好的 qsst 模板样式文件
 + 能够在 windows，linux，unix 上运行
 + 支持多国语言（中文，英文）
 

@@ -1,4 +1,4 @@
-English | [简体中文](readme_zh_CN.md)
+English | [简体中文](readme_zh-CN.md)
 
 # QssStylesheetEditor
 
@@ -11,6 +11,7 @@ English | [简体中文](readme_zh_CN.md)
 <br>
 
 QssStylesheetEditor is a powerful qt stylesheet(QSS) editor.
+Real-time preview, automatically completion, and user can define custom variable.
 
 
 # screenshot
