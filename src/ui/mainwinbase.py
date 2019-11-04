@@ -196,6 +196,7 @@ class MainWinBase(QMainWindow):
         checkbox.setToolTip(self.tr("Using system style, disable qss."))
         self.themeCombo.setToolTip(self.tr("Select system style."))
         self.themeCombo.addItems(QStyleFactory.keys())
+        self.themeCombo.setMinimumWidth(105)
         theme = QApplication.style().objectName()
         self.themeCombo.setCurrentIndex(self.themeCombo.findText(theme, Qt.MatchFixedString))
         # self.themeCombo.setEnabled(False)
@@ -265,7 +266,7 @@ class MainWinBase(QMainWindow):
         self.statusbar.addPermanentWidget(self.status["lines"])
 
     def createDocks(self):
-        self.docks["color"] = QDockWidget(self.tr("Colors"))
+        self.docks["color"] = QDockWidget(self.tr("Color Variables"))
         self.docks["preview"] = QDockWidget(self.tr("Preview"))
 
         self.docks["color"].setMinimumSize(QSize(120, 20))

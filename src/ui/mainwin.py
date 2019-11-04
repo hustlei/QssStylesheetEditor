@@ -117,8 +117,8 @@ class MainWin(MainWinBase):
             "This software is a advanced editor for QtWidget stylesheet(Qss), <br>support custom variable and "
             "real-time preview.<br><br> ")
         aboutText += self.tr(
-            "author: lileilei<br>website: <a href='https://blog.csdn.net/hustlei/article/details/87887369'>https"
-            "://blog.csdn.net/hustlei</a><br><br>welcom communicate with me: hustlei@sina.cn ")
+            "author: lileilei<br>website: <a href='https://github.com/hustlei/QssStylesheetEditor'>https"
+            "://github.com/hustlei/QssStylesheetEditor</a><br><br>welcom communicate with me: hustlei@sina.cn ")
         aboutText += "<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(lambda: QMessageBox.about(self, "about", aboutText))
 
@@ -316,7 +316,7 @@ class MainWin(MainWinBase):
 
     def new(self):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title, self.tr("Current file is not saved, do you want to save?"),
+            ret = QMessageBox.question(self, self.title, self.tr("Current file hasn't been saved, do you want to save?"),
                                        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
@@ -334,7 +334,7 @@ class MainWin(MainWinBase):
 
     def newWithTemplate(self, templatefile="data/default.qsst"):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title, self.tr("Current file is not saved，do you want to save?"),
+            ret = QMessageBox.question(self, self.title, self.tr("Current file hasn't been saved, do you want to save?"),
                                        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
@@ -404,7 +404,7 @@ class MainWin(MainWinBase):
         if self.editor.isModified():
             if self.lastSavedText != self.editor.text():
                 msg = QMessageBox(QMessageBox.Question, self.title,
-                                  self.tr(self.tr("Save before close?") + os.path.basename(self.file)),
+                                  self.tr("Current file hasn't been saved, do you want to save?"),
                                   QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel)
                 msg.setDefaultButton(QMessageBox.Cancel)
                 msg.button(QMessageBox.Save).setText(self.tr("Save"))

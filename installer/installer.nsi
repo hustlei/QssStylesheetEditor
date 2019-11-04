@@ -23,9 +23,9 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
 
     !define ProductName "QssStylesheetEditor"  ;产品名，和项目名相同
     !define StartFile "AppStart" ;.exe文件名,启动软件的exe名称
-    !define Version "1.4" ;版本
+    !define Version "1.5" ;版本
     !define Publisher "lileilei" ;发布人
-    !define Website "https://blog.csdn.net/hustlei/article/details/87887369" ;网站地址
+    !define Website "https://github.com/hustlei/QssStylesheetEditor" ;网站地址
     !define Year "2019"    
     !define Brand "hustlei,${Year} @wuhan" ;品牌,作者声明
     
@@ -328,7 +328,7 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
 ;--------------------------------
 ;multi-lang string
        
-    LangString langTitle ${LANG_SIMPCHINESE} "选择语言"
+    LangString langTitle ${LANG_SIMPCHINESE} "Installer Language"
     LangString langTitle ${LANG_ENGLISH} "Installer Language"
     LangString langInfo ${LANG_SIMPCHINESE} "请选择安装界面使用的语言："
     LangString langInfo ${LANG_ENGLISH} "Please select a language:"
@@ -370,7 +370,7 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     FunctionEnd
 
     Function un.onInit
-        !insertmacro MUI_UNGETLANGUAGE ;获取注册表保存的语言首选项
+        ; !insertmacro MUI_UNGETLANGUAGE ;获取注册表保存的语言首选项
         MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 $(msgUninstConfirm) IDYES +2
         Abort
     FunctionEnd

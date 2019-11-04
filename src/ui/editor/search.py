@@ -94,7 +94,7 @@ class searchDialog(QMainWindow):
         escapeCheckbox = QCheckBox(self.tr(r"support escape char'\n,\r,\t,\0,\x...'"))
         regCheckbox = QCheckBox(self.tr("regular expression"))  # ,"正则表达式"))
         label1 = QLabel(self.tr("Search Text"))  # ,"查找内容："))
-        self.__label2 = QLabel(self.tr("Replace to"))  # ,"替换为："))
+        self.__label2 = QLabel(self.tr("Replace to:"))  # ,"替换为："))
         self.__searchTextBox = QLineEdit()
         self.__replaceTextBox = QLineEdit()
         # self.__searchTextBox.setMinimumWidth(120)

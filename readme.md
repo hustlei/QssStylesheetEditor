@@ -16,8 +16,7 @@ Real-time preview, automatically completion, and user can define custom variable
 
 # screenshot
 
-![GUI(v1.3版本) screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3)")
-
+![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png "GUI(v1.5)")
 # Features
 
 + Qss code highlight and code folding
@@ -56,9 +55,8 @@ Now there is only installer for windows 64bit is available.
 
 Download:
 
-+ QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1_Uf1lPHj14fs9iMG2SVXuQ)**(secuirity code: gwf8)
-+ QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1kGLlpD52N5-wg9IFf0CHPA)**(secuirity code: ze32)
-
++ QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(secuirity code: auhq)
++ QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(secuirity code: brtj)
 
 ## Using custom variable 
 
@@ -125,6 +123,10 @@ QssStylesheetEditor will search the resource file filename.py(filename must be s
 
 ![AutoComplete screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/AutoComplete.png "AutoComplete")
 
+## other os
+
+<div><span><b>QssStylesheetEditor on macOS</b></span></div>
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_mac_v1.5.png" alt="Gui on macOS" height=400/>
 
 ## old version
 

@@ -26,7 +26,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 
 # screenshot
 
-![GUI(v1.3版本) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.3.png "GUI(v1.3版本)")
+![GUI(v1.5版本) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.5.png "GUI(v1.5版本)")
 
 # 安装使用
 
@@ -35,8 +35,8 @@ windows 64bit 操作系统可以下载 exe，直接运行。
 
 下载地址：
 
-+ QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1_Uf1lPHj14fs9iMG2SVXuQ)**(secuirity code: gwf8)
-+ QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1kGLlpD52N5-wg9IFf0CHPA)**(secuirity code: ze32)
++ QssStylesheetEditor_1.4_win64_安装包 **[[下载]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(提取码: auhq)
++ QssStylesheetEditor_1.4_win64_绿色版  **[[下载]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(提取码: brtj)
 
 
 ## 其他操作系统
@@ -106,6 +106,11 @@ background-image: url(":/img/close.png");
 ## 自动补全
 
 ![AutoComplete screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/AutoComplete.png "AutoComplete")
+
+## other os
+
+<div><span><b>QssStylesheetEditor on macOS</b></span></div>
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_mac_v1.5.png" alt="Gui on macOS" height=400/>
 
 
 ## old version

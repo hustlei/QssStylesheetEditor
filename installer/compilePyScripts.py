@@ -1,4 +1,3 @@
-#!usr/bin/python
 # -*- coding: utf-8 -*-
 """compile py code for distribute installer
 
@@ -7,9 +6,9 @@ compile all py codings to pyc, and move pyc to dist directory.
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+import os
 import re
 import shutil
-import os
 # import py_compile
 # import compileall as com
 # com.compile_dir(dir,optimize=2)
@@ -17,16 +16,23 @@ from py_compile import compile as compilepy
 
 # 源代码根文件夹 数据文件夹
 root = os.path.join(os.path.dirname(__file__), "..")
+srcdir = os.path.join(root, "src")
+distroot = os.path.join(root, "dist/build")
+
 pydir = os.path.join(root, "dist/libs/libpython")
 dlldir = os.path.join(root, r"dist/libs/DLLs")
 libdir = os.path.join(root, "dist/libs/Lib")
+
 datadir = os.path.join(root, "src/data")
 resdir = os.path.join(root, "src/res")
-srcdir = os.path.join(root, "src")
-distroot = os.path.join(root, "dist/build")
+
+
 # 不编译的文件夹，文件后缀
-excludedir = (".git", ".github", ".idea", "__pycache__", "data", "dist", "font", "img", "font", "old", "oldversion",
-              "bak", "tests", "installer")
+excludedir = (".git", ".github", ".idea", "__pycache__",
+              "data",  "font", "img", "font",
+              "dist", "build", "tests", "installer",
+              "old", "oldversion", "bak")
+
 
 # 删除dist/build文件夹下所有文件
 print("remove all files in dist/build.")
@@ -51,10 +57,11 @@ def clearDir(path):
 clearDir(distroot)
 
 # 拷贝data和img文件夹到dist/build/scripts文件夹
-print("\ncopy data dir to dist/build.")
+print("\ncopy resources to dist/build.")
 
 
 def copypath(path, distdir):
+    """copy path into distdir"""
     name = os.path.basename(path)
     # print(path+ "is file?"+ str(os.path.isfile(path)))
     if os.path.isfile(path):
@@ -69,8 +76,9 @@ def copypath(path, distdir):
 
 
 def copyfiles(path, distdir, exclude=None):
+    """copy all things in path to distdir"""
     if exclude is None:
-        exclude = [".py"]
+        exclude = (".py")
     files = os.listdir(path)
     if not os.path.exists(distdir):
         os.mkdir(distdir)
@@ -87,7 +95,7 @@ copypath(datadir, os.path.join(distroot, "scripts"))
 copypath(libdir, distroot)
 copypath(pydir, distroot)
 
-copyfiles(resdir, os.path.join(distroot, "scripts/res"), [".py", ".qrc"])
+copyfiles(resdir, os.path.join(distroot, "scripts/res"), (".py", ".qrc"))
 copyfiles(dlldir, distroot)
 copyfiles(os.path.join(root, r"dist/libs"), distroot)  # copy app.exe
 # shutil.copy(os.path.join(root,"dist/libs/QssStylesheetEditor.exe"),distroot)
