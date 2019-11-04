@@ -1,86 +1,92 @@
+English | [简体中文](todo_zh-CN.md)
+
 # ToDo
 
-+ 重构代码
-    - 重写 editor 的设置部分
-    - 重写英文文档
-+ 帮助文档
-    - 软件帮助
-    - Qss 帮助及示例
++ Refactor code
+    - rewrite config for editor
++ Qsst sample
++ Docs
+    - Help
+    - Qss tutorial
+
++ ToDo or not?
+    - qss only support /* */ comment , add inline comment syntax?
 
 # ChangeLog
 
 ## v1.5
-主要修改：**qss 图片引用资源文件**
+Main Changes: **reference image in resource file in qsst**
 
 + ** Features **
-    - 增加资源文件引用图片方式：url(:/img/close.png);
-
-> qss 只支持/* */注释方式，只有块注释，所以不再准备增加这个功能
+    - Support reference image in resource file:url(:/img/close.png);
+    - When there isn't UI language setted, autodetect the os language, if there isn't tranlation, set to english
+    - Readme english version set to default
+    - Add code analysis, test scripts and config file 
 
 ## v1.4
-主要修改：**国际化、配置功能**
+Main Changes: **i18n, settings**
 
 + ** Features **
-    - toml 配置文件
-    - 最近打开的文档目录
-    - 国际化
-    - 资源文件编译
-    - 重构安装包脚本，增加安装包中英文界面
+    - toml config file
+    - recent open list
+    - i18n (add english and chinese translation)
+    - compile images to resource file
+    - refactor installer scripts for win64(add i18n support for installer)
 + ** BugFix **
-    - 修复安装包部分 OS 无法打开等问题
+    - Fix installer starting error on some OS 
 
 ## v1.35
-主要修改：**制作 windows 版本安装包**
+Main Changes: **add installer for windows**
 
 + ** Features **
-    - 增加安装包制作的 Nsis 源码
+    - add Nsis scripts for installer
 
 ## v1.3
-主要修改：**制作 windows x64 版本 exe 软件**
+Main Changes: **portable exe for windows x64**
 
 + ** Features **
-    - 状态栏显示文件行数、编码、当前鼠标位置、选择的行号
-    - 增加是否显示空格符号，换行符
-    - 增加字体大小调节功能，自动换行设置功能
-    - 增加 ScreenSplash
-    - 增加拖放打开文件功能
-    - 语法提示增加 Qss 关键字
-    - 打包 win64 binary exe portable
-    - qss 内用相对路径图片，修改为相对 qss 文件位置
+    - display lines count, coding etc. in statusbar
+    - tool for display space and breakline
+    - tool for auto wrapping
+    - font zooming
+    - screenSplash
+    - drag drop open file for editor
+    - syntax prompt for Qss keywords
+    - portable win64 binary exe
+    - reference image in qss by relative path, base dir set to dir that the qss is in
 + ** BugFix **
-    - 修复 Find 对话框 statusbar 显示问题
+    - Fix display error of Find dialog
 
 ## v1.2
 
-主要修改：**使用 Qscintilla 编辑器**
+Main Changes: **change editor to Qscintilla**
 
 + ** Features **
-    - 使用 QSintilla 替换了 TextEdit
-    - 编辑器增加自动换行功能
-    - 编辑器增加了缩进功能
-    - tab 自动转换为 4 个空格
-    - 增加了自动识别文件编码功能
-    - 自定义代码高亮和代码折叠
-    - 修改变量语法为$var=value;
-    - 增加了 about 菜单
-    - 完善了默认 qss 模板
-    - 增加了查找和替换功能
+    - using QSintilla instead of TextEdit
+    - autowrapping
+    - auto indent
+    - tab default using 4 spaces instead
+    - auto detect coding of qss file
+    - custom syntax hightlight and code folding
+    - change var defination syntax to `$var=value;`
+    - about dialog
+    - rewrite default qss template
+    - find and replace
 + ** BugFix **
-    - 修复语法高亮对中文支持问题
-    - 编辑器背景色自动更新
+    - fix error of syntax highlight when there is chinese word
+    - background of editor auto changed according the qss code
 
 ## v1.1
-主要修改：**修改布局界面，Ui 重构**
+Main Changes: **redesign Ui**
 
 + ** Features **
-    - 已添加拖放打开功能
-    - 优化 pyqt5 动态增减控件部分，减少内存使用
+    - drag drop to open document
+    - optimize dynamic widgets in color pannel, to reduce memory usage
 
 ## v1.0
 
 + ** Features **
-    - 已添加拖放打开功能
-    - 支持实时预览，实时预览控件还待完善
-    - 支持代码高亮，但是高亮质量不高
-    - 支持 redo undo
-    - 支持自定义变量
+    - in-time preview, a little widgets supported
+    - code hightlighting, but need to imporve
+    - redo undo
+    - variable custom
