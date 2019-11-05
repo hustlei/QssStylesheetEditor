@@ -35,8 +35,8 @@ windows 64bit 操作系统可以下载 exe，直接运行。
 
 下载地址：
 
-+ QssStylesheetEditor_1.4_win64_安装包 **[[下载]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(提取码: auhq)
-+ QssStylesheetEditor_1.4_win64_绿色版  **[[下载]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(提取码: brtj)
++ QssStylesheetEditor_1.5_win64_安装包 **[[下载]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(提取码: auhq)
++ QssStylesheetEditor_1.5_win64_绿色版  **[[下载]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(提取码: brtj)
 
 
 ## 其他操作系统

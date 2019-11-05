@@ -9,7 +9,7 @@ pycodestyle . -qq # --statistics
 yapf -ri .
 
 pylint src
-pyflakes .
+# pyflakes . #配置麻烦，所以我不用
 bandit -c .bandit -r . # 如果.bandit是ini格式文件可以直接用`bandit -r .`
 prospector  # or prospector .
 
@@ -27,11 +27,9 @@ coverage report
 
 2. pycodestyle：检查代码格式是否符合pep8
 3. yapf：修改代码格式。（类似于autopep8,black）
-
 4. pylint：源代码静态检查（codacy.com 支持）
-5. pyflakes：代码静态检查，速度比pylint快
-6. bandit：代码安全性检查（codacy.com 支持）
-7. prospector：（codacy.com 支持）
+5. bandit：代码安全性检查（codacy.com 支持）
+6. prospector：（codacy.com 支持）
     + profile-validator：检查prospector配置文件格式
     + pep8格式检查
     + mccabe检查
@@ -44,10 +42,12 @@ coverage report
     + pydocstyle：pep257 docstring规则检查
     + #pylint：由于会出错，所以禁止了
     + #pyroma：检查setup.py是否遵循python打包系统原则
-
-8. pytest：代码测试。（Travis-CI 支持）
+7. pytest：代码测试。（Travis-CI 支持）
     + `pytest --cov=.`运行pytest并调用coverage插件，并显示corerage report结果
-9. coverage report：测试代码覆盖率
+8. coverage report：测试代码覆盖率
+
+> pyflakes：代码静态检查，速度比pylint快。但是如果要自定义配置，就需要使用flake8.
+
 
 # 安装及配置说明
 
@@ -58,7 +58,7 @@ pip install metrics
 pip install pycodestyle
 pip install yapf
 pip install pylint
-pip install pyflakes
+# pip install pyflakes
 pip install bandit
 pip install prospector
 pip install pytest
@@ -85,13 +85,12 @@ pip install coverage
     + 帮助文档：<http://pylint.pycqa.org/en/latest/>
     + 配置文件：`.pylintrc`。pylint2.5以后版本会支持setup.cfg配置
         + 目前pylint2.4.3 还不支持2.5的很多功能
-5. pyflakes:只有使用flake8才能配置
-6. bandit
+5. bandit
     + <https://pypi.org/project/bandit/>
     + 帮助文档：<https://github.com/PyCQA/bandit>
     + 配置文件：`.bandit`中[bandit]节。ini格式
         + 由于在codacy上默认吧.bandit作为ymal格式配置文件，所以我个人把.bandit文件写作yaml格式，在自己电脑上用bandit -c .bandit -r .调用
-7. prospector
+6. prospector
     + <https://github.com/PyCQA/prospector>
     + 帮助文档：<https://prospector.readthedocs.io/en/latest/index.html>
     + 配置文件：`.prospector.yml`

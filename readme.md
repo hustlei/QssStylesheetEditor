@@ -11,12 +11,13 @@ English | [简体中文](readme_zh-CN.md)
 <br>
 
 QssStylesheetEditor is a powerful qt stylesheet(QSS) editor.
-Real-time preview, automatically completion, and user can define custom variable.
+Real-time preview, automatically completion, and user can define custom variables.
 
 
 # screenshot
 
-![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png "GUI(v1.5)")
+![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png  "GUI(v1.5)")
+
 # Features
 
 + Qss code highlight and code folding
@@ -55,8 +56,8 @@ Now there is only installer for windows 64bit is available.
 
 Download:
 
-+ QssStylesheetEditor_1.4_win64_installer **[[Download]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(secuirity code: auhq)
-+ QssStylesheetEditor_1.4_win64_portable  **[[Download]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(secuirity code: brtj)
++ QssStylesheetEditor_1.5_win64_installer **[[Download]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(secuirity code: auhq)
++ QssStylesheetEditor_1.5_win64_portable  **[[Download]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(secuirity code: brtj)
 
 ## Using custom variable 
 
@@ -64,7 +65,7 @@ In QssStylesheetEditor, users can define and use custome variables in QSS.
 
 Using following statement to define new variable:
 
-~~~
+~~~css
 /*example of custom variable definition*/
 $background = #fff;  /* define var with name "background" */
 $text = red; /* define var with name "text" */
@@ -74,7 +75,7 @@ A variable definition end with a ";".
 
 Reference defined variable as following:
 
-~~~
+~~~css
 /* example of custom variable reference */
 QWidget
 {
@@ -91,7 +92,7 @@ Users can export the code to qss file without vars by the "File>Export" menu.
 
 When a variable is defined in QssStylesheetEditor, the variable will be automatically displayed in the color pannel. You can click the color button to select the variable color through the color pick-up box.
 
-<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/ColorDlg_v1.3.png" height=180 />
+<img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/ColorDlg_v1.3.png" style="max-height:480px;max-width:960px"/>
 
 > If an undefined variable is referenced, it will be automatically recognized and displayed in the color panel too. 
 
@@ -119,22 +120,15 @@ QssStylesheetEditor will search the resource file filename.py(filename must be s
 
 # screenshot
 
-## AutoComplete
-
-![AutoComplete screeshot](https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/AutoComplete.png "AutoComplete")
-
-## other os
+<div><span><b>AutoComplete</b></span></div>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/AutoComplete.png" alt="AutoComplete" style="max-height:480px;max-width:960px"/>
 
 <div><span><b>QssStylesheetEditor on macOS</b></span></div>
-    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_mac_v1.5.png" alt="Gui on macOS" height=400/>
-
-## old version
+    <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_mac_v1.5.png" alt="Gui on macOS" style="max-height:480px;max-width:960px"/>
 
 <div><span><b>QssStylesheetEditor GUI V1.2</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" height=200/>
-<div><span><b>QssStylesheetEditor GUI V1.1</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.2.png" alt="v1.2" style="max-height:480px;max-width:960px"/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
-    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
+    <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" style="max-height:480px;max-width:960px"/>
 
 
