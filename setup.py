@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-with open("readme.md", "r", encoding='utf-8') as fh:
-    long_desc = fh.read()
+# with open("readme.md", "r", encoding='utf-8') as fh:
+    # long_desc = fh.read()
 
 setup(
     name="QssStylesheetEditor",  # ProjectName
@@ -36,11 +36,15 @@ setup(
     },
 
     # excutable
-    # scripts=[],
+    # scripts=['src/app.py','src/bootstrapper.py'],# 指定脚本会被安装到Python3x/Scripts下
     entry_points={
-        "distutils.commands": [
-            "QssStylesheetEditor = app:main",
+        "console_scripts":[
+        'qsseditor = bootstrapper', # create qsseditor.exe in Python3x/Scripts
+        'qssteditor =  app:main', # app:main
         ],
+        "gui_scripts":[
+        'QssStylesheetEditor = bootstrapper',
+        ]
     },
 
     # metadata to display on PyPI
@@ -48,19 +52,19 @@ setup(
     author_email='hustlei@sina.cn',
     description="A Qt Stylesheet(QSS) editor",
     keywords="QSS",
-    long_description=long_desc,
-    long_description_content_type="text/markdown",
+    # long_description=long_desc,
+    # long_description_content_type="text/markdown",
     url="https://github.com/hustlei/QssStylesheetEditor"  # project home page, if any
 )
 
 # <https://www.jianshu.com/p/e0e7420e3141>
 # <https://www.cnblogs.com/yangwm/p/11243346.html>
 # <https://www.cnblogs.com/ls-2018/p/10451393.html>
-# install command
-# 源码发布，使用python setup.py install安装
-# python setup.py sdist  # 创建一个压缩包
-# 创建二进制程序
-# python setup.py bdist_wininst  # windows exe 应用程序,依赖本地安装的python，与py2exe不同
-# python setup.py bdist_rpm # linux rpm
-# 获取所有支持的平台
-# python setup.py bdist --help-formats
+
+# python setup.py build  # 编译
+# python setup.py sdist  # zip格式包
+# python setup.py bdist_wininst # exe格式包
+# python setup.py bdist_rpm # rpm格式包
+# python setup.py bdist --help-formats # 获取所有支持的平台
+# python setup.py --help-commands 显示相关可用命令
+# python setup.py install #安装
