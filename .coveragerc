@@ -5,14 +5,12 @@ branch = False
 omit =
     # omit anything in a directory anywhere
     */.git/*
-    */bak/*
-    */toml/*
-    # omit everything in /dir
+    /dist/*
     /installer/*
-    /res/*
-    # omit this single file
-    #utils/tirefire.py
-    main.py
+    */bak/*
+    src/bootstrapper.py
+    setup.py
+    */toml/*
     */chardet/*
 
 

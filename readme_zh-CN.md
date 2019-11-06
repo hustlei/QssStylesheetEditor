@@ -6,7 +6,6 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/220d511b3ab146d0b03fef0245e00525)](https://www.codacy.com/manual/hustlei/QssStylesheetEditor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=hustlei/QssStylesheetEditor&amp;utm_campaign=Badge_Grade)
 [![Coverage Status](https://coveralls.io/repos/github/hustlei/QssStylesheetEditor/badge.svg)](https://coveralls.io/github/hustlei/QssStylesheetEditor?branch=master)
 [![Platform:win|osx|linux](https://hustlei.github.io/assets/badge/platform.svg)](https://travis-ci.com/hustlei/QssStylesheetEditor)
-[![Licence](https://img.shields.io/badge/license-LGPL--3.0-blue)](https://opensource.org/licenses/LGPL-3.0)
 
 <br>
 QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持实时预览，自动提示，自定义变量。

@@ -9,7 +9,6 @@ setup(
     version="1.5",
     python_requires='>=3.0.*, <4', # python的依赖关系
     install_requires=[
-        'python_version>="3.4"',
         'PyQt5', 'Qscintilla'
     ],
     

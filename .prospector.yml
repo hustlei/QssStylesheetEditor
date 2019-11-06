@@ -8,18 +8,13 @@ inherits:
 ignore-patterns:
     - (^|\/|\\)\..+
     - (^|\/|\\)setup.py$
+    - dist
     - .*(^|\/|\\)splash.py$       #imported many modules in splash, but not used
-    # - (^|\/|\\)__init__.py$     #reimported modules in __init__, but not used
     - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$)  #old version scripts
     - .*(^|\/|\\)bak(\/|\\|$).*   #old version scripts
     - .*(^|\/|\\)toml(\/|\\|$).*  #3rdparty scripts
-    - dist
-  
-
-# uses: uses must be name of django, celery, flask
 
 # 7default: pylint, pep8, pyflakes, mccabe, dodgy, pydecstyle, profile-validator
-# 
 
 
 #pylint-config-file: .pylintrc
@@ -61,16 +56,11 @@ pep257:
         - D403 # First word of the first line should be properly capitalized ('Remove', not 'remove')
         - D204 # 1 blank line required after class docstring
         - D415 # First line should end with a period, question mark, or exclamation point
-                
-# frosted:
-    # disable:
-        # - E103
-        # - E306
-    
-# pyroma:
-    # disable:
-        # - PYR15
-        # - PYR16
-        # - PYR17
-        # - PYR18
-        # - PYR19
+
+pyroma:
+    disable:
+        - PYR15
+        - PYR16
+        - PYR17
+        - PYR18
+        - PYR19
