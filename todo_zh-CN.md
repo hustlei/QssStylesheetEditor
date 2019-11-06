@@ -33,7 +33,7 @@
     - 国际化
     - 资源文件编译
     - 重构安装包脚本，增加安装包中英文界面
-+ **BugsFix**
++ **BugsFixed**
     - 修复安装包部分 OS 无法打开等问题
 
 ## v1.35
@@ -54,7 +54,7 @@
     - 语法提示增加 Qss 关键字
     - 打包 win64 binary exe portable
     - qss 内用相对路径图片，修改为相对 qss 文件位置
-+ **BugsFix**
++ **BugsFixed**
     - 修复 Find 对话框 statusbar 显示问题
 
 ## v1.2
@@ -72,7 +72,7 @@
     - 增加了 about 菜单
     - 完善了默认 qss 模板
     - 增加了查找和替换功能
-+ **BugsFix**
++ **BugsFixed**
     - 修复语法高亮对中文支持问题
     - 编辑器背景色自动更新
 

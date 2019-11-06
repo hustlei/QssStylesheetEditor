@@ -2,7 +2,7 @@ python 代码静态分析
 
 # pep8代码格式
 
-PEP8 是一种 Python 代码规范指南，可以参阅官网：https://www.python.org/dev/peps/pep-0008/，其目的
+PEP8 是一种 Python 代码规范指南，可以参阅官网：<https://www.python.org/dev/peps/pep-0008/>，其目的
 是为了保持代码的一致性、可读性。
 
 检查自己代码是否符合 PEP8 规范，一个简单的工具就是：pycodestyle （以前的pep8，最新版改名为
@@ -66,7 +66,7 @@ yapf [files [files ...]]
 
 ## 参数
 
-[-h] [-v] [-d | -i] [-r] [-e PATTERN] [--style STYLE] [-p] [-vv] [files [files ...]]
+`[-h] [-v] [-d | -i] [-r] [-e PATTERN] [--style STYLE] [-p] [-vv] [files [files ...]]`
 
 参数说明
 

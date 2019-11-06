@@ -75,10 +75,10 @@ pip install coverage
 2. pycodestyle
     + <https://pypi.org/project/pycodestyle/>
     + 帮助文件：<https://pycodestyle.readthedocs.io/en/latest/>
-    + 配置文件：`setup.cfg`或`tox.ini`中的[pycodestyle]节
+    + 配置文件：`setup.cfg`或`tox.ini`中的`[pycodestyle]`节
 3. yapf
     + <https://pypi.org/project/yapf/>
-    + 配置文件：`.style.yapf`中的[style]节，`setup.cfg`中的[yapf]节
+    + 配置文件：`.style.yapf`中的`[style]`节，`setup.cfg`中的`[yapf]`节
         + .yapfignore文件中配置忽略文件列表
 4. pylint
     + <https://pypi.org/project/pylint/>
@@ -88,7 +88,7 @@ pip install coverage
 5. bandit
     + <https://pypi.org/project/bandit/>
     + 帮助文档：<https://github.com/PyCQA/bandit>
-    + 配置文件：`.bandit`中[bandit]节。ini格式
+    + 配置文件：`.bandit`中`[bandit]`节。ini格式
         + 由于在codacy上默认吧.bandit作为ymal格式配置文件，所以我个人把.bandit文件写作yaml格式，在自己电脑上用bandit -c .bandit -r .调用
 6. prospector
     + <https://github.com/PyCQA/prospector>
@@ -109,7 +109,7 @@ pip install coverage
     - None
 + pylint: `.pylintrc`
     - `.git, dist, build, bak, toml, splash.py`
-    - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)
+    - `.*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$|_rc[.]py$)`
     
     
 > 貌似在codacy.com上，这些配置文件里的ignore列表都不起作用，只有.codacy.yml配置里的ignore列表才起作用。
