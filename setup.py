@@ -5,38 +5,44 @@ with open("readme.md", "r", encoding='utf-8') as fh:
     long_desc = fh.read()
 
 setup(
-    name="QssStylesheetEditor", #ProjectName
+    name="QssStylesheetEditor",  # ProjectName
     version="1.5",
-    python_requires='>=3.0.*, <4', # python的依赖关系
-    install_requires=[
-        'PyQt5', 'Qscintilla'
-    ],
-    
+    python_requires='>=3.0.*, <4',  # python的依赖关系
+    install_requires=['PyQt5', 'Qscintilla'],
+
     # Module
-    package_dir = {'':'src'},  # # tell distutils packages are under src
-    packages=find_packages(where='src', include=('*'), exclude=['*.bak',]), #
-    py_modules=['app','bootstrapper'], #single file
-    
+    package_dir={'': 'src'},  # tell distutils packages are under src
+    packages=find_packages(where='src', include=('*'), exclude=[
+        '*.bak',
+    ]),  #
+    py_modules=['app', 'bootstrapper'],  # single file
+
     # data
     package_data={
-        'config': ['*.toml'], # *.toml files found in config package
+        'config': ['*.toml'],  # *.toml files found in config package
         'data': ['*.qss', '*.qsst'],
         'i18n': ['*.qm', '*.toml'],
-        'res':['*'],
-        '':['*.zip']
-    },    
-    exclude_package_data={'': ['*.ts','*.qrc',], # 'font' is not in package
-                          'res':['img',]},
-    
+        'res': ['*'],
+        '': ['*.zip']
+    },
+    exclude_package_data={
+        '': [
+            '*.ts',
+            '*.qrc',
+        ],  # 'font' is not in package
+        'res': [
+            'img',
+        ]
+    },
+
     # excutable
     # scripts=[],
     entry_points={
         "distutils.commands": [
-            "QssStylesheetEditor = app",
+            "QssStylesheetEditor = app:main",
         ],
     },
-    
-    
+
     # metadata to display on PyPI
     author='lileilei',
     author_email='hustlei@sina.cn',
@@ -44,9 +50,8 @@ setup(
     keywords="QSS",
     long_description=long_desc,
     long_description_content_type="text/markdown",
-    url="https://github.com/hustlei/QssStylesheetEditor"   # project home page, if any
+    url="https://github.com/hustlei/QssStylesheetEditor"  # project home page, if any
 )
-
 
 # <https://www.jianshu.com/p/e0e7420e3141>
 # <https://www.cnblogs.com/yangwm/p/11243346.html>

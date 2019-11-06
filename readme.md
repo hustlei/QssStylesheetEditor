@@ -136,4 +136,4 @@ Like PyQt5, this software is available under two licenses: the GPL v3, and Comme
 
 If you are willing to follow the terms of the GPL, this software is available to you under Open Source licenses which allows you to develop, modify and distribute your software freely.
 
-Alternatively, if you, your company or your organisation derive commercial benefit from the software and do not wish to distribute your complete source code you are required to use commercial licenses and commercial PyQt5.
+Alternatively, if you, your company or your organisation derive commercial benefit from the software and do not wish to distribute your complete source code you are required to use commercial licenses and purchase commercial version PyQt5.

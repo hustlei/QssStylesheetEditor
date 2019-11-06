@@ -91,6 +91,7 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
+
 # from res.img_rc import *
 
 
@@ -98,6 +99,7 @@ class previewWidget(QTabWidget):
     """
     widget that preview qss effect in previewpannel
     """
+
     def __init__(self):
         super().__init__()
         tab1 = QWidget(self)
@@ -353,29 +355,34 @@ class previewWidget(QTabWidget):
         layout.addWidget(group0)
 
         b1 = QPushButton(self.tr("Info"))
-        b1.clicked.connect(lambda: QMessageBox.information(self, "Info", self.tr("This is a message."), QMessageBox.Ok, QMessageBox.Ok))
+        b1.clicked.connect(lambda: QMessageBox.information(self, "Info", self.tr("This is a message."), QMessageBox.Ok,
+                                                           QMessageBox.Ok))
         b2 = QPushButton(self.tr("Question"))
-        b2.clicked.connect(lambda: QMessageBox.question(self, "question", self.tr("Are you sure?"), QMessageBox.No | QMessageBox.
-                                                        Yes, QMessageBox.Yes))
+        b2.clicked.connect(
+            lambda: QMessageBox.question(self, "question", self.tr("Are you sure?"), QMessageBox.No | QMessageBox.
+                                         Yes, QMessageBox.Yes))
         b3 = QPushButton(self.tr("Warning"))
         b3.clicked.connect(
-            lambda: QMessageBox.warning(self, "warning", self.tr("This is a warning."), QMessageBox.No | QMessageBox.Yes, QMessageBox.Yes))
+            lambda: QMessageBox.warning(self, "warning", self.tr("This is a warning."),
+                                        QMessageBox.No | QMessageBox.Yes, QMessageBox.Yes))
         b4 = QPushButton(self.tr("Error"))
         b4.clicked.connect(
-            lambda: QMessageBox.critical(self, "error", self.tr("It's a error."), QMessageBox.No | QMessageBox.Yes, QMessageBox.Yes))
+            lambda: QMessageBox.critical(self, "error", self.tr("It's a error."), QMessageBox.No | QMessageBox.Yes,
+                                         QMessageBox.Yes))
         b5 = QPushButton(self.tr("About"))
         b5.clicked.connect(lambda: QMessageBox.about(self, "about", self.tr("About this software")))
-        b6 = QPushButton(self.tr("Input"))#,"输入对话框"))
+        b6 = QPushButton(self.tr("Input"))  # ,"输入对话框"))
         b6.clicked.connect(lambda: QInputDialog.getInt(self, self.tr("input"), self.tr("please input int")))
         b6.clicked.connect(lambda: QInputDialog.getDouble(self, self.tr("input"), self.tr("please input float")))
-        b6.clicked.connect(lambda: QInputDialog.getItem(self, self.tr("input"), self.tr("please select"), ["aaa", "bbb"]))
-        b7 = QPushButton(self.tr("Color"))#,"颜色对话框"))
+        b6.clicked.connect(
+            lambda: QInputDialog.getItem(self, self.tr("input"), self.tr("please select"), ["aaa", "bbb"]))
+        b7 = QPushButton(self.tr("Color"))  # ,"颜色对话框"))
         b7.clicked.connect(lambda: QColorDialog.getColor())
-        b8 = QPushButton(self.tr("Font"))#,"字体对话框"))
+        b8 = QPushButton(self.tr("Font"))  # ,"字体对话框"))
         b8.clicked.connect(lambda: QFontDialog.getFont())
-        b9 = QPushButton(self.tr("OpenFile"))#,"打开对话框"))
+        b9 = QPushButton(self.tr("OpenFile"))  # ,"打开对话框"))
         b9.clicked.connect(lambda: QFileDialog.getOpenFileName(self, "open", "", "Text(*.txt *.text)"))
-        b10 = QPushButton(self.tr("SaveFile"))#,"保存对话框"))
+        b10 = QPushButton(self.tr("SaveFile"))  # ,"保存对话框"))
         b10.clicked.connect(lambda: QFileDialog.getSaveFileName())
         layoutRow1.addWidget(b1)
         layoutRow1.addWidget(b2)
@@ -440,7 +447,7 @@ class previewWidget(QTabWidget):
         scroll1.setOrientation(Qt.Horizontal)
         scroll2.setOrientation(Qt.Horizontal)
         scroll3.setOrientation(Qt.Horizontal)
-        c = QLabel(self.tr("Slide to change color"))#, "拖动滑块改变颜色"))
+        c = QLabel(self.tr("Slide to change color"))  # , "拖动滑块改变颜色"))
         c.setAutoFillBackground(True)
         c.setAlignment(Qt.AlignCenter)
         # c.setStyleSheet("border:1px solid gray;")
@@ -639,38 +646,38 @@ class previewWidget(QTabWidget):
         scrollContainer.addWidget(scrollArea)
         tab4.setLayout(scrollContainer)
 
-        group1 = QGroupBox(self.tr("QHBoxLayout"))#, "QHBoxLayout布局"))
+        group1 = QGroupBox(self.tr("QHBoxLayout"))  # , "QHBoxLayout布局"))
         hbox = QHBoxLayout()
         for i in range(1, 5):
             hbox.addWidget(QPushButton(self.tr("Button") + str(i)))
         group1.setLayout(hbox)
         layout.addWidget(group1)
 
-        group2 = QGroupBox(self.tr("QGridLayout"))#, "QGridLayout布局"))
+        group2 = QGroupBox(self.tr("QGridLayout"))  # , "QGridLayout布局"))
         hbox = QGridLayout()
-        hbox.addWidget(QLabel(self.tr("First line:")), 0, 0) #,"第一行数据："))
+        hbox.addWidget(QLabel(self.tr("First line:")), 0, 0)  # "第一行数据："))
         hbox.addWidget(QLabel(self.tr("Second line:")), 1, 0)
         hbox.addWidget(QLabel(self.tr("Third line:")), 2, 0)
         hbox.addWidget(QLineEdit(), 0, 1)
         hbox.addWidget(QLineEdit("0"), 1, 1)
         inputText = QLineEdit()
-        inputText.setPlaceholderText(self.tr("please input"))#, "请输入："))
+        inputText.setPlaceholderText(self.tr("please input"))  # "请输入："))
         hbox.addWidget(inputText, 2, 1)
-        text = QTextEdit(self.tr("This is a textedit, span 3 rows and 2 columns."))#, "这是一个文本框，在QGridLayout中占三行两列。"))
+        text = QTextEdit(self.tr("This is a textedit, span 3 rows and 2 columns."))  # "这是一个文本框，在QGridLayout中占三行两列。"))
         hbox.addWidget(text, 0, 2, 3, 2)
         group2.setLayout(hbox)
         layout.addWidget(group2)
 
-        group3 = QGroupBox(self.tr("QFormLayout"))#, "QFormLayout布局"))
+        group3 = QGroupBox(self.tr("QFormLayout"))  # "QFormLayout布局"))
         hbox = QFormLayout()
 
-        hbox.addRow(self.tr("please input data"), QLineEdit()) #, "请输入数据：")
-        hbox.addRow(QLabel(self.tr("please select data")), QSpinBox()) #, "请选择数据："
+        hbox.addRow(self.tr("please input data"), QLineEdit())  # "请输入数据：")
+        hbox.addRow(QLabel(self.tr("please select data")), QSpinBox())  # "请选择数据："
         box = QComboBox()
         box.addItem("Item1")
         box.addItem("Item2")
         box.addItem("Item3")
-        hbox.addRow(self.tr("Please select item"), box) # , "请选择选项："
+        hbox.addRow(self.tr("Please select item"), box)  # , "请选择选项："
         group3.setLayout(hbox)
         layout.addWidget(group3)
 
@@ -720,13 +727,13 @@ class previewWidget(QTabWidget):
         scrollContainer.addWidget(scrollArea)
         tab.setLayout(scrollContainer)
 
-        group = QGroupBox(self.tr("QGroupBox"))#, "QGroupBox控件"))
+        group = QGroupBox(self.tr("QGroupBox"))  # "QGroupBox控件"))
         hbox = QHBoxLayout()
-        hbox.addWidget(QLabel(self.tr("this is a QGroupBox widget")))#, "这是一个QGroupBox控件")))
+        hbox.addWidget(QLabel(self.tr("this is a QGroupBox widget")))  # "这是一个QGroupBox控件")))
         group.setLayout(hbox)
         layout.addWidget(group)
 
-        group = QGroupBox(self.tr("StackLayout"))#, "StackLayout布局"))
+        group = QGroupBox(self.tr("StackLayout"))  # "StackLayout布局"))
         hbox = QHBoxLayout()
         group.setLayout(hbox)
         listWidget = QListWidget()

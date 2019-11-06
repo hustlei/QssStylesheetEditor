@@ -15,7 +15,7 @@ class ConfBase:
 
     def read(self, cfgFile=None):
         """ read a toml config file
-        
+
         :param cfgFile:  config file path
         :return:  true if read success
         """

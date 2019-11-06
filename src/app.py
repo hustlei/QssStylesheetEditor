@@ -40,6 +40,8 @@ class App(QApplication):
         if not pytest:
             sys.exit(self.exec_())
 
+def main():
+    App().run()
 
 if __name__ == "__main__":
-    App().run()
+    main()
