@@ -65,7 +65,7 @@ In QssStylesheetEditor, users can define and use custome variables in QSS.
 
 Using following statement to define new variable:
 
-~~~css
+~~~js
 /*example of custom variable definition*/
 $background = #fff;  /* define var with name "background" */
 $text = red; /* define var with name "text" */
@@ -132,3 +132,9 @@ QssStylesheetEditor will search the resource file filename.py(filename must be s
     <img src="https://raw.githubusercontent.com/hustlei/QssStylesheetEditor/master/docs/assets/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" style="max-height:480px;max-width:960px"/>
 
 
+# License
+Like PyQt5, this software is available under two licenses: the GPL v3, and Commercial License.
+
+If you are willing to follow the terms of the GPL, this software is available to you under Open Source licenses which allows you to develop, modify and distribute your software freely.
+
+Alternatively, if you, your company or your organisation derive commercial benefit from the software and do not wish to distribute your complete source code you are required to use commercial licenses and commercial PyQt5.
