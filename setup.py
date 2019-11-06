@@ -29,10 +29,11 @@ setup(
         '': [
             '*.ts',
             '*.qrc',
-        ],  # 'font' is not in package
+        ],
         'res': [
             'img',
-        ]
+        ],
+        'data':['__init__.py'] # not work
     },
 
     # excutable
