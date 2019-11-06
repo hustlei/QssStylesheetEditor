@@ -29,7 +29,7 @@ Real-time preview, automatically completion, and user can define custom variable
 + Reference image in resource files
 + Switch different system themes(xp, vista etc.)
 + Internationalization
-    + Now Chinese and English translation is available
+  + Now Chinese and English translation is available
 
 # Platform
 
