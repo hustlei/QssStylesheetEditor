@@ -4,10 +4,13 @@ English | [简体中文](todo_zh-CN.md)
 
 + Refactor code
     - rewrite config for editor
+    - improve code quality by static analysis
 + Qsst sample
 + Docs
     - Help
     - Qss tutorial
++ Binary package
+    - using pyinstaller or fbs
 
 + ToDo or not?
     - qss only support /* */ comment , add inline comment syntax?
