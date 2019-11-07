@@ -44,16 +44,25 @@ Real-time preview, automatically completion, and user can define custom variable
 Follow the steps as below, or install the binary installation package:
 
 1. install python3: following <http://python.org/>
-2. install PyQt5: `pip instll PyQt5`
-3. install Qscintilla: `pip instll Qscintilla`
-4. Download and unzip QssStylesheetEditor
-5. change dir to "QssStylesheetEditor/src" and double click app.py or run `python app.py`
+2. install dependecies:
+    - PyQt5: `pip instll PyQt5`
+    - Qscintilla: `pip instll Qscintilla`
+3. download and unzip package:
+    + download [QssStylesheetEditor_v1.5.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
+    + unzip and change dir to QssStylesheetEditor_v1.5 `cd QssStylesheetEditor_v1.5`
+4. Run QssStylesheetEditor:
+    + double click qsseditor.pyw
+    + or run `python qsseditor.pyw`
 
-## Binary installation package
+> Alternatively, use the egg package is ok too
+> 
+> 1. download [QssStylesheetEditor_v1.5.egg.pkg.zip](https://pan.baidu.com/s/1ZFvbbropak1FbFhllYJ1Sw) (secuirity code: w9hx) and upzip
+> 2. run `python3 setup.py install` install QssStylesheetEditor to python3
+> 3. run `qsseditor` or `QssStylesheetEditor`
 
-Now there is only installer for windows 64bit is available.
+or
 
-Download:
+If you are windows 64bit user, binary package and installer is available now.
 
 + QssStylesheetEditor_1.5_win64_installer **[[Download]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(secuirity code: auhq)
 + QssStylesheetEditor_1.5_win64_portable  **[[Download]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(secuirity code: brtj)

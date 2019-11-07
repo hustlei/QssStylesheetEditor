@@ -29,23 +29,32 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 
 # 安装使用
 
-## windows 64bit
-windows 64bit 操作系统可以下载 exe，直接运行。
+按照如下步骤运行 QssStylesheetEditor:
+
+1. 安装 python3： 参考 python 官网 <http://python.org/>
+2. 安装依赖包：
+    + 安装 PyQt5： `pip instll PyQt5`
+    + 安装 Qscintilla： `pip instll Qscintilla`
+3. 下载解压软件：
+    + 下载 [QssStylesheetEditor_v1.5.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
+    + 解压并进入 QssStylesheetEditor_v1.5 文件夹： `cd QssStylesheetEditor_v1.5`
+4. 运行 QssStylesheetEditor: 
+    + 鼠标双击 qsseditor.pyw
+    + 或者命令行运行 `python qsseditor.pyw`
+
+> 或者：
+> 
+> 1. 下载 [QssStylesheetEditor_v1.5.egg.pkg.zip](https://pan.baidu.com/s/1ZFvbbropak1FbFhllYJ1Sw) (secuirity code: w9hx) ，解压缩
+> 2. 运行 `python3 setup.py install` 安装 QssStylesheetEditor
+> 3. 运行 `qsseditor` or `QssStylesheetEditor`
+
+**windows 64bit 操作系统**可以下载 exe，直接运行。
 
 下载地址：
 
 + QssStylesheetEditor_1.5_win64_安装包 **[[下载]](https://pan.baidu.com/s/1Wd_j_KMBcI9JBY4qDgswMg)**(提取码: auhq)
 + QssStylesheetEditor_1.5_win64_绿色版  **[[下载]](https://pan.baidu.com/s/1cIValPom3TWRGdpwDlKtdw)**(提取码: brtj)
 
-
-## 其他操作系统
-
-其他操作系统暂时没有编译好的二进制软件包，需要在 python 环境下运行，并且依赖 PyQt5 和 Qscintilla。具体安装使用步骤如下：
-
-+ 安装 python3
-+ 安装 PyQt5:`pip instll PyQt5`
-+ 安装 Qscintilla：`pip instll Qscintilla`
-+ 解压本软件源码，直接双击 app.py 即可运行
 
 # 变量定义
 
