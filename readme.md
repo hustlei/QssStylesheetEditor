@@ -13,6 +13,9 @@ QssStylesheetEditor is a powerful qt stylesheet(QSS) editor.
 Real-time preview, automatically completion, and user can define custom variables.
 
 
+> **Now I want to change a new name for QssStylesheetEditor, welcom everyone to vote: <https://github.com/hustlei/QssStylesheetEditor/issues/4>**
+
+
 # screenshot
 
 ![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png  "GUI(v1.5)")
@@ -141,8 +144,6 @@ QssStylesheetEditor will search the resource file filename.py(filename must be s
 
 
 # License
-Like PyQt5, this software is available under two licenses: the GPL v3, and Commercial License.
+You can use this software for free in open source projects that are licensed under the GPL. but there is an exception: if you only use it to generate qss file for commercial product, the product's source code can be shipped with whatever license you want.
 
-If you are willing to follow the terms of the GPL, this software is available to you under Open Source licenses which allows you to develop, modify and distribute your software freely.
-
-Alternatively, if you, your company or your organisation derive commercial benefit from the software and do not wish to distribute your complete source code you are required to use commercial licenses and purchase commercial version PyQt5.
+If you don't want to open your code up to the public, you can purchase a commercial license for USD 10 per developer, and also shold purchase a commercial license for PyQt5.
