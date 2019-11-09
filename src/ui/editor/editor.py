@@ -46,8 +46,6 @@ class CodeEditor(QsciScintilla):
         self.searchDialog = SearchDialog(self)
         self.line = 0  # lines count of document
 
-        self.lexer = None
-
     def getEditInfo(self):
         self.line = len(self.line)
 
