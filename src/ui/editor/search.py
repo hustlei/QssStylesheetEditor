@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 from PyQt5.Qsci import QsciScintilla
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QGridLayout, QVBoxLayout, QCheckBox, QPushButton,
@@ -8,7 +7,7 @@ from PyQt5.QtWidgets import (QMainWindow, QWidget, QHBoxLayout, QGridLayout, QVB
 from PyQt5.QtCore import Qt
 
 
-class searchDialog(QMainWindow):
+class SearchDialog(QMainWindow):
     def __init__(self, editor, replace=False):
         super().__init__(editor)
         self.__editor = editor
@@ -34,6 +33,7 @@ class searchDialog(QMainWindow):
         self.__escape = False
         self.searchText = ""
         self.replaceText = ""
+        self.__finded = False
 
         if replace:
             self.setWindowTitle(self.tr("Replace"))
@@ -67,8 +67,8 @@ class searchDialog(QMainWindow):
     def setWord(self, word):
         self.__word = word
 
-    def setRe(self, re):
-        self.__re = re
+    def setRe(self, regexpression):
+        self.__re = regexpression
 
     def setEscape(self, escape):
         self.__escape = escape
@@ -208,7 +208,7 @@ if __name__ == "__main__":
     btn2 = QCheckBox("replace", win)
     btn2.move(50, 100)
     edt = QsciScintilla()
-    s1 = searchDialog(edt, False, win)
+    s1 = SearchDialog(edt, False, win)
     btn2.stateChanged.connect(s1.setReplaceMode)
     btn1.clicked.connect(s1.show)
     win.show()

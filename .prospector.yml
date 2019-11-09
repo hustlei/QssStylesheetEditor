@@ -9,6 +9,7 @@ ignore-patterns:
     - (^|\/|\\)\..+
     - (^|\/|\\)setup.py$
     - dist
+    - venv
     - .*(^|\/|\\)splash.py$       #imported many modules in splash, but not used
     - .*(_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$$|_bak[.]py$)  #old version scripts
     - .*(^|\/|\\)bak(\/|\\|$).*   #old version scripts

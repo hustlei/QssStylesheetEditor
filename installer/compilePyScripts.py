@@ -29,7 +29,7 @@ resdir = os.path.join(root, "src/res")
 
 # 不编译的文件夹，文件后缀
 excludedir = (".git", ".github", ".idea", "__pycache__",
-              "data",  "font", "img", "font",
+              "data", "font", "img", "font",
               "dist", "build", "tests", "installer",
               "old", "oldversion", "bak")
 

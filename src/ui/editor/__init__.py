@@ -15,4 +15,4 @@ def preload():
     from .enums import BadEnum, EditorEnums
     from .settings import EditorSettings, language_extensions, _settings, _setting_groups, _other_color_settings
     from ui.editor.lexer import lexer_qss
-    from .search import searchDialog
+    from .search import SearchDialog

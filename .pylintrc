@@ -28,6 +28,11 @@ suggestion-mode=yes
 # active Python interpreter and may run arbitrary code.
 unsafe-load-any-extension=yes
 
+[TYPECHECK]
+ignored-modules = PyQt5, sip
+ignored-classes = PyQt5, sip
+# http://www.itkeyword.com/doc/7378082288593243x373/how-do-i-get-pylint-to-recognize-numpy-members
+
 
 [MESSAGES CONTROL]
 
@@ -39,7 +44,7 @@ disable= import-outside-toplevel, # some module need import inside function
          unused-import, # improve later
         ; unused-argument, # override must have unused-argument
         ; unnecessary-lambda, # dialog.show must use lambda
-        ; eval-used,
+         eval-used,
         ; bad-continuation, # not equal to pep8
         ; unsubscriptable-object, #error when you use pyqt#
         ; redefined-variable-type, # base class type as function param will cause err
@@ -63,20 +68,39 @@ never-returning-functions=sys.exit
 
 
 [BASIC]
+
+; ignore='^_.*'
+; exempt="^_.*"
+
 module-naming-style=snake_case
+# module-rgx=<regex>
 
 class-naming-style=PascalCase
-class-attribute-naming-style=camelCase
-attr-naming-style=camelCase
-method-naming-style=camelCase
-argument-naming-style=camelCase
+# class-rgx=<regex>
+# class-attribute-naming-style=camelCase
+# camel Pascal, can begin with _ or __
+class-attribute-rgx=(_{0,2}[a-zA-Z][a-zA-Z0-9]{2,}_*)$
+# method-naming-style=camelCase
+# camel snake, can begin with _ or __
+method-rgx=(_{0,2}[a-z][a-z0-9_]+|_{0,2}[a-z]+[a-zA-Z0-9]+)$
+# attr-naming-style=camelCase
+# camel can begin with _ or __
+attr-rgx=(([a-z_][a-zA-Z0-9]{2,})|(__[a-z][a-zA-Z0-9_]+))$
 
-function-naming-style=snake_case
+# function-naming-style=snake_case
+# camel snake, can begin with _ or __
+function-rgx=(_{0,2}[a-z][a-z0-9_]+|_{0,2}[a-z]+[a-zA-Z0-9]+)$
+# (?:(?P<snake>_{0,2}[a-z][a-z0-9_]+)|(?P<camel>_{0,2}[a-z]+[a-zA-Z0-9]+))$
+argument-naming-style=camelCase
+# argument-rgx=<regex>
 
 # all var in module(such as all vars in __name__=="__main__") are treated as const
 const-naming-style= any #UPPER_CASE
+# const-rgx=<regex>
 variable-naming-style=any
+# variable-rgx=<regex>
 inlinevar-naming-style=any
+# inlinevar-rgx=<regex>
 
 property-classes=abc.abstractproperty
 
@@ -95,7 +119,7 @@ good-names=i,
            _
 
 
-include-naming-hint=no
+include-naming-hint=no # if warning, hint a correct name
 docstring-min-length=-1
 
 
@@ -130,24 +154,24 @@ min-similarity-lines=4
 allow-global-unused-variables=yes
 
 dummy-variables-rgx=_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_
-
+ignored-argument-names=_.*|^ignored_|^unused_|.*Event$|event
 # whether check for unused import in __init__ files.
 init-import = no
 
 
 [DESIGN]
 
-max-args=10 # 8
-max-locals=20  #15
+max-args=16 # 8
+max-locals=45  # 15
 ; max-returns=6
 ; max-branches=12
-max-statements=300 #50
+max-statements=300 # 50
 ; max-parents=7
-max-attributes=20 # 7
-; min-public-methods=2
-; max-public-methods=20
-; max-bool-expr=5
-
+max-attributes=28 # 7
+min-public-methods=1 # 2
+max-public-methods=40 # 20
+max-bool-expr=10 #5
+max-complexity=15 #12
 
 [IMPORTS]
 

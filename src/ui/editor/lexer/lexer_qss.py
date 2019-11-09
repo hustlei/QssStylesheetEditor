@@ -141,7 +141,7 @@ class QsciLexerQSS(QsciLexerCustom):
         # 扩大着色范围，避免修改文件过程中局部着色出错。
         t = str.encode(text)  # start end是byte字节数，如果有非注意和len(text)长度不一样
         while start > 0:
-            if (t[start] == "{" or start == 0):
+            if t[start] == "{" or not start:  # start == 0
                 break
             start -= 1
 
@@ -290,7 +290,7 @@ class QsciLexerQSS(QsciLexerCustom):
         WHITEFLAG = QsciScintilla.SC_FOLDLEVELWHITEFLAG
 
         index = SCI(QsciScintilla.SCI_LINEFROMPOSITION, start)
-        if index == 0:
+        if not index:  # index==0
             level = LEVELBASE
         else:
             lastLevel = SCI(GETFOLDLEVEL, index - 1)
@@ -300,7 +300,7 @@ class QsciLexerQSS(QsciLexerCustom):
         for line in iter(lines):
             open_count = line.count('{')
             close_count = line.count('}')
-            isBlankLine = (line.strip == "")
+            isBlankLine = (not line.strip)  # ==""
             flag = 0x000
 
             if isBlankLine:
@@ -324,16 +324,16 @@ class QsciLexerQSS(QsciLexerCustom):
 
     # token 判断
     ###
-    def isOperator(self, ch):
+    def isOperator(self, aChar):
         # if (ord(ch[0]) > 0x80 or not ch.isalnum()):
-        if not ch[0].isascii():
+        if not aChar[0].isascii():
             return False
-        if ch in self.operatorList:
+        if aChar in self.operatorList:
             return True
         return False
 
-    def isAWordChar(self, ch):
-        return ch >= 0x80 or ch.isalnum() or ch == "-" or ch == "_"
+    def isAWordChar(self, aChar):
+        return aChar >= 0x80 or aChar.isalnum() or aChar == "-" or aChar == "_"
 
     def setQssAutocomplete(self):
         api = QsciAPIs(self)

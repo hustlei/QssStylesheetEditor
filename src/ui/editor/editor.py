@@ -3,7 +3,6 @@
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
-__version__ = "1.0"
 
 import sys
 import os
@@ -13,8 +12,10 @@ from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla
 from .lexer import lexer_qss
 from .enums import BadEnum, EditorEnums
-from .search import searchDialog
+from .search import SearchDialog
 from .settings import language_extensions
+
+__version__ = "1.0"
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
 try:
@@ -42,7 +43,8 @@ class CodeEditor(QsciScintilla):
         # Override defaults with any customizations
         self.configure(**config)
 
-        self.searchDialog = searchDialog(self)
+        self.searchDialog = SearchDialog(self)
+        self.line = 0  # lines count of document
 
     def getEditInfo(self):
         self.line = len(self.line)
@@ -70,16 +72,16 @@ class CodeEditor(QsciScintilla):
         super().focusOutEvent(e)
         self.loseFocus.emit()
 
-    def leaveEvent(self, e):
+    def leaveEvent(self, objEvent):
         self.mouseLeave.emit()
 
-    def mousePressEvent(self, QMouseEvent):
-        super().mousePressEvent(QMouseEvent)
+    def mousePressEvent(self, objQMouseEvent):
+        super().mousePressEvent(objQMouseEvent)
         self.mousePress.emit()
 
-    def dropEvent(self, QDropEventObj):
-        if QDropEventObj.mimeData().hasUrls():
-            self.drop.emit(QDropEventObj)
+    def dropEvent(self, objQDropEvent):
+        if objQDropEvent.mimeData().hasUrls():
+            self.drop.emit(objQDropEvent)
 
     def _setDefaultConfig(self):
         """Set default configuration settings.
@@ -243,7 +245,7 @@ class CodeEditor(QsciScintilla):
             try:
                 self.lexer.setPapers(color)
             except Exception:
-                pass
+                print("set backgroundcolor err.")
 
     def clear(self):
         """Clear the contents of the editor.
@@ -350,11 +352,11 @@ class CodeEditor(QsciScintilla):
         """
         # TODO: Support alpha?
         bgr_int = self.SendScintilla(self.SCI_GETCARETLINEBACK)
-        r, g, b = self.__BGRint2RGB(bgr_int)
+        r, g, b = self.__bgr_int2rgb(bgr_int)
         return QColor(r, g, b)
 
     @classmethod
-    def __BGRint2RGB(cls, bgr_int):
+    def __bgr_int2rgb(cls, bgrInt):
         """Convert an integer in BGR format to an ``(r, g, b)`` tuple.
 
         ``bgr_int`` is an integer representation of an RGB color, where the R, G,
@@ -372,9 +374,9 @@ class CodeEditor(QsciScintilla):
 
         """
         red, green, blue = (
-            bgr_int & 0xFF,
-            (bgr_int >> 8) & 0xFF,
-            (bgr_int >> 16) & 0xFF,
+            bgrInt & 0xFF,
+            (bgrInt >> 8) & 0xFF,
+            (bgrInt >> 16) & 0xFF,
         )
         return (red, green, blue)
 

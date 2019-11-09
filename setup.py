@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 # with open("readme.md", "r", encoding='utf-8') as fh:
-    # long_desc = fh.read()
+# long_desc = fh.read()
 
 setup(
     name="QssStylesheetEditor",  # ProjectName
@@ -33,18 +33,18 @@ setup(
         'res': [
             'img',
         ],
-        'data':['__init__.py'] # not work
+        'data': ['__init__.py']  # not work
     },
 
     # excutable
     # scripts=['src/app.py','src/bootstrapper.py'],# 指定脚本会被安装到Python3x/Scripts下
     entry_points={
-        "console_scripts":[
-        'qsseditor = bootstrapper', # create qsseditor.exe in Python3x/Scripts
-        'qssteditor =  app:main', # app:main
+        "console_scripts": [
+            'qsseditor = bootstrapper',  # create qsseditor.exe in Python3x/Scripts
+            'qssteditor =  app:main',  # app:main
         ],
-        "gui_scripts":[
-        'QssStylesheetEditor = bootstrapper',
+        "gui_scripts": [
+            'QssStylesheetEditor = bootstrapper',
         ]
     },
 

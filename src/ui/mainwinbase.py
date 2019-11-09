@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (QMainWindow, QApplication, QStyleFactory, QAction, 
 
 # from res.img_rc import *
 from .editor import CodeEditor
-from .preview import previewWidget
+from .preview import PreviewWidget
 from .flow_layout import QFlowLayout
 
 
@@ -285,7 +285,7 @@ class MainWinBase(QMainWindow):
         # self.colorPanelLayout = QFlowLayout()
         colorPanelWidget.setLayout(self.colorPanelLayout)
         self.docks["color"].setWidget(colorPanelWidget)
-        self.docks["preview"].setWidget(previewWidget())
+        self.docks["preview"].setWidget(PreviewWidget())
 
         self.docks["color"].visibilityChanged.connect(self.actions["ShowColor"].setChecked)
 

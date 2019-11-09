@@ -91,15 +91,12 @@ from PyQt5.QtWidgets import (
     QMenu,
 )
 
-
 # from res.img_rc import *
 
 
-class previewWidget(QTabWidget):
+class PreviewWidget(QTabWidget):
+    """widget that preview qss effect in previewpannel
     """
-    widget that preview qss effect in previewpannel
-    """
-
     def __init__(self):
         super().__init__()
         tab1 = QWidget(self)
@@ -209,14 +206,14 @@ class previewWidget(QTabWidget):
         completer = QCompleter(model, self)
         text9.setCompleter(completer)
 
-        def textch(s):
-            if "@" in s:
+        def textch(texts):
+            if "@" in texts:
                 return
             strList = ["@163.com", "@qq.com", "@gmail.com", "@hotmail.com", "@126.com"]
             model.removeRows(0, model.rowCount())
             for i in strList:
                 model.insertRow(0)
-                model.setData(model.index(0, 0), s + i)
+                model.setData(model.index(0, 0), texts + i)
 
         text9.textChanged.connect(textch)
         text10 = QLineEdit("ReadOnly")
@@ -358,17 +355,14 @@ class previewWidget(QTabWidget):
         b1.clicked.connect(lambda: QMessageBox.information(self, "Info", self.tr("This is a message."), QMessageBox.Ok,
                                                            QMessageBox.Ok))
         b2 = QPushButton(self.tr("Question"))
-        b2.clicked.connect(
-            lambda: QMessageBox.question(self, "question", self.tr("Are you sure?"), QMessageBox.No | QMessageBox.
-                                         Yes, QMessageBox.Yes))
+        b2.clicked.connect(lambda: QMessageBox.question(self, "question", self.tr("Are you sure?"), QMessageBox.No |
+                                                        QMessageBox.Yes, QMessageBox.Yes))
         b3 = QPushButton(self.tr("Warning"))
-        b3.clicked.connect(
-            lambda: QMessageBox.warning(self, "warning", self.tr("This is a warning."),
-                                        QMessageBox.No | QMessageBox.Yes, QMessageBox.Yes))
+        b3.clicked.connect(lambda: QMessageBox.warning(self, "warning", self.tr("This is a warning."), QMessageBox.No |
+                                                       QMessageBox.Yes, QMessageBox.Yes))
         b4 = QPushButton(self.tr("Error"))
-        b4.clicked.connect(
-            lambda: QMessageBox.critical(self, "error", self.tr("It's a error."), QMessageBox.No | QMessageBox.Yes,
-                                         QMessageBox.Yes))
+        b4.clicked.connect(lambda: QMessageBox.critical(self, "error", self.tr("It's a error."), QMessageBox.No |
+                                                        QMessageBox.Yes, QMessageBox.Yes))
         b5 = QPushButton(self.tr("About"))
         b5.clicked.connect(lambda: QMessageBox.about(self, "about", self.tr("About this software")))
         b6 = QPushButton(self.tr("Input"))  # ,"输入对话框"))
@@ -506,7 +500,7 @@ class previewWidget(QTabWidget):
                 super().__init__(parent)
                 self.setMinimumHeight(170)
 
-            def paintEvent(self, QPaintEvent):
+            def paintEvent(self, objQPaintEvent):
                 p = QPainter()
                 p.begin(self)
 
@@ -612,12 +606,12 @@ class previewWidget(QTabWidget):
         group2Layout.addWidget(pic1)
         group2Layout.addStretch(1)
 
-        class pic(QWidget):
+        class Pic(QWidget):
             def __init__(self):
                 super().__init__()
                 self.setMinimumSize(QSize(100, 100))
 
-            def paintEvent(self, QPaintEvent):
+            def paintEvent(self, objQPaintEvent):
                 p = QPainter()
                 p.begin(self)
                 img = QPixmap(":appres.img/cup.jpg")
@@ -628,7 +622,7 @@ class previewWidget(QTabWidget):
                 p.drawPixmap(s, img, s)
                 p.end()
 
-        group2Layout.addWidget(pic())
+        group2Layout.addWidget(Pic())
         group2Layout.addStretch(1)
 
         layout.addStretch(1)
@@ -942,7 +936,7 @@ if __name__ == "__main__":
 
     os.chdir(os.path.join(os.path.dirname(__file__), ".."))
     app = QApplication(sys.argv)
-    win = previewWidget()
+    win = PreviewWidget()
     win.resize(500, 600)
     win.show()
     sys.exit(app.exec())

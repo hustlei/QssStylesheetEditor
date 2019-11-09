@@ -23,6 +23,7 @@ class App(QApplication):
     """Application to load splash and mainwindow"""
     def __init__(self):
         super().__init__(sys.argv)
+        self.windows = {}
         # sys.setrecursionlimit(1500)
 
     def run(self, pytest=False):
@@ -34,14 +35,16 @@ class App(QApplication):
         splash = SplashScreen("res/splash.png")
         splash.loadProgress()
         from ui.mainwin import MainWin
-        self.mainwin = MainWin()
-        self.mainwin.show()
-        splash.finish(self.mainwin)
+        self.windows["main"] = MainWin()
+        self.windows["main"].show()
+        splash.finish(self.windows["main"])
         if not pytest:
             sys.exit(self.exec_())
 
+
 def main():
     App().run()
+
 
 if __name__ == "__main__":
     main()

@@ -11,5 +11,5 @@ def preload():
     """import all modules, user can call this method in splash to accelorate app.
     but it may consume more memory.
     """
-    from .preview import previewWidget
+    from .preview import PreviewWidget
     from .flow_layout import QFlowLayout

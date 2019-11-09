@@ -1,6 +1,5 @@
 ﻿# -*- coding: utf-8 -*-
-"""
-Copyright (c) 2019 lileilei <hustlei@sina.cn>
+"""Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 import os
 import re
@@ -126,7 +125,7 @@ class MainWin(MainWinBase):
         linefrom, _, lineto, _ = self.editor.getSelection()  # __ is posfrom posto
         linefrom += 1
         lineto += 1
-        if (linefrom == 0 or lineto == 0):
+        if not (linefrom and lineto):
             text = self.tr("select: none")
         else:
             text = self.tr("select:ln") + str(linefrom) + self.tr(" - ln") + str(lineto)
@@ -182,7 +181,7 @@ class MainWin(MainWinBase):
                     c.setNamedColor(cstr)
                     self.editor.setBackgroundColor(c)
                 except Exception:
-                    pass
+                    print("set background clolor exception.")
 
     def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
@@ -316,7 +315,8 @@ class MainWin(MainWinBase):
 
     def new(self):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title, self.tr("Current file hasn't been saved, do you want to save?"),
+            ret = QMessageBox.question(self, self.title,
+                                       self.tr("Current file hasn't been saved, do you want to save?"),
                                        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
@@ -334,7 +334,8 @@ class MainWin(MainWinBase):
 
     def newWithTemplate(self, templatefile="data/default.qsst"):
         if self.editor.isModified():
-            ret = QMessageBox.question(self, self.title, self.tr("Current file hasn't been saved, do you want to save?"),
+            ret = QMessageBox.question(self, self.title,
+                                       self.tr("Current file hasn't been saved, do you want to save?"),
                                        QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel, QMessageBox.No)
             if ret == QMessageBox.Yes:
                 self.save()
@@ -394,9 +395,9 @@ class MainWin(MainWinBase):
             # qDragEnterEvent.setDropAction(Qt::CopyAction Qt::MoveAction
             # Qt::LinkAction Qt::IgnoreAction Qt::TargetMoveAction)
 
-    def dropEvent(self, QDropEvent):
-        if QDropEvent.mimeData().hasUrls():
-            file = QDropEvent.mimeData().urls()[0].toLocalFile()
+    def dropEvent(self, objQDropEvent):
+        if objQDropEvent.mimeData().hasUrls():
+            file = objQDropEvent.mimeData().urls()[0].toLocalFile()
             if os.path.exists(file):
                 self.open(file=file)
 
