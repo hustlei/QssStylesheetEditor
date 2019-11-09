@@ -208,7 +208,7 @@ if __name__ == "__main__":
     btn2 = QCheckBox("replace", win)
     btn2.move(50, 100)
     edt = QsciScintilla()
-    s1 = SearchDialog(edt, False, win)
+    s1 = SearchDialog(edt, False)
     btn2.stateChanged.connect(s1.setReplaceMode)
     btn1.clicked.connect(s1.show)
     win.show()
