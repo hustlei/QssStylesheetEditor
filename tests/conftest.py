@@ -1,14 +1,16 @@
-#!usr/bin/python
 # -*- coding: utf-8 -*-
-"""test for app module.
+"""shared fixtures for tests
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
+from pytest import fixture
 from app import App
 
 
-def test_mainwin(qtbot):
+@fixture(scope="session")
+def windows():
     app = App()
     app.run(pytest=True)
-    qtbot.waitForWindowShown(app.windows["main"])
+    yield app.windows
+    app.exit()

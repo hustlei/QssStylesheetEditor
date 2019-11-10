@@ -1,30 +1,20 @@
-#!usr/bin/python
 # -*- coding: utf-8 -*-
 """test for ui module.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from pytest import fixture
-from ui.mainwin import MainWin
+
+def test_confDialog(qtbot, windows):
+    windows["main"].confDialog.show()
+    qtbot.waitForWindowShown(windows["main"].confDialog)
 
 
-@fixture
-def win():
-    win = MainWin()
-    return win
+def test_findDialog(qtbot, windows):
+    windows["main"].editor.searchDialog.show()
+    qtbot.waitForWindowShown(windows["main"].editor.searchDialog)
 
 
-def test_confDialog(qtbot, win):
-    win.confDialog.show()
-    qtbot.waitForWindowShown(win.confDialog)
-
-
-def test_findDialog(qtbot, win):
-    win.editor.searchDialog.show()
-    qtbot.waitForWindowShown(win.editor.searchDialog)
-
-
-def test_mainwin(qtbot, win):
-    win.show()
-    qtbot.waitForWindowShown(win)
+def test_mainwin(qtbot, windows):
+    windows["main"].show()
+    qtbot.waitForWindowShown(windows["main"])

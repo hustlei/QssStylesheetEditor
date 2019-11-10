@@ -15,7 +15,7 @@ setup(
     packages=find_packages(where='src', include=('*'), exclude=[
         '*.bak',
     ]),  #
-    py_modules=['app', 'bootstrapper'],  # single file
+    py_modules=['app', '__main__'],  # single file
 
     # data
     package_data={
@@ -37,14 +37,14 @@ setup(
     },
 
     # excutable
-    # scripts=['src/app.py','src/bootstrapper.py'],# 指定脚本会被安装到Python3x/Scripts下
+    # scripts=['src/app.py','src/__main__.py'],# 指定脚本会被安装到Python3x/Scripts下
     entry_points={
         "console_scripts": [
-            'qsseditor = bootstrapper',  # create qsseditor.exe in Python3x/Scripts
-            'qssteditor =  app:main',  # app:main
+            'qsseditor = app:main',  # create qsseditor.exe in Python3x/Scripts
+            'qssteditor = app:main',  # __main__
         ],
         "gui_scripts": [
-            'QssStylesheetEditor = bootstrapper',
+            'QssStylesheetEditor = __main__',
         ]
     },
 
