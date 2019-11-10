@@ -65,6 +65,7 @@ class ConfBase:
             if subName not in sec:
                 sec[subName] = {}
             return sec[subName]
+        return None
 
     def getSec(self, secString):
         s = secString.strip()

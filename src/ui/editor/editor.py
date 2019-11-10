@@ -57,7 +57,7 @@ class CodeEditor(QsciScintilla):
         self.searchDialog.setReplaceMode(True)
         self.searchDialog.show()
 
-    def count(self, string, *, case = False):
+    def count(self, string, *, case=False):
         if case:
             counter = self.text().count(string)
         else:

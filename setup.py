@@ -33,7 +33,7 @@ setup(
         'res': [
             'img',
         ],
-        'data': ['__init__.py']  # not work
+        # 'data': ['__init__.py']  # not work
     },
 
     # excutable
@@ -55,7 +55,12 @@ setup(
     keywords="QSS",
     # long_description=long_desc,
     # long_description_content_type="text/markdown",
-    url="https://github.com/hustlei/QssStylesheetEditor"  # project home page, if any
+    url="https://github.com/hustlei/QssStylesheetEditor",  # project home page, if any
+    classifiers = [
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+    ],
 )
 
 # <https://www.jianshu.com/p/e0e7420e3141>
