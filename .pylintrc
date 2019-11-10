@@ -29,8 +29,8 @@ suggestion-mode=yes
 unsafe-load-any-extension=yes
 
 [TYPECHECK]
-ignored-modules = PyQt5, sip
-ignored-classes = PyQt5, sip
+ignored-modules = PyQt5, sip, chardet
+ignored-classes = PyQt5, sip, chardet
 # http://www.itkeyword.com/doc/7378082288593243x373/how-do-i-get-pylint-to-recognize-numpy-members
 
 
