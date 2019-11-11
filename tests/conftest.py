@@ -17,4 +17,5 @@ def windows():
     app = App()
     app.run(pytest=True)
     yield app.windows
+    print("abcd")
     app.exit()
