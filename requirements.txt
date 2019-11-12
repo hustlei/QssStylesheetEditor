@@ -1,0 +1,6 @@
+PyQt5
+PyQt5-sip
+QScintilla
+pytest
+pytest-qt
+pytest-cov
