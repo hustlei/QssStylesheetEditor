@@ -25,6 +25,6 @@ with open("img.qrc", "w", newline="") as out:
 
 print("\ncompile qrc to py")
 
-os.system("pyrcc5 img.qrc -o img_rc.py")
+os.system("pyrcc5 img.qrc -o ../src/res/img_rc.py")
 
 input()
