@@ -13,7 +13,7 @@ collect_ignore_glob = ["*_v0.py", "*.old.py", "*_bak.py"]
 
 
 @fixture(scope="session")
-def windows():
+def sharedwin():
     app = App()
     app.run(pytest=True)
     yield app.windows
@@ -21,6 +21,10 @@ def windows():
 
 
 @fixture(scope="function")
-def mainwin(windows):
-    yield windows["main"]
-    windows["main"].editor.setModified(False)
+def mainwin():
+    app = App()
+    app.run(pytest=True)
+    # windows["main"].newFromTemplate()
+    yield app.windows["main"]
+    app.windows["main"].editor.setModified(False)
+    app.exit()
