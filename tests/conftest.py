@@ -12,7 +12,7 @@ collect_ignore = ["setup.py", "chardet", "flow_layout.py"]
 collect_ignore_glob = ["*_v0.py", "*.old.py", "*_bak.py"]
 
 
-@fixture(scope="session")
+@fixture(scope="module")
 def sharedwin():
     app = App()
     app.run(pytest=True)
