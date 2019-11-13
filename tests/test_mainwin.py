@@ -35,21 +35,23 @@ def test_clrpic(qapp, qtbot, mainwin):
         while not qapp.activeModalWidget():
             qtbot.wait(100)
         qtbot.wait(200)
-        dial=qapp.activeModalWidget()
+        dial = qapp.activeModalWidget()
         qapp.processEvents()
         # dial.setCurrentColor(QColor(255,0,0)) # must in ui thread
         # qapp.processEvents()
         # dial.done(0)    # dial.close()
         qtbot.keyPress(dial, Qt.Key_Enter)
         # qtbot.keyPress(qapp.focusWidget(), Qt.Key_Return, delay=50)
+
     from threading import Thread
-    t1=Thread(target=closedialog)
+    t1 = Thread(target=closedialog)
     t1.start()
     qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
     t1.join()
     qapp.processEvents()
     qtbot.wait(200)
     assert mainwin.clrBtnDict["text"].text() == "#222222"
+
 
 def test_file(windows, tmpdir):
     win = windows["main"]
@@ -60,10 +62,12 @@ def test_file(windows, tmpdir):
     win.save()
     assert not win.editor.text()
 
+
 def test_textchange(qtbot, windows):
     win = windows["main"]
     qtbot.keyPress(win.editor, Qt.Key_Up)
     assert "*" not in win.windowTitle()
+
 
 def test_win(qtbot, windows):
     windows["main"].show()

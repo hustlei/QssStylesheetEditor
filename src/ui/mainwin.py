@@ -300,9 +300,6 @@ class MainWin(MainWinBase):
             self.statusbar.showMessage(self.tr("opening file..."))
             self.lastSavedText = self.editor.text()
             ok = self.editor.load(self.file)
-
-            print("open success?"+str(ok))
-            print(self.editor.text()[:20])
             if ok:
                 self.statusbar.showMessage(self.tr("load file successfully"))
             else:

@@ -56,7 +56,7 @@ setup(
     # long_description=long_desc,
     # long_description_content_type="text/markdown",
     url="https://github.com/hustlei/QssStylesheetEditor",  # project home page, if any
-    classifiers = [
+    classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

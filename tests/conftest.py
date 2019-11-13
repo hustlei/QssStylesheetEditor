@@ -19,6 +19,7 @@ def windows():
     yield app.windows
     app.exit()
 
+
 @fixture(scope="function")
 def mainwin(windows):
     yield windows["main"]
