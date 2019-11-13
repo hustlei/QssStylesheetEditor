@@ -17,5 +17,9 @@ def windows():
     app = App()
     app.run(pytest=True)
     yield app.windows
-    print("abcd")
     app.exit()
+
+@fixture(scope="function")
+def mainwin(windows):
+    yield windows["main"]
+    windows["main"].editor.setModified(False)

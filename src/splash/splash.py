@@ -17,7 +17,7 @@ class SplashScreen(QSplashScreen):
         super(SplashScreen, self).__init__(pixmap)
         # self.setMask(splash_pix.mask())
         # self.raise_()
-        self.labelAlignment = Qt.Alignment(Qt.AlignBottom | Qt.AlignHCenter | Qt.AlignAbsolute)
+        self.labelAlignment = int(Qt.Alignment(Qt.AlignBottom | Qt.AlignHCenter | Qt.AlignAbsolute))
         self.show()
         QApplication.flush()
 

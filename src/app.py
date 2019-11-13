@@ -12,11 +12,9 @@ import os
 from PyQt5.QtWidgets import QApplication
 from splash import SplashScreen
 from i18n.language import Language
-try:
-    os.chdir(os.path.dirname(__file__))
-    sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-except Exception:
-    print('__file__ of app.py load err')
+
+os.chdir(os.path.dirname(__file__))
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 
 class App(QApplication):

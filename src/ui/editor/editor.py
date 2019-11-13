@@ -261,27 +261,31 @@ class CodeEditor(QsciScintilla):
             # lm=os.path.getsize(filename)
             strbytes = f.read()
             deteclen = min(len(strbytes), 1024)
-            try:
-                rst = chardet.detect(strbytes[:deteclen])
-                if rst["confidence"] < 0.8:
-                    deteclen = min(len(strbytes), 256 * 1024)
-                    rst = chardet.detect(strbytes[:deteclen])  # ['encoding']
-                self.coding = rst["encoding"]
-                if rst["confidence"] > 0.8:
-                    self.setText(strbytes.decode(self.coding))
-                else:
-                    if self.__isBin(strbytes):
-                        raise Exception
-                    self.coding = "bin?"
-                    self.setText(self.__byte2str(strbytes))
-                    self.setReadOnly(True)
-                    self.setLanguage("None")
-                    self.setWrapMode(self.WrapWod)
-            except BaseException:  # Exception:
-                self.coding = "none"
-                self.setText(self.tr("can't open this file, it may be a binary file."))
-                self.setEnabled(False)
-                return False
+            if not deteclen:
+                self.coding = "utf-8"
+                self.setText("")
+            else:
+                try:
+                    rst = chardet.detect(strbytes[:deteclen])
+                    if rst["confidence"] < 0.8:
+                        deteclen = min(len(strbytes), 256 * 1024)
+                        rst = chardet.detect(strbytes[:deteclen])  # ['encoding']
+                    self.coding = rst["encoding"]
+                    if rst["confidence"] > 0.8:
+                        self.setText(strbytes.decode(self.coding))
+                    else:
+                        if self.__isBin(strbytes):
+                            raise Exception
+                        self.coding = "bin?"
+                        self.setText(self.__byte2str(strbytes))
+                        self.setReadOnly(True)
+                        self.setLanguage("None")
+                        self.setWrapMode(self.WrapWod)
+                except BaseException:  # Exception:
+                    self.coding = "none"
+                    self.setText(self.tr("can't open this file, it may be a binary file."))
+                    self.setEnabled(False)
+                    return False
             self.setModified(False)
             self.setLanguage(self.guessLang(filename))
             return True

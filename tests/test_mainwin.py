@@ -16,9 +16,9 @@ def test_confDialog(qtbot, windows):
     qtbot.waitForWindowShown(windows["main"].confDialog)
 
 
-def test_findDialog(qtbot, windows):
-    windows["main"].editor.searchDialog.show()
-    qtbot.waitForWindowShown(windows["main"].editor.searchDialog)
+def test_findDialog(qtbot, mainwin):
+    mainwin.editor.searchDialog.show()
+    qtbot.waitForWindowShown(mainwin.editor.searchDialog)
 
 
 def test_theme(windows):
@@ -30,10 +30,7 @@ def test_theme(windows):
     assert win.actions["DisableQss"].isChecked()
 
 
-def test_clrpic(qapp, qtbot):
-    from ui.mainwin import MainWin
-    win=MainWin()
-    win.show()
+def test_clrpic(qapp, qtbot, mainwin):
     def closedialog():
         while not qapp.activeModalWidget():
             qtbot.wait(100)
@@ -48,11 +45,11 @@ def test_clrpic(qapp, qtbot):
     from threading import Thread
     t1=Thread(target=closedialog)
     t1.start()
-    qtbot.mouseClick(win.clrBtnDict["text"], Qt.LeftButton)
+    qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
     t1.join()
     qapp.processEvents()
     qtbot.wait(200)
-    assert win.clrBtnDict["text"].text() == "#222222"
+    assert mainwin.clrBtnDict["text"].text() == "#222222"
 
 def test_file(windows, tmpdir):
     win = windows["main"]

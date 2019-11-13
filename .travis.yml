@@ -23,6 +23,7 @@ jobs:
             - choco install python3 #--version 3.7.4 3.8.0
             - python -m pip install --upgrade pip
             - pip3 install chardet # can't import chardet from .zip
+            - python --version
           env:
             - PATH=/c/Python38:/c/Python38/Scripts:$PATH
             
@@ -31,23 +32,21 @@ jobs:
           osx_image: xcode11 #python3.7
           #xcode10.2 with py3.7.3 xcode9.4 with py3.6.5 xcode9.3 with py2.7.14_2
           language: shell # 'language: python' is an error on Travis CI macOS
-          
-before_install: 
-    - python3 --version
-    - pip3 install -U pip
-    - pip3 install tox
+          before_install:
+            - python3 --version
 
 install:
-    # - pip3 install PyQt5
-    # - pip3 install Qscintilla
-    # - pip3 install -U pytest
-    # - pip3 install -U pytest-qt
+    - pip3 install PyQt5
+    - pip3 install Qscintilla
+    - pip3 install -U pytest
+    - pip3 install -U pytest-qt
     - pip3 install -U coveralls
-    # - pip3 install -U pytest-cov
+    - pip3 install -U pytest-cov
+    # - pip3 install tox
     
 script:
-    - tox
-    # - pytest --cov=. || python3 -m pytest --cov=. # pytest command won't be found on osx
+    # - tox
+    - pytest --cov=. || python3 -m pytest --cov=. # pytest command won't be found on osx
     # 'python' points to Python 2.7 on macOS but points to Python 3.7 on Linux and Windows
     # 'python3' is a 'command not found' error on Windows but 'py' works on Windows only
     #- python3 app.py || py app.py
