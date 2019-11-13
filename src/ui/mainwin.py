@@ -46,7 +46,7 @@ class MainWin(MainWinBase):
         # Lang.setLang()
         # init
         self.__isNewFromTemplate = False
-        self.newWithTemplate()
+        self.newFromTemplate()
         self.statusbar.showMessage(self.tr("Ready"))
 
     def setupActions(self):
@@ -332,7 +332,7 @@ class MainWin(MainWinBase):
         self.setWindowTitle(self.title + " - " + os.path.basename(self.file))
         self.editor.setModified(False)
 
-    def newWithTemplate(self, templatefile="data/default.qsst"):
+    def newFromTemplate(self, templatefile="data/default.qsst"):
         if self.editor.isModified():
             ret = QMessageBox.question(self, self.title,
                                        self.tr("Current file hasn't been saved, do you want to save?"),

@@ -43,6 +43,7 @@ def test_clrpic(qapp, qtbot, mainwin):
         qtbot.keyPress(dial, Qt.Key_Enter)
         # qtbot.keyPress(qapp.focusWidget(), Qt.Key_Return, delay=50)
 
+    mainwin.newFromTemplate()
     from threading import Thread
     t1 = Thread(target=closedialog)
     t1.start()
@@ -53,23 +54,21 @@ def test_clrpic(qapp, qtbot, mainwin):
     assert mainwin.clrBtnDict["text"].text() == "#222222"
 
 
-def test_file(windows, tmpdir):
-    win = windows["main"]
-    win.new()
+def test_file(mainwin, tmpdir):
+    mainwin.new()
     f = tmpdir.join("new.qsst").ensure()
     # f.write("") # create file new.qsst
-    win.file = str(f)
-    win.save()
-    assert not win.editor.text()
+    mainwin.file = str(f)
+    mainwin.save()
+    assert not mainwin.editor.text()
 
 
-def test_textchange(qtbot, windows):
-    win = windows["main"]
-    qtbot.keyPress(win.editor, Qt.Key_Up)
-    assert "*" not in win.windowTitle()
+def test_var_refresh(qtbot, mainwin):
+    qtbot.keyPress(mainwin.editor, Qt.Key_Up)
+    assert "*" not in mainwin.windowTitle()
 
 
-def test_win(qtbot, windows):
+def test_preivew(qtbot, windows):
     windows["main"].show()
     windows["main"].docks["preview"].widget().setCurrentIndex(2)
     # qtbot.waitForWindowShown(windows["main"])
