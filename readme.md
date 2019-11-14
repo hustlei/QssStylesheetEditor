@@ -50,6 +50,7 @@ Follow the steps as below, or install the binary installation package:
 2. install dependecies:
     - PyQt5: `pip instll PyQt5`
     - Qscintilla: `pip instll Qscintilla`
+    - chardet: `pip instll chardet`
 3. download and unzip package:
     + download [QssStylesheetEditor_v1.5.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
     + unzip and change dir to QssStylesheetEditor_v1.5 `cd QssStylesheetEditor_v1.5`

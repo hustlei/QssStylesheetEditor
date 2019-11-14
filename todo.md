@@ -17,6 +17,15 @@ English | [简体中文](todo_zh-CN.md)
 
 # ChangeLog
 
+## v1.6
+Main Changes: **test for multi platform*
+
++ **New Features**
+    - add setup.py for installing by `python setup.py install`
++ **BugsFixed**
+    - fixed chardet import error
+    - fixed binary file detect error
+
 ## v1.5
 Main Changes: **reference image in resource file in qsst**
 

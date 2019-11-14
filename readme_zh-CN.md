@@ -35,6 +35,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 2. 安装依赖包：
     + 安装 PyQt5： `pip instll PyQt5`
     + 安装 Qscintilla： `pip instll Qscintilla`
+    + 安装 chardet `pip install chardet`
 3. 下载解压软件：
     + 下载 [QssStylesheetEditor_v1.5.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
     + 解压并进入 QssStylesheetEditor_v1.5 文件夹： `cd QssStylesheetEditor_v1.5`

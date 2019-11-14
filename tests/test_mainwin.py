@@ -10,33 +10,33 @@ from unittest import mock
 
 from PyQt5.QtWidgets import QApplication
 
-# def test_findDialog(qtbot, sharedwin):
-#     win = sharedwin["main"]
-#     win.editor.searchDialog.show()
-#     qtbot.waitForWindowShown(win.editor.searchDialog)
-#
-# def test_theme(sharedwin):
-#     win = sharedwin["main"]
-#     win.actions["DisableQss"].setChecked(True)
-#     win.actions["DisableQss"].setChecked(False)
-#     win.actions["DisableQss"].setChecked(True)
-#     win.themeCombo.setCurrentIndex(win.themeCombo.maxCount() - 1)
-#     assert win.actions["DisableQss"].isChecked()
-#
-# def test_var_refresh(qtbot, sharedwin):
-#     win = sharedwin["main"]
-#     qtbot.keyPress(win.editor, Qt.Key_Up)
-#     assert "*" not in win.windowTitle()
-#
-# def test_preivew(qtbot, sharedwin):
-#     sharedwin["main"].docks["preview"].widget().setCurrentIndex(2)
-#     # qtbot.waitForWindowShown(windows["main"])
-#     with mock.patch.object(QApplication, "exit"):
-#         assert QApplication.exit.call_count == 0
-#
-# def test_confDialog(qtbot, sharedwin):
-#     sharedwin["main"].confDialog.show()
-#     qtbot.waitForWindowShown(sharedwin["main"].confDialog)
+def test_findDialog(qtbot, sharedwin):
+    win = sharedwin["main"]
+    win.editor.searchDialog.show()
+    qtbot.waitForWindowShown(win.editor.searchDialog)
+
+def test_theme(sharedwin):
+    win = sharedwin["main"]
+    win.actions["DisableQss"].setChecked(True)
+    win.actions["DisableQss"].setChecked(False)
+    win.actions["DisableQss"].setChecked(True)
+    win.themeCombo.setCurrentIndex(win.themeCombo.maxCount() - 1)
+    assert win.actions["DisableQss"].isChecked()
+
+def test_var_refresh(qtbot, sharedwin):
+    win = sharedwin["main"]
+    qtbot.keyPress(win.editor, Qt.Key_Up)
+    assert "*" not in win.windowTitle()
+
+def test_preivew(qtbot, sharedwin):
+    sharedwin["main"].docks["preview"].widget().setCurrentIndex(2)
+    # qtbot.waitForWindowShown(windows["main"])
+    with mock.patch.object(QApplication, "exit"):
+        assert QApplication.exit.call_count == 0
+
+def test_confDialog(qtbot, sharedwin):
+    sharedwin["main"].confDialog.show()
+    qtbot.waitForWindowShown(sharedwin["main"].confDialog)
 
 
 def test_fileop_and_clrpic(qapp, qtbot, mainwin, tmpdir):

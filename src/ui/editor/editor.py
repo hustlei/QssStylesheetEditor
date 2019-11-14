@@ -17,7 +17,6 @@ from .settings import language_extensions
 
 __version__ = "1.0"
 
-print(str(__file__))
 import chardet
 # import zipimport
 # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
@@ -258,7 +257,6 @@ class CodeEditor(QsciScintilla):
             # lm=os.path.getsize(filename)
             strbytes = f.read()
             deteclen = min(len(strbytes), 1024)
-            print("detect length:" + str(deteclen))
             if not deteclen:
                 self.coding = "utf-8"
                 self.setText("")

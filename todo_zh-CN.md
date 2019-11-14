@@ -14,6 +14,15 @@
 
 # ChangeLog
 
+## v1.6
+主要修改: **各个操作系统测试**
+
++ **New Features**
+    - 增加用 `python setup.py install` 命令安装的zip包
++ **BugsFixed**
+    - 修复 chardet import 错误
+    - 修复二进制文件失败错误
+
 ## v1.5
 主要修改：**引用资源文件中的图片**
 
