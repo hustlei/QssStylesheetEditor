@@ -17,7 +17,8 @@ def sharedwin():
     app = App()
     app.run(pytest=True)
     yield app.windows
-    app.exit()
+    app.windows["main"].close()
+    app.quit()
 
 
 @fixture(scope="function")

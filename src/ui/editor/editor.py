@@ -17,14 +17,11 @@ from .settings import language_extensions
 
 __version__ = "1.0"
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
-try:
-    import chardet
-except Exception:
-    print("load chardet failed.")
-    # import zipimport
-    # importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
-    # chardet = importer.load_module('chardet')
+print(str(__file__))
+import chardet
+# import zipimport
+# importer = zipimport.zipimporter(os.path.join(os.path.dirname(__file__), "3rdparty.zip"))
+# chardet = importer.load_module('chardet')
 
 
 class CodeEditor(QsciScintilla):
@@ -261,6 +258,7 @@ class CodeEditor(QsciScintilla):
             # lm=os.path.getsize(filename)
             strbytes = f.read()
             deteclen = min(len(strbytes), 1024)
+            print("detect length:" + str(deteclen))
             if not deteclen:
                 self.coding = "utf-8"
                 self.setText("")
@@ -284,8 +282,10 @@ class CodeEditor(QsciScintilla):
                 except BaseException:  # Exception:
                     self.coding = "none"
                     self.setText(self.tr("can't open this file, it may be a binary file."))
+                    print("open file failue.")
                     self.setEnabled(False)
                     return False
+            print("coding"+self.coding)
             self.setModified(False)
             self.setLanguage(self.guessLang(filename))
             return True
@@ -295,7 +295,7 @@ class CodeEditor(QsciScintilla):
         s = ""
         if echoescape and len(strbytes) < 11 * 1024:
             for b in strbytes:  # ord(chr(b))
-                if b < 0x30:  # >= 0x80 or c.isalnum() or c == "-" or c == "_":
+                if b < 0x20 and b not in (9, 10, 13):  # >= 0x80 or c.isalnum() or c == "-" or c == "_":
                     s += " NUL "
                 else:
                     c = chr(b)
@@ -306,10 +306,10 @@ class CodeEditor(QsciScintilla):
         return s
 
     def __isBin(self, strbytes):
-        chr_list = [b for b in strbytes if b > 0x30]
+        chr_list = [b for b in strbytes if b > 0x20 or b in (9, 10, 13)]
         count = len(chr_list)
         f = count / len(strbytes)
-        return f > 0.7
+        return f < 0.7
 
     def save(self, filename):
         """Save the editor contents to the given filename.

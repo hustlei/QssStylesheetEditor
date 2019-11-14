@@ -21,9 +21,9 @@ jobs:
           language: shell       # 'language: python' is an error on Travis CI Windows
           before_install:
             - choco install python3 #--version 3.7.4 3.8.0
+            - python --version
             - python -m pip install --upgrade pip
             - pip3 install chardet # can't import chardet from .zip
-            - python --version
           env:
             - PATH=/c/Python38:/c/Python38/Scripts:$PATH
             
@@ -34,6 +34,7 @@ jobs:
           language: shell # 'language: python' is an error on Travis CI macOS
           before_install:
             - python3 --version
+            - python --version
 
 install:
     - pip3 install PyQt5
