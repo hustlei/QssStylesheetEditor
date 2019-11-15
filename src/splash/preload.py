@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 from importlib import import_module
 from time import time
@@ -14,10 +15,11 @@ def preload(moduleNames: Iterable[str]):
     """
     for module_name in moduleNames:
         if module_name not in sys.modules:
-            print(f" - {module_name}.. ", end="", flush=True)
+            # print(f" - {module_name}.. ", end="", flush=True)
+            print(" - {:16}... ".format(module_name), end="", flush=True)
             t0 = time()
             import_module(module_name)
-            print(f"✓ ({time() - t0:.2f}s)")
+            print("ok ({:.2}s)".format(time() - t0))  # ✓
         else:
             # warn(
             print((f'Module "{module_name}" has already been imported. Make sure to call "preload"'

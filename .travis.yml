@@ -7,7 +7,7 @@ jobs:
           sudo: required
           dist: bionic
           python:
-            - 3.7
+            - 3.8
           env:
             - QT_QPA_PLATFORM=vnc #Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
             #- QT_DEBUG_PLUGINS=1 #for testing
@@ -20,23 +20,22 @@ jobs:
           os: windows           # Windows 10.0.17134 N/A Build 17134
           language: shell       # 'language: python' is an error on Travis CI Windows
           before_install:
-            - choco install python3 #--version 3.7.4 3.8.0
+            - choco install python --version 3.8.0
             - python --version
             - python -m pip install --upgrade pip
-            # - pip3 install chardet # can't import chardet from .zip
           env:
             - PATH=/c/Python38:/c/Python38/Scripts:$PATH
             
         - name: "macOS"
           os: osx
-          osx_image: xcode11 #python3.7
+          osx_image: xcode11.2 #python3.7.4
           #xcode10.2 with py3.7.3 xcode9.4 with py3.6.5 xcode9.3 with py2.7.14_2
           language: shell # 'language: python' is an error on Travis CI macOS
           before_install:
             - python3 --version
-            - python --version
 
 install:
+    - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
     - pip3 install chardet
     - pip3 install PyQt5
     - pip3 install Qscintilla
@@ -44,6 +43,7 @@ install:
     - pip3 install -U pytest-qt
     - pip3 install -U coveralls
     - pip3 install -U pytest-cov
+    - pip3 uninstall pytest-xdist
     # - pip3 install tox
     
 script:

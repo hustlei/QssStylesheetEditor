@@ -283,7 +283,7 @@ class CodeEditor(QsciScintilla):
                     print("open file failue.")
                     self.setEnabled(False)
                     return False
-            print("coding"+self.coding)
+            print("coding" + self.coding)
             self.setModified(False)
             self.setLanguage(self.guessLang(filename))
             return True
