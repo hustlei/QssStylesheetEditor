@@ -11,25 +11,33 @@ from app import App
 collect_ignore = ["setup.py", "chardet", "flow_layout.py"]
 collect_ignore_glob = ["*_v0.py", "*.old.py", "*_bak.py"]
 
-
-@fixture(scope="module")
-def sharedwin():
-    print("\n@fixture: shared app for module start...")
+@fixture(scope="session")
+def sharedapp():
     app = App()
     app.run(pytest=True)
-    yield app.windows
-    app.windows["main"].close()
+    yield app
     app.quit()
-    print("@fixture: shared app for module end.")
-
+    
 
 @fixture(scope="function")
-def mainwin():
-    print("\n@fixture: single app for function start...")
-    app = App()
-    app.run(pytest=True)
-    # windows["main"].newFromTemplate()
-    yield app.windows["main"]
+def sharedwin(sharedapp):
+    print("@fixture: shared mainwin load...")
+    app=sharedapp
+    app.windows["main"].newFromTemplate()
+    app.windows["main"].show()
+    yield app.windows
     app.windows["main"].editor.setModified(False)
-    app.quit()
-    print("@fixture: single app for function end.")
+    app.windows["main"].close()
+    print("@fixture: shared mainwin end.")
+
+
+# @fixture(scope="function")
+# def mainwin():
+    # print("\n@fixture: single app for function start...")
+    # app = App()
+    # app.run(pytest=True)
+    ## windows["main"].newFromTemplate()
+    # yield app.windows["main"]
+    # app.windows["main"].editor.setModified(False)
+    # app.quit()
+    # print("@fixture: single app for function end.")
