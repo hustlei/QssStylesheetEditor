@@ -33,8 +33,7 @@ def test_fileop_and_clrpic(qapp, qtbot, mainwin, tmpdir):
         # dial.done(0)    # dial.close()
         qtbot.keyPress(dial, Qt.Key_Enter)
         # qtbot.keyPress(qapp.focusWidget(), Qt.Key_Return, delay=50)
-        import os
-        os._exit(0)  # exit thread
+        # os._exit(0)  # it will exit test, not exit thread
 
     from threading import Thread
     t1 = Thread(target=closeclrdialog)
