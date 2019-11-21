@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/python3
 # -*- coding: utf-8 -*-
-"""QssStylesheetEditor app start module
+"""Class for application start
 
-Create QApplication and show splash. Include minimal module to accelerate spalsh load.
+App class wrapped a QApplication, which will show splash and start gui.
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
@@ -25,8 +25,8 @@ class App(QApplication):
         # sys.setrecursionlimit(1500)
 
     def run(self, pytest=False):
-        """run the app
-        :param pytest: if run is true start event loop, else just for test
+        """run the app, show splash and mainwindow
+        :param pytest: if true, it will not start event loop, just for test
         """
         print("starting...")
         Language.setTrans()
@@ -41,6 +41,7 @@ class App(QApplication):
 
 
 def main():
+    """main function for the program"""
     App().run()
 
 

@@ -12,7 +12,7 @@ QWidget
 
 QFrame{
     color: #222;
-    background-color: #FFFFFF;/*²»ÄÜÉèÖÃÎªtransparent*/
+    background-color: #FFFFFF;/*ä¸èƒ½è®¾ç½®ä¸ºtransparent*/
 }
 QMainWindow::separator{
     border: 1px solid #999999;
@@ -29,7 +29,7 @@ QSplitter::handle{
     width: 4px;
     height: 4px;
 }
-QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);²ÅÉúĞ§*/
+QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);æ‰ç”Ÿæ•ˆ*/
     border-color: #EA2;
 }
 QSplitter::handle:pressed{
@@ -38,8 +38,8 @@ QSplitter::handle:pressed{
 QSizeGrip{
     background-color: none;
 }
-/* Ò»¶¨Òª¼ÇµÃ£¬ÓÃqApp»òÕßQApplication.instanceµÄsetStyle£¬
-    ÓÃself.setStyle»áÓĞºÜ¶àµØ·½²»ÉúĞ§£ºMenu ToolTipµÈ*/
+/* ä¸€å®šè¦è®°å¾—ï¼Œç”¨qAppæˆ–è€…QApplication.instanceçš„setStyleï¼Œ
+    ç”¨self.setStyleä¼šæœ‰å¾ˆå¤šåœ°æ–¹ä¸ç”Ÿæ•ˆï¼šMenu ToolTipç­‰*/
 /* =============================================== */
 /* MenuBar Menu                                    */
 /* =============================================== */
@@ -77,7 +77,7 @@ QMenu::item{
     border: 1px solid transparent;
     margin: 1px;
 }
-QMenu::icon {/*²Ëµ¥µÄÍ¼±ê*/
+QMenu::icon {/*èœå•çš„å›¾æ ‡*/
     width: 15px;
     height: 15px;
     padding:5px;
@@ -95,7 +95,7 @@ QMenu::separator {
     margin: 0 5px;
 }
 
-QMenu::indicator {/*checked µÄ¡Ì*/
+QMenu::indicator {/*checked çš„âˆš*/
     width: 13px;
     height: 13px;
     padding:2px;
@@ -170,7 +170,7 @@ QToolTip {
 /* TextBox                                         */
 /* =============================================== */
 QLineEdit {
-    background: #FFFFFF;/*²»½¨ÒéÉèÎªÍ¸Ã÷£¬·ñÔòtable±à¼­Ê±»á×ÖÏÔÊ¾*/
+    background: #FFFFFF;/*ä¸å»ºè®®è®¾ä¸ºé€æ˜ï¼Œå¦åˆ™tableç¼–è¾‘æ—¶ä¼šå­—æ˜¾ç¤º*/
     selection-background-color: #8BF;
     border: 1px solid #999999;
     border-radius: 2px;
@@ -186,7 +186,7 @@ QLineEdit:focus{
 }
 /*QLineEdit[readOnly="true"] { color: gray }*/
 QLineEdit[echoMode="2"]{
-    lineedit-password-character: 9679;/*×Ö·ûµÄasciiÂë35 88µÈ */
+    lineedit-password-character: 9679;/*å­—ç¬¦çš„asciiç 35 88ç­‰ */
 }
 
 QLineEdit:read-only {
@@ -240,7 +240,7 @@ QPushButton:focus, QPushButton:default {
 }
 
 
-QToolButton,QToolButton:unchecked { /* ToolBarÀïµÄ°´Å¥ºÍ´øÏÂÀ­²Ëµ¥µÄ°´Å¥ */
+QToolButton,QToolButton:unchecked { /* ToolBaré‡Œçš„æŒ‰é’®å’Œå¸¦ä¸‹æ‹‰èœå•çš„æŒ‰é’® */
     border: 1px solid transparent;
     border-radius: 3px;
     background-color: transparent;
@@ -313,7 +313,7 @@ QComboBox QAbstractItemView {
     selection-background-color: #8BF;
 }
 /*QComboBox QAbstractItemView::item {
-    height: 12px;ĞèÒªÉèÖÃcomboBox.setView(QListView())·ñÔò»áÊ¹ÓÃÄ¬ÈÏµÄitemÑùÊ½
+    height: 12px;éœ€è¦è®¾ç½®comboBox.setView(QListView())å¦åˆ™ä¼šä½¿ç”¨é»˜è®¤çš„itemæ ·å¼
 }*/
 /* =============================================== */
 /* SpinBox DateTime                                */
@@ -351,7 +351,7 @@ QSlider::groove{
     border: 1px solid #999999;
     background: #FFFFFF;
 }
-QSlider::handle {/*ÉèÖÃÖĞ¼äµÄÄÇ¸ö»¬¶¯µÄ¼ü*/                           
+QSlider::handle {/*è®¾ç½®ä¸­é—´çš„é‚£ä¸ªæ»‘åŠ¨çš„é”®*/                           
     border: 1px solid #999999;
     background: #8BF;
 }
@@ -371,11 +371,11 @@ QSlider::handle:vertical{
     height: 6px;
     margin: -7px; /* height */
 }
-QSlider::add-page{/*»¹Ã»ÓĞ»¬ÉÏÈ¥µÄµØ·½*/
+QSlider::add-page{/*è¿˜æ²¡æœ‰æ»‘ä¸Šå»çš„åœ°æ–¹*/
     border: 1px solid #999999;
     background:#EEEEEF;
 }
-QSlider::sub-page{/*ÒÑ¾­»®¹ıµÄ´ÓµØ·½*/                            
+QSlider::sub-page{/*å·²ç»åˆ’è¿‡çš„ä»åœ°æ–¹*/                            
     background: #EA2;
 }
 
@@ -526,7 +526,7 @@ QHeaderView {
 	margin: 0px;
 	padding: 0px;
 }
-QHeaderView::section, QTableCornerButton::section {/*ÉèÖÃ±íÍ·ÊôĞÔ*//*×óÉÏ½Ç*/
+QHeaderView::section, QTableCornerButton::section {/*è®¾ç½®è¡¨å¤´å±æ€§*//*å·¦ä¸Šè§’*/
 	background-color: #EEEEEF;
 	padding: 0 3px;
 	border-right: 1px solid #999999;
@@ -548,16 +548,16 @@ QHeaderView::section:checked {
 /* =============================================== */
 QTableWidget, QTableView
 {
-    gridline-color: #999999;    /*±í¸ñÖĞµÄÍø¸ñÏßÌõÑÕÉ«*/
+    gridline-color: #999999;    /*è¡¨æ ¼ä¸­çš„ç½‘æ ¼çº¿æ¡é¢œè‰²*/
     background: #FFFFFF;
-    /*ÉèÖÃ½»ÌæÑÕÉ«£¬ĞèÒªÔÚº¯ÊıÊôĞÔÖĞÉèÖÃ:tableWidget->setAlternatingRowColors(true)*/
+    /*è®¾ç½®äº¤æ›¿é¢œè‰²ï¼Œéœ€è¦åœ¨å‡½æ•°å±æ€§ä¸­è®¾ç½®:tableWidget->setAlternatingRowColors(true)*/
     alternate-background-color: #EEEEEF;
-    /*selection-color:#FFFFFF;    Êó±êÑ¡ÖĞÊ±Ç°¾°É«£ºÎÄ×ÖÑÕÉ«*/
-    selection-background-color:#8BF;   /*Êó±êÑ¡ÖĞÊ±±³¾°É«*/
-    border:1px solid #999999;  /*±ß¿òÏßµÄ¿í¶È¡¢ÑÕÉ«*/
-    /*border:none;    È¥³ı±ß½çÏß*/
+    /*selection-color:#FFFFFF;    é¼ æ ‡é€‰ä¸­æ—¶å‰æ™¯è‰²ï¼šæ–‡å­—é¢œè‰²*/
+    selection-background-color:#8BF;   /*é¼ æ ‡é€‰ä¸­æ—¶èƒŒæ™¯è‰²*/
+    border:1px solid #999999;  /*è¾¹æ¡†çº¿çš„å®½åº¦ã€é¢œè‰²*/
+    /*border:none;    å»é™¤è¾¹ç•Œçº¿*/
     /*border-radius:5px;*/
-    /*padding:10px 10px;*/  /*±í¸ñÓë±ß¿òµÄ¼ä¾à*/
+    /*padding:10px 10px;*/  /*è¡¨æ ¼ä¸è¾¹æ¡†çš„é—´è·*/
 }
 QTableView::item, QTabWidget::item{
     background: transparent;

@@ -15,17 +15,17 @@ from PyQt5.QtWidgets import QApplication
 class TestMain():
     @classmethod
     def setup_class(cls):
-        print ("setup_class       class:%s" % cls.__name__)
- 
+        print("setup_class       class:%s" % cls.__name__)
+
     @classmethod
     def teardown_class(cls):
-        print ("teardown_class    class:%s" % cls.__name__)
- 
+        print("teardown_class    class:%s" % cls.__name__)
+
     def setup_method(self, method):
-        print ("setup_method      method:%s" % method.__name__)
- 
+        print("setup_method      method:%s" % method.__name__)
+
     def teardown_method(self, method):
-        print ("teardown_method   method:%s" % method.__name__)
+        print("teardown_method   method:%s" % method.__name__)
 
     def test_find_dialog(self, qtbot, sharedwin):
         win = sharedwin["main"]
@@ -56,14 +56,12 @@ class TestMain():
     def test_confDialog(self, qtbot, sharedwin):
         sharedwin["main"].confDialog.show()
         qtbot.waitForWindowShown(sharedwin["main"].confDialog)
-        
-       
-       
+
     def test_fileop_and_clrpic(self, qapp, qtbot, sharedwin, tmpdir):
         """Test file new and save, test color pick, this test will effect editor text
         """
         mainwin = sharedwin["main"]
-        
+
         def file():
             mainwin.new()
             f = tmpdir.join("new.qsst").ensure()
@@ -75,12 +73,14 @@ class TestMain():
         file()
         mainwin.newFromTemplate()
         mainwin.editor.setModified(False)
-        
-        if not sys.platform.startswith('darwin'):
+
+        if not sys.platform.startswith(
+                'darwin'):  # will cause unable to create basic accelerated opengl renderer error in osx docker
+
             class DialogCloseThread(QThread):
                 def __init__(self, parent=None):
                     super().__init__(parent)
-                    
+
                 def run(self):
                     while not qapp.activeModalWidget():
                         qtbot.wait(100)
