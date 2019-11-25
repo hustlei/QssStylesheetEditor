@@ -6,7 +6,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 import os
 from PyQt5.QtCore import QTranslator, QLibraryInfo, QLocale
 from PyQt5.QtWidgets import QApplication
-from config.base import ConfBase
+from config.base import ConfigParser
 
 
 class Language():
@@ -23,7 +23,7 @@ class Language():
                 systrans,trans,分别是qtbase_xx.qm文件和当前语言的qm文件
         """
         Language.__listInToml = []
-        conf = ConfBase()
+        conf = ConfigParser()
         try:
             conf.read(os.path.join(os.path.dirname(__file__), "list.toml"))
             languages = conf.getSec("languages")
@@ -74,7 +74,7 @@ class Language():
         :return:
         """
         configfile = os.path.join(os.path.dirname(__file__), "../config/config.toml")
-        config = ConfBase()
+        config = ConfigParser()
         config.read(configfile)
         Language.lang = config.getSec("general").get("language", "")
 

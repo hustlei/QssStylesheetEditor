@@ -5,10 +5,10 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
-from config.base import ConfBase
+from config.base import ConfigParser
 
 
-class Config(ConfBase):
+class Config(ConfigParser):
     """Config parser for config.toml"""
     def __init__(self, cfgfile=None):
         super().__init__()

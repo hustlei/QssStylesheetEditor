@@ -1,6 +1,5 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""test scripts for QssStylesheetEditor
+"""test scripts for Program
 
 using pytest pytest-qt to test modules of project.
 

@@ -26,7 +26,9 @@ class App(QApplication):
 
     def run(self, pytest=False):
         """run the app, show splash and mainwindow
-        :param pytest: if true, it will not start event loop, just for test
+
+        Args:
+            pytest: if true, it will not start event loop, just for test
         """
         print("starting...")
         Language.setTrans()

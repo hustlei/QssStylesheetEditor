@@ -164,7 +164,7 @@ class MainWin(MainWinBase):
                 resn, _ = os.path.splitext(os.path.basename(res))
                 if os.path.exists(res):
                     if resp not in sys.path:
-                        sys.path.append(resp)
+                        sys.path.appendToChild(resp)
                     try:
                         __import__(resn)
                     except BaseException:

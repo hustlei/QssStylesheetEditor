@@ -395,7 +395,7 @@ def loads(s, _dict=dict, decoder=None):
                             if arrayoftables:
                                 raise TomlDecodeError("An implicitly defined " "table can't be an array", original, pos)
                         elif arrayoftables:
-                            currentlevel[group].append(decoder.get_empty_table())
+                            currentlevel[group].appendToChild(decoder.get_empty_table())
                         else:
                             raise TomlDecodeError("What? " + group + " already exists?" + str(currentlevel), original,
                                                   pos)

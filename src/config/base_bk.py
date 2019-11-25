@@ -22,8 +22,16 @@ class Section(dict):
     def __init__(self):
         super().__init__()
 
-    @staticmethod
-    def _addChild(sec, subName):
+    def _addSec(self, secName):
+        """Add a section to root of self"""
+        secName = secName.strip()
+        if len(secName) < 1:
+            return None
+        if secName not in self:
+            self[secName] = Section()
+        return self[secName]
+
+    def _addSubSec(self, sec, subName):
         """Add section to section sec
 
         Args:
@@ -62,7 +70,7 @@ class Section(dict):
         if subName in sec:
             return sec[subName]
         if addifnotfound:
-            return self._addChild(sec, subName)
+            return self._addSubSec(sec, subName)
         return None
 
     def _rmSec(self, secName):
@@ -114,7 +122,7 @@ class Section(dict):
         secs = secString.split(".")
         sec = self._addSec(secs[0])
         for i in range(1, len(secs)):
-            sec = self._addChild(sec, secs[i])
+            sec = self._addSubSec(sec, secs[i])
         return sec
 
     def rmSec(self, secString):
@@ -190,8 +198,8 @@ class Section(dict):
         childNames = childString.split(".")
         sec = self
         for i in range(0, len(childNames)-1):
-            sec = self._addChild(sec, childNames[i])
-        return sec._addChild(sec, obj)
+            sec = self._addSubSec(sec, childNames[i])
+        return sec._addSubSec(sec, obj)
 
     def rmChild(self, childString):
         pass
