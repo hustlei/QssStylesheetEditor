@@ -46,7 +46,7 @@ class ConfigParser(Section):
             with open(cfgFile, 'w', newline='', encoding=coding) as outfile:
                 # 不指定newline，则换行符自动转换为各系统默认的换行符(\n, \r, or \r\n,)
                 # newline=''表示不转换
-                s = toml.dumps(self.dict)
+                s = toml.dumps(self)
                 outfile.write(s)
                 return True
         return False
