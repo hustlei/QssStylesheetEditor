@@ -5,7 +5,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
-import toml
+from . import toml
 from config.base import Section
 
 class ConfigParser(Section):
