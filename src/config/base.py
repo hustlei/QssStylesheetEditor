@@ -279,5 +279,4 @@ class Section(dict):
         elif not addifnosec:
             raise GetWrongTypeError("Section", type(sec))
         else:
-            sec = Section()
-            return sec
+            return self.addSec(secString)

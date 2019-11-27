@@ -1,3 +1,6 @@
-file = ""
-editor = ""
-general = ""
+[file]
+recent = []
+recentcount = 4
+
+[editor]
+fontsize = 11
