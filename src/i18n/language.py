@@ -6,7 +6,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 import os
 from PyQt5.QtCore import QTranslator, QLibraryInfo, QLocale
 from PyQt5.QtWidgets import QApplication
-from config.base import ConfigParser
+from config import ConfigParser
 
 
 class Language():

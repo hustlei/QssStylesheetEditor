@@ -4,8 +4,32 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import os
-from . import toml
+# exception classes
+class Error(Exception):
+    """Base class for Section exceptions."""
+
+    def __init__(self, msg=''):
+        self.message = msg
+        Exception.__init__(self, msg)
+
+    def __repr__(self):
+        return self.message
+
+    __str__ = __repr__
+
+class NoSectionError(Error):
+    """Raised when section not exist."""
+
+    def __init__(self, sectionName):
+        Error.__init__(self, 'No section: %r' % (sectionName,))
+        self.section = sectionName
+        self.args = (sectionName,)
+
+class GetWrongTypeError(Error):
+    """Raised when section not exist."""
+
+    def __init__(self, gettype, returntype):
+        Error.__init__(self, 'Type Error: Return "{}", when get "{}".'.format(returntype, gettype))
 
 class Section(dict):
     """A section object in toml
@@ -22,62 +46,181 @@ class Section(dict):
     def __init__(self):
         super().__init__()
 
-    @staticmethod
-    def _addChild(sec, subName):
-        """Add section to section sec
+    ##
+    ## Child Item Operate
+    ##
+    def hasChild(self, childString):
+        """If child item exist return true, else false
 
         Args:
-            sec: a section in self(section type must be dict)
-            subName: name of section will be added
+            childString: "childname.subchildname" format path to ditermine child item
         """
-        subName = subName.strip()
-        if len(subName) < 1:
+        childString = childString.strip(". \r\n\t")
+        if len(childString) <1:
+            return False
+        childNames = childString.split(".")
+        item = self
+        for i in range(0, len(childNames)):
+            if childNames[i] not in item:
+                return False
+            item = item[childNames[i]]
+        return True
+
+
+    def addChild(self, childString, obj=""):
+        """Add child using format childname.subchildname string
+
+        Args:
+            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+            obj: child tobe added, default is ""
+
+        Example:
+            `self.addChild("child.key1", "value")`: aaa subsection of general section
+        """
+        childString = childString.strip(". \r\n\t")
+        if len(childString) <1:
             return None
-        if subName in sec:
-            return sec[subName]
-        sec[subName] = Section()
-        return sec[subName]
+        childNames = childString.split(".")
+        item = self
+        length = len(childNames)
+        for i in range(0, length-1):
+            if childNames[i] in item and isinstance(item, dict):
+                item.__class__ = Section
+                if not isinstance(item[childNames[i]], dict):
+                    item[childNames[i]] = Section()
+                item = item[childNames[i]]
+            else:
+                item[childNames[i]] = Section()
+                item = item[childNames[i]]
+        item[childNames[length-1]] = obj
+        return item[childNames[length-1]]
 
-    def _getSec(self, secName=None, addifnotfound=True):
-        """Get section by name
 
-        Args:
-            secName: name of section in toml root, if None it's mean root
-            defaultadd: if not found add the section
-        """
-        if secName is None:
-            return self
-        if secName in self:
-            return (self[secName])
-        if addifnotfound:
-            return self._addSec(secName)
-        return None
-
-    def _getSubSec(self, sec, subName, addifnotfound=True):
-        """Get section in section sec
-
-        Args:
-            sec: a section, type must be dict
-        """
-        if subName in sec:
-            return sec[subName]
-        if addifnotfound:
-            return self._addChild(sec, subName)
-        return None
-
-    def _rmSec(self, secName):
-        """Remove section in root of toml
+    def rmChild(self, childString):
+        """Remove child by format 'childname.subchildname.xxx'
 
         Returns:
-            return the section removed, if section not exist return None
+            return the removed child, if not exist return None
         """
-        if secName not in self:
+        childString = childString.strip(". \r\n\t")
+        if len(childString) <1:
             return None
-        return self.pop(secName, None)
+        childNames = childString.split(".")
+        item = self
+        for name in childNames[:-1]:
+            if name not in item:
+                return None
+            item = item[name]
+        if isinstance(item, dict):
+            return item.pop(childNames[-1], None)
+        return None
 
-    def _rmSubSec(self, sec, subName):
-        """Remove section in sec"""
-        return sec.pop(subName, None)
+    def getChild(self, childString, addifnochild=True, defaultchild=""):
+        """Get child by format 'childname.subchildname'
+
+        Args:
+            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+            addifnochild: if child is not exist add the child
+            defaultchild: if child not exist, add defaultchild as the child value
+        """
+        childString = childString.strip(". \r\n\t")
+        if len(childString) <1:
+            return None
+        childNames = childString.split(".")
+        item = self
+        for childname in childNames[:-1]:
+            if childname in item and isinstance(item[childname], dict):
+                item[childname].__class__ = Section
+                item = item[childname]
+            elif addifnochild:
+                item[childname] = Section()
+                item = item[childname]
+            else:
+                return None
+        if childNames[-1] in item:
+            return item[childNames[-1]]
+        elif addifnochild:
+            item[childNames[-1]] = defaultchild
+            return item[childNames[-1]]
+        else:
+            return None
+
+
+    def setChild(self, childString, value, addifnochild=True):
+        """Set value to child, if success return True else return False
+
+        Args:
+            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+            value: value will be set to the child
+            addifnochild: if child is not exist add the child
+        """
+        if addifnochild or self.hasChild(childString):
+            self.addChild(childString, value)
+            return True
+        return False
+
+    def appendToChild(self, childString, obj):
+        """Append 'obj' to child, child indicated by 'name.subname' format, if it's not a list.
+        if it's a list, obj will be appended. if it's a string or number, it will be converted to list.
+        if it's a dict ,return false
+
+        Args:
+            childString: "name.subname" format to get child
+            obj: value to be appended
+        Returns:
+            True: if successed
+            False: if child is not exist, or child is a dict
+        """
+        if self.hasChild(childString):
+            childString = childString.strip(". \r\n\t")
+            childNames = childString.split(".")
+            item = self
+            for childname in childNames[:-1]:
+                if childname in item and isinstance(item[childname], dict):
+                    item[childname].__class__ = Section
+                    item = item[childname]
+                else:
+                    return False
+            if isinstance(item[childNames[-1]], dict):
+                return False
+            if not isinstance(item[childNames[-1]], list):
+                prevalue = item[childNames[-1]]
+                item[childNames[-1]] = [prevalue]
+            item[childNames[-1]].append(obj)
+            return True
+        return False
+
+    def insertToChild(self, childString, index, obj):
+        """Insert 'obj' to child at index position, child indicated by 'name.subname' format.
+        if it's a list, obj will be inserted. if it's a string or number, it will be converted to list.
+        if it's a dict ,return false
+
+        Args:
+            childString: "name.subname" format to get child, child must be a list, if not a list, it will be covert to a list
+            index: position to be inserted to the list
+            obj: value to be inserted
+        Returns:
+            True: if insert successed
+            False: if child is not exist, or child is a dict
+        """
+        if self.hasChild(childString):
+            childString = childString.strip(". \r\n\t")
+            childNames = childString.split(".")
+            item = self
+            for childname in childNames[:-1]:
+                if childname in item and isinstance(item[childname], dict):
+                    item[childname].__class__ = Section
+                    item = item[childname]
+                else:
+                    return False
+            if isinstance(item[childNames[-1]], dict):
+                return False
+            if not isinstance(item[childNames[-1]], list):
+                prevalue = item[childNames[-1]]
+                item[childNames[-1]] = [prevalue]
+            item[childNames[-1]].insert(index, obj)
+            return True
+        return False
 
     ##
     ## Section Operate
@@ -88,7 +231,7 @@ class Section(dict):
         Args:
             secString: "secname.subsecname" format path to ditermine section
         """
-        secString = secString.strip(". ")
+        secString = secString.strip(". \r\n\t")
         if len(secString) <1:
             return False
         secs = secString.split(".")
@@ -107,31 +250,14 @@ class Section(dict):
         Example:
             `self.addSec("general.subsection")`: aaa subsection of general section
         """
-        secString = secString.strip()
-        if len(secString) <1:
-            return self
-        secString = secString.strip(".")
-        secs = secString.split(".")
-        sec = self._addSec(secs[0])
-        for i in range(1, len(secs)):
-            sec = self._addChild(sec, secs[i])
-        return sec
+        return self.addChild(secString, Section())
 
     def rmSec(self, secString):
         """Remove secname.subsecname sections if exist"""
-        secString = secString.strip()
-        if len(secString) <1:
-            return None
-        secString = secString.strip(".")
-        secs = secString.split(".")
-        sec = self
-        for i in range(0, len(secs)-1):
-            sec = sec[secs[i]]
-            if not isinstance(sec, dict):
-                return None
-        return self._rmSubSec(sec, secs[-1])
+        return self.rmChild(secString)
 
-    def getSec(self, secString=None, addifnotfound=True):
+
+    def getSec(self, secString=None, addifnosec=True):
         """Get section by secname.subsecname string
 
         Example:
@@ -141,129 +267,17 @@ class Section(dict):
         Args:
             addifnotfound: if True, if section is not found, add it to toml
         """
-        if secString is None:
-            return self
-        secString = secString.strip()
+        secString = secString.strip(". \r\n\t")
         if len(secString) < 1:
-            return None
-        secString = secString.strip(".")
-        secs = secString.strip().split(".")
-        if len(secs) == 1:
-            return self._getSec(secs[0], addifnotfound)
-        sec = self._getSec(secs[0])
-        for i in range(1, len(secs)):
-            sec = self._getSubSec(sec, secs[i], addifnotfound)
-            if sec is None:
-                return None
-        return sec
-
-    ##
-    ## Child Item Operate
-    ##
-    def hasChild(self, childString):
-        """If child item exist return true, else false
-
-        Args:
-            childString: "childname.subchildname" format path to ditermine child item
-        """
-        childString = childString.strip()
-        if len(childString) <1:
-            return False
-        childNames = childString.split(".")
-        item = self
-        for i in range(0, len(childNames)):
-            if childNames[i] not in item:
-                return False
-            item = item[childNames[i]]
-        return True
-
-    def addChild(self, childString, obj):
-        """Add child using format childname.subchildname string
-
-        Example:
-            `self.addChild("child.key1", "value")`: aaa subsection of general section
-        """
-        childString = childString.strip()
-        if len(childString) <1:
             return self
-        childString = childString.strip(".")
-        childNames = childString.split(".")
-        sec = self
-        for i in range(0, len(childNames)-1):
-            sec = self._addChild(sec, childNames[i])
-        return sec._addChild(sec, obj)
-
-    def rmChild(self, childString):
-        pass
-
-    def getChild(self, childString):
-        pass
-
-    def appendToChild(self, node, child, sec=None):
+        sec = self.getChild(secString, addifnosec)
         if sec is None:
-            sec = self.dict
-        if node not in sec or not isinstance(sec[node], list):
-            sec[node] = []
-        if child in sec[node]:
-            for _ in range(sec[node].count(child)):
-                sec[node].remove(child)
-        sec[node].appendToChild(child)
-
-    def insertToChild(self, node, child, sec=None):
-        if sec is None:
-            sec = self.dict
-        if node not in sec or not isinstance(sec[node], list):
-            sec[node] = []
-        if child in sec[node]:
-            for _ in range(sec[node].count(child)):
-                sec[node].remove(child)
-        sec[node].insertToChild(0, child)
-
-class ConfigParser(Section):
-    """Paser for toml config file"""
-    def __init__(self):
-        # self.dict = {}
-        self.cfgFile=None
-        super().__init__()
-
-    def read(self, cfgFile=None):
-        """Read a toml config file
-
-        Toml file shall be coded in utf-8
-        Parser toml file and store config into self.dict
-
-        Args:
-            cfgFile:  config file path
-        Returns:
-            Success or failed, return true if read success
-        """
-        if cfgFile is None:
-            return False
-        if not os.path.exists(cfgFile):
-            print("Toml config file: \"" + os.path.basename(cfgFile) + '\" not found.')
-            return False
-        with open(cfgFile, mode='rb') as f:
-            content = f.read()
-        if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
-            content = content[3:]
-        self.clear()
-        self.update(toml.loads(content.decode('utf8'), _dict=Section))
-        return True
-
-    def _save(self, cfgFile=None, coding='utf-8'):
-        """save config in self.dict to toml file."""
-        if cfgFile is None:
-            cfgFile = self.cfgFile
-        if cfgFile is not None:
-            with open(cfgFile, 'w', newline='', encoding=coding) as outfile:
-                # 不指定newline，则换行符自动转换为各系统默认的换行符(\n, \r, or \r\n,)
-                # newline=''表示不转换
-                s = toml.dumps(self.dict)
-                outfile.write(s)
-                return True
-        return False
-
-    # def sections(self):
-
-
-
+            raise NoSectionError(Section)
+        elif isinstance(sec, dict):
+            sec.__class__ = Section
+            return sec
+        elif not addifnosec:
+            raise GetWrongTypeError("Section", type(sec))
+        else:
+            sec = Section()
+            return sec

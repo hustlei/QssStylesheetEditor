@@ -4,5 +4,8 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from .config import Config
-from .dialog import ConfDialog
+from config import core, dialog
+
+Config = core.Config
+ConfigParser = core.ConfigParser
+ConfDialog = dialog.ConfDialog
