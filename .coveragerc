@@ -1,0 +1,14 @@
+# .coveragerc to control coverage.py
+[run]
+branch = False # default branch is False
+omit = */.git/*  /dist/*  setup.py
+
+[report]
+exclude_lines =
+    def __repr__
+    if self\.debug
+
+    if __name__ == .__main__.:
+    def main():
+
+ignore_errors = True
