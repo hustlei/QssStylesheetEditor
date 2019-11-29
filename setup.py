@@ -7,13 +7,8 @@ setup(
     setup_requires=['setuptools_scm'],
     use_scm_version=True,  # version="1.0",
     python_requires='>=2.7.*',
-    # install_requires=[''],
-    package_dir={'': 'src'},  # tell distutils packages are under src
-    packages=find_packages(where='src', include=('*'), exclude=[
-        '*.bak',
-    ]),
-    # py_modules=['__main__'],  # single file
-
+    packages=find_packages(include=('preimport'), exclude=['tests',]),
+    
     # data
     package_data={'': ['README.md', 'LICENSE']},
 
@@ -27,8 +22,8 @@ setup(
     classifiers=[
         "License :: OSI Approved :: GNU LESSER GENERAL PUBLIC LICENSE v2.1 (LGPLv2.1)",
         "Programming Language :: Python",
-        "Operating System :: OS Independent",
-    ],
+        "Operating System :: OS Independent"
+    ]
 )
 
 # python setup.py build  # 编译
