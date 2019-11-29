@@ -27,6 +27,6 @@ def _get_version(default='x.x.x.dev'):
 
 __version__ = _get_version()
 
-import preimport.core
+from . import core
 
-preimport = preimport.core.preimport
+preimport = core.preimport

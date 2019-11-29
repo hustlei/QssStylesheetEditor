@@ -12,7 +12,10 @@ from time import time
 
 
 def preimport(*moduleNames):
-    """
+    """Import python modules. And print the status.
+
+    :param moduleNames: module name to be imported. Can be multi names or name list.
+    :return: no return
     """
     for moduleName in moduleNames:
         if isinstance(moduleName, str):
