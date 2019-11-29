@@ -33,7 +33,6 @@ def preimport(*moduleNames):
                 else:
                     print(" successfully in {:.2}s".format(time() - timeStart))
         elif isinstance(moduleName, Iterable):
-            for name in moduleName:
-                preimport(name)
+            preimport(*moduleName)
         else:
             print("  [Error]: preimport failed, please check the moduleName")
