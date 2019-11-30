@@ -5,12 +5,15 @@ from setuptools import setup, find_packages
 setup(
     name="preimport",
     setup_requires=['setuptools_scm'],
-    use_scm_version=True,  # version="1.0",
+    # version="1.0",
+    use_scm_version=True,
     python_requires='>=2.7.*',
-    packages=find_packages(include=('preimport'), exclude=['tests',]),
-    
-    # data
-    package_data={'': ['README.md', 'LICENSE']},
+    # src_root = ".",
+    package_dir={'': '.'},
+    packages=find_packages(include=['preimport']),
+    # include_package_data = True,
+    # package_data={'':['']},
+    # data_files = [('Lib/site-packages/preimport', ['README.md'])],
 
     # metadata to display on PyPI
     author='lileilei',
@@ -26,7 +29,8 @@ setup(
     ]
 )
 
-# python setup.py build  # 编译
-# python setup.py sdist  # zip格式包
-# python setup.py --help-commands 显示相关可用命令
-# python setup.py install #安装
+# python setup.py bdist_wheel
+# pip install xx.whl
+#or
+# python setup.py sdist
+# python setup.py install

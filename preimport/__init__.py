@@ -26,6 +26,8 @@ def _get_version(default='x.x.x.dev'):
 
 
 __version__ = _get_version()
+# from setuptools_scm import get_version
+# __version__ = get_version(root='..', relative_to=__file__)
 
 from . import core
 
