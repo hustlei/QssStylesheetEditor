@@ -12,7 +12,9 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../../preimport'))#指向src目录
+srcdir = os.path.join(os.path.dirname(__file__), '../..')
+srcdir = os.path.normpath(srcdir)
+sys.path.insert(0, srcdir)#指向src目录
 
 
 # -- Project information -----------------------------------------------------
@@ -23,8 +25,12 @@ author = 'lileilei'
 
 # The full version, including alpha/beta/rc tags
 # release = 'v1.0'
-import preimport
-release = preimport.__version__
+# import preimport
+# release = preimport.__version__
+from setuptools_scm import get_version
+release = get_version(root='../..', relative_to=__file__)
+# for example take major/minor
+version = '.'.join(release.split('.')[:2])
 
 # -- General configuration ---------------------------------------------------
 
