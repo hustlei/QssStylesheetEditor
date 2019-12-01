@@ -7,13 +7,14 @@
 
 import sys
 sys.path.append(".")
+import preimport as package
 from preimport import preimport
 
-MODULE_NAMES = ('numpy', 'PyQt5.QtCore')
+MODULE_NAMES = ('numpy', 'openpyxl.utils')
 
 
 def test_preimport(capsys):
-    print("")
+    print("\n"+package.__version__)
     preimport(MODULE_NAMES)
     for module in MODULE_NAMES:
         assert module in sys.modules

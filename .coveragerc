@@ -1,7 +1,6 @@
-# .coveragerc to control coverage.py
 [run]
-branch = False # default branch is False
-omit = */.git/*  /dist/*  setup.py
+branch = False
+omit = */.git/*  /dist/* */build/* /tests/*  setup.py
 
 [report]
 exclude_lines =
