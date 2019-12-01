@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """Implementation functions for preimport
 """
 

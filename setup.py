@@ -24,13 +24,11 @@ setup(
     project_urls={"Source Code": "https://github.com/hustlei/preimport"},
     classifiers=[
         "License :: OSI Approved :: GNU LESSER GENERAL PUBLIC LICENSE v2.1 (LGPLv2.1)",
-        "Programming Language :: Python",
-        "Operating System :: OS Independent"
-    ]
-)
+        "Programming Language :: Python", "Operating System :: OS Independent"
+    ])
 
 # python setup.py bdist_wheel
 # pip install xx.whl
-#or
+# or
 # python setup.py sdist
 # python setup.py install

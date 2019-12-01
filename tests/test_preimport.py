@@ -14,7 +14,7 @@ MODULE_NAMES = ('numpy', 'openpyxl.utils')
 
 
 def test_preimport(capsys):
-    print("\n"+package.__version__)
+    print("\n" + package.__version__)
     preimport(MODULE_NAMES)
     for module in MODULE_NAMES:
         assert module in sys.modules
