@@ -12,6 +12,9 @@ def myversion():
         return guess_next_version(version.tag)
 
     return {'version_scheme': version_scheme,'local_scheme': local_scheme}
+    
+with open("README.md", "r", encoding='utf-8') as fh:
+    long_desc = fh.read()
 
 setup(
     name="preimport",
@@ -31,6 +34,8 @@ setup(
     author_email='hustlei@sina.cn',
     description="Preimport python modules to accelerate running speed.",
     keywords="preimport",
+    long_description=long_desc,
+    long_description_content_type="text/markdown",
     url="https://github.com/hustlei/preimport",
     project_urls={"Source Code": "https://github.com/hustlei/preimport"},
     classifiers=[
