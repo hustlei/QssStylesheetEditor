@@ -1,4 +1,4 @@
-English | [简体中文](readme_zh-CN.md)
+简体中文 | [English](readme.md)
 
 # preimport
 
@@ -8,15 +8,15 @@ English | [简体中文](readme_zh-CN.md)
 
 <br>
 
-preimport python modules to accelerate running speed and avoid "hang" when invoke module.
+预加载(preimport) python 模块，加快 python 程序运行时的速度，消除程序运行的时候，因为加载模块导致的“停顿”。
 
-# Installation
+# 安装
 
 ~~~shell
 pip install preimport
 ~~~
 
-# Usage
+# 使用
 
 ~~~python
 from preimport import preimport
