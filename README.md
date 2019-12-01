@@ -3,13 +3,13 @@ preimport python modules to accelerate running speed and avoid "hang" when invok
 
 # Installation
 
-~~~
-python setup.py install
+~~~shell
+pip install preimport
 ~~~
 
 # Usage
 
-~~~
+~~~python
 from preimport import preimport
 
 preimport('numpy', 'PyQt5')
