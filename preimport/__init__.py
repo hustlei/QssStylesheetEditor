@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """function for preimport python module
 
-author: lileilei
-email: hustlei@sina.cn
+| author: lileilei
+| email: hustlei@sina.cn
 """
 
 

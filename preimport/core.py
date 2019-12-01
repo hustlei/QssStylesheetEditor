@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+"""Implementation functions for preimport
+"""
+
 import sys
 from collections.abc import Iterable
 from importlib import import_module
@@ -10,8 +13,9 @@ def preimport(*moduleNames):
     """Import python modules. And print the status.
 
     :param moduleNames: module name to be imported. Can be multi names or name list.
-    :returns: no return
+    :return: no return
     """
+
     for moduleName in moduleNames:
         if isinstance(moduleName, str):
             if moduleName in sys.modules:
