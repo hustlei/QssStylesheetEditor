@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 def myversion():
     from setuptools_scm.version import guess_next_version
     def local_scheme(version):
-        return version.format_choice(".r{distance}", ".a{distance}")
+        return version.format_choice(".r{distance}", ".a{distance}") if version.distance else ""
         # return version.format_choice(".d{time:%Y%m%d}", ".{distance}.{node}.{time:%Y%m%d}")
         # return ".dev{}".format(version.distance)
     def version_scheme(version):
