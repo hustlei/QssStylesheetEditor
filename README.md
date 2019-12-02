@@ -4,7 +4,7 @@ Toml configparser made (stupidly) simple.
 # install
 
 ~~~shell
-python setup.py install
+pip install TomlConfig
 ~~~
 
 # Usage
@@ -15,7 +15,7 @@ from tomlconfig import TomlConfig
 config=TomlConfig("config.toml")
 language=config.getChild("general.language")
 size=config.getChild("general.editor.size")
-font=config.getChild("general.editor").get("font")
+font=config.getSec("general.editor").get("font")
 fontWeight=config.getChild("general.editor").get("fontWeight",2)
 
 config.hasChild("general.language") # True
