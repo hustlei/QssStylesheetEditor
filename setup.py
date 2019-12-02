@@ -28,4 +28,5 @@ setup(
 
     version=ver,
     packages=["tomlconfig"],
+    install_requires=['toml'],
 )
