@@ -42,8 +42,21 @@ class TomlSection(dict):
         sec11 = sec.getSec("sec1.sec11")
         sec11.setValue("abc")
     """
-    def __init__(self):
+    def __init__(self, other=()):
         super().__init__()
+        self.update(other)
+
+    def __contains__(self, item):
+        return self.hasChild(item)
+
+    def __getitem__(self, item):
+        return self.getChild(item)
+
+    def __setitem__(self, key, value):
+        self.setChild(key, value)
+
+    def __delitem__(self, key):
+        self.rmChild(key)
 
     ##
     ## Child Item Operate
@@ -60,9 +73,9 @@ class TomlSection(dict):
         childNames = childString.split(".")
         item = self
         for i in range(0, len(childNames)):
-            if childNames[i] not in item:
+            if childNames[i] not in item.keys():
                 return False
-            item = item[childNames[i]]
+            item = item.get(childNames[i])
         return True
 
     def addChild(self, childString, obj=""):
@@ -82,16 +95,15 @@ class TomlSection(dict):
         item = self
         length = len(childNames)
         for i in range(0, length - 1):
-            if childNames[i] in item and isinstance(item, dict):
-                item.__class__ = TomlSection
-                if not isinstance(item[childNames[i]], dict):
-                    item[childNames[i]] = TomlSection()
-                item = item[childNames[i]]
+            if childNames[i] in item.keys() and isinstance(item, dict):
+                # item = TomlSection(item)
+                if not isinstance(item.get(childNames[i]), dict):
+                    item.update({childNames[i]: TomlSection()})
             else:
-                item[childNames[i]] = TomlSection()
-                item = item[childNames[i]]
-        item[childNames[length - 1]] = obj
-        return item[childNames[length - 1]]
+                item.update({childNames[i]: TomlSection()})
+            item = item.get(childNames[i])
+        item.update({childNames[length - 1]: obj})
+        return item.get(childNames[length - 1])
 
     def rmChild(self, childString):
         """Remove child by format 'childname.subchildname.xxx'
@@ -105,9 +117,9 @@ class TomlSection(dict):
         childNames = childString.split(".")
         item = self
         for name in childNames[:-1]:
-            if name not in item:
+            if name not in item.keys():
                 return None
-            item = item[name]
+            item = item.get(name)
         if isinstance(item, dict):
             return item.pop(childNames[-1], None)
         return None
@@ -126,19 +138,23 @@ class TomlSection(dict):
         childNames = childString.split(".")
         item = self
         for childname in childNames[:-1]:
-            if childname in item and isinstance(item[childname], dict):
-                item[childname].__class__ = TomlSection
-                item = item[childname]
+            subitem = item.get(childname)
+            if childname in item.keys() and isinstance(subitem, dict):
+                # item.update({childname: TomlSection(subitem)})
+                item = subitem
             elif addifnochild:
-                item[childname] = TomlSection()
-                item = item[childname]
+                item.update({childname: TomlSection()})
+                item = item.get(childname)
             else:
                 return None
-        if childNames[-1] in item:
-            return item[childNames[-1]]
+        if childNames[-1] in item.keys():
+            t = type(item.get(childNames[-1]))
+            if t == dict and t != TomlSection:
+                item.update({childNames[-1]: TomlSection(item.get(childNames[-1]))})
+            return item.get(childNames[-1])
         elif addifnochild:
-            item[childNames[-1]] = defaultchild
-            return item[childNames[-1]]
+            item.update({childNames[-1]: defaultchild})
+            return item.get(childNames[-1])
         else:
             return None
 
@@ -172,17 +188,18 @@ class TomlSection(dict):
             childNames = childString.split(".")
             item = self
             for childname in childNames[:-1]:
-                if childname in item and isinstance(item[childname], dict):
-                    item[childname].__class__ = TomlSection
-                    item = item[childname]
+                subitem = item.get(childname)
+                if childname in item and isinstance(subitem, dict):
+                    subitem = TomlSection(item)
+                    item = subitem
                 else:
                     return False
-            if isinstance(item[childNames[-1]], dict):
+            lastitem = item.get(childNames[-1])
+            if isinstance(lastitem, dict):
                 return False
-            if not isinstance(item[childNames[-1]], list):
-                prevalue = item[childNames[-1]]
-                item[childNames[-1]] = [prevalue]
-            item[childNames[-1]].append(obj)
+            if not isinstance(lastitem, list):
+                item.update({childNames[-1]: [lastitem]})
+            item.get(childNames[-1]).append(obj)
             return True
         return False
 
@@ -204,17 +221,18 @@ class TomlSection(dict):
             childNames = childString.split(".")
             item = self
             for childname in childNames[:-1]:
-                if childname in item and isinstance(item[childname], dict):
-                    item[childname].__class__ = TomlSection
-                    item = item[childname]
+                subitem = item.get(childname)
+                if childname in item.keys() and isinstance(subitem, dict):
+                    subitem = TomlSection(item)
+                    item = subitem
                 else:
                     return False
-            if isinstance(item[childNames[-1]], dict):
+            lastitem = item.get(childNames[-1])
+            if isinstance(lastitem, dict):
                 return False
-            if not isinstance(item[childNames[-1]], list):
-                prevalue = item[childNames[-1]]
-                item[childNames[-1]] = [prevalue]
-            item[childNames[-1]].insert(index, obj)
+            if not isinstance(lastitem, list):
+                item.update({childNames[-1]: [lastitem]})
+            item.get(childNames[-1]).insert(index, obj)
             return True
         return False
 
@@ -230,12 +248,12 @@ class TomlSection(dict):
         secString = secString.strip(". \r\n\t")
         if len(secString) < 1:
             return False
-        secs = secString.split(".")
+        secnames = secString.split(".")
         sec = self
-        for i in range(0, len(secs)):
-            if secs[i] not in sec:
+        for i in range(0, len(secnames)):
+            if secnames[i] not in sec.keys():
                 return False
-            sec = sec[secs[i]]
+            sec = sec.get(secnames[i])
         if isinstance(sec, dict):
             return True
         return False

@@ -16,18 +16,16 @@ if config.read(os.path.join(currentdir, "config.toml")):
 else:
     print("config file not loaded")
 
-# in or not
-if "general.language" in config:
-    print("'general.language' is an option or section in tomlcofig.")
-language = config["general.language"]
-print("language content is:" + language)
-
-size = config.getChild("general.editor.size")
+language = config.getChild("general.language")
+print("language:" + language)
+size = config.getChild("interface.editor.size")
 print("size:{}".format(size))
-font = config.getSec("general.editor").get("font")
-# print("font:" + font)
-fontWeight = config.getChild("general.editor").get("fontWeight", 2)
+font = config.getSec("interface.editor").get("font")
+print("font:" + font)
+fontWeight = config.getChild("interface.editor").get("fontWeight", 2)
 print("fontWeight:{}".format(fontWeight))
+
+config.save(os.path.join(currentdir, "a.toml"))
 
 haslang = config.hasChild("general.language")  # True
 print("has general.language:{}".format(haslang))

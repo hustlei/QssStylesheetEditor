@@ -25,7 +25,7 @@ class TomlConfig(TomlSection):
         """
         try:
             self.clear()
-            self.update(toml.loads(tomlString), _dict=TomlSection)
+            self.update(toml.loads(tomlString, _dict=dict))
         except:
             return False
         return True
@@ -51,7 +51,8 @@ class TomlConfig(TomlSection):
         if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
             content = content[3:]
         self.clear()
-        self.update(toml.loads(content.decode('utf8'), _dict=TomlSection))
+        tomldict = toml.loads(content.decode('utf8')) # _dict=TomlSection))
+        self.update(TomlSection(tomldict)) #,
         return True
 
     def save(self, tomlFile=None, coding='utf-8'):
