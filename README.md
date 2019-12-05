@@ -1,5 +1,5 @@
 # TomlConfig
-Toml configparser made (stupidly) simple.
+Toml configparser made (stupidly) simple for python.
 
 # install
 
@@ -9,27 +9,7 @@ pip install TomlConfig
 
 # Usage
 
-~~~python
-from tomlconfig import TomlConfig
-
-# read config file
-config=TomlConfig("config.toml")
-
-# get config item
-language=config["general.language"]
-size=config["general.editor.size"]
-font=config["general.editor"].get("font")
-fontWeight=config["general.editor"].get("fontWeight",2)
-
-# in operation
-"general.language" in  config # True
-
-# set config item
-config["otherSection.key1"] = 'value1' # set to config
-config["otherSection2"] = {"k1":1} # add config section
-~~~
-
-Assume the "config.toml" file content is:
+If the toml config file "config.toml" exist with content:
 
 ~~~
 [general]
@@ -38,4 +18,30 @@ language = 'en'
 [general.editor]
 size = 12
 font = 'arial'
+~~~
+
+Use the TomlConfig parse it as following:
+
+~~~python
+from tomlconfig import TomlConfig
+
+# read config file
+config = TomlConfig("config.toml")
+
+# get item
+language = config["general.language"] # "en"
+size = config["general.editor.size"]  # 12
+
+# in operation
+"general.language" in  config  # True
+
+# set or add item
+config["general.editor.font"] = "Roman" # set font=Roman in toml
+config["server.name"] = 'server1' # add a new item
+config["newSection"] = {"k1":1} # add a new config section
+
+# list item operation
+config.insertToChild("general.editor.font", 0, "Arial") # change font from str to list and insert item
+config.appendToChild("general.editor.font", "SimSun") # font=["Arial", "Roman", "SimSun"]
+# same as config["general.editor.file"].append("SimSun")
 ~~~
