@@ -2,8 +2,6 @@
 [general]
 language = 'en'
 
-[interface]
-a=1
-[interface.editor]
+[general.editor]
 size = 12
 font = 'arial'

@@ -9,23 +9,27 @@ pip install TomlConfig
 
 # Usage
 
-
 ~~~python
 from tomlconfig import TomlConfig
-config=TomlConfig("config.toml")
-language=config.getChild("general.language")
-size=config.getChild("general.editor.size")
-font=config.getSec("general.editor").get("font")
-fontWeight=config.getChild("general.editor").get("fontWeight",2)
 
-config.hasChild("general.language") # True
-config.hasSec("general") # True
-config.hasSec("general.language") # False
-config.addSec("otherSection")
-config.addChild("general.theme", "simple") # add "theme=simple" to general
+# read config file
+config=TomlConfig("config.toml")
+
+# get config item
+language=config["general.language"]
+size=config["general.editor.size"]
+font=config["general.editor"].get("font")
+fontWeight=config["general.editor"].get("fontWeight",2)
+
+# in operation
+"general.language" in  config # True
+
+# set config item
+config["otherSection.key1"] = 'value1' # set to config
+config["otherSection2"] = {"k1":1} # add config section
 ~~~
 
-Assume the config.toml content is:
+Assume the "config.toml" file content is:
 
 ~~~
 [general]

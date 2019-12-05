@@ -22,18 +22,15 @@ if "general.language" in config:
 language = config["general.language"]
 print("language content is:" + language)
 
-size = config.getChild("general.editor.size")
+size = config["general.editor.size"]
 print("size:{}".format(size))
-font = config.getSec("general.editor").get("font")
-# print("font:" + font)
-fontWeight = config.getChild("general.editor").get("fontWeight", 2)
+fontWeight = config["general.editor"].get("fontWeight", 2)
 print("fontWeight:{}".format(fontWeight))
 
-haslang = config.hasChild("general.language")  # True
-print("has general.language:{}".format(haslang))
-hasgen = config.hasSec("general")  # True
-print("has general section:{}".format(hasgen))
-haslangsec = config.hasSec("general.language")  # False, language is not a section
-print("has general.language section:{}".format(haslangsec))
-config.addSec("otherSection")
-config.addChild("general.theme", "simple")  # add "theme=simple" to general
+if "general.language" in config:  # True
+    print("'general.language' is in config.")
+if config.hasSec("general.editor"):  # True
+    print("'general.editor' is a section in config")
+
+config["otherSection"]={'key1':1}  # add section
+config["general.theme"]="simple"  # add "theme=simple" to general
