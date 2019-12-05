@@ -8,7 +8,6 @@ import sys
 sys.path.append(".")
 
 from pytest import fixture, raises
-# from config import Config
 from tomlconfig import TomlSection, Error
 
 

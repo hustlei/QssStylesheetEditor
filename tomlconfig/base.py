@@ -183,25 +183,22 @@ class TomlSection(dict):
             True: if successed
             False: if child is not exist, or child is a dict
         """
-        if self.hasChild(childString):
-            childString = childString.strip(". \r\n\t")
-            childNames = childString.split(".")
-            item = self
-            for childname in childNames[:-1]:
-                subitem = item.get(childname)
-                if childname in item and isinstance(subitem, dict):
-                    subitem = TomlSection(item)
-                    item = subitem
-                else:
-                    return False
-            lastitem = item.get(childNames[-1])
-            if isinstance(lastitem, dict):
-                return False
-            if not isinstance(lastitem, list):
-                item.update({childNames[-1]: [lastitem]})
-            item.get(childNames[-1]).append(obj)
-            return True
-        return False
+        if not self.hasChild(childString):
+            self.addChild(childString)
+        childString = childString.strip(". \r\n\t")
+        childNames = childString.split(".")
+        item = self
+        for childname in childNames[:-1]:
+            subitem = item.get(childname)
+            if childname in item and isinstance(subitem, dict):
+                item = subitem
+            else:
+                item.update({childname: TomlSection()})
+                item = item.get(childname)
+        lastitem = item.get(childNames[-1])
+        if not isinstance(lastitem, list):
+            item.update({childNames[-1]: [lastitem]})
+        item.get(childNames[-1]).append(obj)
 
     def insertToChild(self, childString, index, obj):
         """Insert 'obj' to child at index position, child indicated by 'name.subname' format.
@@ -216,25 +213,23 @@ class TomlSection(dict):
             True: if insert successed
             False: if child is not exist, or child is a dict
         """
-        if self.hasChild(childString):
-            childString = childString.strip(". \r\n\t")
-            childNames = childString.split(".")
-            item = self
-            for childname in childNames[:-1]:
-                subitem = item.get(childname)
-                if childname in item.keys() and isinstance(subitem, dict):
-                    subitem = TomlSection(item)
-                    item = subitem
-                else:
-                    return False
-            lastitem = item.get(childNames[-1])
-            if isinstance(lastitem, dict):
-                return False
-            if not isinstance(lastitem, list):
+        childString = childString.strip(". \r\n\t")
+        childNames = childString.split(".")
+        item = self
+        for childname in childNames[:-1]:
+            subitem = item.get(childname)
+            if childname in item.keys() and isinstance(subitem, dict):
+                item = subitem
+            else:
+                item.update({childname: TomlSection()})
+                item = item.get(childname)
+        lastitem = item.get(childNames[-1])
+        if not isinstance(lastitem, list):
+            if lastitem is None:
+                item.update({childNames[-1]: []})
+            else:
                 item.update({childNames[-1]: [lastitem]})
-            item.get(childNames[-1]).insert(index, obj)
-            return True
-        return False
+        item.get(childNames[-1]).insert(index, obj)
 
     ##
     ## Section Operate
