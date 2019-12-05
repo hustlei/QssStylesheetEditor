@@ -42,3 +42,6 @@ config.insertToChild("general.editor.font", 0, "Arial") # change font from str t
 config.appendToChild("general.editor.font", "SimSun") # font=["Arial", "Roman", "SimSun"]
 # same as config["general.editor.file"].append("SimSun")
 print("font list is:{}".format(config["general.editor.font"]))
+
+# save toml config file
+# config.save()
