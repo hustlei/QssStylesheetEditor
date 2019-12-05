@@ -41,7 +41,7 @@ def test_section(section):
     assert "sec1" in section
     assert "sec3" not in section
     assert 'sec11' in section["sec1"]
-    assert section["sec2"]=={}
+    assert section["sec2"] == {}
     del section["sec2"]
     assert 'sec2' not in section
     # add21 = section.addChild("sec2.sec21")
