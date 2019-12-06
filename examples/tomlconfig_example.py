@@ -6,6 +6,7 @@
 """
 
 import sys, os
+
 currentdir = os.path.dirname(__file__)
 sys.path.append(currentdir + "/..")  # test environments, if TomlConfig is installed, this not needed
 from tomlconfig import TomlConfig
@@ -31,15 +32,15 @@ print("size:{}".format(size))
 config["general.editor.font"] = "Roman"
 config["general.editor.fontWeight"] = 2
 print("add item fontWeight, and value is set to:{}".format(config["general.editor.fontWeight"]))
-config["newSection"]={'key1':1}  # add section
+config["newSection"] = {'key1': 1}  # add section
 
 # is a section in toml
 if config.hasSec("general.editor"):  # True
     print("'general.editor' is a section in config")
 
 # list item operation
-config.insertToChild("general.editor.font", 0, "Arial") # change font from str to list and insert item
-config.appendToChild("general.editor.font", "SimSun") # font=["Arial", "Roman", "SimSun"]
+config.insertToChild("general.editor.font", 0, "Arial")  # change font from str to list and insert item
+config.appendToChild("general.editor.font", "SimSun")  # font=["Arial", "Roman", "SimSun"]
 # same as config["general.editor.file"].append("SimSun")
 print("font list is:{}".format(config["general.editor.font"]))
 

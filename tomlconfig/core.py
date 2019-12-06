@@ -25,7 +25,8 @@ class TomlConfig(TomlSection):
         """
         try:
             self.clear()
-            self.update(toml.loads(tomlString, _dict=dict))
+            tomdict = toml.loads(tomlString, _dict=dict)
+            self.update(TomlSection(tomdict))
         except:
             return False
         return True

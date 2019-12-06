@@ -18,14 +18,10 @@ else:
 
 language = config.getChild("general.language")
 print("language:" + language)
-size = config.getChild("interface.editor.size")
+size = config.getChild("general.editor.size")
 print("size:{}".format(size))
-font = config.getSec("interface.editor").get("font")
-print("font:" + font)
-fontWeight = config.getChild("interface.editor").get("fontWeight", 2)
+fontWeight = config.getChild("general.editor").get("fontWeight", 2)
 print("fontWeight:{}".format(fontWeight))
-
-config.save(os.path.join(currentdir, "a.toml"))
 
 haslang = config.hasChild("general.language")  # True
 print("has general.language:{}".format(haslang))
@@ -35,3 +31,5 @@ haslangsec = config.hasSec("general.language")  # False, language is not a secti
 print("has general.language section:{}".format(haslangsec))
 config.addSec("otherSection")
 config.addChild("general.theme", "simple")  # add "theme=simple" to general
+
+# config.save(os.path.join(currentdir, "a.toml"))

@@ -1,49 +1,31 @@
 # -*- coding: utf-8 -*-
-"""test for qsst module.
+"""test for basic api of tomlsection
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import sys
-sys.path.append(".")
 
-from pytest import fixture, raises
-# from config import Config
+from pytest import raises
 from tomlconfig import TomlSection, Error
 
 
-@fixture(scope="function")
-def section():
-    """Fixture: create a TomlConfigParser object
-    """
-    return TomlSection()
-
-
-def test_section_child(section):
+def test_child_basicapi(section):
     """Test child operation for Section"""
-    section['sec1'] = TomlSection()
-    section['sec1']['sec11'] = TomlSection()
-    section['sec1']['sec12'] = TomlSection()
-    section['sec1']['sec11']['v111'] = 111
-    section['sec1']['sec11']['v112'] = 112
-    section['sec1']['sec12']['v121'] = 121
-    section['sec1']['sec12']['v122'] = 122
     # test for hasChild
     assert section.hasChild("sec1")
-    assert not section.hasChild("sec2")
+    assert not section.hasChild("sec3")
     assert section.hasChild("sec1.sec11")
-    assert section.hasChild("sec1.sec12")
+    assert section.hasChild("sec1.sec11.v111")
     assert not section.hasChild("sec1.sec13")
     assert not section.hasChild("sec1.sec13.sec")
-    assert section.hasChild("sec1.sec11.v111")
     # test for addChild
-    add21 = section.addChild("sec2.sec21")
-    assert section.hasChild("sec2.sec21")
+    add21 = section.addChild("sec3.sec31")
+    assert section.hasChild("sec3.sec31")
     assert add21 == ""
     assert section.addChild(".") is None
     section.addChild("sec3")
     assert section.hasChild("sec3")
-    section.addChild("sec3.sec31")
+    section.addChild("sec3.sec31", TomlSection())
     assert section.hasChild("sec3.sec31")
     # test for rmChild
     section.rmChild("sec3.sec31")
@@ -68,15 +50,8 @@ def test_section_child(section):
     assert not section.setChild("sec1.sec11.v1113", 123, addifnochild=False)
 
 
-def test_section_sec(section):
+def test_sec_basicapi(section):
     """Test method for Section"""
-    section['sec1'] = TomlSection()
-    section['sec1']['sec11'] = TomlSection()
-    section['sec1']['sec12'] = TomlSection()
-    section['sec1']['sec11']['v111'] = 111
-    section['sec1']['sec11']['v112'] = 112
-    section['sec1']['sec12']['v121'] = 121
-    section['sec1']['sec12']['v122'] = 122
     # test for hasSec
     assert section.hasSec("sec1")
     assert not section.hasSec("sec2")
@@ -113,48 +88,3 @@ def test_section_sec(section):
     assert 1112 in section.getChild("sec1.sec11.v111")
     assert not section.appendToChild("sec1", "sec1xx")
 
-
-# def test_tomlparser(tomlparser):
-#     """Test for TomlConfigParser
-#     """
-#     # test read
-#     rst = section.read()
-#     assert (not rst)
-#     rst = section.read("config/config.toml")
-#     assert rst
-#     assert section["general"]
-#     assert 'file' in section
-#     assert 'editor' in section
-#     assert 'default' not in section
-#
-#     root = tomlparser.getSec()
-#     assert root == {}
-#     tomlparser.add
-
-# @fixture
-# def conf():
-#     obj = Config()
-#     return obj
-#
-#
-# def test_sec(conf):
-#     conf.getSec("xx")
-#     assert "xx" in conf.dict
-#     conf.dict["xx"] = "aa"
-#     assert conf.dict["xx"] == "aa"
-#
-#
-# def test_rmsec(conf):
-#     conf.getSec("xx")
-#     assert "xx" in conf.dict
-#     conf.rmSec("xx")
-#     assert "xx" not in conf.dict
-#
-#
-# def test_list(conf):
-#     conf.listNodeAppend("node", "child1")
-#     conf.listNodeAppend("node", "child2")
-#     assert conf.dict["node"][0] == "child1"
-#     assert conf.dict["node"][1] == "child2"
-#     conf.listNodeInsert("node", "ccc")
-#     assert conf.dict["node"][0] == "ccc"
