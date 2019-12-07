@@ -1,7 +1,7 @@
-TomlConfig
+tomlconfig
 ==========
 
 .. toctree::
    :maxdepth: 4
 
-   TomlConfig
+   tomlconfig

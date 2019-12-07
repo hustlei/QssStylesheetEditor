@@ -1,1 +1,1 @@
-sphinx-apidoc -Mfo source ../TomlConfig/
+sphinx-apidoc -Mfo source ../tomlconfig/

@@ -1,7 +1,7 @@
-TomlConfig package
+tomlconfig package
 ==================
 
-.. automodule:: TomlConfig
+.. automodule:: tomlconfig
    :members:
    :undoc-members:
    :show-inheritance:
@@ -9,18 +9,18 @@ TomlConfig package
 Submodules
 ----------
 
-TomlConfig.base module
+tomlconfig.base module
 ----------------------
 
-.. automodule:: TomlConfig.base
+.. automodule:: tomlconfig.base
    :members:
    :undoc-members:
    :show-inheritance:
 
-TomlConfig.core module
+tomlconfig.core module
 ----------------------
 
-.. automodule:: TomlConfig.core
+.. automodule:: tomlconfig.core
    :members:
    :undoc-members:
    :show-inheritance:

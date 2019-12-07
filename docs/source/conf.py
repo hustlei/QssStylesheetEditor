@@ -19,8 +19,8 @@ sys.path.insert(0, srcdir)  #指向src目录
 
 # -- Project information -----------------------------------------------------
 
-project = 'TomlConfig'
-copyright = '2019, lileilei'
+project = 'tomlconfig'
+copyright = '2019 lileilei'
 author = 'lileilei'
 
 # The full version, including alpha/beta/rc tags
@@ -33,6 +33,13 @@ release = '1.1.0'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.doctest',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -41,14 +48,7 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.mathjax',]
+exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
