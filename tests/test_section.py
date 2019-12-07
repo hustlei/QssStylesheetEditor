@@ -4,7 +4,6 @@
 Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
-
 from tomlconfig import TomlSection
 
 

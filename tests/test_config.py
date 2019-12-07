@@ -4,8 +4,8 @@
 Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
-
 from tomlconfig import TomlConfig
+
 
 def test_tomlconfig(configfile):
     """Test for TomlConfig class
@@ -16,13 +16,13 @@ def test_tomlconfig(configfile):
     assert "sec1" in config
 
     # readstring
-    tomlstr="[sec]\n"
+    tomlstr = "[sec]\n"
     config.readString(tomlstr)
     assert "sec" in config
     assert "sec1" not in config
 
     # update dict to tomlconfig
-    tomldict={'sec3':{'v31': 31}}
+    tomldict = {'sec3': {'v31': 31}}
     config.update(tomldict)
     assert "sec" in config
     assert config["sec3.v31"] == 31
@@ -30,11 +30,10 @@ def test_tomlconfig(configfile):
     # test for clear
     config.clear()
     config["v2"] = 2
-    assert config == {"v2":2}
+    assert config == {"v2": 2}
 
     # test for save
     config.save()
     config.read(configfile)
     assert "v2" in config
     assert "sec1" not in config
-

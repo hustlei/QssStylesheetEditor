@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Test for basic api of tomlsection
+"""Test basic api of tomlsection
 
 Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
-
 
 from pytest import raises
 from tomlconfig import TomlSection, Error
@@ -36,11 +35,10 @@ def test_child_basicapi(section):
     assert rm1 == {}
     assert section.rmChild("sec3") is None
     # test for getChild
-    assert section.getChild('sec1.sec12.v122') == 122
-    assert 'v121' in section.getChild('sec1.sec12')
-    assert section.getChild('sec1').hasChild('sec12')
-    assert section.getChild('sec1').hasChild('sec12.v122')
-    assert 'v121' in section.getChild('sec1.sec12')
+    assert section.getChild('sec1.sec11.v111') == 111
+    assert 'v111' in section.getChild('sec1.sec11')
+    assert section.getChild('sec1').hasChild('sec11')
+    assert section.getChild('sec1').hasChild('sec11.v111')
     assert section.getChild('') is None
     assert section.getChild('sec4') == ""
     assert section.getChild('sec5', False) is None
@@ -54,9 +52,8 @@ def test_sec_basicapi(section):
     """Test method for Section"""
     # test for hasSec
     assert section.hasSec("sec1")
-    assert not section.hasSec("sec2")
+    assert not section.hasSec("sec3")
     assert section.hasSec("sec1.sec11")
-    assert section.hasSec("sec1.sec12")
     assert not section.hasSec("sec1.sec13")
     assert not section.hasSec("sec1.sec13.sec")
     assert not section.hasSec("sec1.sec11.v111")
@@ -87,4 +84,3 @@ def test_sec_basicapi(section):
     assert isinstance(section.getChild("sec1.sec11.v111"), list)
     assert 1112 in section.getChild("sec1.sec11.v111")
     assert not section.appendToChild("sec1", "sec1xx")
-
