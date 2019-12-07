@@ -64,8 +64,7 @@ class TomlSection(dict):
     def hasChild(self, childString):
         """If child item exist return true, else false
 
-        Args:
-            childString: "childname.subchildname" format path to ditermine child item
+        :param childString: "childname.subchildname" format path to ditermine child item
         """
         childString = childString.strip(". \r\n\t")
         if len(childString) < 1:
@@ -81,9 +80,8 @@ class TomlSection(dict):
     def addChild(self, childString, obj=""):
         """Add child using format childname.subchildname string
 
-        Args:
-            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
-            obj: child tobe added, default is ""
+        :param childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+        :param obj: child tobe added, default is ""
 
         Example:
             `self.addChild("child.key1", "value")`: aaa subsection of general section
@@ -108,8 +106,7 @@ class TomlSection(dict):
     def rmChild(self, childString):
         """Remove child by format 'childname.subchildname.xxx'
 
-        Returns:
-            return the removed child, if not exist return None
+        :returns: return the removed child, if not exist return None
         """
         childString = childString.strip(". \r\n\t")
         if len(childString) < 1:
@@ -127,10 +124,9 @@ class TomlSection(dict):
     def getChild(self, childString, addifnochild=True, defaultchild=""):
         """Get child by format 'childname.subchildname'
 
-        Args:
-            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
-            addifnochild: if child is not exist add the child
-            defaultchild: if child not exist, add defaultchild as the child value
+        :param childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+        :param addifnochild: if child is not exist add the child
+        :param defaultchild: if child not exist, add defaultchild as the child value
         """
         childString = childString.strip(". \r\n\t")
         if len(childString) < 1:
@@ -161,10 +157,9 @@ class TomlSection(dict):
     def setChild(self, childString, value, addifnochild=True):
         """Set value to child, if success return True else return False
 
-        Args:
-            childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
-            value: value will be set to the child
-            addifnochild: if child is not exist add the child
+        :param childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
+        :param value: value will be set to the child
+        :param addifnochild: if child is not exist add the child
         """
         if addifnochild or self.hasChild(childString):
             self.addChild(childString, value)
@@ -176,12 +171,9 @@ class TomlSection(dict):
         if it's a list, obj will be appended. if it's a string or number, it will be converted to list.
         if it's a dict ,return false
 
-        Args:
-            childString: "name.subname" format to get child
-            obj: value to be appended
-        Returns:
-            True: if successed
-            False: if child is not exist, or child is a dict
+        :param childString: "name.subname" format to get child
+        :param obj: value to be appended
+        :return: True if successed; False if child is not exist, or child is a dict
         """
         if not self.hasChild(childString):
             self.addChild(childString)
@@ -205,13 +197,10 @@ class TomlSection(dict):
         if it's a list, obj will be inserted. if it's a string or number, it will be converted to list.
         if it's a dict ,return false
 
-        Args:
-            childString: "name.subname" format to get child, child must be a list, if not a list, it will be covert to a list
-            index: position to be inserted to the list
-            obj: value to be inserted
-        Returns:
-            True: if insert successed
-            False: if child is not exist, or child is a dict
+        :param childString: "name.subname" format to get child, child must be a list, if not a list, it will be covert to a list
+        :param index: position to be inserted to the list
+        :param obj: value to be inserted
+        :return: True if insert successed; False if child is not exist, or child is a dict
         """
         childString = childString.strip(". \r\n\t")
         childNames = childString.split(".")
@@ -237,8 +226,7 @@ class TomlSection(dict):
     def hasSec(self, secString):
         """If section exist and type is dict return true, else false
 
-        Args:
-            secString: "secname.subsecname" format path to ditermine section
+        :param secString: "secname.subsecname" format path to ditermine section
         """
         secString = secString.strip(". \r\n\t")
         if len(secString) < 1:
@@ -272,8 +260,7 @@ class TomlSection(dict):
             `self.getSec()`: get root section
             `self.getSec("general.subsection")`: get the subsection of general section
 
-        Args:
-            addifnotfound: if True, if section is not found, add it to toml
+        :param addifnotfound: if True, if section is not found, add it to toml
         """
         secString = secString.strip(". \r\n\t")
         if len(secString) < 1:

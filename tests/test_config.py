@@ -42,4 +42,3 @@ def test_tomlconfig(configfile):
     import tomlconfig
     ver = tomlconfig.__version__
     assert int(ver[0]) >= 1
-    

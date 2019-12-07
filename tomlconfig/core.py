@@ -11,6 +11,7 @@ from .base import TomlSection
 
 class TomlConfig(TomlSection):
     """Paser for toml config file"""
+
     def __init__(self, tomlFile=None):
         super().__init__()
         self.configFile = tomlFile
@@ -37,10 +38,8 @@ class TomlConfig(TomlSection):
         Toml file shall be coded in utf-8
         Parser toml file and store config into self.dict
 
-        Args:
-            tomlFile:  toml config file path
-        Returns:
-            Success or failed, return true if read success
+        :pram tomlFile:  toml config file path
+        :return: Success or failed, return true if read success
         """
         if tomlFile is None:
             return False
@@ -54,7 +53,7 @@ class TomlConfig(TomlSection):
             content = content[3:]
         self.clear()
         tomldict = toml.loads(content.decode('utf8'))  # _dict=TomlSection))
-        self.update(TomlSection(tomldict))  #,
+        self.update(TomlSection(tomldict))  # ,
         return True
 
     def save(self, tomlFile=None, coding='utf-8'):
