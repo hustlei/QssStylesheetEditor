@@ -24,7 +24,7 @@ copyright = '2019 lileilei'
 author = 'lileilei'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.0'
+release = '1.2.0'
 
 
 # -- General configuration ---------------------------------------------------
