@@ -11,7 +11,6 @@ from .base import TomlSection
 
 class TomlConfig(TomlSection):
     """Paser for toml config file"""
-
     def __init__(self, tomlFile=None):
         super().__init__()
         self.configFile = tomlFile

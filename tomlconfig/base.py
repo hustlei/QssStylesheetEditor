@@ -36,6 +36,7 @@ class TomlSection(dict):
     """A TomlSection means a dict object in toml. TomlSection is base on dict.
 
     Examples::
+
         sec = Section()
         if not sec.hasSec("sec1.sec11"):
             sec.addSec("sec1.sec11")
@@ -84,6 +85,7 @@ class TomlSection(dict):
         :param obj: child tobe added, default is ""
 
         Example::
+
             self.addChild("child.key1", "value") # aaa subsection of general section
         """
         childString = childString.strip(". \r\n\t")
@@ -245,6 +247,7 @@ class TomlSection(dict):
         """Add section using format secname.subsecname string
 
         Example::
+
             self.addSec("general.subsection") # add subsection of general section
         """
         return self.addChild(secString, TomlSection())
@@ -257,6 +260,7 @@ class TomlSection(dict):
         """Get section by secname.subsecname string
 
         Example::
+
             self.getSec() # get root section
             self.getSec("general.subsection") # get the subsection of general section
 
