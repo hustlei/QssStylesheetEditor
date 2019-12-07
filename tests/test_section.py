@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """test for TomlSection.
 
-Copyright (c) 2019 lileilei <hustlei@sina.cn>
+Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
 
@@ -31,5 +31,11 @@ def test_section(section):
     assert 'sec3.sec32' not in section
 
     # test for hassection
-    assert section.hasSection("sec1.sec11")
-    assert not section.hasSection("sec1.sec11.v111")
+    assert section.hasSec("sec1.sec11")
+    assert not section.hasSec("sec1.sec11.v111")
+
+    # test for list
+    section.insertToChild("sec1.sec11.v111", 0, 1110)
+    assert section['sec1.sec11.v111'] == [1110, 111]
+    section.appendToChild("sec1.sec11.v111", 1112)
+    assert section['sec1.sec11.v111'] == [1110, 111, 1112]

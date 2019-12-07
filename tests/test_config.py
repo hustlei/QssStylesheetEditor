@@ -1,48 +1,40 @@
 # -*- coding: utf-8 -*-
-"""test for TomlConfig class"""
+"""Test for TomlConfig class
+
+Copyright (c) 2019 lileilei. <hustlei@sina.cn>
+"""
 
 
-# def test_tomlparser(tomlparser):
-#     """Test for TomlConfigParser
-#     """
-#     # test read
-#     rst = section.read()
-#     assert (not rst)
-#     rst = section.read("config/config.toml")
-#     assert rst
-#     assert section["general"]
-#     assert 'file' in section
-#     assert 'editor' in section
-#     assert 'default' not in section
-#
-#     root = tomlparser.getSec()
-#     assert root == {}
-#     tomlparser.add
+from tomlconfig import TomlConfig
 
-# @fixture
-# def conf():
-#     obj = Config()
-#     return obj
-#
-#
-# def test_sec(conf):
-#     conf.getSec("xx")
-#     assert "xx" in conf.dict
-#     conf.dict["xx"] = "aa"
-#     assert conf.dict["xx"] == "aa"
-#
-#
-# def test_rmsec(conf):
-#     conf.getSec("xx")
-#     assert "xx" in conf.dict
-#     conf.rmSec("xx")
-#     assert "xx" not in conf.dict
-#
-#
-# def test_list(conf):
-#     conf.listNodeAppend("node", "child1")
-#     conf.listNodeAppend("node", "child2")
-#     assert conf.dict["node"][0] == "child1"
-#     assert conf.dict["node"][1] == "child2"
-#     conf.listNodeInsert("node", "ccc")
-#     assert conf.dict["node"][0] == "ccc"
+def test_tomlconfig(configfile):
+    """Test for TomlConfig class
+    """
+    # readfile
+    config = TomlConfig()
+    config.read(configfile)
+    assert "sec1" in config
+
+    # readstring
+    tomlstr="[sec]\n"
+    config.readString(tomlstr)
+    assert "sec" in config
+    assert "sec1" not in config
+
+    # update dict to tomlconfig
+    tomldict={'sec3':{'v31': 31}}
+    config.update(tomldict)
+    assert "sec" in config
+    assert config["sec3.v31"] == 31
+
+    # test for clear
+    config.clear()
+    config["v2"] = 2
+    assert config == {"v2":2}
+
+    # test for save
+    config.save()
+    config.read(configfile)
+    assert "v2" in config
+    assert "sec1" not in config
+

@@ -49,6 +49,7 @@ class TomlConfig(TomlSection):
             return False
         with open(tomlFile, mode='rb') as f:
             content = f.read()
+        self.configFile = tomlFile
         if content.startswith(b'\xef\xbb\xbf'):  # 去掉 utf8 bom 头 #TOML要求使用UTF-8 编码
             content = content[3:]
         self.clear()

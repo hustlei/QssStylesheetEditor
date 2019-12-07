@@ -9,7 +9,7 @@ pip install TomlConfig
 
 # Usage
 
-If the toml config file "config.toml" exist with content:
+Define the toml config file "config.toml" as following:
 
 ~~~
 [general]
@@ -20,7 +20,7 @@ size = 12
 font = 'arial'
 ~~~
 
-Use the TomlConfig parse it as following:
+TomlConfig parse it very simply:
 
 ~~~python
 from tomlconfig import TomlConfig
@@ -33,10 +33,14 @@ language = config["general.language"] # "en"
 size = config["general.editor.size"]  # 12
 
 # in operation
-"general.language" in  config  # True
+"general.language" in  config  # True"
+config.hasSec("general") # True
+config.hasSec("general.language") #False
 
-# set or add item
+# set item
 config["general.editor.font"] = "Roman" # set font=Roman in toml
+
+# add item
 config["server.name"] = 'server1' # add a new item
 config["newSection"] = {"k1":1} # add a new config section
 
@@ -44,4 +48,9 @@ config["newSection"] = {"k1":1} # add a new config section
 config.insertToChild("general.editor.font", 0, "Arial") # change font from str to list and insert item
 config.appendToChild("general.editor.font", "SimSun") # font=["Arial", "Roman", "SimSun"]
 # same as config["general.editor.file"].append("SimSun")
+
+# save
+config.save()
+# saveas
+config.save("newfile.toml")
 ~~~

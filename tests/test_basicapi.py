@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""test for basic api of tomlsection
+"""Test for basic api of tomlsection
 
-Copyright (c) 2019 lileilei <hustlei@sina.cn>
+Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
 
