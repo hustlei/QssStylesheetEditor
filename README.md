@@ -1,6 +1,6 @@
 English | [简体中文](README_zh-CN.md)
 
-# TomlConfig
+# tomlconfig
 Toml configparser made (stupidly) simple for python.
 
 # install

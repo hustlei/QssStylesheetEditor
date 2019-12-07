@@ -1,6 +1,6 @@
 简体中文 | [English](README.md)
 
-# TomlConfig
+# tomlconfig
 最简单，最易用的toml配置文件解析器（python库）.
 
 # 安装

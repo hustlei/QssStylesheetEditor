@@ -18,8 +18,8 @@ setup(
     desciption="Toml config parser made (stupidly) simple",
     long_description=long_desc,
     long_description_content_type="text/markdown",
-    url="https://github.com/hustlei/TomlConfig",
-    project_urls={"Source Code": "https://github.com/hustlei/TomlConfig"},
+    url="https://github.com/hustlei/tomlconfig",
+    project_urls={"Source Code": "https://github.com/hustlei/tomlconfig"},
     classifiers=[
         "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
         "Programming Language :: Python :: 3", "Operating System :: OS Independent"
