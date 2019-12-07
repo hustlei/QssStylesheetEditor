@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Toml config file parser
 
-Copyright (c) 2019 lileilei <hustlei@sina.cn>
+Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
 
@@ -35,7 +35,7 @@ class SectionTypeError(Error):
 class TomlSection(dict):
     """A TomlSection means a dict object in toml. TomlSection is base on dict.
 
-    Examples:
+    Examples::
         sec = Section()
         if not sec.hasSec("sec1.sec11"):
             sec.addSec("sec1.sec11")
@@ -83,8 +83,8 @@ class TomlSection(dict):
         :param childString: name of child, childName shall be format "childname.subchildname.subsub.childname"
         :param obj: child tobe added, default is ""
 
-        Example:
-            `self.addChild("child.key1", "value")`: aaa subsection of general section
+        Example::
+            self.addChild("child.key1", "value") # aaa subsection of general section
         """
         childString = childString.strip(". \r\n\t")
         if len(childString) < 1:
@@ -244,8 +244,8 @@ class TomlSection(dict):
     def addSec(self, secString):
         """Add section using format secname.subsecname string
 
-        Example:
-            `self.addSec("general.subsection")`: aaa subsection of general section
+        Example::
+            self.addSec("general.subsection") # add subsection of general section
         """
         return self.addChild(secString, TomlSection())
 
@@ -256,9 +256,9 @@ class TomlSection(dict):
     def getSec(self, secString=None, addifnosec=True):
         """Get section by secname.subsecname string
 
-        Example:
-            `self.getSec()`: get root section
-            `self.getSec("general.subsection")`: get the subsection of general section
+        Example::
+            self.getSec() # get root section
+            self.getSec("general.subsection") # get the subsection of general section
 
         :param addifnotfound: if True, if section is not found, add it to toml
         """
