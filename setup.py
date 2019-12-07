@@ -8,7 +8,7 @@ from setuptools import setup
 with open("README.md", encoding="utf-8") as f:
     long_desc=f.read()
 
-ver="1.2.0"
+ver="1.2.1"
 
 setup(
     name="tomlconfig",
