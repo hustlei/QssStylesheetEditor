@@ -1,17 +1,17 @@
-English | [简体中文](README_zh-CN.md)
+简体中文 | [English](README.md)
 
 # TomlConfig
-Toml configparser made (stupidly) simple for python.
+最简单，最易用的toml配置文件解析器（python库）.
 
-# install
+# 安装
 
 ~~~shell
 pip install TomlConfig
 ~~~
 
-# Usage
+# 使用方法
 
-Define the toml config file "config.toml" as following:
+假如有一个toml配置文件 "config.toml", 内容为:
 
 ~~~
 [general]
@@ -22,7 +22,7 @@ size = 12
 font = 'arial'
 ~~~
 
-TomlConfig parse it very simply:
+使用 TomlConfig 可以非常简单的解析和修改配置:
 
 ~~~python
 from tomlconfig import TomlConfig
