@@ -11,7 +11,7 @@ with open("README.md", encoding="utf-8") as f:
 ver="1.1.0"
 
 setup(
-    name="TomlConfig",
+    name="tomlconfig",
     author="lileilei",
     author_email="hustlei@sina.cn",
     keywords="toml config parser",

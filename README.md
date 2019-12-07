@@ -1,4 +1,4 @@
-English | [简体中文](README_zh-CN.md)
+English | [简体中文](https://github.com/hustlei/tomlconfig/blob/master/README_zh-CN.md)
 
 # tomlconfig
 Toml configparser made (stupidly) simple for python.

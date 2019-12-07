@@ -1,4 +1,4 @@
-简体中文 | [English](README.md)
+简体中文 | [English](https://github.com/hustlei/tomlconfig/blob/master/README.md)
 
 # tomlconfig
 最简单，最易用的toml配置文件解析器（python库）.
