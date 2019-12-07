@@ -6,7 +6,7 @@ Toml configparser made (stupidly) simple for python.
 # install
 
 ~~~shell
-pip install TomlConfig
+pip install tomlconfig
 ~~~
 
 # Usage

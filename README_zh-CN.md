@@ -6,7 +6,7 @@
 # 安装
 
 ~~~shell
-pip install TomlConfig
+pip install tomlconfig
 ~~~
 
 # 使用方法
