@@ -37,3 +37,9 @@ def test_tomlconfig(configfile):
     config.read(configfile)
     assert "v2" in config
     assert "sec1" not in config
+
+    # test for version
+    import tomlconfig
+    ver = tomlconfig.__version__
+    assert int(ver[0]) >= 1
+    
