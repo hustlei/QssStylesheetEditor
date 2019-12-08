@@ -1,7 +1,5 @@
 chardet
-PyQt5
-PyQt5-sip
+tomlconfig
 QScintilla
-pytest
 pytest-qt
 pytest-cov

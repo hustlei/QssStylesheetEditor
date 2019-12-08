@@ -8,7 +8,7 @@ setup(
     name="QssStylesheetEditor",  # ProjectName
     version="1.5",
     python_requires='>=3.0.*, <4',  # python的依赖关系
-    install_requires=['chardet', 'Qscintilla'],
+    install_requires=['chardet', 'Qscintilla', 'tomlconfig'],
 
     # Module
     package_dir={'': 'src'},  # tell distutils packages are under src

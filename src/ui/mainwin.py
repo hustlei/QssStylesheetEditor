@@ -37,7 +37,7 @@ class MainWin(MainWinBase):
         if self.tr("LTR") == "RTL":
             self.setLayoutDirection(Qt.RightToLeft)
         # conf
-        self.config = Config()
+        self.config = Config.current()
         self.configfile = os.path.join(os.path.dirname(__file__), "../config/config.toml")
         self.useConfig()
         # lang
@@ -433,11 +433,10 @@ class MainWin(MainWinBase):
         self.config.getSec("editor")["fontsize"] = self.editor.font().pointSize()
 
     def useConfig(self):
-        self.config.read()
-        recentlist = self.config.getSec("file").get("recent")
+        recentlist = self.config["file.recent"]
         if recentlist is not None:
             self.recent.setList(recentlist)
-        maxcount = self.config.getSec("file").get("recentcount")
+        maxcount = self.config["file.recentcount"]
         if maxcount is not None:
             self.recent.maxcount = maxcount
-        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize", 11))
+        self.editor.font().setPointSize(self.config["editor"].get("fontsize", 11))
