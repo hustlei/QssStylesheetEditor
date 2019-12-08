@@ -425,7 +425,7 @@ class MainWin(MainWinBase):
                     e.ignore()
         else:
             self.updateConfig()
-            self.config.save()
+            self.config.saveDefault()
 
     def updateConfig(self):
         self.config.getSec("file")["recent"] = self.recent.getList()

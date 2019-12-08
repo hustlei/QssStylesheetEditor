@@ -38,7 +38,7 @@ class Config(TomlConfig):
             Config._current = Config()
             return Config._current
 
-    def save(self):
+    def saveDefault(self):
         if self.save(self.file):
             print("config file saved.")
         else:

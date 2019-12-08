@@ -4,3 +4,6 @@ recentcount = 4
 
 [editor]
 fontsize = 11
+
+[general]
+language = ""
