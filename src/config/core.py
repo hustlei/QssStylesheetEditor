@@ -7,10 +7,12 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 import os
 from tomlconfig import TomlConfig
 
+
 class Config(TomlConfig):
     """Config parser for program"""
     defaultfile = os.path.join(os.path.dirname(__file__), "config.toml")
     _current = None
+
     def __init__(self, cfgfile=None):
         super().__init__()
         if cfgfile is None:
@@ -39,7 +41,9 @@ class Config(TomlConfig):
             return Config._current
 
     def saveDefault(self):
-        if self.save(self.file):
+        conf = self
+        conf.__class__ = TomlConfig
+        if conf.save(self.file):
             print("config file saved.")
         else:
             print("config file save failed.")

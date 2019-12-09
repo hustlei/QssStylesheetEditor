@@ -38,7 +38,6 @@ class MainWin(MainWinBase):
             self.setLayoutDirection(Qt.RightToLeft)
         # conf
         self.config = Config.current()
-        self.configfile = os.path.join(os.path.dirname(__file__), "../config/config.toml")
         self.useConfig()
         # lang
         # from i18n.language import Language as Lang
@@ -439,4 +438,4 @@ class MainWin(MainWinBase):
         maxcount = self.config["file.recentcount"]
         if maxcount is not None:
             self.recent.maxcount = maxcount
-        self.editor.font().setPointSize(self.config["editor"].get("fontsize", 11))
+        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize", 11))

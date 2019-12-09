@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """SplashScreen
 
 Copyright (c) 2019 lileilei <hustlei@sina.cn>

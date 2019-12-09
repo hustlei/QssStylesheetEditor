@@ -1,9 +1,9 @@
+[general]
+language = ""
+
 [file]
-recent = []
-recentcount = 4
+recent = ""
+recentcount = ""
 
 [editor]
 fontsize = 11
-
-[general]
-language = ""
