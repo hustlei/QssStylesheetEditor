@@ -48,9 +48,10 @@ Follow the steps as below, or install the binary installation package:
 
 1. install python3: following <http://python.org/>
 2. install dependecies:
-    - PyQt5: `pip instll PyQt5`
-    - Qscintilla: `pip instll Qscintilla`
+    - preimport: `pip instll preimport`
+    - tomlconfig: `pip insatll tomlconfig`
     - chardet: `pip instll chardet`
+    - Qscintilla: `pip instll Qscintilla`
 3. download and unzip package:
     + download [QssStylesheetEditor_v1.5.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
     + unzip and change dir to QssStylesheetEditor_v1.5 `cd QssStylesheetEditor_v1.5`
