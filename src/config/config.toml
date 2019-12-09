@@ -2,8 +2,8 @@
 language = ""
 
 [file]
-recent = ""
-recentcount = ""
+recent = [ ]
+recentcount = 4
 
 [editor]
 fontsize = 11

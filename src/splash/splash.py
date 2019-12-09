@@ -8,7 +8,7 @@ import time
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QSplashScreen
-from .preimport import preload
+from preimport import preimport
 
 
 class SplashScreen(QSplashScreen):
@@ -54,13 +54,13 @@ class SplashScreen(QSplashScreen):
         self.setProgressText(15)
         time.sleep(0.1)
         self.setProgressText(20)  # PyQt5, i18n are loaded, so before 20% do nothing
-        preload(["PyQt5.Qsci"])
+        preimport(["PyQt5.Qsci"])
         self.setProgressText(40)
-        preload(["res", "res.img_rc"])
+        preimport(["res", "res.img_rc"])
         self.setProgressText(60)
-        preload(["ui"])
+        preimport(["ui"])
         self.setProgressText(80)
-        preload(["qss_template"])
+        preimport(["qss_template"])
         self.setProgressText(100)
 
 

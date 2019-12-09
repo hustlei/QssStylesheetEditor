@@ -1,4 +1,5 @@
 chardet
+preimport
 tomlconfig
 QScintilla
 pytest-qt
