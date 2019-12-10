@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """load add save recent opened list
+
+Example::
+
+    recent = Recent(openfilefn, recentmenu)
+    recent.setList(['file1', 'file2'])
+    recent.addFile('newfile')
+
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
@@ -8,6 +15,7 @@ from PyQt5.QtWidgets import QAction
 
 
 class Recent():
+    """Class for add recent opened file path to recent menu"""
     def __init__(self, openfn, menu=None):
         super().__init__()
         self._pathes = []
@@ -16,6 +24,7 @@ class Recent():
         self.menu = menu
 
     def _updateMenu(self, recentMenu=None):
+        """Update files in recent to menubar"""
         if recentMenu is None:
             recentMenu = self.menu
         if recentMenu is not None:
@@ -29,9 +38,11 @@ class Recent():
                 recentMenu.addAction(action)
 
     def _recentact(self, path):
+        """Method implemented when recent menu clicked"""
         self.open(path)
 
     def addFile(self, filePath):
+        """Add one file to recent and update menu"""
         if filePath in self._pathes:
             self._pathes.remove(filePath)
         self._pathes.insert(0, filePath)
@@ -41,10 +52,12 @@ class Recent():
             self._updateMenu()
 
     def setList(self, filelist):
+        """Set filelist to recent and update menu"""
         self._pathes = filelist
         if filelist is None:
             self._pathes = []
         self._updateMenu()
 
     def getList(self):
+        """Get filelist in recent"""
         return self._pathes
