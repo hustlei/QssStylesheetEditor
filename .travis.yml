@@ -37,13 +37,13 @@ jobs:
 install:
     - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
     - pip3 install chardet
-    - pip3 install PyQt5
+    - pip3 install preimport
+    - pip3 install tomlconfig
     - pip3 install Qscintilla
-    - pip3 install -U pytest
     - pip3 install -U pytest-qt
-    - pip3 install -U coveralls
     - pip3 install -U pytest-cov
     - pip3 uninstall pytest-xdist
+    - pip3 install -U coveralls
     # - pip3 install tox
     
 script:
