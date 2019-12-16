@@ -1,2 +1,3 @@
 # CodeEditor
-Syntax highlighting code editor,  python package.
+Syntax highlighting code editor, python package.
+
