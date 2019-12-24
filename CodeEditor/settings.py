@@ -301,22 +301,22 @@ class EditorSettings():
     def _create_combobox(self, name):
         """Return a combobox for modifying a multiple-getValue setting."""
         setting = settingItems[name]
+        valuetype = setting['valuetype']
         # Create the combobox and populate it
         combo = QComboBox()
-        for label, value in setting['values']:
+        for value, valueinfo in SettingEnums.enums[valuetype].items():
             data = QVariant(value)
-            combo.addItem(label, data)
+            combo.addItem(valueinfo["display"], data)
 
         # Set the initial getValue, if any
-        current = self.previousSettings.get(name, setting['values'][0][1])
+        current = self.previousSettings.get(name, list(SettingEnums.enums[valuetype].values())[0])
         index = combo.findData(current)
         combo.setCurrentIndex(index)
 
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            value = str(data)  # .toString())
-            self.nextSettings[name] = value
+            self.nextSettings[name] = data
 
         # Connect event handler
         combo.currentIndexChanged[int].connect(combo_changed)
