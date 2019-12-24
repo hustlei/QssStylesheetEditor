@@ -11,7 +11,7 @@ from PyQt5.QtCore import Qt, QVariant
 from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
                              QComboBox, QColorDialog)
 from PyQt5.Qsci import QsciScintilla
-from setting_enums import getEnum, getEnumName, EnumError
+from setting_enums import EnumError, SettingEnums
 from lang import language_extensions
 
 
@@ -76,31 +76,19 @@ settingItems = {
         'label': 'Brace Matching',
         'type': 'combo',
         'help': 'Whether and how to highlight matching {} [] () braces',
-        'values': (
-            ('None', 'NoBraceMatch'),
-            ('Strict', 'StrictBraceMatch'),
-            ('Sloppy', 'SloppyBraceMatch'),
-        ),
+        'valuetype': QsciScintilla.BraceMatch,
     },
     'edgeMode': {
         'label': 'Edge Mode',
         'type': 'combo',
         'help': 'How the edge of the text width is indicated',
-        'values': (
-            ('None', 'EdgeNone'),
-            ('Line', 'EdgeLine'),
-            ('Background', 'EdgeBackground'),
-        ),
+        'valuetype': QsciScintilla.EdgeMode,
     },
     'eolMode': {
         'label': 'Line Endings',
         'type': 'combo',
         'help': 'End lines with carriage return and/or line feed',
-        'values': (
-            ('Windows', 'EolWindows'),
-            ('Unix', 'EolUnix'),
-            ('Mac', 'EolMac'),
-        ),
+        'valuetype': QsciScintilla.EolMode,
     },
     'folding': {
         'label':
@@ -109,14 +97,7 @@ settingItems = {
             'combo',
         'help':
             'What kind of icons to display for code-folding',
-        'values': (
-            ('None', 'NoFoldStyle'),
-            ('Plain', 'PlainFoldStyle'),
-            ('Circled', 'CircledFoldStyle'),
-            ('Boxed', 'BoxedFoldStyle'),
-            ('Circled Tree', 'CircledTreeFoldStyle'),
-            ('Boxed Tree', 'BoxedTreeFoldStyle'),
-        ),
+        'valuetype': QsciScintilla.FoldStyle
     },
     'whitespaceVisibility': {
         'label':
@@ -125,27 +106,19 @@ settingItems = {
             'combo',
         'help':
             'Whether whitespace is indicated with visible markers',
-        'values': (
-            ('Invisible', 'WsInvisible'),
-            ('Visible', 'WsVisible'),
-            ('Visible After Indent', 'WsVisibleAfterIndent'),
-        ),
+        'valuetype': QsciScintilla.WhitespaceVisibility
     },
     'wrapMode': {
         'label': 'Wrap Mode',
         'type': 'combo',
         'help': 'How to wrap text when it reaches the text width',
-        'values': (
-            ('None', 'WrapNone'),
-            ('Word', 'WrapWord'),
-            ('Character', 'WrapCharacter'),
-        ),
+        'valuetype': QsciScintilla.WrapMode
     },
     'language': {
         'label': 'Language',
         'type': 'combo',
         'help': 'Syntax highlighting language',
-        'values': [(lang, lang) for (lang, ext) in language_extensions],
+        'valuetype': 'language',
     },
 
     # TODO: Need a getter for this

@@ -13,3 +13,8 @@ def test_basic():
     assert SettingEnums.getDisplayString(QsciScintilla.AutoCompletionSource, QsciScintilla.AcsNone) == "None"
     # test getFromName
     assert SettingEnums.getFromName(QsciScintilla.AutoCompletionSource,"AcsNone") == QsciScintilla.AcsNone
+
+    # test for language
+    assert SettingEnums.getName('language',"Python") == 'Python'
+    assert SettingEnums.getFromName('language',"Python") == 'Python'
+    assert SettingEnums.getDisplayString('language',"Python") == 'Python'
