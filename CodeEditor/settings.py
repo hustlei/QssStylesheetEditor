@@ -10,8 +10,10 @@ import os
 from PyQt5.QtCore import Qt, QVariant
 from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
                              QComboBox, QColorDialog)
-from settingEnums import getEnum, getEnumName, BadEnum
+from PyQt5.Qsci import QsciScintilla
+from setting_enums import getEnum, getEnumName, EnumError
 from lang import language_extensions
+
 
 settingItems = {
     # Boolean settings
@@ -237,6 +239,8 @@ class EditorSettings():
         self.groupWidgets = {}
         if editor:
             self.editor = editor
+            for item in settingItems:
+                self.previousSettings[item] = self.editor.getConfig(item)
 
 
     def defaultLayout(self):

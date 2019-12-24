@@ -15,3 +15,6 @@ def test_editor(editor):
     assert editor.language() == "QSS"
     editor.setLanguage("Python")
     assert editor.language() == "Python"
+
+
+
