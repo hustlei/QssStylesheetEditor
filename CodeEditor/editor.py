@@ -11,6 +11,7 @@ from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
 from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
 from lexer import lexer_qss
+from .search import SearchDialog
 
 import chardet
 # if sys.platform.startswith("linux"):
@@ -36,6 +37,7 @@ class Editor(QsciScintilla):
         # self._setDefaultConfig()
         # Override defaults with any customizations
         self.configure(**config)
+        self.searchDialog = SearchDialog(self)
 
     ###
     # extension(core): config extension
