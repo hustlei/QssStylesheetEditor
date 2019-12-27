@@ -8,7 +8,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 import os
 from PyQt5.QtCore import Qt, QVariant, QCoreApplication
-from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QColor, QPalette
 from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
                              QComboBox, QColorDialog)
 from PyQt5.Qsci import QsciScintilla
@@ -214,16 +214,31 @@ class EditorSettings():
     )
 
     def __init__(self, editor=None):
-        self.previousSettings = {}  # settings exist
-        self.nextSettings = {}  # settings changed to be applied
-        # settings in toml format (all enum using name intead)
-        self.tomlDictSettings = {}
+        self.currentSettings = {}  # settings exist
+        self.changedSettings = {}  # settings changed to be applied
+        self.updateActions = {}
         # all setting group widgets
         self.groupWidgets = {}
-        if editor:
-            self.editor = editor
-            for item in self.settingItems:
-                self.previousSettings[item] = self.editor.getConfig(item)
+        self.editor = editor
+
+    def loadFromEditor(self):
+        for item in self.settingItems:
+            self.currentSettings[item] = self.editor.getConfig(item)
+
+        self.updateUi(self.currentSettings)
+
+    def loadFromTomlDict(self, tomldict):
+        """
+        :param tomldict: settings dict load form toml config file, all colors and enums are using name string insteaded in tomldict
+        """
+        for name, value in tomldict:
+            self.currentSettings[name] = value
+            if isinstance(value, str) and name in self.settingItems:
+                if self.settingItems[name][type] == 'color':
+                    self.currentSettings[name] = QColor(value)
+                elif self.settingItems[name][type] == 'combo':
+                    self.currentSettings[name] = SettingEnums.getFromName(self.settingItems[name]['valuetype'], name)
+        self.updateUi(self.currentSettings)
 
     def defaultLayout(self):
         """Create and return the main layout for the dialog widget.
@@ -234,14 +249,7 @@ class EditorSettings():
         layout = QVBoxLayout()
         for g in self.groupWidgets.values():
             layout.addWidget(g)
-
-        # Layout columns section and OK button vertically
-
-        # OK button at the bottom
-        ok = QPushButton('OK')
-        # ok.clicked.connect(self.accept)
-        layout.addWidget(ok)
-
+        self.loadFromEditor()
         return layout
 
     def createWidgets(self):
@@ -292,22 +300,43 @@ class EditorSettings():
         checkbox = QCheckBox()
 
         def checkbox_changed(state):
-            """Event handler for the given setting.
-            """
             if state == Qt.Checked:
-                self.nextSettings[name] = True
+                self.changedSettings[name] = True
             elif state == Qt.Unchecked:
-                self.nextSettings[name] = False
+                self.changedSettings[name] = False
 
         checkbox.stateChanged[int].connect(checkbox_changed)
 
-        # Set the initial checkbox state based on current getValue
-        if self.previousSettings.get(name, True):
-            checkbox.setCheckState(Qt.Checked)
-        else:
-            checkbox.setCheckState(Qt.Unchecked)
+        def checkbox_update(value):
+            if value:
+                checkbox.setChecked(True)  # checkbox.setCheckState(Qt.Checked)
+            else:
+                checkbox.setChecked(False)  # checkbox.setCheckState(Qt.Unchecked)
 
+        self.updateActions[name] = checkbox_update
+
+        # Set the initial checkbox state based on current getValue
+        # checkbox_update(self.currentSettings.get(name, True))
         return checkbox
+
+    def _create_number_box(self, name):
+        """Return a numeric entry widget for a numeric setting.
+        """
+        spinbox = QSpinBox()
+        spinbox.setMaximumWidth(120)
+
+        def spinbox_changed(value):
+            self.changedSettings[name] = value
+
+        spinbox.valueChanged[int].connect(spinbox_changed)
+
+        def spinbox_update(value):
+            spinbox.setValue(value)
+
+        self.updateActions[name] = spinbox_update
+        # Set initial getValue
+        # spinbox.setValue(self.currentSettings.get(name, 5))
+        return spinbox
 
     def _create_combobox(self, name):
         """Return a combobox for modifying a multiple-getValue setting."""
@@ -320,19 +349,20 @@ class EditorSettings():
             data = QVariant(value)
             combo.addItem(valueinfo["display"], data)
 
-        # Set the initial getValue, if any
-        current = self.previousSettings.get(name, list(SettingEnums.enums[valuetype].values())[0])
-        index = combo.findData(current)
-        combo.setCurrentIndex(index)
-
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            self.nextSettings[name] = data
+            self.changedSettings[name] = data
 
-        # Connect event handler
         combo.currentIndexChanged[int].connect(combo_changed)
 
+        # Set the initial getValue, if any
+        def combo_update(value):
+            index = combo.findData(value)
+            combo.setCurrentIndex(index)
+
+        self.updateActions[name] = combo_update
+        # combo_update(self.currentSettings.get(name, list(SettingEnums.enums[valuetype].values())[0]))
         return combo
 
     def _create_color_picker(self, name):
@@ -340,82 +370,38 @@ class EditorSettings():
         # Button with colored background
         button = QPushButton()
         button.setMinimumWidth(80)
-        current_color = self.previousSettings.get(name, Qt.red)
-        try:
-            current_color = current_color.name()
-        except:
-            pass
 
         # Event handler
         def button_pressed():
-            color = QColorDialog.getColor(QColor(current_color))
+            color = QColorDialog.getColor(
+                self.currentSettings.get(name, Qt.white))  # button.palette().color(QPalette.Background))
             if color.isValid():
                 button.setStyleSheet("background-color: %s" % color.name())
-                self.nextSettings[name] = color.name()
+                self.changedSettings[name] = color
 
         # Connect event handler
         button.pressed.connect(button_pressed)
 
-        # Set default background color
-        button.setStyleSheet("background-color: %s" % current_color)
+        def button_update(value):
+            button.setStyleSheet("background-color: %s" % value.name())
 
+        self.updateActions[name] = button_update
+        # button.setStyleSheet("background-color: %s" % current_color)
         return button
 
-    def _create_number_box(self, name):
-        """Return a numeric entry widget for a numeric setting.
-        """
-        spinbox = QSpinBox()
-        spinbox.setMaximumWidth(120)
+    def updateUi(self, settingdict):
+        if self.editor:
+            for name, value in settingdict.items():
+                try:
+                    self.updateActions[name](value)
+                except:
+                    print("Can't update {} setting to config dialog.".format(name))
 
-        # Set initial getValue
-        spinbox.setValue(self.previousSettings.get(name, 5))
+    def cancel(self):
+        self.changedSettings.clear()
+        self.updateUi(self.currentSettings)
 
-        def spinbox_changed(value):
-            self.nextSettings[name] = value
-
-        # Connect event handler
-        spinbox.valueChanged[int].connect(spinbox_changed)
-
-        return spinbox
-
-    def _create_line_number_checkbox(self):
-        """Return a widget for enabling/disabling line numbers."""
-
-        # Line numbers
-        def checkbox_changed(state):
-            """Event handler for the given setting.
-            """
-            if state == Qt.Checked:
-                self.nextSettings['marginLineNumbers'] = True
-            elif state == Qt.Unchecked:
-                self.nextSettings['marginLineNumbers'] = False
-
-        # Create the checkbox and connect the event handler
-        checkbox = QCheckBox('Line numbers', self)
-        checkbox.stateChanged[int].connect(checkbox_changed)
-
-        # Set the initial checkbox state based on current getValue
-        if self.previousSettings['marginLineNumbers']:
-            checkbox.setCheckState(Qt.Checked)
-        else:
-            checkbox.setCheckState(Qt.Unchecked)
-
-        return checkbox
-
-
-if __name__ == "__main__":
-    from PyQt5.QtWidgets import QApplication
-    import sys
-    from editor import Editor
-
-    app = QApplication(sys.argv)
-    win = QWidget()
-    layout = QHBoxLayout()
-    win.setLayout(layout)
-    ed = Editor()
-    d = QWidget(win)
-    d.setLayout(EditorSettings(ed).defaultLayout())
-    layout.addWidget(ed)
-    layout.addWidget(d)
-    win.show()
-    sys.exit(app.exec_())
+    def apply(self):
+        self.currentSettings.update(self.changedSettings)
+        if self.editor:
+            self.editor.configure(self.changedSettings)
