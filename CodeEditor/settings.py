@@ -404,4 +404,7 @@ class EditorSettings():
     def apply(self):
         self.currentSettings.update(self.changedSettings)
         if self.editor:
-            self.editor.configure(self.changedSettings)
+            try:
+                self.editor.configure(**self.changedSettings)
+            except Exception as e:
+                print(e)
