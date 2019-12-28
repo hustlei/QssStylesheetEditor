@@ -8,12 +8,11 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 import os
 from PyQt5.QtCore import Qt, QVariant, QCoreApplication
-from PyQt5.QtGui import QColor, QPalette
+from PyQt5.QtGui import QColor, QPalette, QFont
 from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
-                             QComboBox, QColorDialog)
+                             QComboBox, QColorDialog, QFontComboBox)
 from PyQt5.Qsci import QsciScintilla
-from setting_enums import EnumError, SettingEnums
-from lang import language_extensions
+from .setting_enums import EnumError, SettingEnums
 
 
 class EditorSettings():
@@ -69,7 +68,18 @@ class EditorSettings():
             'help': QCoreApplication.translate('EditorSettings',
                                                'Default background color'),
         },
-
+        'fontFamily': {
+            'type': 'fontfamily',
+            'label': QCoreApplication.translate('EditorSettings', 'Font Family'),
+            'help': QCoreApplication.translate('EditorSettings',
+                                               'Default font family'),
+        },
+        'fontSize': {
+            'type': 'number',
+            'label': QCoreApplication.translate('EditorSettings', 'Font Size'),
+            'help': QCoreApplication.translate('EditorSettings',
+                                               'Default font size'),
+        },
         # Numeric settings
         'edgeColumn': {
             'type': 'number',
@@ -171,6 +181,8 @@ class EditorSettings():
     settingGroups = {
         'Colors': {'label': QCoreApplication.translate('EditorSettings', 'Colors'),
                    'items': {'color', 'paper', }},
+        'Text':{'label': QCoreApplication.translate('EditorSettings', 'Text'),
+                   'items': {'fontFamily', 'fontSize', }},
         'Indentation': {'label': QCoreApplication.translate('EditorSettings', 'Indentation'),
                         'items': {'tabWidth', 'tabIndents', 'backspaceUnindents', 'autoIndent', 'indentationGuides',
                                   'indentationsUseTabs', }},
@@ -277,6 +289,8 @@ class EditorSettings():
             widget = self._create_number_box(name)
         elif type_ == 'combo':
             widget = self._create_combobox(name)
+        elif type_ == 'fontfamily':
+            widget = self._create_fontcombobox(name)
         elif type_ == 'color':
             widget = self._create_color_picker(name)
 
@@ -365,6 +379,28 @@ class EditorSettings():
         # combo_update(self.currentSettings.get(name, list(SettingEnums.enums[valuetype].values())[0]))
         return combo
 
+    def _create_fontcombobox(self, name):
+        """Return a combobox for modifying a multiple-getValue setting."""
+        setting = self.settingItems[name]
+        # Create the combobox and populate it
+        combo = QFontComboBox()
+        combo.setMinimumWidth(100)
+        combo.setFontFilters(QFontComboBox.AllFonts) #设置过滤器
+
+        # Ugly event handler!
+        def combo_changed(index):
+            self.changedSettings[name] = combo.currentFont().family()
+
+        combo.currentFontChanged.connect(combo_changed)
+
+        # Set the initial getValue, if any
+        def combo_update(value):
+            combo.setCurrentFont(QFont(value))
+
+        self.updateActions[name] = combo_update
+        # combo_update(self.currentSettings.get(name, list(SettingEnums.enums[valuetype].values())[0]))
+        return combo
+
     def _create_color_picker(self, name):
         """Return a color-picker widget for a color-based setting."""
         # Button with colored background
@@ -408,3 +444,4 @@ class EditorSettings():
                 self.editor.configure(**self.changedSettings)
             except Exception as e:
                 print(e)
+        self.changedSettings.clear()

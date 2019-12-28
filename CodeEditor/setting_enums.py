@@ -1,8 +1,8 @@
 """Wrapper for Qsci.QsciScintilla enumerations.
 """
 from PyQt5.Qsci import QsciScintilla
-from PyQt5.QtCore import QCoreApplication
-from lang import language_extensions
+from PyQt5.QtCore import QCoreApplication, Qt
+from .lang import language_extensions
 
 
 class EnumError(Exception):
@@ -148,7 +148,7 @@ class SettingEnums:
                                        QsciScintilla.WrapFlagByBorder: {'name': 'WrapFlagByBorder',
                                                                         'display': 'ByBorder'}},
         # custom list for language
-        'language': dict([(lang, {'name':lang,'display':lang}) for (lang, ext) in language_extensions])
+        'language': dict([(lang, {'name':lang,'display':lang}) for (lang, ext) in language_extensions]),
     }
     lookup = dict(
         [(enumtype, dict([(enuminfo['name'], enumvalue) for (enumvalue, enuminfo) in enumvalues.items()])) for

@@ -10,6 +10,20 @@ win = QWidget()
 hlayout = QHBoxLayout()
 
 ed = Editor()
+ed.setMinimumWidth(600)
+text="""#include <stdio.h>
+int main()
+{
+    // 这是一首思念家乡的诗
+    printf("床前明月光，");
+    printf("疑是地上霜。");
+    printf("举头望明月，");
+    printf("低头思故乡。"); 
+    return 0;    
+}"""
+ed.setText(text)
+ed.setLanguage("CPP")
+
 confpannel = QWidget(win)
 conflayout = QVBoxLayout()
 confpannel.setLayout(conflayout)

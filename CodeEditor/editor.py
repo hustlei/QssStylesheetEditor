@@ -5,21 +5,23 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import sys
-import os
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
 from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
-from lexer import lexer_qss
+from .lexer import lexer_qss
 from .search import SearchDialog
 
 import chardet
-# if sys.platform.startswith("linux"):
-#     font = QFont("DejaVu Sans Mono", 10, 50)
-# elif sys.platform.startswith("darwin"):
-#     font = QFont("Menlo", 10, 50)
-# elif sys.platform.startswith("win"):
-#     font = QFont("Courier New", 10, 50)
+
+font = QFont('Courier New', 11, 50)
+if sys.platform.startswith("linux"):
+    font = QFont("DejaVu Sans Mono", 11, 50)
+elif sys.platform.startswith("darwin"):
+    font = QFont("Menlo", 11, 50)
+elif sys.platform.startswith("win"):
+    font.setFamily('Consolas')
+    # font.setFamilies(["Courier New", 'Consolas'])
 
 
 class Editor(QsciScintilla):
@@ -34,9 +36,10 @@ class Editor(QsciScintilla):
         self.coding = "utf-8"
 
         self.settings = {}
-        # self._setDefaultConfig()
+        self._setDefaultConfig()
         # Override defaults with any customizations
-        self.configure(**config)
+        if config:
+            self.configure(**config)
         self.searchDialog = SearchDialog(self)
 
     ###
@@ -63,26 +66,26 @@ class Editor(QsciScintilla):
         self.configure(
             # Fonts
             utf8=True,  # 支持中文字符
-            font=QFont('Consolas', 11),  # 设置默认字体
-            marginsFont=QFont('Courier New', 10),
+            marginsFont=QFont('Courier New', 11, 50),
+            font=font,
 
             # Wrap mode: Wrap(None|Word|Character|Whitespace) 0,1,2,3
-            wrapMode='WrapNone',  # self.setWrapMode(self.WrapWord)    # 自动换行
+            wrapMode=self.WrapNone,  # self.setWrapMode(self.WrapWord)    # 自动换行
             # Text wrapping visual flag:
             # WrapFlag(None|ByText|ByBorder|InMargin)
-            wrapVisualFlags='WrapFlagNone',  # 无对应getter
+            wrapVisualFlags=self.WrapFlagNone,  # 无对应getter
             # End-of-line mode
             # EolMode: Eol(Windows|Unix|Mac) SC_EOL_CRLF|SC_EOL_LF|SC_EOL_CR
-            eolMode='EolWindows',  # self.SC_EOL_LF,# 以\n换行
+            # eolMode='EolWindows',  # self.SC_EOL_LF,# 以\n换行
             eolVisibility=False,  # 是否显示换行符
 
             # Whitespace: Ws(Invisible|Visible|VisibleAfterIndent)
-            whitespaceVisibility='WsInvisible',  # 是否显示空格，类似word空格处显示为点
+            whitespaceVisibility=self.WsInvisible,  # 是否显示空格，类似word空格处显示为点
             #  WhitespaceSize: (0|1|2) 点大小，0不显示，1小点，2大点
             whitespaceSize=2,
 
             # indent
-            indentationsUseTabs=False,  # False表示用空格代替\t
+            indentationsUseTabs=True,  # False表示用空格代替\t
             tabWidth=4,  # 空格数量，或者\t宽度
             indentationGuides=True,  # 用tab键缩进时，在缩进位置上显示一个竖点线，缩进有效，在字符串后加空格不显示
             indentationWidth=0,  # 如果在行首部空格位置tab，缩进的宽度字符数，并且不会转换为空格
@@ -104,16 +107,16 @@ class Editor(QsciScintilla):
             # edges
             edgeColumn=80,
             # Edge mode: Edge(None|Line|Background)
-            edgeMode='EdgeLine',
+            edgeMode=self.EdgeLine,
             edgeColor=QColor('#FF88FFFF'),
 
             # Brace matching: (No|Strict|Sloppy)BraceMatch
-            braceMatching='SloppyBraceMatch',
+            braceMatching=self.SloppyBraceMatch,
 
             # AutoComplete
             # Acs[None|All|Document|APIs]禁用自动补全提示功能|所有可用的资源|
             # 当前文档中出现的名称都自动补全提示|使用QsciAPIs类加入的名称都自动补全提示
-            autoCompletionSource='AcsAll',  # 自动补全。对于所有Ascii字符
+            autoCompletionSource=self.AcsAll,  # 自动补全。对于所有Ascii字符
             autoCompletionCaseSensitivity=False,  # 自动补全大小写敏感,不是很有用
             autoCompletionThreshold=1,  # 输入多少个字符才弹出补全提示
             autoCompletionReplaceWord=True,  # 是否用补全的字符串替代光标右边的字符串
@@ -129,7 +132,7 @@ class Editor(QsciScintilla):
 
             # margin (folding)
             # Folding: (No|Plain|Circled|Boxed|CircledTree|BoxedTree)FoldStyle
-            folding="BoxedTreeFoldStyle",  # 代码可折叠
+            folding=self.BoxedTreeFoldStyle,  # 代码可折叠
             foldMarginColors=(QColor('#aad'), QColor('#bbe')),
             # marginType=(2,QsciScintilla.SC_MARGIN_SYMBOL),#页边类型
             # marginMarkerMask=(2,QsciScintilla.SC_MASK_FOLDERS),#页边掩码
@@ -151,8 +154,6 @@ class Editor(QsciScintilla):
             ...     eolVisibility = True,
             ...     edgeColumn = 80)
         """
-        self.settings.update(config)
-
         for name, args in config.items():
             # Get the setter method ('setWhatEver')
             setter = getattr(self, 'set' + name[0].upper() + name[1:])
@@ -167,11 +168,10 @@ class Editor(QsciScintilla):
         # Adjust margin if line numbers are on
         if 'marginLineNumbers' in config:
             if config['marginLineNumbers'] == (0, True):
-                font_metrics = QFontMetrics(self.settings['marginsFont'])  # self.marginsFont())
+                font_metrics = QFontMetrics(config.get('marginsFont',font))  # self.marginsFont())
                 self.setMarginWidth(0, font_metrics.width('000') + 5)
             else:
                 self.setMarginWidth(0, 0)
-
 
     # Language and syntax highlighting
     # Note: These follow the getter/setter pattern of other QsciScintilla settings,
@@ -180,7 +180,7 @@ class Editor(QsciScintilla):
         """Getter for language.
         """
         if isinstance(self.lexer, QsciLexer):
-            return self.lexer.language()
+            return self.lexerName  # self.lexer.language()
         return 'None'
 
     def setLanguage(self, language):
@@ -207,6 +207,7 @@ class Editor(QsciScintilla):
                 raise AttributeError
                 # print("Editor syntax highlighting language error: set to plain text.")
             # raise ValueError("Unknown language: '%s'" % language)
+            self.lexerName = language
             self.lexer.setDefaultFont(self.font())
         print("Editor syntax highlighting language: %s" % language)
         self.setLexer(self.lexer)
@@ -216,6 +217,28 @@ class Editor(QsciScintilla):
     # Missing Getters 只有set函数，但是没有对应get函数的属性
     # Mssing Setters
     ###
+    def fontSize(self):
+        return self.font().pointSize()
+
+    def setFontSize(self, fontSize):
+        font = self.font()
+        font.setPointSize(fontSize)
+        self.setFont(font)
+        if self.lexer:
+            self.lexer.setDefaultFont(font)
+            self.lexer.setFont(font)
+
+    def fontFamily(self):
+        return self.font().family()
+
+    def setFontFamily(self, fontFamily):
+        font = self.font()
+        font.setFamily(fontFamily)
+        self.setFont(font)
+        if self.lexer:
+            self.lexer.setDefaultFont(font)
+            self.lexer.setFont(font)
+
     def setBackgroundColor(self, color):
         if self.lexer:
             try:
@@ -239,7 +262,6 @@ class Editor(QsciScintilla):
         bgr_int = self.SendScintilla(self.SCI_GETCARETLINEBACK)
         r, g, b = self.__bgr_int2rgb(bgr_int)
         return QColor(r, g, b)
-
 
     ###
     # Content operation
