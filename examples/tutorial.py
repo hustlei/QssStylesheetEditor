@@ -15,6 +15,12 @@ text="""床前明月光，
 举头望明月，
 低头思故乡。"""
 ed.setText(text)
+# ed.configure(language="CPP")
+# font=ed.font()
+# font.setFamily("Arial")
+# ed.setFont(font)
+# ed.lexer.setFont(font)
+# print(ed.lexer.font(0).family())
 
 layout.addWidget(ed)
 win.setLayout(layout)

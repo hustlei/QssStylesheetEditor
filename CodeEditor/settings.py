@@ -432,6 +432,7 @@ class EditorSettings():
                     self.updateActions[name](value)
                 except:
                     print("Can't update {} setting to config dialog.".format(name))
+            self.changedSettings.clear()
 
     def cancel(self):
         self.changedSettings.clear()
@@ -441,6 +442,11 @@ class EditorSettings():
         self.currentSettings.update(self.changedSettings)
         if self.editor:
             try:
+                if "language" in self.changedSettings or "fontSize" in self.changedSettings or "fontFamily" in self.changedSettings:
+                    if "fontSize" not in self.changedSettings:
+                        self.changedSettings['fontSize'] = self.currentSettings['fontSize']
+                    if "fontFamily" not in self.changedSettings:
+                        self.changedSettings['fontFamily'] = self.currentSettings["fontFamily"]
                 self.editor.configure(**self.changedSettings)
             except Exception as e:
                 print(e)

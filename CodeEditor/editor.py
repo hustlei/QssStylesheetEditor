@@ -34,6 +34,7 @@ class Editor(QsciScintilla):
     def __init__(self, **config):
         super().__init__()
         self.coding = "utf-8"
+        self.lexer = None
 
         self.settings = {}
         self._setDefaultConfig()
@@ -207,7 +208,8 @@ class Editor(QsciScintilla):
                 raise AttributeError
                 # print("Editor syntax highlighting language error: set to plain text.")
             # raise ValueError("Unknown language: '%s'" % language)
-            self.lexerName = language
+        self.lexerName = language
+        if self.lexer:
             self.lexer.setDefaultFont(self.font())
         print("Editor syntax highlighting language: %s" % language)
         self.setLexer(self.lexer)
@@ -218,26 +220,38 @@ class Editor(QsciScintilla):
     # Mssing Setters
     ###
     def fontSize(self):
-        return self.font().pointSize()
+        if self.lexer:
+            return self.lexer.font(0).pointSize()
+        else:
+            return self.font().pointSize()
 
     def setFontSize(self, fontSize):
-        font = self.font()
-        font.setPointSize(fontSize)
-        self.setFont(font)
         if self.lexer:
-            self.lexer.setDefaultFont(font)
-            self.lexer.setFont(font)
+            myfont = self.lexer.font(0)
+        else:
+            myfont = self.font()
+        myfont.setPointSize(fontSize)
+        self.setFont(myfont)
+        if self.lexer:
+            # self.lexer.setDefaultFont(myfont)
+            self.lexer.setFont(myfont)
 
     def fontFamily(self):
-        return self.font().family()
+        if self.lexer:
+            return self.lexer.font(0).family()
+        else:
+            return self.font().family()
 
     def setFontFamily(self, fontFamily):
-        font = self.font()
-        font.setFamily(fontFamily)
-        self.setFont(font)
         if self.lexer:
-            self.lexer.setDefaultFont(font)
-            self.lexer.setFont(font)
+            myfont = self.lexer.font(0)
+        else:
+            myfont = self.font()
+        myfont.setFamily(fontFamily)
+        self.setFont(myfont)
+        if self.lexer:
+            # self.lexer.setDefaultFont(myfont)
+            self.lexer.setFont(myfont)
 
     def setBackgroundColor(self, color):
         if self.lexer:
