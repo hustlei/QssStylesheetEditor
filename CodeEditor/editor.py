@@ -46,20 +46,53 @@ class Editor(QsciScintilla):
     ###
     # extension(core): config extension
     ###
-    def getConfig(self, name, *args):
+    def getConfig(self, name):
         """Return the current configuration setting for attribute ``name``.
         If ``name`` refers to an enumerated setting, return the string version
         of that enumeration.
         """
         name = name[0].lower() + name[1:]
         getter = getattr(self, name)
-        value = getter(*args)
+        value = getter()
         return value
 
     def setConfig(self, name, value):
         """Set the current configuration setting for attribute ``name``."""
-        conf = {name: value}
-        self.configure(**conf)
+        self.configure(**{name: value})
+
+    def configure(self, **config):
+        """Configure the editor with the given settings.
+
+        Accepts ``keyword=getValue`` arguments for any attribute ``foo`` that is
+        normally set via a ``setFoo`` method.
+        For example, instead of this:
+            >>> editor.setEdgeColor(QFont('Courier New', 10))
+            >>> editor.setEolVisibility(True)
+            >>> editor.setEdgeColumn(80)
+        This method allows you to do this:
+            >>> editor.configure(
+            ...     edgeColor = QFont('Courier New', 10),
+            ...     eolVisibility = True,
+            ...     edgeColumn = 80)
+        """
+        for name, args in config.items():
+            # Get the setter method ('setWhatEver')
+            setter = getattr(self, 'set' + name[0].upper() + name[1:])
+
+            # Handle setters that accept multiple arguments
+            # (like marginLineNumbers)
+            if isinstance(args, (tuple, list)):
+                setter(*args)
+            else:
+                setter(args)
+
+        # Adjust margin if line numbers are on
+        if 'marginLineNumbers' in config:
+            if config['marginLineNumbers'] == (0, True):
+                font_metrics = QFontMetrics(config.get('marginsFont', font))  # self.marginsFont())
+                self.setMarginWidth(0, font_metrics.width('000') + 5)
+            else:
+                self.setMarginWidth(0, 0)
 
     def _setDefaultConfig(self):
         """Set default configuration settings.
@@ -140,40 +173,6 @@ class Editor(QsciScintilla):
             # marginSensitivity=(2,True),#注册通知事件，当用户点击边栏时，scintilla会通知我们
         )
 
-    def configure(self, **config):
-        """Configure the editor with the given settings.
-
-        Accepts ``keyword=getValue`` arguments for any attribute ``foo`` that is
-        normally set via a ``setFoo`` method.
-        For example, instead of this:
-            >>> editor.setEdgeColor(QFont('Courier New', 10))
-            >>> editor.setEolVisibility(True)
-            >>> editor.setEdgeColumn(80)
-        This method allows you to do this:
-            >>> editor.configure(
-            ...     edgeColor = QFont('Courier New', 10),
-            ...     eolVisibility = True,
-            ...     edgeColumn = 80)
-        """
-        for name, args in config.items():
-            # Get the setter method ('setWhatEver')
-            setter = getattr(self, 'set' + name[0].upper() + name[1:])
-
-            # Handle setters that accept multiple arguments
-            # (like marginLineNumbers)
-            if isinstance(args, (tuple, list)):
-                setter(*args)
-            else:
-                setter(args)
-
-        # Adjust margin if line numbers are on
-        if 'marginLineNumbers' in config:
-            if config['marginLineNumbers'] == (0, True):
-                font_metrics = QFontMetrics(config.get('marginsFont',font))  # self.marginsFont())
-                self.setMarginWidth(0, font_metrics.width('000') + 5)
-            else:
-                self.setMarginWidth(0, 0)
-
     # Language and syntax highlighting
     # Note: These follow the getter/setter pattern of other QsciScintilla settings,
     # to allow `configure` to manipulate them.
@@ -189,9 +188,11 @@ class Editor(QsciScintilla):
         If ``language`` is ``None``, ``'None'`` or empty, then syntax highlighting is disabled.
         """
         if not language or language == 'None':
-            print("Disabling syntax highlighting")
+            self.lexerName = "None"
+            #self.lexer.deleteLater()
             self.lexer = None
         else:
+            self.lexerName = language
             custom = False
             for lexer in dir(lexer_qss):
                 if lexer[9:] == language:
@@ -208,7 +209,6 @@ class Editor(QsciScintilla):
                 raise AttributeError
                 # print("Editor syntax highlighting language error: set to plain text.")
             # raise ValueError("Unknown language: '%s'" % language)
-        self.lexerName = language
         if self.lexer:
             self.lexer.setDefaultFont(self.font())
         print("Editor syntax highlighting language: %s" % language)
@@ -259,6 +259,8 @@ class Editor(QsciScintilla):
                 self.lexer.setPapers(color)
             except Exception:
                 print("set backgroundcolor err.")
+        else:
+            self.setPaper(color)
 
     def setMarginWidthes(self, *widthes):
         for i, w in widthes:

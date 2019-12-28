@@ -40,12 +40,12 @@ class SettingEnums:
         # corresponding indented block.
         QsciScintilla.BraceMatch: {
             QsciScintilla.NoBraceMatch: {'name': 'NoBraceMatch',
-                                         'display': QCoreApplication.translate('SettingEnums', "NoBraceMatch")},
+                                         'display': QCoreApplication.translate('SettingEnums', "No")},
             QsciScintilla.StrictBraceMatch: {'name': 'StrictBraceMatch',
-                                             'display': QCoreApplication.translate('SettingEnums', "StrictBraceMatch")},
+                                             'display': QCoreApplication.translate('SettingEnums', "Strict")},
             QsciScintilla.SloppyBraceMatch: {'name': 'SloppyBraceMatch',
                                              'display': QCoreApplication.translate(
-                                                 'SettingEnums', "SloppyBraceMatch")},
+                                                 'SettingEnums', "Sloppy")},
         },
         # call tip styles
         QsciScintilla.CallTipsStyle: {
@@ -65,7 +65,7 @@ class SettingEnums:
                                  QsciScintilla.EdgeBackground: {'name': 'EdgeBackground', 'display': 'Background'}
                                  },
         # end-of-line modes
-        QsciScintilla.EolMode: {QsciScintilla.EolWindows: {'name': 'EolWindows', 'display': 'EolWindows'},
+        QsciScintilla.EolMode: {QsciScintilla.EolWindows: {'name': 'EolWindows', 'display': 'Windows'},
                                 QsciScintilla.EolUnix: {'name': 'Unix', 'display': 'Unix'},
                                 QsciScintilla.EolMac: {'name': 'EolMac', 'display': 'Mac'}},
         # styles for the folding margin

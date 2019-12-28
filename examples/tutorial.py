@@ -1,7 +1,10 @@
 
 
 import sys
+
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout
+from PyQt5.QtCore import Qt
 sys.path.append("..")
 from CodeEditor import Editor
 
@@ -9,20 +12,20 @@ app = QApplication(sys.argv)
 win = QWidget()
 layout = QHBoxLayout()
 
-ed = Editor()
+edt = Editor()
 text="""床前明月光，
 疑是地上霜。
 举头望明月，
 低头思故乡。"""
-ed.setText(text)
-# ed.configure(language="CPP")
-# font=ed.font()
-# font.setFamily("Arial")
-# ed.setFont(font)
-# ed.lexer.setFont(font)
-# print(ed.lexer.font(0).family())
+edt.setText(text)
+# edt.configure(language="CPP") # some error exist if convert language from lexer to None
+# edt.configure(language=None)
+edt.setLanguage(None)
+edt.setColor(QColor("#FF0000"))
+edt.setFontSize(20)
+edt.setFontFamily("Microsoft YaHei")
 
-layout.addWidget(ed)
+layout.addWidget(edt)
 win.setLayout(layout)
 win.show()
 sys.exit(app.exec_())

@@ -180,18 +180,18 @@ class EditorSettings():
     # Setting groups
     settingGroups = {
         'Colors': {'label': QCoreApplication.translate('EditorSettings', 'Colors'),
-                   'items': {'color', 'paper', }},
+                   'items': ('color', 'paper', )},
         'Text':{'label': QCoreApplication.translate('EditorSettings', 'Text'),
-                   'items': {'fontFamily', 'fontSize', }},
+                   'items': ('fontFamily', 'fontSize', )},
         'Indentation': {'label': QCoreApplication.translate('EditorSettings', 'Indentation'),
-                        'items': {'tabWidth', 'tabIndents', 'backspaceUnindents', 'autoIndent', 'indentationGuides',
-                                  'indentationsUseTabs', }},
+                        'items': ('tabWidth', 'tabIndents', 'backspaceUnindents', 'autoIndent', 'indentationGuides',
+                                  'indentationsUseTabs', )},
         'Wrapping': {'label': QCoreApplication.translate('EditorSettings', 'Wrapping'),
-                     'items': {'edgeMode', 'wrapMode', 'edgeColumn', }},
+                     'items': ('wrapMode', 'edgeMode',  'edgeColumn', )},
         'Formatting': {'label': QCoreApplication.translate('EditorSettings', 'Formatting'),
-                       'items': {'whitespaceVisibility', 'eolMode', 'eolVisibility', }},
+                       'items': ('whitespaceVisibility', 'eolMode', 'eolVisibility', )},
         'Coding aids': {'label': QCoreApplication.translate('EditorSettings', 'Coding aids'),
-                        'items': {'language', 'folding', 'braceMatching', }},
+                        'items': ('language', 'folding', 'braceMatching',)},
     }
 
     # Write-only color settings.
@@ -385,6 +385,7 @@ class EditorSettings():
         # Create the combobox and populate it
         combo = QFontComboBox()
         combo.setMinimumWidth(100)
+        combo.setMaximumWidth(150)
         combo.setFontFilters(QFontComboBox.AllFonts) #设置过滤器
 
         # Ugly event handler!
@@ -442,6 +443,11 @@ class EditorSettings():
         self.currentSettings.update(self.changedSettings)
         if self.editor:
             try:
+                if "language" in self.changedSettings:
+                    if "color" not in self.changedSettings:
+                        self.changedSettings["color"] = self.currentSettings["color"]
+                    if "paper" not in self.changedSettings:
+                        self.changedSettings["paper"] = self.currentSettings["paper"]
                 if "language" in self.changedSettings or "fontSize" in self.changedSettings or "fontFamily" in self.changedSettings:
                     if "fontSize" not in self.changedSettings:
                         self.changedSettings['fontSize'] = self.currentSettings['fontSize']
