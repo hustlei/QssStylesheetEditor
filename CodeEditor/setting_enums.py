@@ -36,7 +36,7 @@ class SettingEnums:
                                     'display': QCoreApplication.translate('SettingEnums', "APIs")},
         },
         # brace matching modes. The character pairs (), [] and () are treated as
-        # braces. The Python lexer will also match a : with the end of the
+        # braces. The Python lexers will also match a : with the end of the
         # corresponding indented block.
         QsciScintilla.BraceMatch: {
             QsciScintilla.NoBraceMatch: {'name': 'NoBraceMatch',

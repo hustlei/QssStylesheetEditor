@@ -9,7 +9,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
 from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
-from .lexer import lexer_qss
+from CodeEditor import lexers
 from .search import SearchDialog
 
 import chardet
@@ -180,7 +180,7 @@ class Editor(QsciScintilla):
         """Getter for language.
         """
         if isinstance(self.lexer, QsciLexer):
-            return self.lexerName  # self.lexer.language()
+            return self.lexerName  # self.lexers.language()
         return 'None'
 
     def setLanguage(self, language):
@@ -188,27 +188,25 @@ class Editor(QsciScintilla):
         If ``language`` is ``None``, ``'None'`` or empty, then syntax highlighting is disabled.
         """
         if not language or language == 'None':
-            self.lexerName = "None"
-            #self.lexer.deleteLater()
-            self.lexer = None
-        else:
-            self.lexerName = language
-            custom = False
-            for lexer in dir(lexer_qss):
-                if lexer[9:] == language:
-                    custom = True
-                    break
+            language = "Text"
+        self.lexerName = language
 
-            try:
-                if custom:
-                    self.lexer = getattr(lexer_qss, 'QsciLexer' + language)(self)
-                else:
-                    self.lexer = getattr(Qsci, 'QsciLexer' + language)(self)  # lexer = QsciLexerCSS()
-            except AttributeError:
-                self.lexer = None
-                raise AttributeError
-                # print("Editor syntax highlighting language error: set to plain text.")
-            # raise ValueError("Unknown language: '%s'" % language)
+        custom = False
+        for lexer in dir(lexers):
+            if lexer[0:9] == 'QsciLexer' and lexer[9:] == language:
+                custom = True
+                break
+
+        try:
+            if custom:
+                self.lexer = getattr(lexers, 'QsciLexer' + language)(self)
+            else:
+                self.lexer = getattr(Qsci, 'QsciLexer' + language)(self)  # lexers = QsciLexerCSS()
+        except AttributeError:
+            self.lexer = None
+            raise AttributeError
+            # print("Editor syntax highlighting language error: set to plain text.")
+        # raise ValueError("Unknown language: '%s'" % language)
         if self.lexer:
             self.lexer.setDefaultFont(self.font())
         print("Editor syntax highlighting language: %s" % language)
@@ -233,7 +231,7 @@ class Editor(QsciScintilla):
         myfont.setPointSize(fontSize)
         self.setFont(myfont)
         if self.lexer:
-            # self.lexer.setDefaultFont(myfont)
+            # self.lexers.setDefaultFont(myfont)
             self.lexer.setFont(myfont)
 
     def fontFamily(self):
@@ -250,7 +248,7 @@ class Editor(QsciScintilla):
         myfont.setFamily(fontFamily)
         self.setFont(myfont)
         if self.lexer:
-            # self.lexer.setDefaultFont(myfont)
+            # self.lexers.setDefaultFont(myfont)
             self.lexer.setFont(myfont)
 
     def setBackgroundColor(self, color):

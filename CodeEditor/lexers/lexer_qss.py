@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""custom lexer for qt stylesheet syntex
+"""custom lexers for qt stylesheet syntex
 
 Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """

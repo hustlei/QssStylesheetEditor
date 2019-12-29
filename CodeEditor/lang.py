@@ -8,8 +8,8 @@ language_extensions is (Name, extensions) tuples, where <Name> must match QsciLe
 import os
 
 language_extensions = (
-    ('None', '.txt .text'),
-    # ('Custom', ''),
+    # ('None', '.txt .text'),
+    ('Text', '.txt .text'),
     ('QSS', '.qss .qsst'),
     ('Bash', '.sh .bashrc .bash_history'),
     ('Batch', '.bat .cmd'),
