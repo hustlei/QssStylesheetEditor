@@ -4,5 +4,7 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-from .editor import CodeEditor
+__version__ = "1.0.0"
+
+from .codeeditor import CodeEditor
 from .settings import EditorSettings

@@ -11,6 +11,7 @@ from PyQt5.QtCore import Qt
 
 class ConfDialog(QWidget):
     """config dialog"""
+
     def __init__(self, mainwin):
         super(ConfDialog, self).__init__()
         self._app = QApplication.instance()  # 获取app实例
@@ -70,13 +71,15 @@ class ConfDialog(QWidget):
 
         # editor
         from ui.editor.settings import EditorSettings
-        w = EditorSettings(self.win.editor)
+        settings = EditorSettings(self.win.editor)
+        w = QWidget()
+        w.setLayout(settings.defaultLayout())
         self.stack.addWidget(w)
 
         self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)
         self.cancelbtn.clicked.connect(self.close)
         self.cancelbtn.setVisible(False)
-        self.okbtn.clicked.connect(self.close)
+        self.okbtn.clicked.connect(lambda: (settings.apply(), self.close()))
 
         # action
         self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
@@ -127,6 +130,7 @@ class ConfDialog(QWidget):
 
 if __name__ == "__main__":
     import sys
+
     app = QApplication(sys.argv)
     win = QWidget()
     dialog = ConfDialog(win)
