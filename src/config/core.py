@@ -27,7 +27,7 @@ class Config(TomlConfig):
 
         s = """[general]
 
-        [editor]
+        [CodeEditor]
 
         """
         self.readString(s)

@@ -51,7 +51,7 @@ setup(
     # metadata to display on PyPI
     author='lileilei',
     author_email='hustlei@sina.cn',
-    description="A Qt Stylesheet(QSS) editor",
+    description="A Qt Stylesheet(QSS) CodeEditor",
     keywords="QSS",
     # long_description=long_desc,
     # long_description_content_type="text/markdown",

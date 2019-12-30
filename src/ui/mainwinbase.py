@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QMainWindow, QApplication, QStyleFactory, QAction, 
                              QCheckBox, QComboBox, QTabWidget, QDockWidget)
 
 # from res.img_rc import *
-from .editor import CodeEditor
+from ui.CodeEditor import Editor
 from .preview import PreviewWidget
 from .flow_layout import QFlowLayout
 
@@ -24,7 +24,7 @@ class MainWinBase(QMainWindow):
         self.menubar = self.menuBar()
         self.statusbar = self.statusBar()
         self.mainWidget = QTabWidget()
-        self.editor = CodeEditor()
+        self.editor = Editor()
 
         self.actions = {}
         self.menus = {}
@@ -292,4 +292,4 @@ class MainWinBase(QMainWindow):
     def createMainWidget(self):
         self.setCentralWidget(self.mainWidget)
         self.mainWidget.setTabBarAutoHide(True)
-        self.mainWidget.addTab(self.editor, self.tr("main", "editor tab in tabwidget of mainwidget"))
+        self.mainWidget.addTab(self.editor, self.tr("main", "CodeEditor tab in tabwidget of mainwidget"))

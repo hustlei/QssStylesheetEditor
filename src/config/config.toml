@@ -2,8 +2,11 @@
 language = ""
 
 [file]
-recent = []
+recent = [ "C:\\Users\\lei\\AppData\\Local\\Temp\\pytest-of-lei\\pytest-221\\test_fileop_and_clrpic0\\new.qsst",]
 recentcount = 4
 
 [editor]
+fontsize = 11
+
+[CodeEditor]
 fontsize = 11

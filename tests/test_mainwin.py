@@ -58,7 +58,7 @@ class TestMain():
         qtbot.waitForWindowShown(sharedwin["main"].confDialog)
 
     def test_fileop_and_clrpic(self, qapp, qtbot, sharedwin, tmpdir):
-        """Test file new and save, test color pick, this test will effect editor text
+        """Test file new and save, test color pick, this test will effect CodeEditor text
         """
         mainwin = sharedwin["main"]
 

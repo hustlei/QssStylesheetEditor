@@ -87,7 +87,7 @@ class MainWin(MainWinBase):
 
         self.docks["color"].dockLocationChanged.connect(sizeDock)
 
-        # main editor
+        # main CodeEditor
         self.editor.keyPress.connect(self.textChanged)
 
         def rend():
@@ -112,7 +112,7 @@ class MainWin(MainWinBase):
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
         aboutText += self.tr(
-            "This software is a advanced editor for QtWidget stylesheet(Qss), <br>support custom variable and "
+            "This software is a advanced CodeEditor for QtWidget stylesheet(Qss), <br>support custom variable and "
             "real-time preview.<br><br> ")
         aboutText += self.tr(
             "author: lileilei<br>website: <a href='https://github.com/hustlei/QssStylesheetEditor'>https"
@@ -282,7 +282,7 @@ class MainWin(MainWinBase):
             pos = self.editor.verticalScrollBar().sliderPosition()
             self.editor.selectAll()
             self.editor.replaceSelectedText(self.qsst.srctext)  # setText(self.qsst.srctext)
-            # self.editor.setCursorPosition(xp,yp)
+            # self.CodeEditor.setCursorPosition(xp,yp)
             self.editor.verticalScrollBar().setSliderPosition(pos)
             self.renderStyle()
 
@@ -429,7 +429,7 @@ class MainWin(MainWinBase):
     def updateConfig(self):
         self.config.getSec("file")["recent"] = self.recent.getList()
         self.config.getSec("file")["recentcount"] = self.recent.maxcount
-        self.config.getSec("editor")["fontsize"] = self.editor.font().pointSize()
+        self.config.getSec("CodeEditor")["fontsize"] = self.editor.font().pointSize()
 
     def useConfig(self):
         recentlist = self.config["file.recent"]
@@ -438,4 +438,4 @@ class MainWin(MainWinBase):
         maxcount = self.config["file.recentcount"]
         if maxcount:
             self.recent.maxcount = int(maxcount)
-        self.editor.font().setPointSize(self.config.getSec("editor").get("fontsize", 11))
+        self.editor.font().setPointSize(self.config.getSec("CodeEditor").get("fontsize", 11))

@@ -69,11 +69,10 @@ class ConfDialog(QWidget):
         w.setLayout(layw)
         self.stack.addWidget(w)
 
-        # editor
-        from ui.editor.settings import EditorSettings
+        # CodeEditor
+        from ui.CodeEditor.settings import EditorSettings
         settings = EditorSettings(self.win.editor)
-        w = QWidget()
-        w.setLayout(settings.defaultLayout())
+        w = settings.settingPanel()
         self.stack.addWidget(w)
 
         self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)

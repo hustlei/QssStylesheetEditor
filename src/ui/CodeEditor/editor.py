@@ -9,9 +9,10 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
 from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
-from . import lexers
-from .search import SearchDialog
-from .lang import guessLang
+
+from ui import CodeEditor
+from ui.CodeEditor import lexers
+from ui.CodeEditor.search import SearchDialog
 
 import chardet
 
@@ -25,7 +26,7 @@ elif sys.platform.startswith("win"):
     # font.setFamilies(["Courier New", 'Consolas'])
 
 
-class CodeEditor(QsciScintilla):
+class Editor(QsciScintilla):
     keyPress = pyqtSignal(QKeyEvent)
     loseFocus = pyqtSignal()
     mouseLeave = pyqtSignal()
@@ -44,8 +45,6 @@ class CodeEditor(QsciScintilla):
             self.configure(**config)
         self.searchDialog = SearchDialog(self)
 
-    def guessLang(self, filename):
-        return guessLang(filename)
     ###
     # extension(core): config extension
     ###
@@ -64,16 +63,16 @@ class CodeEditor(QsciScintilla):
         self.configure(**{name: value})
 
     def configure(self, **config):
-        """Configure the editor with the given settings.
+        """Configure the CodeEditor with the given settings.
 
         Accepts ``keyword=getValue`` arguments for any attribute ``foo`` that is
         normally set via a ``setFoo`` method.
         For example, instead of this:
-            >>> editor.setEdgeColor(QFont('Courier New', 10))
-            >>> editor.setEolVisibility(True)
-            >>> editor.setEdgeColumn(80)
+            >>> CodeEditor.setEdgeColor(QFont('Courier New', 10))
+            >>> CodeEditor.setEolVisibility(True)
+            >>> CodeEditor.setEdgeColumn(80)
         This method allows you to do this:
-            >>> editor.configure(
+            >>> CodeEditor.configure(
             ...     edgeColor = QFont('Courier New', 10),
             ...     eolVisibility = True,
             ...     edgeColumn = 80)
@@ -284,12 +283,12 @@ class CodeEditor(QsciScintilla):
     # Content operation
     ###
     def clear(self):
-        """Clear the contents of the editor."""
+        """Clear the contents of the CodeEditor."""
         self.setText('')
         self.setModified(False)
 
     def load(self, filename):
-        """Load the given file into the editor."""
+        """Load the given file into the CodeEditor."""
         with open(filename, 'rb') as f:
             self.setEnabled(True)
             # lm=os.path.getsize(filename)
@@ -323,11 +322,11 @@ class CodeEditor(QsciScintilla):
                     return False
             print("coding: " + self.coding)
             self.setModified(False)
-            self.setLanguage(self.guessLang(filename))
+            self.setLanguage(CodeEditor.guessLang(filename))
             return True
 
     def save(self, filename):
-        """Save the editor contents to the given filename."""
+        """Save the CodeEditor contents to the given filename."""
         with open(filename, 'w', newline='') as outfile:
             # 不指定newline，则换行符为各系统默认的换行符（\n, \r, or \r\n, ）
             # newline=''表示不转换
@@ -349,7 +348,7 @@ class CodeEditor(QsciScintilla):
     # extension: get find text infomation
     ###
     def count(self, string, *, case=False):
-        """Get the count of string text appeared in editor content"""
+        """Get the count of string text appeared in CodeEditor content"""
         if case:
             counter = self.text().count(string)
         else:

@@ -318,8 +318,8 @@ class QsciLexerQSS(QsciLexerCustom):
             # l=(level & ~HEADERFLAG)-LEVELBASE
             # print("{}:{}".format(index+1,l))
         # Reset the fold level of the last line
-        # editor.SendScintilla(QsciScintilla.SCI_SETFOLDLEVEL, len(lines), 0)
-        # editor.SendScintilla(QsciScintilla.SCI_SETFOLDFLAGS, 16 | 4, 0)# //
+        # CodeEditor.SendScintilla(QsciScintilla.SCI_SETFOLDLEVEL, len(lines), 0)
+        # CodeEditor.SendScintilla(QsciScintilla.SCI_SETFOLDFLAGS, 16 | 4, 0)# //
         # 如果折叠就在折叠行的上下各画一条横线
 
     # token 判断
