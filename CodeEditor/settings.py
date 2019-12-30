@@ -232,7 +232,7 @@ class EditorSettings():
         # all setting group widgets
         self.groupWidgets = {}
         self.editor = editor
-        self.__loadNeeded = False
+        self.__loadNeeded = True
 
     def loadFromEditor(self):
         for item in self.settingItems:
@@ -285,7 +285,6 @@ class EditorSettings():
         layout = QVBoxLayout()
         for g in self.groupWidgets.values():
             layout.addWidget(g)
-        self.loadFromEditor()
         return layout
 
     def createWidgets(self):
