@@ -10,7 +10,7 @@ from PyQt5.QtGui import (QFont, QFontMetrics, QKeyEvent, QColor, QDropEvent)
 from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
 from CodeEditor import lexers
-from .search import SearchDialog
+from CodeEditor.search import SearchDialog
 
 import chardet
 

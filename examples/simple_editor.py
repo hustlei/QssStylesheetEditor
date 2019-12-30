@@ -29,7 +29,7 @@ conflayout = QVBoxLayout()
 confpannel.setLayout(conflayout)
 
 setting = EditorSettings(ed)
-conflayout.addLayout(setting.defaultLayout())
+conflayout.addWidget(setting.settingPanel())
 btcancel = QPushButton("Cancel")
 btcancel.clicked.connect(setting.cancel)
 btok = QPushButton("Apply")

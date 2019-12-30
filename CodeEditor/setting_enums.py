@@ -2,7 +2,7 @@
 """
 from PyQt5.Qsci import QsciScintilla
 from PyQt5.QtCore import QCoreApplication, Qt
-from .lang import language_extensions
+from CodeEditor.lang import language_extensions
 
 
 class EnumError(Exception):

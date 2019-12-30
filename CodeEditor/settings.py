@@ -7,10 +7,10 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
-from PyQt5.QtCore import Qt, QVariant, QCoreApplication
+from PyQt5.QtCore import Qt, QVariant, QCoreApplication, QSize, pyqtSignal
 from PyQt5.QtGui import QColor, QPalette, QFont
 from PyQt5.QtWidgets import (QWidget, QGroupBox, QVBoxLayout, QPushButton, QLabel, QHBoxLayout, QSpinBox, QCheckBox,
-                             QComboBox, QColorDialog, QFontComboBox)
+                             QComboBox, QColorDialog, QFontComboBox, QScrollArea)
 from PyQt5.Qsci import QsciScintilla
 from .setting_enums import EnumError, SettingEnums
 
@@ -232,6 +232,7 @@ class EditorSettings():
         # all setting group widgets
         self.groupWidgets = {}
         self.editor = editor
+        self.__loadNeeded = False
 
     def loadFromEditor(self):
         for item in self.settingItems:
@@ -251,6 +252,29 @@ class EditorSettings():
                 elif self.settingItems[name][type] == 'combo':
                     self.currentSettings[name] = SettingEnums.getFromName(self.settingItems[name]['valuetype'], name)
         self.updateUi(self.currentSettings)
+
+    def settingPanel(self):
+        """Create and return a widget include all settings"""
+        class Panel(QScrollArea):
+            showed = pyqtSignal()
+            def __init__(self, parent=None):
+                super().__init__(parent)
+            def showEvent(self, *args, **kwargs):
+                self.showed.emit()
+
+        scrollArea = Panel()
+        scrollArea.setWidgetResizable(True)
+        mainWidget = QWidget()
+        #mainWidget.setMinimumSize(QSize(420, 600))
+        scrollArea.setWidget(mainWidget)
+        layout = self.defaultLayout()
+        mainWidget.setLayout(layout)
+        def reloadconfig():
+            if self.__loadNeeded:
+                self.loadFromEditor()
+                self.__loadNeeded = False
+        scrollArea.showed.connect(reloadconfig)
+        return scrollArea
 
     def defaultLayout(self):
         """Create and return the main layout for the dialog widget.
@@ -438,6 +462,7 @@ class EditorSettings():
     def cancel(self):
         self.changedSettings.clear()
         self.updateUi(self.currentSettings)
+        self.__loadNeeded = True
 
     def apply(self):
         self.currentSettings.update(self.changedSettings)
@@ -457,3 +482,4 @@ class EditorSettings():
             except Exception as e:
                 print(e)
         self.changedSettings.clear()
+        self.__loadNeeded = True
