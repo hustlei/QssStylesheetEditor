@@ -226,9 +226,9 @@ class EditorSettings():
     )
 
     def __init__(self, editor=None):
-        self.currentSettings = {}  # settings exist
-        self.changedSettings = {}  # settings changed to be applied
-        self.updateActions = {}
+        self._currentSettings = {}  # settings exist
+        self._changedSettings = {}  # settings changed to be applied
+        self._updateActions = {}
         # all setting group widgets
         self.groupWidgets = {}
         self.editor = editor
@@ -236,22 +236,59 @@ class EditorSettings():
 
     def loadFromEditor(self):
         for item in self.settingItems:
-            self.currentSettings[item] = self.editor.getConfig(item)
+            self._currentSettings[item] = self.editor.getConfig(item)
 
-        self.updateUi(self.currentSettings)
+        self.updateUi(self._currentSettings)
+
+    def get(self, name):
+        """get config by name, when value is color or combo, return color string or enum name"""
+        value = self.editor.getConfig(name)
+        if isinstance(value, Qt.GlobalColor):
+            value = QColor(value).name()
+        elif isinstance(value, QColor):
+            value = value.name()
+        elif name in self.settingItems and self.settingItems[name]['type'] == 'combo':
+            value = SettingEnums.getName(self.settingItems[name]['valuetype'], value)
+        return value
+
+    def set(self, name, tomlformatvalue):
+        """set config item to editor, when value is color or combo the value can be color string or enum name,
+         same to tomldict format"""
+        value = tomlformatvalue
+        if name in self.settingItems:
+            if self.settingItems[name]['type'] == 'color':
+                value = QColor(tomlformatvalue)
+            elif self.settingItems[name]['type'] == 'combo':
+                value = SettingEnums.getFromName(self.settingItems[name]['valuetype'], tomlformatvalue)
+        elif isinstance(name, str):
+            try:
+                value = QColor(tomlformatvalue)
+            except:
+                pass
+        self.editor.setConfig(name, value)
+
+    def configure(self, **config):
+        for name, args in config.items():
+            self.set(name, args)
+
+    def getTomlDict(self):
+        """get editor all settings in tomldict format. eg: if is color or enum using string instead"""
+        rst = {}
+        for name in self.settingItems:
+            rst[name] = self.get(name)
 
     def loadFromTomlDict(self, tomldict):
         """
         :param tomldict: settings dict load form toml config file, all colors and enums are using name string insteaded in tomldict
         """
         for name, value in tomldict:
-            self.currentSettings[name] = value
+            self._currentSettings[name] = value
             if isinstance(value, str) and name in self.settingItems:
-                if self.settingItems[name][type] == 'color':
-                    self.currentSettings[name] = QColor(value)
-                elif self.settingItems[name][type] == 'combo':
-                    self.currentSettings[name] = SettingEnums.getFromName(self.settingItems[name]['valuetype'], name)
-        self.updateUi(self.currentSettings)
+                if self.settingItems[name]['type'] == 'color':
+                    self._currentSettings[name] = QColor(value)
+                elif self.settingItems[name]['type'] == 'combo':
+                    self._currentSettings[name] = SettingEnums.getFromName(self.settingItems[name]['valuetype'], name)
+        self.updateUi(self._currentSettings)
 
     def settingPanel(self):
         """Create and return a widget include all settings"""
@@ -267,7 +304,7 @@ class EditorSettings():
         mainWidget = QWidget()
         #mainWidget.setMinimumSize(QSize(420, 600))
         scrollArea.setWidget(mainWidget)
-        layout = self.defaultLayout()
+        layout = self._defaultLayout()
         mainWidget.setLayout(layout)
         def reloadconfig():
             if self.__loadNeeded:
@@ -276,7 +313,7 @@ class EditorSettings():
         scrollArea.showed.connect(reloadconfig)
         return scrollArea
 
-    def defaultLayout(self):
+    def _defaultLayout(self):
         """Create and return the main layout for the dialog widget.
         """
         # Indexed group boxes, for easier rearrangement
@@ -338,9 +375,9 @@ class EditorSettings():
 
         def checkbox_changed(state):
             if state == Qt.Checked:
-                self.changedSettings[name] = True
+                self._changedSettings[name] = True
             elif state == Qt.Unchecked:
-                self.changedSettings[name] = False
+                self._changedSettings[name] = False
 
         checkbox.stateChanged[int].connect(checkbox_changed)
 
@@ -350,7 +387,7 @@ class EditorSettings():
             else:
                 checkbox.setChecked(False)  # checkbox.setCheckState(Qt.Unchecked)
 
-        self.updateActions[name] = checkbox_update
+        self._updateActions[name] = checkbox_update
 
         # Set the initial checkbox state based on current getValue
         # checkbox_update(self.currentSettings.get(name, True))
@@ -363,14 +400,14 @@ class EditorSettings():
         spinbox.setMaximumWidth(120)
 
         def spinbox_changed(value):
-            self.changedSettings[name] = value
+            self._changedSettings[name] = value
 
         spinbox.valueChanged[int].connect(spinbox_changed)
 
         def spinbox_update(value):
             spinbox.setValue(value)
 
-        self.updateActions[name] = spinbox_update
+        self._updateActions[name] = spinbox_update
         # Set initial getValue
         # spinbox.setValue(self.currentSettings.get(name, 5))
         return spinbox
@@ -389,7 +426,7 @@ class EditorSettings():
         # Ugly event handler!
         def combo_changed(index):
             data = combo.itemData(index)
-            self.changedSettings[name] = data
+            self._changedSettings[name] = data
 
         combo.currentIndexChanged[int].connect(combo_changed)
 
@@ -398,7 +435,7 @@ class EditorSettings():
             index = combo.findData(value)
             combo.setCurrentIndex(index)
 
-        self.updateActions[name] = combo_update
+        self._updateActions[name] = combo_update
         # combo_update(self.currentSettings.get(name, list(SettingEnums.enums[valuetype].values())[0]))
         return combo
 
@@ -413,7 +450,7 @@ class EditorSettings():
 
         # Ugly event handler!
         def combo_changed(index):
-            self.changedSettings[name] = combo.currentFont().family()
+            self._changedSettings[name] = combo.currentFont().family()
 
         combo.currentFontChanged.connect(combo_changed)
 
@@ -421,7 +458,7 @@ class EditorSettings():
         def combo_update(value):
             combo.setCurrentFont(QFont(value))
 
-        self.updateActions[name] = combo_update
+        self._updateActions[name] = combo_update
         # combo_update(self.currentSettings.get(name, list(SettingEnums.enums[valuetype].values())[0]))
         return combo
 
@@ -434,10 +471,10 @@ class EditorSettings():
         # Event handler
         def button_pressed():
             color = QColorDialog.getColor(
-                self.currentSettings.get(name, Qt.white))  # button.palette().color(QPalette.Background))
+                self._currentSettings.get(name, Qt.white))  # button.palette().color(QPalette.Background))
             if color.isValid():
                 button.setStyleSheet("background-color: %s" % color.name())
-                self.changedSettings[name] = color
+                self._changedSettings[name] = color
 
         # Connect event handler
         button.pressed.connect(button_pressed)
@@ -445,7 +482,7 @@ class EditorSettings():
         def button_update(value):
             button.setStyleSheet("background-color: %s" % value.name())
 
-        self.updateActions[name] = button_update
+        self._updateActions[name] = button_update
         # button.setStyleSheet("background-color: %s" % current_color)
         return button
 
@@ -453,32 +490,32 @@ class EditorSettings():
         if self.editor:
             for name, value in settingdict.items():
                 try:
-                    self.updateActions[name](value)
+                    self._updateActions[name](value)
                 except:
                     print("Can't update {} setting to config dialog.".format(name))
-            self.changedSettings.clear()
+            self._changedSettings.clear()
 
     def cancel(self):
-        self.changedSettings.clear()
-        self.updateUi(self.currentSettings)
+        self._changedSettings.clear()
+        self.updateUi(self._currentSettings)
         self.__loadNeeded = True
 
     def apply(self):
-        self.currentSettings.update(self.changedSettings)
+        self._currentSettings.update(self._changedSettings)
         if self.editor:
             try:
-                if "language" in self.changedSettings:
-                    if "color" not in self.changedSettings:
-                        self.changedSettings["color"] = self.currentSettings["color"]
-                    if "paper" not in self.changedSettings:
-                        self.changedSettings["paper"] = self.currentSettings["paper"]
-                if "language" in self.changedSettings or "fontSize" in self.changedSettings or "fontFamily" in self.changedSettings:
-                    if "fontSize" not in self.changedSettings:
-                        self.changedSettings['fontSize'] = self.currentSettings['fontSize']
-                    if "fontFamily" not in self.changedSettings:
-                        self.changedSettings['fontFamily'] = self.currentSettings["fontFamily"]
-                self.editor.configure(**self.changedSettings)
+                if "language" in self._changedSettings:
+                    if "color" not in self._changedSettings:
+                        self._changedSettings["color"] = self._currentSettings["color"]
+                    if "paper" not in self._changedSettings:
+                        self._changedSettings["paper"] = self._currentSettings["paper"]
+                if "language" in self._changedSettings or "fontSize" in self._changedSettings or "fontFamily" in self._changedSettings:
+                    if "fontSize" not in self._changedSettings:
+                        self._changedSettings['fontSize'] = self._currentSettings['fontSize']
+                    if "fontFamily" not in self._changedSettings:
+                        self._changedSettings['fontFamily'] = self._currentSettings["fontFamily"]
+                self.editor.configure(**self._changedSettings)
             except Exception as e:
                 print(e)
-        self.changedSettings.clear()
+        self._changedSettings.clear()
         self.__loadNeeded = True

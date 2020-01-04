@@ -1,16 +1,18 @@
+# -*- coding: utf-8 -*-
+"""Simple editor sample using CodeEditor package.
 
+Copyright (c) 2019 lileilei. <hustlei@sina.cn>
+"""
 
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout, QVBoxLayout, QPushButton
 sys.path.append("..")
-from CodeEditor import Editor, EditorSettings
+from PyQt5.QtWidgets import QApplication, QWidget, QSplitter, QVBoxLayout, QHBoxLayout, QPushButton
+from CodeEditor import Editor
 
 app = QApplication(sys.argv)
 win = QWidget()
-hlayout = QHBoxLayout()
-
-ed = Editor()
-ed.setMinimumWidth(600)
+# create editor
+edt = Editor()
 text="""#include <stdio.h>
 int main()
 {
@@ -21,40 +23,44 @@ int main()
     printf("低头思故乡。"); 
     return 0;    
 }"""
-ed.setText(text)
-ed.setLanguage("CPP")
+edt.setText(text)
+edt.setLanguage("CPP")
 
-confpannel = QWidget(win)
-conflayout = QVBoxLayout()
-confpannel.setLayout(conflayout)
-
-setting = EditorSettings(ed)
-conflayout.addWidget(setting.settingPanel())
+# setting widgets
+settingPanel = edt.settings.settingPanel()
 btcancel = QPushButton("Cancel")
-btcancel.clicked.connect(setting.cancel)
+btcancel.clicked.connect(edt.settings.cancel)
 btok = QPushButton("Apply")
-btok.clicked.connect(setting.apply)
-layout1 = QHBoxLayout()
-layout1.addWidget(btcancel)
-layout1.addWidget(btok)
-conflayout.addLayout(layout1)
-
-hlayout.addWidget(ed)
-hlayout.addWidget(confpannel)
-
-mainLayout = QVBoxLayout()
-toolbar = QHBoxLayout()
+btok.clicked.connect(edt.settings.apply)
+# ok cancel button
+btnLayout = QHBoxLayout()
+btnLayout.addWidget(btcancel)
+btnLayout.addWidget(btok)
+settingDialogLayout = QVBoxLayout()
+settingDialogLayout.addWidget(edt.settings.settingPanel())
+settingDialogLayout.addLayout(btnLayout)
+# setting dialog
+settingDialog = QWidget(win)
+settingDialog.setLayout(settingDialogLayout)
+# container for editor and setting dialog
+splitter = QSplitter()
+splitter.addWidget(edt)
+splitter.addWidget(settingDialog)
+# toolbar
 butfind = QPushButton("find")
-butfind.clicked.connect(ed.find)
+butfind.clicked.connect(edt.find)
 butreplace = QPushButton("replace")
-butreplace.clicked.connect(ed.replace)
+butreplace.clicked.connect(edt.replace)
+toolbar = QHBoxLayout()
 toolbar.addWidget(butfind)
 toolbar.addWidget(butreplace)
 toolbar.addStretch(1)
+# main layout
+mainLayout = QVBoxLayout()
 mainLayout.addLayout(toolbar)
-mainLayout.addLayout(hlayout)
-
+mainLayout.addWidget(splitter)
 win.setLayout(mainLayout)
+
 win.setMinimumWidth(800)
 win.show()
 sys.exit(app.exec_())

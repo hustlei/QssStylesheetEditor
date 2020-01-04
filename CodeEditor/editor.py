@@ -11,6 +11,8 @@ from PyQt5 import Qsci
 from PyQt5.Qsci import QsciScintilla, QsciLexer
 from CodeEditor import lexers
 from CodeEditor.search import SearchDialog
+from CodeEditor.settings import EditorSettings
+from CodeEditor.lang import guessLang
 
 import chardet
 
@@ -42,6 +44,7 @@ class Editor(QsciScintilla):
         if config:
             self.configure(**config)
         self.searchDialog = SearchDialog(self)
+        self.settings = EditorSettings(self)
 
     ###
     # extension(core): config extension
@@ -208,10 +211,14 @@ class Editor(QsciScintilla):
             # print("Editor syntax highlighting language error: set to plain text.")
         # raise ValueError("Unknown language: '%s'" % language)
         if self.lexer:
-            self.lexer.setDefaultFont(self.font())
+            self.lexer.setFont(self.font(), 0)
+            self.lexer.setColor(self.color(), 0)
+            self.lexer.setPaper(self.paper(), 0)
         print("Editor syntax highlighting language: %s" % language)
         self.setLexer(self.lexer)
 
+    def guessLanguage(self, filename):
+        return guessLang(filename)
     ###
     # extension: Getters setter
     # Missing Getters 只有set函数，但是没有对应get函数的属性
@@ -277,6 +284,15 @@ class Editor(QsciScintilla):
         r, g, b = self.__bgr_int2rgb(bgr_int)
         return QColor(r, g, b)
 
+    def setColor(self, color):
+        super().setColor(color)
+        if self.lexer:
+            self.lexer.setColor(color, 0)
+
+    def setPaper(self, bgColor):
+        super().setPaper(bgColor)
+        if self.lexer:
+            self.lexer.setPaper(bgColor, 0)
     ###
     # Content operation
     ###
