@@ -219,6 +219,7 @@ class Editor(QsciScintilla):
 
     def guessLanguage(self, filename):
         return guessLang(filename)
+
     ###
     # extension: Getters setter
     # Missing Getters 只有set函数，但是没有对应get函数的属性
@@ -293,6 +294,7 @@ class Editor(QsciScintilla):
         super().setPaper(bgColor)
         if self.lexer:
             self.lexer.setPaper(bgColor, 0)
+
     ###
     # Content operation
     ###

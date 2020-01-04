@@ -1,17 +1,17 @@
-English | [简体中文](README_zh-CN.md)
+简体中文 | [English](README.md)
 
 # CodeEditor
-Syntax highlighting code editor. Easy to config.
- 
-A python editor package, based on QScintilla. support:
+支持语法高亮，非常容易自定义配置的编辑器库。
 
-+ find and replace dialog
-+ setting panel for config dialog
-+ easy config api
+CodeEditor是一个基于 QScintilla 的python库。支持的功能有：
 
-# usage
+1. 自带搜索和替换对话框
+2. 自带配置面板控件
+3. 易用的配置 api
 
-Create editor, open file or find text:
+# 用法
+
+创建编辑器, 打开文件，使用搜索和替换对话框:
 
 ~~~python
 from CodeEditor import editor
@@ -25,12 +25,12 @@ edt.find()  # show find dialog
 edt.replace() # show replace dialog
 ~~~
 
-find and replace dialog will dispaly as follow:
+搜索和替换对话框截图:
 
 ![search dialog screenshot](docs/assets/screenshot/find.png)
 ![replace dialog screenshot](docs/assets/screenshot/replace.png)
 
-create setting panel:
+创建配置面板控件:
 
 ~~~python
 from CodeEditor import editor
@@ -41,11 +41,11 @@ panel.apply()  # apply all change options in setting panel
 panel.cancel() # cancel all change options and refresh setting panel
 ~~~
 
-settingPanel is a Scrollable Qt Widget, it will display as follow:
+配置面板控件是一个可滚动的 Qt 控件, 实际显示效果如下:
 
 ![setting panel screenshot](docs/assets/screenshot/settingpanel.png)
 
-config editor:
+配置编辑器:
 
 ~~~python
 from CodeEditor import editor

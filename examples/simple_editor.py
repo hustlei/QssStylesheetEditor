@@ -5,6 +5,7 @@ Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 """
 
 import sys
+
 sys.path.append("..")
 from PyQt5.QtWidgets import QApplication, QWidget, QSplitter, QVBoxLayout, QHBoxLayout, QPushButton
 from CodeEditor import Editor
@@ -13,7 +14,7 @@ app = QApplication(sys.argv)
 win = QWidget()
 # create editor
 edt = Editor()
-text="""#include <stdio.h>
+text = """#include <stdio.h>
 int main()
 {
     // 这是一首思念家乡的诗
