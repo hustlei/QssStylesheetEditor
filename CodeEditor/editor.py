@@ -46,6 +46,8 @@ class Editor(QsciScintilla):
         self.searchDialog = SearchDialog(self)
         self.settings = EditorSettings(self)
 
+        self.__foldingStyle = self.BoxedFoldStyle
+
     ###
     # extension(core): config extension
     ###
@@ -160,7 +162,7 @@ class Editor(QsciScintilla):
 
             # margins switch
             marginWidthes=((1, 0), (3, 0), (4, 0)),  # 设置边栏宽度，设置宽度为0表示不显示
-            marginWidth=(2, 12),  # 设置边栏宽度
+            # marginWidth=(2, 12),  # 设置边栏宽度
 
             # margin（line number）
             marginLineNumbers=(0, True),  # 设置第0个边栏为行号边栏，True表示显示
@@ -214,6 +216,12 @@ class Editor(QsciScintilla):
             self.lexer.setFont(self.font(), 0)
             self.lexer.setColor(self.color(), 0)
             self.lexer.setPaper(self.paper(), 0)
+            if language == "Text":
+                self.__foldingStyle = self.folding()
+                self.setFolding(self.NoFoldStyle)
+            elif self.folding() == self.NoFoldStyle:
+                self.setFolding(self.__foldingStyle)
+
         print("Editor syntax highlighting language: %s" % language)
         self.setLexer(self.lexer)
 

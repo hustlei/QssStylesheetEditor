@@ -8,7 +8,6 @@ import sys
 
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QHBoxLayout
-from PyQt5.QtCore import Qt
 
 sys.path.append("..")
 from CodeEditor import Editor
