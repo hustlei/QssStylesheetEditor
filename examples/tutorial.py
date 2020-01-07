@@ -25,7 +25,6 @@ edt.setText(text)
 edt.setLanguage("Text")
 edt.setColor(QColor("#FF0000"))
 edt.setFontSize(20)
-edt.setFontFamily("Microsoft YaHei")
 from PyQt5.Qsci import QsciScintilla
 
 edt.setEdgeMode(QsciScintilla.EdgeLine)

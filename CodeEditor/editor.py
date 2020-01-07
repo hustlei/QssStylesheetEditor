@@ -257,6 +257,9 @@ class Editor(QsciScintilla):
             return self.font().family()
 
     def setFontFamily(self, fontFamily):
+        from auxilary import fontFamilies
+        if fontFamily in fontFamilies:
+            fontFamily = fontFamilies[fontFamily]
         if self.lexer:
             myfont = self.lexer.font(0)
         else:
