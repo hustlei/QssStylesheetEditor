@@ -7,7 +7,7 @@ Copyright (c) 2019 lileilei. <hustlei@sina.cn>
 import sys
 
 sys.path.append("..")
-from PyQt5.QtWidgets import QApplication, QWidget, QSplitter, QVBoxLayout, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QSplitter, QVBoxLayout, QHBoxLayout, QPushButton, QFileDialog
 from CodeEditor import Editor
 
 app = QApplication(sys.argv)
@@ -48,11 +48,18 @@ splitter = QSplitter()
 splitter.addWidget(edt)
 splitter.addWidget(settingDialog)
 # toolbar
+butopen = QPushButton("open")
+def openfile():
+    dialog, _ = QFileDialog.getOpenFileName()
+    if dialog:
+        edt.load(dialog)
+butopen.clicked.connect(openfile)
 butfind = QPushButton("find")
 butfind.clicked.connect(edt.find)
 butreplace = QPushButton("replace")
 butreplace.clicked.connect(edt.replace)
 toolbar = QHBoxLayout()
+toolbar.addWidget(butopen)
 toolbar.addWidget(butfind)
 toolbar.addWidget(butreplace)
 toolbar.addStretch(1)

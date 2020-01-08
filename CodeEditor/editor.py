@@ -13,6 +13,7 @@ from CodeEditor import lexers
 from CodeEditor.search import SearchDialog
 from CodeEditor.settings import EditorSettings
 from CodeEditor.lang import guessLang
+from CodeEditor.auxilary import binfiletypes, textfiletypes, getFileType
 
 import chardet
 
@@ -316,15 +317,22 @@ class Editor(QsciScintilla):
 
     def load(self, filename):
         """Load the given file into the editor."""
+        self.coding = "utf-8"
+        self.setText("")
+        filetype = getFileType(filename)
         with open(filename, 'rb') as f:
+            strbytes = f.read()
+
+        if filetype in binfiletypes:
+            self.setEnabled(True)
+            self.coding = "unknown"
+            self.setText(strbytes)
+            self.setLanguage("None")
+        else:
             self.setEnabled(True)
             # lm=os.path.getsize(filename)
-            strbytes = f.read()
             deteclen = min(len(strbytes), 1024)
-            if not deteclen:
-                self.coding = "utf-8"
-                self.setText("")
-            else:
+            if deteclen:
                 try:
                     rst = chardet.detect(strbytes[:deteclen])
                     if rst["confidence"] < 0.8:
@@ -334,22 +342,20 @@ class Editor(QsciScintilla):
                     if rst["confidence"] > 0.8:
                         self.setText(strbytes.decode(self.coding))
                     else:
-                        if self.__isBin(strbytes):
-                            raise Exception
-                        self.coding = "bin?"
-                        self.setText(self.__byte2str(strbytes))
-                        self.setReadOnly(True)
+                        self.coding = "unknown"
+                        self.setText(strbytes)
                         self.setLanguage("None")
-                        self.setWrapMode(self.WrapWod)
                 except BaseException:  # Exception:
                     self.coding = "none"
-                    self.setText(self.tr("can't open this file, it may be a binary file."))
-                    print("open file failue.")
+                    self.setText(self.tr("Error: can't open this file."))
                     self.setEnabled(False)
                     return False
             print("coding: " + self.coding)
             self.setModified(False)
-            self.setLanguage(self.guessLang(filename))
+            if filetype in textfiletypes:
+                self.setLanguage(textfiletypes[filetype])
+            else:
+                self.setLanguage(self.guessLanguage(filename))
             return True
 
     def save(self, filename):
