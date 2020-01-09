@@ -1,4 +1,4 @@
-English | [简体中文](README_zh-CN.md)
+English | [简体中文](https://github.com/hustlei/CodeEditor/blob/master/README_zh-CN.md)
 
 # CodeEditor
 Syntax highlighting code editor. Easy to config.
@@ -27,8 +27,8 @@ edt.replace() # show replace dialog
 
 find and replace dialog will dispaly as follow:
 
-![search dialog screenshot](docs/assets/screenshot/find.png)
-![replace dialog screenshot](docs/assets/screenshot/replace.png)
+![search dialog screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/find.png?raw=true)
+![replace dialog screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/replace.png?raw=true)
 
 create setting panel:
 
@@ -43,7 +43,7 @@ panel.cancel() # cancel all change options and refresh setting panel
 
 settingPanel is a Scrollable Qt Widget, it will display as follow:
 
-![setting panel screenshot](docs/assets/screenshot/settingpanel.png)
+![setting panel screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/settingpanel.png?raw=true)
 
 config editor:
 

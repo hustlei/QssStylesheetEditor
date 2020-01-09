@@ -1,4 +1,4 @@
-简体中文 | [English](README.md)
+简体中文 | [English](https://github.com/hustlei/CodeEditor/blob/master/README.md)
 
 # CodeEditor
 支持语法高亮，非常容易自定义配置的编辑器库。
@@ -27,8 +27,8 @@ edt.replace() # show replace dialog
 
 搜索和替换对话框截图:
 
-![search dialog screenshot](docs/assets/screenshot/find.png)
-![replace dialog screenshot](docs/assets/screenshot/replace.png)
+![search dialog screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/find.png?raw=true)
+![replace dialog screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/replace.png?raw=true)
 
 创建配置面板控件:
 
@@ -43,7 +43,7 @@ panel.cancel() # cancel all change options and refresh setting panel
 
 配置面板控件是一个可滚动的 Qt 控件, 实际显示效果如下:
 
-![setting panel screenshot](docs/assets/screenshot/settingpanel.png)
+![setting panel screenshot](https://github.com/hustlei/CodeEditor/blob/master/docs/assets/screenshot/settingpanel.png?raw=true)
 
 配置编辑器:
 
