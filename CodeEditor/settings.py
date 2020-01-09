@@ -25,10 +25,13 @@ class EditorSettings():
             'help': QCoreApplication.translate('EditorSettings', 'Use the tab key to indent text'),
         },
         'backspaceUnindents': {
-            'type': 'bool',
-            'label': QCoreApplication.translate('EditorSettings', 'Backspace unindents'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Backspace will unindent a line instead of just deleting a character'),
+            'type':
+            'bool',
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Backspace unindents'),
+            'help':
+            QCoreApplication.translate('EditorSettings',
+                                       'Backspace will unindent a line instead of just deleting a character'),
         },
         'autoIndent': {
             'type': 'bool',
@@ -37,48 +40,51 @@ class EditorSettings():
                                                'Automatically indent text to match the preceding line'),
         },
         'indentationGuides': {
-            'type': 'bool',
-            'label': QCoreApplication.translate('EditorSettings', 'Indentation guides'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Display visible guidelines to help keep indentation consistent'),
+            'type':
+            'bool',
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Indentation guides'),
+            'help':
+            QCoreApplication.translate('EditorSettings',
+                                       'Display visible guidelines to help keep indentation consistent'),
         },
         'indentationsUseTabs': {
-            'type': 'bool',
-            'label': QCoreApplication.translate('EditorSettings', 'Use tab character'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Tab key inserts an actual tab character instead of spaces'),
+            'type':
+            'bool',
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Use tab character'),
+            'help':
+            QCoreApplication.translate('EditorSettings', 'Tab key inserts an actual tab character instead of spaces'),
         },
         'eolVisibility': {
-            'type': 'bool',
-            'label': QCoreApplication.translate('EditorSettings', 'Show CR/LF'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Display a visible icon for carriage return and line feeds'),
+            'type':
+            'bool',
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Show CR/LF'),
+            'help':
+            QCoreApplication.translate('EditorSettings', 'Display a visible icon for carriage return and line feeds'),
         },
 
         # Color settings
         'color': {
             'type': 'color',
             'label': QCoreApplication.translate('EditorSettings', 'Text color'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Default text color'),
+            'help': QCoreApplication.translate('EditorSettings', 'Default text color'),
         },
         'paper': {
             'type': 'color',
             'label': QCoreApplication.translate('EditorSettings', 'Paper color'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Default background color'),
+            'help': QCoreApplication.translate('EditorSettings', 'Default background color'),
         },
         'fontFamily': {
             'type': 'fontfamily',
             'label': QCoreApplication.translate('EditorSettings', 'Font Family'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Default font family'),
+            'help': QCoreApplication.translate('EditorSettings', 'Default font family'),
         },
         'fontSize': {
             'type': 'number',
             'label': QCoreApplication.translate('EditorSettings', 'Font Size'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Default font size'),
+            'help': QCoreApplication.translate('EditorSettings', 'Default font size'),
         },
         # Numeric settings
         'edgeColumn': {
@@ -88,10 +94,13 @@ class EditorSettings():
                                                'Number of characters per line before wrapping occurs'),
         },
         'tabWidth': {
-            'type': 'number',
-            'label': QCoreApplication.translate('EditorSettings', 'Tab width'),
-            'help': QCoreApplication.translate('EditorSettings',
-                                               'Width of tabs in characters, or the number of spaces to insert when tab is pressed'),
+            'type':
+            'number',
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Tab width'),
+            'help':
+            QCoreApplication.translate(
+                'EditorSettings', 'Width of tabs in characters, or the number of spaces to insert when tab is pressed'),
         },
 
         # Multiple-selection settings
@@ -179,19 +188,56 @@ class EditorSettings():
 
     # Setting groups
     settingGroups = {
-        'Colors': {'label': QCoreApplication.translate('EditorSettings', 'Colors'),
-                   'items': ('color', 'paper', )},
-        'Text':{'label': QCoreApplication.translate('EditorSettings', 'Text'),
-                   'items': ('fontFamily', 'fontSize', )},
-        'Indentation': {'label': QCoreApplication.translate('EditorSettings', 'Indentation'),
-                        'items': ('tabWidth', 'tabIndents', 'backspaceUnindents', 'autoIndent', 'indentationGuides',
-                                  'indentationsUseTabs', )},
-        'Wrapping': {'label': QCoreApplication.translate('EditorSettings', 'Wrapping'),
-                     'items': ('wrapMode', 'edgeMode',  'edgeColumn', )},
-        'Formatting': {'label': QCoreApplication.translate('EditorSettings', 'Formatting'),
-                       'items': ('whitespaceVisibility', 'eolMode', 'eolVisibility', )},
-        'Coding aids': {'label': QCoreApplication.translate('EditorSettings', 'Coding aids'),
-                        'items': ('language', 'folding', 'braceMatching',)},
+        'Colors': {
+            'label': QCoreApplication.translate('EditorSettings', 'Colors'),
+            'items': (
+                'color',
+                'paper',
+            )
+        },
+        'Text': {
+            'label': QCoreApplication.translate('EditorSettings', 'Text'),
+            'items': (
+                'fontFamily',
+                'fontSize',
+            )
+        },
+        'Indentation': {
+            'label':
+            QCoreApplication.translate('EditorSettings', 'Indentation'),
+            'items': (
+                'tabWidth',
+                'tabIndents',
+                'backspaceUnindents',
+                'autoIndent',
+                'indentationGuides',
+                'indentationsUseTabs',
+            )
+        },
+        'Wrapping': {
+            'label': QCoreApplication.translate('EditorSettings', 'Wrapping'),
+            'items': (
+                'wrapMode',
+                'edgeMode',
+                'edgeColumn',
+            )
+        },
+        'Formatting': {
+            'label': QCoreApplication.translate('EditorSettings', 'Formatting'),
+            'items': (
+                'whitespaceVisibility',
+                'eolMode',
+                'eolVisibility',
+            )
+        },
+        'Coding aids': {
+            'label': QCoreApplication.translate('EditorSettings', 'Coding aids'),
+            'items': (
+                'language',
+                'folding',
+                'braceMatching',
+            )
+        },
     }
 
     # Write-only color settings.
@@ -278,8 +324,10 @@ class EditorSettings():
             rst[name] = self.get(name)
 
     def loadFromTomlDict(self, tomldict):
-        """
-        :param tomldict: settings dict load form toml config file, all colors and enums are using name string insteaded in tomldict
+        """load settings from tomldict
+
+        :param tomldict: settings dict load form toml config file, all colors and enums are using name string
+         insteaded in tomldict
         """
         for name, value in tomldict:
             self._currentSettings[name] = value
@@ -294,22 +342,26 @@ class EditorSettings():
         """Create and return a widget include all settings"""
         class Panel(QScrollArea):
             showed = pyqtSignal()
+
             def __init__(self, parent=None):
                 super().__init__(parent)
+
             def showEvent(self, *args, **kwargs):
                 self.showed.emit()
 
         scrollArea = Panel()
         scrollArea.setWidgetResizable(True)
         mainWidget = QWidget()
-        #mainWidget.setMinimumSize(QSize(420, 600))
+        # mainWidget.setMinimumSize(QSize(420, 600))
         scrollArea.setWidget(mainWidget)
         layout = self._defaultLayout()
         mainWidget.setLayout(layout)
+
         def reloadconfig():
             if self.__loadNeeded:
                 self.loadFromEditor()
                 self.__loadNeeded = False
+
         scrollArea.showed.connect(reloadconfig)
         return scrollArea
 
@@ -446,7 +498,7 @@ class EditorSettings():
         combo = QFontComboBox()
         combo.setMinimumWidth(100)
         combo.setMaximumWidth(150)
-        combo.setFontFilters(QFontComboBox.AllFonts) #设置过滤器
+        combo.setFontFilters(QFontComboBox.AllFonts)  # 设置过滤器
 
         # Ugly event handler!
         def combo_changed(index):
@@ -470,8 +522,8 @@ class EditorSettings():
 
         # Event handler
         def button_pressed():
-            color = QColorDialog.getColor(
-                self._currentSettings.get(name, Qt.white))  # button.palette().color(QPalette.Background))
+            color = QColorDialog.getColor(self._currentSettings.get(
+                name, Qt.white))  # button.palette().color(QPalette.Background))
             if color.isValid():
                 button.setStyleSheet("background-color: %s" % color.name())
                 self._changedSettings[name] = color
@@ -509,7 +561,8 @@ class EditorSettings():
                         self._changedSettings["color"] = self._currentSettings["color"]
                     if "paper" not in self._changedSettings:
                         self._changedSettings["paper"] = self._currentSettings["paper"]
-                if "language" in self._changedSettings or "fontSize" in self._changedSettings or "fontFamily" in self._changedSettings:
+                if "language" in self._changedSettings or "fontSize" in self._changedSettings \
+                        or "fontFamily" in self._changedSettings:
                     if "fontSize" not in self._changedSettings:
                         self._changedSettings['fontSize'] = self._currentSettings['fontSize']
                     if "fontFamily" not in self._changedSettings:

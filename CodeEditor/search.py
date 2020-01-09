@@ -155,9 +155,8 @@ class SearchDialog(QMainWindow):
         findNextBtn.clicked.connect(lambda: (self.setReverse(False), self.findreplace()))
         self.__findPreBtn.clicked.connect(lambda: (self.setReverse(True), self.findreplace()))
         self.__replaceBtn.clicked.connect(lambda: self.findreplace(True))
-        self.__countBtn.clicked.connect(
-            lambda: (self.statusbar.showMessage(
-                self.tr("Count:{} times matched.").format(self.__editor.count(self.searchText, case=self.__caseFlag)))))
+        self.__countBtn.clicked.connect(lambda: (self.statusbar.showMessage(
+            self.tr("Count:{} times matched.").format(self.__editor.count(self.searchText, case=self.__caseFlag)))))
 
         cancelBtn.clicked.connect(self.close)
         cancelBtn.setShortcut(Qt.Key_Escape)
@@ -184,8 +183,8 @@ class SearchDialog(QMainWindow):
 
     def findreplace(self, replace=False):
         if self.__startNewSearch:
-            state = (self.__reFlag, self.__caseFlag, self.__wordFlag, self.__wrapFlag, self.__forwardFlag, self.__line, self.__index,
-                     self.__show, self.__posixFlag, self.__cxx11Flag)
+            state = (self.__reFlag, self.__caseFlag, self.__wordFlag, self.__wrapFlag, self.__forwardFlag, self.__line,
+                     self.__index, self.__show, self.__posixFlag, self.__cxx11Flag)
             self.__finded = self.__editor.findFirst(self.searchText, *state)
             if self.__finded:
                 self.__startNewSearch = False

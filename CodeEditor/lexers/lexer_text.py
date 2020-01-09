@@ -10,9 +10,7 @@ from PyQt5.Qsci import QsciLexerCustom
 class QsciLexerText(QsciLexerCustom):
     """Lexer for styling normal text documents"""
     # Class variables
-    styles = {
-        "Default": 0
-    }
+    styles = {"Default": 0}
 
     def __init__(self, parent=None):
         """Overridden initialization"""
