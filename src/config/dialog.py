@@ -5,11 +5,11 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
-                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout)
+                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout, QDialog)
 from PyQt5.QtCore import Qt
 
 
-class ConfDialog(QWidget):
+class ConfDialog(QDialog):
     """config dialog"""
 
     def __init__(self, mainwin):
@@ -70,15 +70,12 @@ class ConfDialog(QWidget):
         self.stack.addWidget(w)
 
         # CodeEditor
-        from ui.CodeEditor.settings import EditorSettings
-        settings = EditorSettings(self.win.editor)
-        w = settings.settingPanel()
-        self.stack.addWidget(w)
+        self.stack.addWidget(self.win.editor.settings.settingPanel())
 
         self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)
         self.cancelbtn.clicked.connect(self.close)
         self.cancelbtn.setVisible(False)
-        self.okbtn.clicked.connect(lambda: (settings.apply(), self.close()))
+        self.okbtn.clicked.connect(lambda: (self.win.editor.settings.apply(), self.close()))
 
         # action
         self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
@@ -112,7 +109,7 @@ class ConfDialog(QWidget):
         self.win.config.getSec("general")["language"] = lang
         print("restart soft to enable.")
 
-    def show(self):
+    def showEvent(self, QShowEvent):
         # default value
         self.fontsizespin.setValue(self.win.editor.font().pointSize())
         self.recentcountspin.setValue(self.win.recent.maxcount)
@@ -124,7 +121,6 @@ class ConfDialog(QWidget):
             if l["lang"] == lang:
                 self.langCombo.setCurrentText(l["nativename"])
                 break
-        super().show()
 
 
 if __name__ == "__main__":

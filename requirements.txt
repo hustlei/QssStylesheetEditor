@@ -1,6 +1,5 @@
-chardet
 preimport
 tomlconfig
-QScintilla
+CodeEditor
 pytest-qt
 pytest-cov

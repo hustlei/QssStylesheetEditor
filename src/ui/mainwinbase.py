@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QMainWindow, QApplication, QStyleFactory, QAction, 
                              QCheckBox, QComboBox, QTabWidget, QDockWidget)
 
 # from res.img_rc import *
-from ui.CodeEditor import Editor
+from CodeEditor import Editor
 from .preview import PreviewWidget
 from .flow_layout import QFlowLayout
 
