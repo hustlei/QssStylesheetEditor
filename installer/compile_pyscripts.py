@@ -18,6 +18,8 @@ from py_compile import compile as compilepy
 root = os.path.join(os.path.dirname(__file__), "..")
 srcdir = os.path.join(root, "src")
 distroot = os.path.join(root, "dist/build")
+venvroot = os.path.join(root, "venv/Lib/site-packages")
+deps = ["chardet", "CodeEditor", "preimport", "toml", "tomlconfig"]
 
 pydir = os.path.join(root, "dist/libs/libpython")
 dlldir = os.path.join(root, r"dist/libs/DLLs")
@@ -26,13 +28,11 @@ libdir = os.path.join(root, "dist/libs/Lib")
 datadir = os.path.join(root, "src/data")
 resdir = os.path.join(root, "src/res")
 
-
 # 不编译的文件夹，文件后缀
 excludedir = (".git", ".github", ".idea", "__pycache__",
               "data", "font", "img", "font",
               "dist", "build", "tests", "installer",
               "old", "oldversion", "bak")
-
 
 # 删除dist/build文件夹下所有文件
 print("remove all files in dist/build.")
@@ -134,6 +134,9 @@ def compile_copy(path, distdir):
 
 
 compile_copy(srcdir, os.path.join(distroot, "scripts"))
+for dep in deps:
+    dirname = os.path.join(venvroot, dep)
+    compile_copy(dirname, os.path.join(distroot, "Lib/" + dep))
 # compile main.py
 compile_copy(os.path.join(pydir, "../scripts"), os.path.join(distroot, "scripts"))
 

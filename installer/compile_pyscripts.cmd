@@ -1,0 +1,1 @@
+call "../dist/libs/libpython/python.exe" compile_pyscripts.py
