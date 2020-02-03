@@ -1,8 +1,22 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
+
 # with open("readme.md", "r", encoding='utf-8') as fh:
 # long_desc = fh.read()
+
+# import os
+# def clearpyc(srcpath):
+    # files = os.listdir(srcpath)
+    # for fd in files:
+        # cur_path = os.path.join(srcpath, fd)            
+        # if os.path.isdir(cur_path):
+            # if fd == "__pycache__":
+                # print("rm %s -rf" % cur_path)
+                # os.system("rm %s -rf" % cur_path)
+            # else:
+                # clearpyc(cur_path)
+# clearpyc(os.path.join(os.path.dirname(__file__),'src'))
 
 setup(
     name="QssStylesheetEditor",  # ProjectName
@@ -13,9 +27,9 @@ setup(
     # Module
     package_dir={'': 'src'},  # tell distutils packages are under src
     packages=find_packages(where='src', include=('*'), exclude=[
-        '*.bak',
+        '*.__pycache__',
     ]),  #
-    py_modules=['app', '__main__'],  # single file
+    py_modules=['app', 'bootstrapper'],  # single file
 
     # data
     package_data={
@@ -29,6 +43,7 @@ setup(
         '': [
             '*.ts',
             '*.qrc',
+            '__pycache__/*.*',
         ],
         'res': [
             'img',
@@ -44,7 +59,7 @@ setup(
             'qssteditor = app:main',  # __main__
         ],
         "gui_scripts": [
-            'QssStylesheetEditor = __main__',
+            'QssStylesheetEditor = bootstrapper',
         ]
     },
 

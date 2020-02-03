@@ -23,7 +23,7 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
 
     !define ProductName "QssStylesheetEditor"  ;产品名，和项目名相同
     !define StartFile "AppStart" ;.exe文件名,启动软件的exe名称
-    !define Version "1.5" ;版本
+    !define Version "1.6" ;版本
     !define Publisher "lileilei" ;发布人
     !define Website "https://github.com/hustlei/QssStylesheetEditor" ;网站地址
     !define Year "2019"    

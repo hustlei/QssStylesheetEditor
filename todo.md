@@ -2,9 +2,6 @@ English | [简体中文](todo_zh-CN.md)
 
 # ToDo
 
-+ Refactor code
-    - rewrite config for editor
-    - improve code quality by static analysis
 + Qsst sample
 + Docs
     - Help
@@ -18,10 +15,12 @@ English | [简体中文](todo_zh-CN.md)
 # ChangeLog
 
 ## v1.6
-Main Changes: **test for multi platform*
+Main Changes: **split editor, config etc to single package, test for multi platform*
 
 + **New Features**
     - add setup.py for installing by `python setup.py install`
+    - rewrite config for editor, and move codeeditor and config to single package and uplaod to pypi;
+    - improve code quality by static analysis
 + **BugsFixed**
     - fixed chardet import error
     - fixed binary file detect error
@@ -33,7 +32,7 @@ Main Changes: **reference image in resource file in qsst**
     - Support reference image in resource file:url(:/img/close.png);
     - When there isn't UI language setted, autodetect the os language, if there isn't tranlation, set to english
     - Readme english version set to default
-    - Add code analysis, test scripts and config file 
+    - Add code analysis, test scripts and config file
 
 ## v1.4
 Main Changes: **i18n, settings**

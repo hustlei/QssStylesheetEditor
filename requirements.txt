@@ -1,5 +1,0 @@
-preimport
-tomlconfig
-CodeEditor
-pytest-qt
-pytest-cov
