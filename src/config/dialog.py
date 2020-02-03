@@ -11,7 +11,6 @@ from PyQt5.QtCore import Qt
 
 class ConfDialog(QDialog):
     """config dialog"""
-
     def __init__(self, mainwin):
         super(ConfDialog, self).__init__()
         self._app = QApplication.instance()  # 获取app实例
