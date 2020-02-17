@@ -46,14 +46,14 @@ Real-time preview, automatically completion, and user can define custom variable
 
 Follow the steps as below, or install the binary installation package:
 
-1. download [QssStylesheetEditor-1.6-py3-none-any.whl](https://pan.baidu.com/s/1PHa93Q4R1BPHcQDweawEnw) (secuirity code: 32gu)
+1. download [QssStylesheetEditor-1.6-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
 2. run `pip install QssStylesheetEditor-1.6-py3-none-any.whl` install QssStylesheetEditor
 3. run `qsseditor` or `QssStylesheetEditor` the app will started
 
 If you are windows 64bit user, binary package and installer is available now.
 
-+ QssStylesheetEditor1.6_win64_installer **[[Download]](https://pan.baidu.com/s/1VIlN7PuEReBR_Uen-qDRYw)**(secuirity code: 7gsg)
-+ QssStylesheetEditor1.6_win64_portable  **[[Download]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ)**(secuirity code: j7fc)
++ [QssStylesheetEditor1.6_win64_installer.exe](https://github.com/hustlei/QssStylesheetEditor/releases)
++ QssStylesheetEditor1.6_win64_portable.7z [[Download]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ) (secuirity code: j7fc)
 
 
 > Alternatively, manually install the package is ok too

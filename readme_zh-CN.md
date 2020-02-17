@@ -31,14 +31,14 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 
 按照如下步骤运行 QssStylesheetEditor:
 
-1. 下载 [QssStylesheetEditor-1.6-py3-none-any.whl](https://pan.baidu.com/s/1PHa93Q4R1BPHcQDweawEnw) (提取码: 32gu)
+1. 下载 [QssStylesheetEditor-1.6-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
 2. 运行 `pip install QssStylesheetEditor-1.6-py3-none-any.whl` 安装 QssStylesheetEditor
 3. 命令行执行 `qsseditor` 或者 `QssStylesheetEditor` 命令运行程序
 
 **windows 64bit 操作系统**可以下载安装包或者绿色版exe运行。下载地址：
 
-+ QssStylesheetEditor1.6 64位安装包 **[[下载]](https://pan.baidu.com/s/1VIlN7PuEReBR_Uen-qDRYw)**(提取码: 7gsg)
-+ QssStylesheetEditor1.6 64位绿色版  **[[下载]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ)**(提取码: j7fc)
++ [QssStylesheetEditor1.6 64位安装包](https://github.com/hustlei/QssStylesheetEditor/releases)
++ QssStylesheetEditor1.6 64位绿色版  [[下载]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ) (提取码: j7fc)
 
 > 或者可以根据如下步骤手动安装：
 >
