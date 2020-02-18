@@ -84,9 +84,10 @@ class TestMain():
                 def run(self):
                     while not qapp.activeModalWidget():
                         qtbot.wait(50)
-                    qtbot.wait(50)
                     dial = qapp.activeModalWidget()
-                    qapp.processEvents()
+                    if sys.platform.startswith("win") or sys.platform.startswith("darwin"):
+                        qtbot.wait(50)
+                        # qapp.processEvents()
                     # dial.setCurrentColor(QColor(255,0,0)) # must in ui thread
                     # qapp.processEvents()
                     # dial.done(0)    # dial.close()
@@ -98,6 +99,5 @@ class TestMain():
             t1.start()
             qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
             t1.wait()
-            qapp.processEvents()
-            qtbot.wait(50)
+            #qapp.processEvents()
             assert mainwin.clrBtnDict["text"].text() == "#222222"
