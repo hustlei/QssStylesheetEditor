@@ -5,17 +5,17 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import sys
-from PyQt5.QtCore import Qt, QThread
+from PyQt5.QtCore import Qt, QThread, QObject
 # from PyQt5.QtGui import QColor
 # from unittest import mock
 
 from PyQt5.QtWidgets import QApplication
 
 
-class TestMain():
+class TestMain():        
     @classmethod
     def setup_class(cls):
-        print("setup_class       class:%s" % cls.__name__)
+        print("\nsetup_class       class:%s" % cls.__name__)
 
     @classmethod
     def teardown_class(cls):
@@ -39,7 +39,7 @@ class TestMain():
         # with mock.patch.object(QApplication, "exit"):
         #     assert QApplication.exit.call_count == 0
 
-    def test_theme(self, sharedwin):
+    def test_theme(self, sharedwin, qtbot):
         win = sharedwin["main"]
         win.actions["DisableQss"].setChecked(True)
         win.actions["DisableQss"].setChecked(False)
@@ -62,42 +62,32 @@ class TestMain():
         """
         mainwin = sharedwin["main"]
 
-        def file():
-            mainwin.new()
-            f = tmpdir.join("new.qsst").ensure()
-            # f.write("") # create file new.qsst
-            mainwin.file = str(f)
-            mainwin.save()
-            assert not mainwin.editor.text()
+        # def file():
+            # mainwin.new()
+            # f = tmpdir.join("new.qsst").ensure()
+            # mainwin.file = str(f)
+            # mainwin.save()
+            # assert not mainwin.editor.text()
 
-        file()
-        mainwin.newFromTemplate()
-        mainwin.editor.setModified(False)
+        # file()
+        # mainwin.newFromTemplate()
+        # mainwin.editor.setModified(False)
 
-        if not sys.platform.startswith(
-                'darwin'):  # will cause unable to create basic accelerated opengl renderer error in osx docker
+        class DialogCloseThread(QThread):
+            def __init__(self, parent=None):
+                super().__init__(parent)
 
-            class DialogCloseThread(QThread):
-                def __init__(self, parent=None):
-                    super().__init__(parent)
+            def run(self):
+                # if not qapp.activeModalWidget():
+                while not qapp.activeModalWidget():
+                    qtbot.wait(100)
+                dial = qapp.activeModalWidget()
+                qtbot.keyPress(dial, Qt.Key_Enter)
 
-                def run(self):
-                    while not qapp.activeModalWidget():
-                        qtbot.wait(50)
-                    dial = qapp.activeModalWidget()
-                    if sys.platform.startswith("win") or sys.platform.startswith("darwin"):
-                        qtbot.wait(50)
-                        # qapp.processEvents()
-                    # dial.setCurrentColor(QColor(255,0,0)) # must in ui thread
-                    # qapp.processEvents()
-                    # dial.done(0)    # dial.close()
-                    qtbot.keyPress(dial, Qt.Key_Enter)
-                    # qtbot.keyPress(qapp.focusWidget(), Qt.Key_Return, delay=50)
-                    # os._exit(0)  # it will exit test, not exit thread
-
-            t1 = DialogCloseThread()
-            t1.start()
-            qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
-            t1.wait()
-            #qapp.processEvents()
-            assert mainwin.clrBtnDict["text"].text() == "#222222"
+        t1 = DialogCloseThread()
+        t1.finished.connect(lambda: print("t1 finished"))
+        t1.start()
+        qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
+        t1.wait()
+        t1.quit()
+        assert mainwin.clrBtnDict["text"].text() == "#222222" or mainwin.clrBtnDict["text"].text() == "#222"

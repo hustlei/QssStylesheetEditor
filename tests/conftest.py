@@ -14,10 +14,12 @@ collect_ignore_glob = ["*_v0.py", "*.old.py", "*_bak.py"]
 
 @fixture(scope="session")
 def sharedapp():
+    print("\n@fixture: shared session Application load...")
     app = App()
     app.run(pytest=True)
     yield app
     app.quit()
+    print("\n@fixture: shared session Application quited.")
 
 
 @fixture(scope="function")
@@ -29,4 +31,4 @@ def sharedwin(sharedapp):
     yield app.windows
     app.windows["main"].editor.setModified(False)
     app.windows["main"].close()
-    print("@fixture: shared mainwin end.")
+    print("@fixture: shared mainwin closed.")
