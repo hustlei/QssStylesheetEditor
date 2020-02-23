@@ -61,33 +61,33 @@ class TestMain():
         """Test file new and save, test color pick, this test will effect CodeEditor text
         """
         mainwin = sharedwin["main"]
+        def file():
+            mainwin.new()
+            f = tmpdir.join("new.qsst").ensure()
+            mainwin.file = str(f)
+            mainwin.save()
+            assert not mainwin.editor.text()
 
-        # def file():
-            # mainwin.new()
-            # f = tmpdir.join("new.qsst").ensure()
-            # mainwin.file = str(f)
-            # mainwin.save()
-            # assert not mainwin.editor.text()
+        file()
+        mainwin.newFromTemplate()
+        mainwin.editor.setModified(False)
+        
+        import sys
+        if sys.platform.startswith('win'):
+            class DialogCloseThread(QThread):
+                def __init__(self, parent=None):
+                    super().__init__(parent)
 
-        # file()
-        # mainwin.newFromTemplate()
-        # mainwin.editor.setModified(False)
+                def run(self):
+                    while not qapp.activeModalWidget():
+                        qtbot.wait(100)
+                    dial = qapp.activeModalWidget()
+                    qtbot.keyPress(dial, Qt.Key_Enter)
 
-        class DialogCloseThread(QThread):
-            def __init__(self, parent=None):
-                super().__init__(parent)
-
-            def run(self):
-                # if not qapp.activeModalWidget():
-                while not qapp.activeModalWidget():
-                    qtbot.wait(100)
-                dial = qapp.activeModalWidget()
-                qtbot.keyPress(dial, Qt.Key_Enter)
-
-        t1 = DialogCloseThread()
-        t1.finished.connect(lambda: print("t1 finished"))
-        t1.start()
-        qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
-        t1.wait()
-        t1.quit()
-        assert mainwin.clrBtnDict["text"].text() == "#222222" or mainwin.clrBtnDict["text"].text() == "#222"
+            t1 = DialogCloseThread()
+            t1.finished.connect(lambda: print("t1 finished"))
+            t1.start()
+            qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
+            t1.wait()
+            t1.quit()
+            assert mainwin.clrBtnDict["text"].text() == "#222222" or mainwin.clrBtnDict["text"].text() == "#222"
