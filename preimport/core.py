@@ -17,20 +17,20 @@ def preimport(*moduleNames):
 
     for moduleName in moduleNames:
         if isinstance(moduleName, str):
+            print("  Preimporting {:9}   ...".format("'" + moduleName + "'"), end="", flush=True)
             if moduleName in sys.modules:
-                print("  [Note]: {} already imported.".format(moduleName))
+                print("   [Note]:{} already imported.".format(moduleName))
             else:
-                print("  Preimporting {:18}...".format(moduleName), end="", flush=True)
                 timeStart = time()
                 try:
                     import_module(moduleName)
                 except ModuleNotFoundError:
-                    print("  failed, ModuleNotFound.")
+                    print("   [Failed]:ModuleNotFound.")
                 except:
-                    print("  failed, error happened.")
+                    print("   [Error]:Unexpected error happened")
                 else:
-                    print(" successfully in {:.2}s".format(time() - timeStart))
+                    print("   successfully in {:.2}s.".format(time() - timeStart))
         elif isinstance(moduleName, Iterable):
             preimport(*moduleName)
         else:
-            print("  [Error]: preimport failed, please check the moduleName")
+            print("  [Error]: preimport error, moduleName must be str or Iterable.")

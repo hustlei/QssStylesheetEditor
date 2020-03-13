@@ -10,7 +10,7 @@ sys.path.append(".")
 import preimport as package
 from preimport import preimport
 
-MODULE_NAMES = ('numpy', 'openpyxl.utils')
+MODULE_NAMES = ('six', 'pluggy')
 
 
 def test_preimport(capsys):
@@ -35,7 +35,7 @@ def test_import_failed(capsys):
     preimport("wrong name", "noInstalledMudule")
     out, err = capsys.readouterr()
     print(out)
-    assert "failed" in out
+    assert "Failed" in out
 
 
 def test_import_argerr(capsys):
@@ -43,4 +43,4 @@ def test_import_argerr(capsys):
     preimport(1, object())
     out, err = capsys.readouterr()
     print(out)
-    assert "check" in out
+    assert "Error" in out
