@@ -38,6 +38,7 @@ install:
     - pip3 install --upgrade pip  # all three OSes agree about 'pip3'
     - pip3 install preimport
     - pip3 install tomlconfig
+    - pip3 install PyQt5==5.13.2
     - pip3 install CodeEditor
     - pip3 install -U pytest-qt
     - pip3 install -U pytest-cov
