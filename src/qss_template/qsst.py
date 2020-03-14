@@ -52,10 +52,12 @@ class Qsst():
 
         for v in self.varDict:
             if v in varDict.keys():
-                qssStr = qssStr.replace("$" + v, varDict[v])
+                # qssStr = qssStr.replace("$" + v, varDict[v])
+                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m:'{}{}'.format(varDict[m.group(1)], m.group(2)), qssStr)
             else:
                 self.varUndefined.append(v)
-                qssStr = qssStr.replace("$" + v, ' ')
+                # qssStr = qssStr.replace("$" + v, ' ')
+                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m:'{}{}'.format(" ", m.group(2)), qssStr)
         self.qss = qssStr
 
     # def replaceVarsInQss(self,val):
