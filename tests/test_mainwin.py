@@ -27,8 +27,6 @@ class TestMain():
     def test_find_dialog(cls, qtbot, sharedwin):
         win = sharedwin["main"]
         win.editor.searchDialog.show()
-        import time
-        time.sleep(1)
         qtbot.waitForWindowShown(win.editor.searchDialog)
 
     @staticmethod
@@ -54,11 +52,7 @@ class TestMain():
 
     def test_confDialog(self, qtbot, sharedwin):
         sharedwin["main"].confDialog.show()
-        # import time
-        # time.sleep(1)
-        # assert sharedwin["main"].confDialog
-        # time.sleep(1)
-        #qtbot.waitForWindowShown(sharedwin["main"].confDialog)
+        qtbot.waitForWindowShown(sharedwin["main"].confDialog)
 
     def test_fileop_and_clrpic(self, qapp, qtbot, sharedwin, tmpdir):
         """Test file new and save, test color pick, this test will effect CodeEditor text
