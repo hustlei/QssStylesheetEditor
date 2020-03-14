@@ -221,15 +221,19 @@ class MainWin(MainWinBase):
             self.clrBtnDict = {}
             for varName, clrStr in self.qsst.varDict.items():
                 contianerWidget = QWidget()
-                contianerWidget.setMinimumSize(QSize(140, 25))
+                contianerWidget.setMinimumSize(QSize(185, 25))
                 label = QLabel(varName, contianerWidget)
-                label.setFont(QFont("Arial", 9, QFont.Medium))
                 btn = QPushButton(clrStr, contianerWidget)
+                if sys.platform.startswith("win"):
+                    font1 = QFont("Arial", 10, QFont.Medium)
+                    font2 = QFont("sans-serif", 9, QFont.Medium)
+                    label.setFont(font1)
+                    btn.setFont(font2)
                 self.clrBtnDict[varName] = btn
                 # label.setFixedWidth(80)
                 # btn.setFixedWidth(100)
-                label.move(5, 10)
-                btn.move(80, 5)
+                label.move(5, 5)
+                btn.move(100, 5)
                 self.colorPanelLayout.addWidget(contianerWidget)
                 self.colorPanelLayout.setSpacing(5)
                 btn.clicked.connect(lambda x, var=varName: self.chclr(var))
