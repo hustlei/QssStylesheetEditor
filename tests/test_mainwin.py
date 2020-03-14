@@ -4,10 +4,7 @@
 Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
-import sys
-from PyQt5.QtCore import Qt, QThread, QObject
-# from PyQt5.QtGui import QColor
-# from unittest import mock
+from PyQt5.QtCore import Qt, QThread
 
 from PyQt5.QtWidgets import QApplication
 
@@ -27,9 +24,11 @@ class TestMain():
     def teardown_method(self, method):
         print("teardown_method   method:%s" % method.__name__)
 
-    def test_find_dialog(self, qtbot, sharedwin):
+    def test_find_dialog(cls, qtbot, sharedwin):
         win = sharedwin["main"]
         win.editor.searchDialog.show()
+        import time
+        time.sleep(1)
         qtbot.waitForWindowShown(win.editor.searchDialog)
 
     @staticmethod
@@ -39,7 +38,7 @@ class TestMain():
         # with mock.patch.object(QApplication, "exit"):
         #     assert QApplication.exit.call_count == 0
 
-    def test_theme(self, sharedwin, qtbot):
+    def test_theme(self, sharedwin):
         win = sharedwin["main"]
         win.actions["DisableQss"].setChecked(True)
         win.actions["DisableQss"].setChecked(False)
@@ -55,7 +54,11 @@ class TestMain():
 
     def test_confDialog(self, qtbot, sharedwin):
         sharedwin["main"].confDialog.show()
-        qtbot.waitForWindowShown(sharedwin["main"].confDialog)
+        # import time
+        # time.sleep(1)
+        # assert sharedwin["main"].confDialog
+        # time.sleep(1)
+        #qtbot.waitForWindowShown(sharedwin["main"].confDialog)
 
     def test_fileop_and_clrpic(self, qapp, qtbot, sharedwin, tmpdir):
         """Test file new and save, test color pick, this test will effect CodeEditor text
@@ -71,7 +74,7 @@ class TestMain():
         file()
         mainwin.newFromTemplate()
         mainwin.editor.setModified(False)
-        
+
         import sys
         if sys.platform.startswith('win'):
             class DialogCloseThread(QThread):
@@ -80,7 +83,7 @@ class TestMain():
 
                 def run(self):
                     while not qapp.activeModalWidget():
-                        qtbot.wait(100)
+                        qtbot.wait(10)
                     dial = qapp.activeModalWidget()
                     qtbot.keyPress(dial, Qt.Key_Enter)
 
@@ -90,4 +93,5 @@ class TestMain():
             qtbot.mouseClick(mainwin.clrBtnDict["text"], Qt.LeftButton)
             t1.wait()
             t1.quit()
+            del t1
             assert mainwin.clrBtnDict["text"].text() == "#222222" or mainwin.clrBtnDict["text"].text() == "#222"
