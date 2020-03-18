@@ -66,12 +66,12 @@ class ConfDialog(QDialog):
         # advanced
         g2 = QGroupBox(self.tr("Advanced"))
         labeladv1 = QLabel(self.tr("Export qss When save qsst:"))
-        checkboxAutoExportQss = QCheckBox()
-        checkboxAutoExportQss.setToolTip(self.tr("Option for whether export qss when save qsst file each time."))
+        self.checkboxAutoExportQss = QCheckBox()
+        self.checkboxAutoExportQss.setToolTip(self.tr("Option for whether export qss when save qsst file each time."))
         layh1 = QHBoxLayout()
         layh1.addWidget(labeladv1)
         layh1.addStretch(1)
-        layh1.addWidget(checkboxAutoExportQss)
+        layh1.addWidget(self.checkboxAutoExportQss)
         g2layout = QVBoxLayout()
         g2layout.addLayout(layh1)
         g2.setLayout(g2layout)
@@ -95,7 +95,7 @@ class ConfDialog(QDialog):
 
         self.recentcountspin.valueChanged.connect(lambda x: self.changedOptions.__setitem__("file.recentcount",x))
         self.langCombo.currentIndexChanged.connect(lambda i: self.changedOptions.__setitem__("general.language",i))
-        checkboxAutoExportQss.stateChanged.connect(lambda b: self.changedOptions.update({"advance.autoexportqss",b}))
+        self.checkboxAutoExportQss.stateChanged.connect(lambda b: self.changedOptions.update({"advance.autoexportqss":b}))
 
 
     def setLangItems(self, combo):
@@ -123,12 +123,14 @@ class ConfDialog(QDialog):
         print("Setting Language to " + lang)
         self.win.config["general.language"] = lang
         print("restart soft to enable.")
-        if self.alertChLang:
+        if not self.first:
             QMessageBox.information(self, self.tr("Change Language Info"), self.tr("You must restart soft to enable luanguage change."))
 
     def showEvent(self, QShowEvent):
         if self.first:
-            self.recentcountspin.setValue(self.win.config["file.recentcount"])
+            count = self.win.config["file.recentcount"]
+            if count:
+                self.recentcountspin.setValue(count)
             # lang = self.win.config.get("general.language","en") #self.win.config.getSec("general").get("language", "en")
             # lang = self.win.config["general.language"]
             # if lang is None:
@@ -136,12 +138,12 @@ class ConfDialog(QDialog):
             from i18n.language import Language
             lang = Language.lang
             for l in Language.getLangs():
-                if l["lang"] == lang:
-                    self.alertChLang = False
+                if l["lang"].replace("-","_") == lang.replace("-","_"):
                     self.langCombo.setCurrentText(l["nativename"])
-                    self.alertChLang = True
                     break
+            self.checkboxAutoExportQss.setChecked(bool(self.win.config["advance.autoexportqss"]))
             self.first = False
+            self.changedOptions.clear()
 
         # # update changed value
         # if self.changedOptions["file.recentcount"]:
@@ -161,6 +163,7 @@ class ConfDialog(QDialog):
 
         if "general.language" in self.changedOptions:
             self.chLang()
+        self.changedOptions.clear()
 
 
 
