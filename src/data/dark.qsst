@@ -1,0 +1,593 @@
+/* ================================================ *
+author:lei
+lastedited:2019.8
+* ================================================ */
+$text = #CCCCCC;
+$background = #DC333333;
+$border = #666666;
+$selected = #66AAEE; /*hover*/
+$pressed = #DCDD9922;
+$focused = #DC88BBFF; /*actived*/
+$grad1a = #999999; /*gradient start*/
+$grad1b = #888888; /*gradient end*/
+
+QWidget
+{
+    color: $text;
+    background-color: $background;
+}
+
+QFrame{
+    color: $text;
+    background-color: $background;/*不能设置为transparent*/
+}
+QMainWindow::separator{
+    border: 1px solid $border;
+    border-style: outset;
+    width: 4px;
+    height: 4px;
+}
+QMainWindow::separator:hover{
+    background: $selected;
+}
+QSplitter::handle{
+    border: 1px solid $border;
+    border-style: outset;
+    width: 4px;
+    height: 4px;
+}
+QSplitter::handle:hover{/*splitter->handle(1)->setAttribute(Qt::WA_Hover, true);才生效*/
+    border-color: $focused;
+}
+QSplitter::handle:pressed{
+    border-color: $pressed;
+}
+QAbstractScrollArea, QSciScintilla{
+    background-color: $background;
+}
+/* 一定要记得，用qApp或者QApplication.instance的setStyle，
+    用self.setStyle会有很多地方不生效：Menu ToolTip等*/
+/* =============================================== */
+/* MenuBar Menu                                    */
+/* =============================================== */
+QMenuBar {
+    background-color: $background;
+    spacing: 1px;
+    border-bottom: 1px solid $border;
+}
+
+QMenuBar::item{
+    background: transparent;
+    padding: 1px 8px;
+}
+
+QMenuBar::item:selected{
+    background: $selected;
+    border: 1px solid $selected;
+}
+
+QMenuBar::item:pressed{
+    background: $pressed;
+    border: 1px solid $pressed;
+    padding-top: 4px; /*margin-bottom: -4px;*/
+}
+
+QMenu {
+    background-color: $background;
+    border: 1px solid $border;
+    margin: 1px; /* some spacing around the menu */
+    padding: 1px;
+}
+
+QMenu::item{
+    padding: 2px 25px 2px 20px;
+    border: 1px solid transparent;
+    margin: 1px;
+}
+QMenu::icon {/*菜单的图标*/
+    width: 15px;
+    height: 15px;
+    padding:5px;
+    border-right: 1px inset $border;
+}
+
+QMenu::item:selected {
+    border-color: $border;
+    background: $selected;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: $border;
+    margin: 0 5px;
+}
+
+QMenu::indicator {/*checked 的√*/
+    width: 13px;
+    height: 13px;
+    padding:2px;
+}
+QMenu::icon:checked { /* appearance of a 'checked' icon */
+    background: $selected;
+    border: 1px inset $pressed;
+    border-radius: 3px;
+    padding: 2px;
+    /*position: absolute;
+    top: 0px;
+    right: 1px;
+    bottom: 5px;
+    left: 2px;*/
+}
+
+/* =============================================== */
+/* ToolBar StatusBar                               */
+/* =============================================== */
+QToolBar {
+    background: $background;
+    spacing: 1px; /* spacing between items in the tool bar */
+    padding: 1px;
+    border-bottom: 1px solid $border;
+}
+
+QStatusBar{
+    background: transparent;
+    border-top:1px solid $border;
+}
+
+QStatusBar::item {
+    margin: 2px 0;
+    border-left: 1px solid $border;
+}
+
+QStatusBar QLabel{
+    background: transparent;
+    margin: 0  2px;
+}
+
+QStatusBar QPushButton{
+    background: transparent;
+    margin: 0  2px;
+}
+
+QStatusBar QPushButton:hover{
+    background: $selected;
+    margin: 0  2px;
+}
+
+/* =============================================== */
+/* Label                                           */
+/* =============================================== */
+QLabel {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 1px;
+}
+
+
+/* A QLabel is a QFrame ... */
+/* A QToolTip is a QLabel ... */
+QToolTip {
+    border: 1px solid $border;
+    padding: 5px;
+    border-radius: 3px;
+    opacity:210;
+}
+
+/* =============================================== */
+/* TextBox                                         */
+/* =============================================== */
+QLineEdit {
+    background: $background;/*不建议设为透明，否则table编辑时会字显示*/
+    selection-background-color: $selected;
+    border: 1px solid $border;
+    border-radius: 2px;
+    border-style: inset;
+    padding: 0 1px;
+}
+
+QLineEdit:hover{
+    border-color: $selected;
+}
+QLineEdit:focus{
+    border-color: $focused;
+}
+/*QLineEdit[readOnly="true"] { color: gray }*/
+QLineEdit[echoMode="2"]{
+    lineedit-password-character: 9679;/*字符的ascii码35 88等 */
+}
+
+QLineEdit:read-only {
+    color: lightgray;
+}
+
+QLineEdit:disabled{
+    color: lightgray;
+    background: lightgray;
+}
+
+QTextEdit{
+    selection-background-color:$selected;
+    border: 1px solid $border;
+    border-style: inset;
+}
+QTextEdit:hover{
+    border-color: $selected;
+}
+QTextEdit:focus{
+    border-color: $focused;
+}
+/* =============================================== */
+/* Button                                          */
+/* =============================================== */
+QPushButton {
+    border: 1px solid $border;
+    border-radius: 2px;
+    /*background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, 
+        stop: 0 $grad1a, stop: 0.05 $grad1b,stop: 0.5 $grad1b, 
+        stop: 0.9 $grad1a, stop: 1 $grad1a);*/
+    padding: 1px 4px;
+    min-width: 50px;
+    min-height: 16px;
+}
+
+QPushButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+
+QPushButton:pressed
+{
+    border-width: 1px;      
+    background-color: $pressed;
+    border-color: $border;
+}
+
+QPushButton:focus, QPushButton:default {
+    border-color: $focused; /* make the default button prominent */
+}
+
+
+QToolButton,QToolButton:unchecked { /* ToolBar里的按钮和带下拉菜单的按钮 */
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: transparent;
+    margin: 1px;
+}
+QToolButton:checked{
+    background-color: $selected;
+    border-color: $pressed;
+}
+QToolButton:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+
+QToolButton:pressed,QToolButton:checked:hover{
+    background-color: $pressed;
+    border-color: $focused;
+}
+QToolButton:checked:pressed{
+    background-color: $selected;
+}
+
+/* only for MenuButtonPopup */
+QToolButton[popupMode="1"]{
+    padding-left: 1px;
+    padding-right: 15px; /* make way for the popup button */
+    border: 1px solid $border;
+    min-height: 15px;
+    /*background: qlineargradient(x1:0, y1:0 ,x2:0, y2:1
+        stop: 0 $grad1a, stop: 0.05 $grad1b, stop: 0.5 $grad1b
+        stop: 0.95 $grad1a stop: 1$grad1a)*/
+}
+QToolButton[popupMode="1"]:hover{
+    background-color: $selected;
+    border-color: $pressed;
+}
+QToolButton[popupMode="1"]:pressed{
+    border-width: 1px;
+    background-color: $pressed;
+    border-color: $border;
+}
+QToolButton::menu-button {
+    border: 1px solid $border;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    width: 16px;
+}
+
+/* =============================================== */
+/* ComboBox                                        */
+/* =============================================== */
+QComboBox{
+    border: 1px solid $border;
+}
+QComboBox:editable{
+    border-style: inset;
+}
+QComboBox:hover{
+    border-color: $selected;
+}
+QComboBox:focus{
+    border-color: $focused;
+}
+QComboBox:on { /* shift the text when the popup opens */
+    padding-top: 2px;
+    padding-left: 2px;
+}
+QComboBox QAbstractItemView {
+    border: 1px solid $border;
+    selection-background-color: $selected;
+}
+/*QComboBox QAbstractItemView::item {
+    height: 12px;需要设置comboBox.setView(QListView())否则会使用默认的item样式
+}*/
+/* =============================================== */
+/* SpinBox DateTime                                */
+/* =============================================== */
+QSpinBox, QDoubleSpinBox,QDateEdit,QTimeEdit,QDateTimeEdit{
+    border: 1px solid $border;
+    border-style: inset;
+}
+QSpinBox:hover, QDoubleSpinBox:hover,QDateEdit:hover, QTimeEdit:hover,QDateTimeEdit:hover{
+    border-color: $selected;
+}
+QSpinBox:focus, QDoubleSpinBox:focus,QDateEdit:focus,QTimeEdit:focus,QDateTimeEdit:focus{
+    border-color: $focused;
+}
+
+/* =============================================== */
+/* Slider ProgressBar                              */
+/* =============================================== */
+QProgressBar {
+    border: 1px solid $border;
+    border-radius: 4px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: $focused;
+    width: 4px;
+    margin: 1px;
+}
+
+QSlider{
+    border: 1px solid transparent;
+}
+QSlider::groove{
+    border: 1px solid $border;
+    background: $background;
+}
+QSlider::handle {/*设置中间的那个滑动的键*/                           
+    border: 1px solid $border;
+    background: $selected;
+}
+QSlider::groove:horizontal {
+    height: 3px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+    left:5px; right: 5px;
+}
+QSlider::groove:vertical{
+    width: 3px;
+    top: 5px; bottom: 5px;
+}
+QSlider::handle:horizontal{
+    width: 6px;
+    margin: -7px; /* height */
+}
+QSlider::handle:vertical{
+    height: 6px;
+    margin: -7px; /* height */
+}
+QSlider::add-page{/*还没有滑上去的地方*/
+    border: 1px solid $border;
+    background:$grad1a;
+}
+QSlider::sub-page{/*已经划过的从地方*/                            
+    background: $focused;
+}
+
+/* =============================================== */
+/* ScrollBar                                       */
+/* =============================================== */
+QScrollBar{
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 5px;
+    padding: 1px;
+    height: 10px;
+    width: 10px;
+}
+QScrollBar:hover{
+    border-color:$selected;
+}
+QScrollBar::handle{
+    border-radius: 3px;
+    background: $pressed;
+    min-width: 16px;
+    min-height: 16px;
+}
+QScrollBar::handle:hover {
+    background: $focused;
+}
+QScrollBar::add-line, QScrollBar::sub-line,
+QScrollBar::add-page, QScrollBar::sub-page {
+    width: 0px;
+    background: transparent;
+}
+QScrollArea{
+    border: none;
+}
+/*QScrollArea  QAbstractSlider{
+    border-radius: 0px;
+}*/
+/* =============================================== */
+/* DockWidget                                       */
+/* =============================================== */
+QDockWidget, QDockWidget > QWidget/*not work*/
+{
+    border-color: $border;/*qt bug*/
+    background: transparent;
+}
+QDockWidget::title {
+    border-bottom: 1px solid $border;
+    border-style: inset;
+    text-align: left; /* align the text to the left */
+    padding: 6px;
+}
+
+/* =============================================== */
+/* GroupBox                                        */
+/* =============================================== */
+QGroupBox {
+    background-color: $background;
+    border: 1px solid $border;
+    border-radius: 4px;
+    margin-top: 0.5em;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 1em;
+    background-color: $background;
+}
+/* =============================================== */
+/* ToolBox                                         */
+/* =============================================== */
+QToolBox{
+    border: 1px solid $border;
+}
+QToolBox::tab {
+    background: $grad1a;
+    border: 1px solid $border;
+    border-radius: 1px;
+}
+QToolBox::tab:hover {
+    background-color: $selected;
+    border-color: transparent;
+}
+QToolBox::tab:pressed {
+    background-color: $pressed;
+    border-color: transparent;
+}
+QToolBox::tab:selected {
+    font-weight: bold;
+    border-color: $selected;
+}
+
+/* =============================================== */
+/* TabWidget                                       */
+/* =============================================== */
+QTabWidget{
+    margin-top:10px;
+}
+QTabWidget::pane{
+    border: 1px solid $border;
+}
+QTabWidget::tab-bar {
+    left: 0px;
+}
+QTabBar::tab {
+    background: $background;
+    border: 1px solid $border;
+    padding: 3px 5px;    
+}
+QTabBar::tab:hover {
+    background: $selected;
+    border-color: transparent;
+}
+QTabBar::tab:selected {
+    background: $selected;
+    border-color: $pressed;
+}
+QTabBar::tab:pressed {
+    background: $pressed;
+    border-color: transparent;
+}
+QTabBar::tab:focus {
+    border-color: $focused;
+}
+QTabBar::tab:top{
+    margin-top: 3px;
+    border-bottom: transparent;
+    margin-right: 1px;
+}
+QTabBar::tab:bottom{
+    margin-bottom: 3px;
+    border-top: transparent;
+    margin-right: 1px;
+}
+QTabBar::tab:left{
+    border-right: transparent;
+    margin-bottom: 1px;
+}
+QTabBar::tab:right{
+    border-left: transparent;
+    margin-bottom: 1px;
+}
+
+/* =============================================== */
+/* QHeaderView for list table                      */
+/* =============================================== */
+QHeaderView {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+}
+QHeaderView::section, QTableCornerButton::section {/*设置表头属性*//*左上角*/
+	background-color: $grad1a;
+	padding: 0 3px;
+	border-right: 1px solid $border;
+	border-bottom: 1px solid $border;
+	border-radius: 0px;
+}
+QHeaderView::section:hover, QTableCornerButton::section:hover{
+    background-color: $selected;
+}
+QHeaderView::section:pressed{
+    background-color: $pressed;
+}
+QHeaderView::section:checked {
+    background-color: $focused;
+}
+
+/* =============================================== */
+/* QTableWidget                                    */
+/* =============================================== */
+QTableWidget, QTableView
+{
+    gridline-color: $border;    /*表格中的网格线条颜色*/
+    background: $background;
+    /*设置交替颜色，需要在函数属性中设置:tableWidget->setAlternatingRowColors(true)*/
+    alternate-background-color: $grad1a;
+    /*selection-color:$background;    鼠标选中时前景色：文字颜色*/
+    selection-background-color:$selected;   /*鼠标选中时背景色*/
+    border:1px solid $border;  /*边框线的宽度、颜色*/
+    /*border:none;    去除边界线*/
+    /*border-radius:5px;*/
+    /*padding:10px 10px;*/  /*表格与边框的间距*/
+}
+QTableView::item, QTabWidget::item{
+    background: transparent;
+	outline-style: none;
+	border: none;
+}
+
+QTableView::item:hover {
+	background: $selected;
+    border: 1px solid $focused;
+}
+
+QTableView::item:selected {
+	background: $selected;
+	color: $grad1a;
+}
+
+QTableView::item:selected:active {
+	background: $pressed;
+	color: $grad1a;
+}
+
+QTableWidget QComboBox{
+    margin: 2px;
+    border: none;
+}

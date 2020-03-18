@@ -28,17 +28,16 @@ class MainWin(MainWinBase):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
-        self.confDialog = None
         # ui
         self.setAcceptDrops(True)
+        # conf
+        self.recent = Recent(self.open, self.submenus["recent"])
+        self.config = Config.current()
+        self.confDialog = ConfDialog(self)
         # self.setupUi()
         self.setupActions()
-        self.recent = Recent(self.open, self.submenus["recent"])
         if self.tr("LTR") == "RTL":
             self.setLayoutDirection(Qt.RightToLeft)
-        # conf
-        self.config = Config.current()
-        self.useConfig()
         # lang
         # from i18n.language import Language as Lang
         # Lang.getConfigLang(self)
@@ -106,7 +105,6 @@ class MainWin(MainWinBase):
         self.editor.drop.connect(self.dropEvent)
 
         # setting
-        self.confDialog = ConfDialog(self)
         self.actions["config"].triggered.connect(self.confDialog.show)
 
         # help
@@ -421,25 +419,17 @@ class MainWin(MainWinBase):
                     self.save()
                     e.ignore()
                 elif ret in (QMessageBox.Discard, QMessageBox.No):
-                    self.updateConfig()
+                    self.updateSpecialConfig()
                     self.config.save()
                     qApp.exit()
                 else:
                     e.ignore()
         else:
-            self.updateConfig()
+            self.updateSpecialConfig()
             self.config.saveDefault()
 
-    def updateConfig(self):
+    def updateSpecialConfig(self):
+        """get new options, some option canbe changed without config dialog."""
         self.config.getSec("file")["recent"] = self.recent.getList()
-        self.config.getSec("file")["recentcount"] = self.recent.maxcount
-        self.config.getSec("CodeEditor")["fontsize"] = self.editor.font().pointSize()
 
-    def useConfig(self):
-        recentlist = self.config["file.recent"]
-        if recentlist:
-            self.recent.setList(recentlist)
-        maxcount = self.config["file.recentcount"]
-        if maxcount:
-            self.recent.maxcount = int(maxcount)
-        self.editor.font().setPointSize(self.config.getSec("CodeEditor").get("fontsize", 11))
+

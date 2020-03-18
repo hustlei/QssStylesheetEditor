@@ -15,6 +15,7 @@ class Language():
     systrans = QTranslator()
     __inited = False
     __listInToml = []
+    lang = "en"
 
     @classmethod
     def loadList(cls):

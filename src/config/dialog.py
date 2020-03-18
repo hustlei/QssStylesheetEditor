@@ -5,7 +5,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
-                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout, QDialog)
+                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout, QDialog, QCheckBox, QMessageBox)
 from PyQt5.QtCore import Qt
 
 
@@ -16,16 +16,21 @@ class ConfDialog(QDialog):
         self._app = QApplication.instance()  # 获取app实例
         self.setWindowFlags(Qt.Tool | Qt.WindowStaysOnTopHint)
         self.win = mainwin
+        self.leftList = QListWidget()
+        self.rightStack = QStackedWidget()
+        self.changedOptions = {}
         self.initUI()
+        recentlist = self.win.config["file.recent"]
+        if recentlist:
+            self.win.recent.setList(recentlist)
+        self.first = True
 
     def initUI(self):
         mainLayout = QVBoxLayout()
         layH1 = QHBoxLayout()
         layH2 = QHBoxLayout()
-        self.conflist = QListWidget()
-        self.stack = QStackedWidget()
-        layH1.addWidget(self.conflist)
-        layH1.addWidget(self.stack)
+        layH1.addWidget(self.leftList)
+        layH1.addWidget(self.rightStack)
         self.okbtn = QPushButton(self.tr("OK"))
         self.cancelbtn = QPushButton(self.tr("Cancel"))
         layH2.addStretch(1)
@@ -35,14 +40,15 @@ class ConfDialog(QDialog):
         mainLayout.addLayout(layH2)
         self.setLayout(mainLayout)
 
-        # list
-        self.conflist.addItem(self.tr("General"))
-        self.conflist.addItem(self.tr("Editor"))
-        self.conflist.setMaximumWidth(150)
-        # general
+        # left list
+        self.leftList.addItem(self.tr("General"))
+        self.leftList.addItem(self.tr("Editor"))
+        self.leftList.setMaximumWidth(150)
+
+        #right stack
         w = QWidget()
         layw = QVBoxLayout()
-
+        # general
         g = QGroupBox(self.tr("General"))
         glayout = QFormLayout()
         label1 = QLabel(self.tr("select UI language:"))
@@ -53,39 +59,48 @@ class ConfDialog(QDialog):
         self.recentcountspin = QSpinBox()
         self.recentcountspin.setMinimum(1)
         self.recentcountspin.setMaximum(30)
-        label3 = QLabel(self.tr("Font Size:"))
-        self.fontsizespin = QSpinBox()
-        self.fontsizespin.setMinimum(1)
-        self.fontsizespin.setMaximum(30)
-
         glayout.addRow(label1, self.langCombo)
         glayout.addRow(label2, self.recentcountspin)
-        glayout.addRow(label3, self.fontsizespin)
         g.setLayout(glayout)
-
         layw.addWidget(g)
+        # advanced
+        g2 = QGroupBox(self.tr("Advanced"))
+        labeladv1 = QLabel(self.tr("Export qss When save qsst:"))
+        checkboxAutoExportQss = QCheckBox()
+        checkboxAutoExportQss.setToolTip(self.tr("Option for whether export qss when save qsst file each time."))
+        layh1 = QHBoxLayout()
+        layh1.addWidget(labeladv1)
+        layh1.addStretch(1)
+        layh1.addWidget(checkboxAutoExportQss)
+        g2layout = QVBoxLayout()
+        g2layout.addLayout(layh1)
+        g2.setLayout(g2layout)
+        layw.addWidget(g2)
+
         layw.addStretch(1)
         w.setLayout(layw)
-        self.stack.addWidget(w)
+        self.rightStack.addWidget(w)
 
-        # CodeEditor
-        self.stack.addWidget(self.win.editor.settings.settingPanel())
+        # CodeEditor SettingPannel
+        self.rightStack.addWidget(self.win.editor.settings.settingPanel())
 
-        self.conflist.currentRowChanged.connect(self.stack.setCurrentIndex)
+        self.leftList.currentRowChanged.connect(self.rightStack.setCurrentIndex)
         self.cancelbtn.clicked.connect(self.close)
         self.cancelbtn.setVisible(False)
-        self.okbtn.clicked.connect(lambda: (self.win.editor.settings.apply(), self.close()))
+        self.okbtn.clicked.connect(lambda: (self.win.editor.settings.apply(), self.apply(), self.close()))
 
         # action
-        self.fontsizespin.valueChanged.connect(self.win.editor.font().setPointSize)
-
         def setCount(x):
             self.win.recent.maxcount = x
 
-        self.recentcountspin.valueChanged.connect(setCount)
-        self.langCombo.currentIndexChanged.connect(self.chLang)
+        self.recentcountspin.valueChanged.connect(lambda x: self.changedOptions.__setitem__("file.recentcount",x))
+        self.langCombo.currentIndexChanged.connect(lambda i: self.changedOptions.__setitem__("general.language",i))
+        checkboxAutoExportQss.stateChanged.connect(lambda b: self.changedOptions.update({"advance.autoexportqss",b}))
+
 
     def setLangItems(self, combo):
+        """set combo list for language
+        """
         from i18n.language import Language
         langs = Language.getLangs()
         for l in langs:
@@ -93,6 +108,7 @@ class ConfDialog(QDialog):
         return True
 
     def chLang(self):
+        """change ui luanguage setting."""
         # print("Change language to "+lang)
         # try:
         #     if lang.lower()=="english":
@@ -105,21 +121,47 @@ class ConfDialog(QDialog):
         #     print(Argument)
         lang = self.langCombo.currentData()
         print("Setting Language to " + lang)
-        self.win.config.getSec("general")["language"] = lang
+        self.win.config["general.language"] = lang
         print("restart soft to enable.")
+        if self.alertChLang:
+            QMessageBox.information(self, self.tr("Change Language Info"), self.tr("You must restart soft to enable luanguage change."))
 
     def showEvent(self, QShowEvent):
-        # default value
-        self.fontsizespin.setValue(self.win.editor.font().pointSize())
-        self.recentcountspin.setValue(self.win.recent.maxcount)
-        lang = self.win.config.getSec("general").get("language", None)
-        if lang is None:
-            lang = "en"
-        from i18n.language import Language
-        for l in Language.getLangs():
-            if l["lang"] == lang:
-                self.langCombo.setCurrentText(l["nativename"])
-                break
+        if self.first:
+            self.recentcountspin.setValue(self.win.config["file.recentcount"])
+            # lang = self.win.config.get("general.language","en") #self.win.config.getSec("general").get("language", "en")
+            # lang = self.win.config["general.language"]
+            # if lang is None:
+            #     lang = "en"
+            from i18n.language import Language
+            lang = Language.lang
+            for l in Language.getLangs():
+                if l["lang"] == lang:
+                    self.alertChLang = False
+                    self.langCombo.setCurrentText(l["nativename"])
+                    self.alertChLang = True
+                    break
+            self.first = False
+
+        # # update changed value
+        # if self.changedOptions["file.recentcount"]:
+        #     self.recentcountspin.setValue(int(self.changedOptions["file.recentcount"]))
+        # if self.changedOptions["general.language"]:
+        #     self.langCombo.setLan
+
+
+    def apply(self):
+        """get config and apply to app.
+        """
+        recentlist = self.win.config["file.recent"]
+        self.win.recent.setList(recentlist)
+        if "file.recentcount" in self.changedOptions:
+            self.win.config["file.recentcount"] = self.changedOptions["file.recentcount"]
+        self.win.recent.maxcount = int(self.win.config["file.recentcount"])
+
+        if "general.language" in self.changedOptions:
+            self.chLang()
+
 
 
 if __name__ == "__main__":
