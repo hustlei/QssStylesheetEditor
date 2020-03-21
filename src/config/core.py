@@ -12,6 +12,11 @@ class Config(TomlConfig):
     """Config parser for program"""
     defaultfile = os.path.join(os.path.dirname(__file__), "config.toml")
     _current = None
+    defaultOptions = {
+        "general.language": "en",
+        "file.recentcount": 8,
+        "advance.autoexportqss": False,
+    }
 
     def __init__(self, cfgfile=None):
         super().__init__()

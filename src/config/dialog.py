@@ -18,12 +18,15 @@ class ConfDialog(QDialog):
         self.win = mainwin
         self.leftList = QListWidget()
         self.rightStack = QStackedWidget()
+        self.optionActions = {}
         self.changedOptions = {}
         self.initUI()
+        self.initConfOptions()
+        self.initOptionActions()
         recentlist = self.win.config["file.recent"]
         if recentlist:
             self.win.recent.setList(recentlist)
-        self.first = True
+        self.alertChLang = False
 
     def initUI(self):
         mainLayout = QVBoxLayout()
@@ -31,11 +34,13 @@ class ConfDialog(QDialog):
         layH2 = QHBoxLayout()
         layH1.addWidget(self.leftList)
         layH1.addWidget(self.rightStack)
-        self.okbtn = QPushButton(self.tr("OK"))
         self.cancelbtn = QPushButton(self.tr("Cancel"))
+        self.okbtn = QPushButton(self.tr("OK"))
+        # self.cancelbtn.setVisible(False)
+        self.okbtn.setDefault(True)
         layH2.addStretch(1)
-        layH2.addWidget(self.okbtn)
         layH2.addWidget(self.cancelbtn)
+        layH2.addWidget(self.okbtn)
         mainLayout.addLayout(layH1)
         mainLayout.addLayout(layH2)
         self.setLayout(mainLayout)
@@ -53,7 +58,7 @@ class ConfDialog(QDialog):
         glayout = QFormLayout()
         label1 = QLabel(self.tr("select UI language:"))
         self.langCombo = QComboBox()
-        self.setLangItems(self.langCombo)  # .addItems(self.getLangList())
+        self.fillLangItems(self.langCombo)  # .addItems(self.getLangList())
         self.langCombo.setMinimumWidth(150)
         label2 = QLabel(self.tr("Number of recent files:"))
         self.recentcountspin = QSpinBox()
@@ -84,21 +89,49 @@ class ConfDialog(QDialog):
         # CodeEditor SettingPannel
         self.rightStack.addWidget(self.win.editor.settings.settingPanel())
 
+        # action for dialog
         self.leftList.currentRowChanged.connect(self.rightStack.setCurrentIndex)
-        self.cancelbtn.clicked.connect(self.close)
-        self.cancelbtn.setVisible(False)
-        self.okbtn.clicked.connect(lambda: (self.win.editor.settings.apply(), self.apply(), self.close()))
+        self.cancelbtn.clicked.connect(lambda: (self.cancel(), self.close()))
+        self.okbtn.clicked.connect(lambda: (self.apply(), self.close()))
 
-        # action
-        def setCount(x):
-            self.win.recent.maxcount = x
-
+        #actions
         self.recentcountspin.valueChanged.connect(lambda x: self.changedOptions.__setitem__("file.recentcount",x))
         self.langCombo.currentIndexChanged.connect(lambda i: self.changedOptions.__setitem__("general.language",i))
         self.checkboxAutoExportQss.stateChanged.connect(lambda b: self.changedOptions.update({"advance.autoexportqss":b}))
 
+    # def showEvent(self, QShowEvent):
+    def initConfOptions(self):
+        """load option and display on ui when dialog first start"""
+        count = self.win.config["file.recentcount"]
+        if count:
+            self.recentcountspin.setValue(count)
+        # lang = self.win.config.get("general.language","en") #self.win.config.getSec("general").get("language", "en")
+        # lang = self.win.config["general.language"]
+        # if lang is None:
+        #     lang = "en"
+        from i18n.language import Language
+        lang = Language.lang
+        for l in Language.getLangs():
+            if l["lang"].replace("-","_") == lang.replace("-","_"):
+                self.langCombo.setCurrentText(l["nativename"])
+                break
+        self.checkboxAutoExportQss.setChecked(bool(self.win.config["advance.autoexportqss"]))
 
-    def setLangItems(self, combo):
+    @staticmethod
+    def setValue(vartobeassign):
+        def innerset(value):
+            vartobeassign = value
+        return innerset
+
+    def initOptionActions(self):
+        self.optionActions = {
+            # option: [applyaction, updateuiaction]
+            "general.language": [self.chLang, self.updateLangCombo],
+            "file.recentcount": [self.setValue(self.win.recent.maxcount), self.recentcountspin.setValue],
+            "advance.autoexportqss": [self.setValue(self.win.config["advance.autoexportqss"]), self.checkboxAutoExportQss.setChecked],
+        }
+
+    def fillLangItems(self, combo):
         """set combo list for language
         """
         from i18n.language import Language
@@ -107,7 +140,7 @@ class ConfDialog(QDialog):
             combo.addItem(l["nativename"], l["lang"])
         return True
 
-    def chLang(self):
+    def chLang(self, lang="en"):
         """change ui luanguage setting."""
         # print("Change language to "+lang)
         # try:
@@ -123,34 +156,18 @@ class ConfDialog(QDialog):
         print("Setting Language to " + lang)
         self.win.config["general.language"] = lang
         print("restart soft to enable.")
-        if not self.first:
+        if self.alertChLang:
             QMessageBox.information(self, self.tr("Change Language Info"), self.tr("You must restart soft to enable luanguage change."))
 
-    def showEvent(self, QShowEvent):
-        if self.first:
-            count = self.win.config["file.recentcount"]
-            if count:
-                self.recentcountspin.setValue(count)
-            # lang = self.win.config.get("general.language","en") #self.win.config.getSec("general").get("language", "en")
-            # lang = self.win.config["general.language"]
-            # if lang is None:
-            #     lang = "en"
-            from i18n.language import Language
+    def updateLangCombo(self, lang=None):
+        """update setting ui to lang"""
+        from i18n.language import Language
+        if not lang:
             lang = Language.lang
-            for l in Language.getLangs():
-                if l["lang"].replace("-","_") == lang.replace("-","_"):
-                    self.langCombo.setCurrentText(l["nativename"])
-                    break
-            self.checkboxAutoExportQss.setChecked(bool(self.win.config["advance.autoexportqss"]))
-            self.first = False
-            self.changedOptions.clear()
-
-        # # update changed value
-        # if self.changedOptions["file.recentcount"]:
-        #     self.recentcountspin.setValue(int(self.changedOptions["file.recentcount"]))
-        # if self.changedOptions["general.language"]:
-        #     self.langCombo.setLan
-
+        for l in Language.getLangs():
+            if l["lang"].replace("-","_") == lang.replace("-","_"):
+                self.langCombo.setCurrentText(l["nativename"])
+                break
 
     def apply(self):
         """get config and apply to app.
@@ -164,6 +181,16 @@ class ConfDialog(QDialog):
         if "general.language" in self.changedOptions:
             self.chLang()
         self.changedOptions.clear()
+        self.win.editor.settings.apply()
+
+    def cancel(self):
+        for option in self.changedOptions.keys():
+            if option in self.win.config:
+                self.optionActions[option][1](self.win.config[option])
+            else:
+                self.optionActions[option][1](self.win.config.defaultOptions[option])
+        self.changedOptions.clear()
+        self.win.editor.settings.cancel()
 
 
 
