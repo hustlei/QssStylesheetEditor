@@ -358,6 +358,7 @@ class MainWin(MainWinBase):
             self.setWindowTitle(self.title + " - " + os.path.basename(self.file))
             self.actions["save"].setEnabled(False)
             self.recent.addFile(self.file)
+            self.autoExport(self.file)
         else:
             self.saveAs()
 
@@ -376,6 +377,7 @@ class MainWin(MainWinBase):
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
             self.actions["save"].setEnabled(False)
             self.recent.addFile(self.file)
+            self.autoExport(self.file)
 
     def export(self):
         self.qsst.convertQss()
@@ -387,6 +389,18 @@ class MainWin(MainWinBase):
         savefile, _ = QFileDialog.getSaveFileName(self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
         if savefile:
             with open(savefile, 'w', newline='') as f:
+                f.write(self.qsst.qss)
+
+    def autoExport(self, file):
+        if self.config["advance.autoexportqss"]:
+            self.qsst.convertQss()
+            qssfile = os.path.splitext(file)[0] + ".qss"
+            backupfile = qssfile + ".backup"
+            if os.path.exists(qssfile):
+                if os.path.exists(backupfile):
+                    os.remove(backupfile)
+                os.rename(qssfile, backupfile)
+            with open(qssfile, 'w', newline='') as f:
                 f.write(self.qsst.qss)
 
     def dragEnterEvent(self, qDragEnterEvent):

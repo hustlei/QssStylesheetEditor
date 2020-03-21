@@ -1,9 +1,10 @@
 [general]
-language = ""
+language = "zh-CN"
 
 [file]
-recent = []
+recent = [ "C:/Users/lei/Desktop 4/new1.qsst",]
 recentcount = 8
 
 [CodeEditor]
 fontsize = 11
+

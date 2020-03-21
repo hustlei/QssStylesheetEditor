@@ -14,6 +14,16 @@ English | [简体中文](todo_zh-CN.md)
 
 # ChangeLog
 
+## v1.7
+
+Main Changes: **update config, fixed ISSUES*
+
++ **New Features**
+    - add auto export qss features
++ **BugsFixed**
+    - fixed ISSUES
+
+
 ## v1.6
 Main Changes: **split editor, config etc to single package, test for multi platform*
 

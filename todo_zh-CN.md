@@ -12,6 +12,15 @@
 
 # ChangeLog
 
+
+## v1.6
+主要修改: **重构config, 修复ISSUE中提到的bug**
+
++ **New Features**
+    - 增加自动导出qss的功能，每次保存自动导出qss
++ **BugsFixed**
+    - 修复ISSUE中提到的BUG
+
 ## v1.6
 主要修改: **重构editor和config部分到单独的包中，各个操作系统测试**
 
