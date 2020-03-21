@@ -20,7 +20,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="QssStylesheetEditor",  # ProjectName
-    version="1.6",
+    version="1.7",
     python_requires='>=3.0.*, <4',  # python的依赖关系
     install_requires=['CodeEditor', 'preimport', 'tomlconfig'],
 

@@ -19,7 +19,7 @@ from .recent import Recent
 class MainWin(MainWinBase):
     def __init__(self):
         super().__init__()
-        self.ver = "v1.50"
+        self.ver = "v1.70"
         self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("res/app.ico"))
@@ -28,6 +28,7 @@ class MainWin(MainWinBase):
         self.file = None
         self.lastSavedText = ""
         self.newIndex = 0
+        self.firstAutoExport = True
         # ui
         self.setAcceptDrops(True)
         # conf
@@ -378,6 +379,7 @@ class MainWin(MainWinBase):
             self.actions["save"].setEnabled(False)
             self.recent.addFile(self.file)
             self.autoExport(self.file)
+            self.firstAutoExport = True
 
     def export(self):
         self.qsst.convertQss()
@@ -396,12 +398,13 @@ class MainWin(MainWinBase):
             self.qsst.convertQss()
             qssfile = os.path.splitext(file)[0] + ".qss"
             backupfile = qssfile + ".backup"
-            if os.path.exists(qssfile):
+            if self.firstAutoExport and os.path.exists(qssfile):
                 if os.path.exists(backupfile):
                     os.remove(backupfile)
                 os.rename(qssfile, backupfile)
             with open(qssfile, 'w', newline='') as f:
                 f.write(self.qsst.qss)
+                self.firstAutoExport = False
 
     def dragEnterEvent(self, qDragEnterEvent):
         if qDragEnterEvent.mimeData().hasUrls():
