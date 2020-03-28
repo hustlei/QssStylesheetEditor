@@ -5,7 +5,7 @@ jobs:
         - name: "linux" 
           os: linux
           sudo: required
-          dist: bionic
+          # dist: bionic
           python:
             - 3.8
           before_install:
@@ -34,8 +34,8 @@ install:
     - pip3 install -U pytest
     - pip3 install -U pytest-cov
     - pip3 install -U coveralls
-    - pip3 install numpy
-    - pip3 install openpyxl
+    # - pip3 install numpy
+    # - pip3 install openpyxl
     
 script:
     - py.test --cov=preimport tests
