@@ -5,6 +5,7 @@ English | [简体中文](readme_zh-CN.md)
 [![Build Status](https://travis-ci.com/hustlei/preimport.svg?branch=master)](https://travis-ci.com/hustlei/preimport)
 [![Coverage Status](https://coveralls.io/repos/github/hustlei/preimport/badge.svg?branch=master)](https://coveralls.io/github/hustlei/preimport?branch=master)
 [![Platform:win|osx|linux](https://hustlei.github.io/assets/badge/platform.svg)](https://travis-ci.com/hustlei/preimport)
+[![PyPI](https://img.shields.io/pypi/v/preimport)](https://pypi.org/project/preimport/)
 
 <br>
 
