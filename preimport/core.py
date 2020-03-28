@@ -17,7 +17,11 @@ def preimport(*moduleNames):
 
     for moduleName in moduleNames:
         if isinstance(moduleName, str):
-            print("  Preimporting {:9}   ...".format("'" + moduleName + "'"), end="", flush=True)
+            print(
+                "  Preimporting {:9}   ...".format("'" + moduleName + "'"),
+                end="",
+                flush=True,
+            )
             if moduleName in sys.modules:
                 print("   [Note]:{} already imported.".format(moduleName))
             else:

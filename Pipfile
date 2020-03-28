@@ -6,9 +6,9 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 pycodestyle = "*"
+black = "*"
 
 [packages]
-yapf = "*"
 
 [requires]
 python_version = "3.8"
