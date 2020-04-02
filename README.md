@@ -1,4 +1,4 @@
-English | [简体中文](https://github.com/hustlei/preimport/blob/master/readme_zh-CN.md)
+English | [简体中文](https://github.com/hustlei/preimport/blob/master/README_zh-CN.md)
 
 # preimport
 
