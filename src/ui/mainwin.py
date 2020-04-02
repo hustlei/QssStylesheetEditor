@@ -390,7 +390,7 @@ class MainWin(MainWinBase):
             f = os.path.splitext(self.file)[0]
         savefile, _ = QFileDialog.getSaveFileName(self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
         if savefile:
-            with open(savefile, 'w', newline='') as f:
+            with open(savefile, 'w', newline='', encoding ='utf-8') as f:
                 f.write(self.qsst.qss)
 
     def autoExport(self, file):
@@ -402,7 +402,7 @@ class MainWin(MainWinBase):
                 if os.path.exists(backupfile):
                     os.remove(backupfile)
                 os.rename(qssfile, backupfile)
-            with open(qssfile, 'w', newline='') as f:
+            with open(qssfile, 'w', newline='', encoding ='utf-8') as f:
                 f.write(self.qsst.qss)
                 self.firstAutoExport = False
 

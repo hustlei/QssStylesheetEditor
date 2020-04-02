@@ -10,11 +10,12 @@ pytest = "*"
 pytest-qt = "*"
 pycodestyle = "*"
 yapf = "*"
+pyqt5-tools = "*"
 
 [packages]
 tomlconfig = ">=1.2.1"
-codeeditor = ">=1.1.0"
 preimport = ">=1.1.0"
+codeeditor = ">=1.1.0"
 chardet = ">=3.0.4"
 qscintilla = ">=2.11.4"
 toml = ">=0.10.0"
