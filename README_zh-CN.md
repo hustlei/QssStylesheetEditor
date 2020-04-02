@@ -33,12 +33,15 @@ preimport(['sys', 'os'])
 >>> # examples
 >>> preimport('numpy')
 >>> Preimporting 'numpy'       ...   successfully in 0.202s.
+>>>
 >>> # 如果模块已经导入了的情况
 >>> preimport('os')
 >>> Preimporting 'os'        ...   [Note]:os already imported.
+>>>
 >>> # 如果系统未安装模块
 >>> preimport('PyQt5')
 >>> Preimporting 'PyQt5'   ...   [Failed]:ModuleNotFound.
+>>>
 >>> # 模块名称错误
 >>> preimport(1)
 >>> [Error]: preimport error, moduleName must be str or Iterable.

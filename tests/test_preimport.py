@@ -12,9 +12,10 @@ from preimport import preimport
 
 MODULE_NAMES = ('six', 'pluggy')
 
+def test_vesion():
+    print("\n" + package.__version__)
 
 def test_preimport(capsys):
-    print("\n" + package.__version__)
     preimport(MODULE_NAMES)
     for module in MODULE_NAMES:
         assert module in sys.modules

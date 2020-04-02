@@ -7,8 +7,13 @@ verify_ssl = true
 pytest = "*"
 pycodestyle = "*"
 black = "*"
+pytest-cov = "*"
+pkg-resources = "*"
 
 [packages]
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true

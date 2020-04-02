@@ -1,4 +1,4 @@
-English | [简体中文](readme_zh-CN.md)
+English | [简体中文](https://github.com/hustlei/preimport/blob/master/readme_zh-CN.md)
 
 # preimport
 
@@ -32,12 +32,15 @@ It will be like following when using preimport in cli.
 >>> # examples
 >>> preimport('numpy')
 >>> Preimporting 'numpy'       ...   successfully in 0.202s.
+>>>
 >>> # if module imported
 >>> preimport('os')
 >>> Preimporting 'os'        ...   [Note]:os already imported.
+>>>
 >>> # if module not installed
 >>> preimport('PyQt5')
 >>> Preimporting 'PyQt5'   ...   [Failed]:ModuleNotFound.
+>>>
 >>> # error module name
 >>> preimport(1)
 >>> [Error]: preimport error, moduleName must be str or Iterable.
