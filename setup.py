@@ -4,15 +4,22 @@ from setuptools import setup, find_packages
 
 
 def myversion():
-    from setuptools_scm.version import guess_next_version
+    from setuptools_scm.version import guess_next_version, _bump_regex, _strip_local
 
     def local_scheme(version):
         return ""
+        # return ".{}".format(version.distance)#version.format_choice(".{distance}","") if version.distance else ""
         # return version.format_choice(".r{distance}", ".a{distance}") if version.distance else ""
         # return version.format_choice(".d{time:%Y%m%d}", ".{distance}.{node}.{time:%Y%m%d}")
         # return ".dev{}".format(version.distance)
     def version_scheme(version):
-        return guess_next_version(version.tag)
+        verstr = str(version.tag)
+        ver = verstr.split(".")
+        if ver[2] != "0":
+            return "{}.{}".format(verstr, version.distance)
+        else:
+            return "{}.{}.{}".format(ver[0],ver[1],version.distance)
+        # return guess_next_version(version.tag)
 
     return {'version_scheme': version_scheme, 'local_scheme': local_scheme}
 
