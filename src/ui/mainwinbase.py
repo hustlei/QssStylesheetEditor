@@ -269,7 +269,7 @@ class MainWinBase(QMainWindow):
         self.docks["color"] = QDockWidget(self.tr("Color Variables"))
         self.docks["preview"] = QDockWidget(self.tr("Preview"))
 
-        self.docks["color"].setMinimumSize(QSize(120, 20))
+        self.docks["color"].setMinimumSize(QSize(80, 20))
         self.docks["color"].setFeatures(QDockWidget.AllDockWidgetFeatures)
         self.docks["preview"].setMinimumSize(QSize(200, 200))
         self.docks["preview"].setFeatures(QDockWidget.DockWidgetMovable | QDockWidget.DockWidgetFloatable)

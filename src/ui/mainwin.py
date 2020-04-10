@@ -5,7 +5,8 @@ import os
 import re
 import sys
 
-from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog, QMessageBox)
+from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog, QMessageBox, QFormLayout,
+                             QVBoxLayout, QHBoxLayout)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize
 # import sip
@@ -218,24 +219,36 @@ class MainWin(MainWinBase):
             while self.colorPanelLayout.count() > 0:
                 self.colorPanelLayout.removeItem(self.colorPanelLayout.itemAt(0))
             self.clrBtnDict = {}
+            labels = {}
+            widLabel = 0
+            widBtn = 0
             for varName, clrStr in self.qsst.varDict.items():
-                contianerWidget = QWidget()
-                contianerWidget.setMinimumSize(QSize(185, 25))
-                label = QLabel(varName, contianerWidget)
-                btn = QPushButton(clrStr, contianerWidget)
+                label = QLabel(varName)#, contianerWidget)
+                btn = QPushButton(clrStr)#, contianerWidget)
                 if sys.platform.startswith("win"):
                     font1 = QFont("Arial", 10, QFont.Medium)
                     font2 = QFont("sans-serif", 9, QFont.Medium)
                     label.setFont(font1)
                     btn.setFont(font2)
                 self.clrBtnDict[varName] = btn
-                # label.setFixedWidth(80)
-                # btn.setFixedWidth(100)
-                label.move(5, 5)
-                btn.move(100, 5)
-                self.colorPanelLayout.addWidget(contianerWidget)
-                self.colorPanelLayout.setSpacing(5)
+                labels [varName] = label
+                label.adjustSize()
+                widLabel = label.width() if label.width() > widLabel else widLabel
+                btn.adjustSize()
+                widBtn = btn.width() if btn.width() > widBtn else widBtn
+                #label.move(5, 5)
+                #btn.move(100, 5)
                 btn.clicked.connect(lambda x, var=varName: self.chclr(var))
+            for name, btn in self.clrBtnDict.items():
+                contianerWidget = QWidget()
+                lay = QHBoxLayout()
+                labels[name].setFixedWidth(widLabel)
+                btn.setFixedWidth(widBtn)
+                lay.addWidget(labels[name])
+                lay.addWidget(btn)
+                contianerWidget.setLayout(lay)
+                #contianerWidget.setMinimumSize(QSize(185, 25))
+                self.colorPanelLayout.addWidget(contianerWidget)
 
         for varName, btn in self.clrBtnDict.items():
             clrStr = self.qsst.varDict[varName]
