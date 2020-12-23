@@ -148,6 +148,7 @@ class PreviewWidget(QTabWidget):
 
         # Label TextBox
         group1 = QGroupBox("Text")
+        group1.setCheckable(True)
         group1layout = QHBoxLayout()
         group1.setLayout(group1layout)
         layout.addWidget(group1)
@@ -223,6 +224,7 @@ class PreviewWidget(QTabWidget):
 
         # Button
         group2 = QGroupBox("Button")
+        group2.setCheckable(True)
         group2layout = QVBoxLayout()
         group2.setLayout(group2layout)
         layout.addWidget(group2)
@@ -296,6 +298,7 @@ class PreviewWidget(QTabWidget):
 
         # Selecting Input
         group4 = QGroupBox("Selectable")
+        group4.setCheckable(True)
         group4Layout = QVBoxLayout()
         layoutRow1 = QHBoxLayout()
         group4Layout.addLayout(layoutRow1)
@@ -320,6 +323,7 @@ class PreviewWidget(QTabWidget):
 
         # TextEdit
         group5 = QGroupBox("TextEdit")
+        group5.setCheckable(True)
         group5Layout = QVBoxLayout()
         group5.setLayout(group5Layout)
         layout.addWidget(group5)
@@ -391,6 +395,7 @@ class PreviewWidget(QTabWidget):
 
         # DateTime
         group1 = QGroupBox("DateTime")
+        group1.setCheckable(True)
         group1Layout = QHBoxLayout()
         layoutRow1 = QVBoxLayout()
         layoutRow2 = QVBoxLayout()
@@ -418,6 +423,7 @@ class PreviewWidget(QTabWidget):
 
         # Slider
         group2 = QGroupBox("Sliders")
+        group2.setCheckable(True)
         group2Layout = QVBoxLayout()
         layoutRow1 = QHBoxLayout()
         layoutRow2 = QHBoxLayout()
@@ -469,6 +475,7 @@ class PreviewWidget(QTabWidget):
 
         # Meter
         group3 = QGroupBox("Meters")
+        group3.setCheckable(True)
         layRow = QHBoxLayout()
         group3.setLayout(layRow)
         layout.addWidget(group3)
@@ -588,6 +595,7 @@ class PreviewWidget(QTabWidget):
                 p.end()
 
         group1 = QGroupBox("DrawGraphics")
+        group1.setCheckable(True)
         group1Layout = QHBoxLayout()
         group1.setLayout(group1Layout)
         layout.addWidget(group1)
@@ -597,13 +605,19 @@ class PreviewWidget(QTabWidget):
 
         # picture
         group2 = QGroupBox("Pictures")
+        group2.setCheckable(True)
         group2Layout = QHBoxLayout()
         group2.setLayout(group2Layout)
         layout.addWidget(group2)
 
         pic1 = QLabel()
         pic1.setPixmap(QPixmap(":appres.img/cup.jpg"))
-        group2Layout.addWidget(pic1)
+        pic1text = QLabel("QLabel")
+        pic1text.setAlignment(Qt.AlignHCenter)
+        pic1layout = QVBoxLayout()
+        pic1layout.addWidget(pic1)
+        pic1layout.addWidget(pic1text)
+        group2Layout.addLayout(pic1layout)
         group2Layout.addStretch(1)
 
         class Pic(QWidget):
@@ -622,7 +636,12 @@ class PreviewWidget(QTabWidget):
                 p.drawPixmap(s, img, s)
                 p.end()
 
-        group2Layout.addWidget(Pic())
+        pic2text = QLabel("QWidget Paint")
+        pic2text.setAlignment(Qt.AlignHCenter)
+        pic2layout = QVBoxLayout()
+        pic2layout.addWidget(Pic())
+        pic2layout.addWidget(pic2text)
+        group2Layout.addLayout(pic2layout)
         group2Layout.addStretch(1)
 
         layout.addStretch(1)
@@ -648,6 +667,7 @@ class PreviewWidget(QTabWidget):
         layout.addWidget(group1)
 
         group2 = QGroupBox(self.tr("QGridLayout"))  # , "QGridLayout布局"))
+        group2.setCheckable(True)
         hbox = QGridLayout()
         hbox.addWidget(QLabel(self.tr("First line:")), 0, 0)  # "第一行数据："))
         hbox.addWidget(QLabel(self.tr("Second line:")), 1, 0)
@@ -663,6 +683,7 @@ class PreviewWidget(QTabWidget):
         layout.addWidget(group2)
 
         group3 = QGroupBox(self.tr("QFormLayout"))  # "QFormLayout布局"))
+        group3.setCheckable(True)
         hbox = QFormLayout()
 
         hbox.addRow(self.tr("please input data"), QLineEdit())  # "请输入数据：")
@@ -676,6 +697,7 @@ class PreviewWidget(QTabWidget):
         layout.addWidget(group3)
 
         group4 = QGroupBox("Spliter MDI Dock")
+        group4.setCheckable(True)
         hbox = QHBoxLayout()
         group4.setLayout(hbox)
         layout.addWidget(group4)
@@ -727,7 +749,15 @@ class PreviewWidget(QTabWidget):
         group.setLayout(hbox)
         layout.addWidget(group)
 
+        group = QGroupBox(self.tr("QGroupBox"))  # "QGroupBox控件"))
+        group.setCheckable(True)
+        hbox = QHBoxLayout()
+        hbox.addWidget(QLabel(self.tr("this is a checkable QGroupBox widget")))  # "这是一个QGroupBox控件")))
+        group.setLayout(hbox)
+        layout.addWidget(group)
+
         group = QGroupBox(self.tr("StackLayout"))  # "StackLayout布局"))
+        group.setCheckable(True)
         hbox = QHBoxLayout()
         group.setLayout(hbox)
         listWidget = QListWidget()
@@ -765,6 +795,7 @@ class PreviewWidget(QTabWidget):
         layout.addWidget(group)
 
         group = QGroupBox("ToolBox")
+        group.setCheckable(True)
         lay = QVBoxLayout()
         group.setLayout(lay)
         layout.addWidget(group)
@@ -788,6 +819,7 @@ class PreviewWidget(QTabWidget):
         lay.addWidget(t1)
 
         group = QGroupBox("TabWidget")
+        group.setCheckable(True)
         lay = QVBoxLayout()
         lay1 = QHBoxLayout()
         lay2 = QHBoxLayout()
