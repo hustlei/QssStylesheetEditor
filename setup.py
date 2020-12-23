@@ -29,7 +29,7 @@ setup(
     packages=find_packages(where='src', include=('*'), exclude=[
         '*.__pycache__',
     ]),  #
-    py_modules=['app', 'bootstrapper'],  # single file
+    py_modules=['app'], #, 'bootstrapper'],  # single file
 
     # data
     package_data={
@@ -59,7 +59,7 @@ setup(
             'qssteditor = app:main',  # __main__
         ],
         "gui_scripts": [
-            'QssStylesheetEditor = bootstrapper',
+            'QssStylesheetEditor = app:main',
         ]
     },
 
@@ -85,7 +85,7 @@ setup(
 # python setup.py build  # 编译
 # python setup.py sdist  # zip格式包
 # python setup.py bdist_wininst # exe格式包
-# python setup.py bdist_rpm # rpm格式包
+# python setup.py bdist_rpm # rpm格式包  bdist_wheel wheel包
 # python setup.py bdist --help-formats # 获取所有支持的平台
 # python setup.py --help-commands 显示相关可用命令
 # python setup.py install #安装
