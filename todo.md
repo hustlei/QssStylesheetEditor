@@ -6,22 +6,27 @@ English | [简体中文](todo_zh-CN.md)
 + Docs
     - Help
     - Qss tutorial
-+ Binary package
-    - using pyinstaller or fbs
 
 + ToDo or not?
     - qss only support /* */ comment , add inline comment syntax?
 
 # ChangeLog
 
+## v1.8
+
+Main Changes: **add custom window preview, fixed ISSUES**
+
 ## v1.7
 
-Main Changes: **update config, fixed ISSUES*
+Main Changes: **update config, fixed ISSUES**
 
 + **New Features**
     - add auto export qss features
+    - make groupbox in preivew area checkable  ISSUES#25
 + **BugsFixed**
     - fixed ISSUES
+    - fixed var export error ISSUES#24
+    - fixed wheel package error ISSUES#26
 
 
 ## v1.6
