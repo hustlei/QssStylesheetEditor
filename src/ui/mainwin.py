@@ -368,7 +368,7 @@ class MainWin(MainWinBase):
     def save(self):
         if (self.file and os.path.exists(self.file)):
             self.lastSavedText = self.editor.text()
-            self.editor.save(self.file)
+            self.editor.save(self.file.encode("utf-8"))
             self.status["coding"].setText("utf-8")
             self.setWindowTitle(self.title + " - " + os.path.basename(self.file))
             self.actions["save"].setEnabled(False)
@@ -388,7 +388,7 @@ class MainWin(MainWinBase):
         if file:
             self.file = file
             self.lastSavedText = self.editor.text()
-            self.editor.save(self.file)
+            self.editor.save(self.file.encode("utf-8"))
             self.status["coding"].setText("utf-8")
             self.setWindowTitle(self.title + " - " + os.path.basename(file))
             self.actions["save"].setEnabled(False)
