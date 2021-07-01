@@ -89,14 +89,16 @@ class MainWin(MainWinBase):
         self.docks["color"].dockLocationChanged.connect(sizeDock)
 
         # main CodeEditor
-        self.editor.keyPress.connect(self.textChanged)
+        self.changed = False
+        self.editor.textChanged.connect(self.textChanged)
+        self.editor.keyPress.connect(self.keyPressed)
 
         def rend():
             self.renderStyle()
             self.loadColorPanel()
 
         self.editor.loseFocus.connect(rend)
-        self.editor.mouseLeave.connect(rend)
+        #self.editor.mouseLeave.connect(rend)
         self.editor.mousePress.connect(rend)
         self.editor.linesChanged.connect(
             lambda: self.status["lines"].setText(self.tr("lines:") + str(self.editor.lines())))
@@ -139,7 +141,8 @@ class MainWin(MainWinBase):
 
     def renderStyle(self):
         self.qsst.srctext = self.editor.text()
-        self.qsst.loadVars()
+        if not self.qsst.loadVars():
+            return
         self.qsst.convertQss()
 
         norand = self.actions["DisableQss"].isChecked()
@@ -182,14 +185,18 @@ class MainWin(MainWinBase):
                 except Exception:
                     print("set background clolor exception.")
 
-    def textChanged(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
+    def keyPressed(self, e):# QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         # 大键盘为Ret小键盘为Enter
-        if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight, Qt.Key_Up, Qt.Key_Down,
-                        Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab, Qt.Key_Delete, Qt.Key_Backspace)):
-            self.renderStyle()
-            self.loadColorPanel()
+        if self.changed:
+            if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight, Qt.Key_Up, Qt.Key_Down,
+                            Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab, Qt.Key_Delete, Qt.Key_Backspace)):
+                self.renderStyle()
+                self.loadColorPanel()
+                self.changed = False
 
+    def textChanged(self):
+        self.changed = True
         self.actions["undo"].setEnabled(self.editor.isUndoAvailable())
         self.actions["redo"].setEnabled(self.editor.isRedoAvailable())
 
@@ -203,7 +210,8 @@ class MainWin(MainWinBase):
 
     def loadColorPanel(self):
         self.qsst.srctext = self.editor.text()
-        self.qsst.loadVars()
+        if not self.qsst.loadVars():
+            return
         # item = self.colorGridLayout.itemAt(0)
         # while (item != None):
         #     self.colorGridLayout.removeItem(item)

@@ -35,13 +35,20 @@ class Qsst():
         self.varUsed = re.findall(r':[ \t\w,.:()]*[$]([\w]+)', qssStr)
         varsDefined = re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)
         self.varDict = {}
+        valerr = False
         for var, val in varsDefined:
+            if not valerr:
+                valerrind = re.match(r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',val)
+                if not valerrind:
+                    valerr = True
             self.varDict[var] = val
+
         self.varUndefined = []
         for varused in self.varUsed:
             if varused not in self.varDict.keys():
                 self.varDict[varused] = ''
                 self.varUndefined.append(varused)
+        return not valerr  # 如果有变量的值格式不正确返回false
 
     def runCodeBlocks(self):
         """代码块中可以放QPalette的定义，如果有Qpalette定义，在预览的时候需要先运行代码块中的定义"""
