@@ -30,7 +30,7 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     !define Brand "hustlei,${Year} @wuhan" ;品牌,作者声明
     
     ;资源
-    !define LICENSE "License.rtf"
+    #!define LICENSE "License.rtf"
     !define ICON "img\install.ico" ;安装包图标
     !define HEADER "img\header.bmp"
     !define SIDE "img\side.bmp"
@@ -189,7 +189,6 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
 
 
 
-
 /*** 安装选项及文件 ***/
 ;--------------------------------
 ; intall type
@@ -334,6 +333,11 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     LangString langInfo ${LANG_ENGLISH} "Please select a language:"
     !define MUI_LANGDLL_WINDOWTITLE $(langTitle)
     !define MUI_LANGDLL_INFO $(langInfo)
+
+    LicenseLangString langLicense ${LANG_ENGLISH} "License.rtf"
+    LicenseLangString langLicense ${LANG_SIMPCHINESE} "License.zh_cn.rtf"
+    !define LICENSE ${langLicense}
+    # http://blog.sina.com.cn/s/blog_6aeaee7e0100smr3.html
 
     LangString msgRuning ${LANG_SIMPCHINESE} "安装程序已经在运行"
     LangString msgRuning ${LANG_ENGLISH} "Installer is running."
