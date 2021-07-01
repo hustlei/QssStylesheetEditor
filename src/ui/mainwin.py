@@ -260,9 +260,15 @@ class MainWin(MainWinBase):
                     lable = c[3]
                 else:
                     lable = 255
-                color = QColor(c[0], c[1], c[2], lable)
+                try:
+                    color = QColor(int(c[0]), int(c[1]), int(c[2]), lable)
+                except:
+                    continue
             else:
-                color = QColor(clrStr)
+                try:
+                    color = QColor(clrStr)
+                except:
+                    continue
             s = ''
             if qGray(color.rgb()) < 100:
                 s += "color:white;"
