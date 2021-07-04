@@ -39,7 +39,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 
 from PyQt5.QtCore import Qt, QSize, QRect, QDate, QTime, QDateTime, QRegExp
 from PyQt5.QtGui import (QIcon, QPen, QBrush, QPixmap, QPainter, QLinearGradient, QRadialGradient, QConicalGradient,
-                         QDoubleValidator, QRegExpValidator, QStandardItemModel)
+                         QDoubleValidator, QRegExpValidator, QStandardItemModel, QKeySequence, QFont)
 from PyQt5.QtWidgets import (
     QWidget,
     QApplication,
@@ -88,8 +88,9 @@ from PyQt5.QtWidgets import (
     QTreeWidgetItem,
     QDirModel,
     QCompleter,
-    QMenu,
+    QMenu, QToolBar, QAction, QMainWindow,
 )
+from .customeditor import SrcEditor
 
 # from res.img_rc import *
 
@@ -105,18 +106,21 @@ class PreviewWidget(QTabWidget):
         tab4 = QWidget(self)
         tab5 = QWidget(self)
         tab6 = QWidget(self)
+        tab7 = QMainWindow(self)
         self.addTab(tab1, self.tr("Basic"))  # ,"常用组件"))
         self.addTab(tab2, self.tr("Special"))  # ,"特别组件"))
         self.addTab(tab3, self.tr("Drawing"))  # ,"绘图组件"))
         self.addTab(tab4, self.tr("Layout"))  # ,"布局组件"))
         self.addTab(tab5, self.tr("Container"))  # ,"容器组件"))
         self.addTab(tab6, self.tr("Advance"))  # ,"高级组件"))
+        self.addTab(tab7, self.tr("Custom"))  # ,"高级组件"))
         self.setupTab1(tab1)
         self.setupTab2(tab2)
         self.setupTab3(tab3)
         self.setupTab4(tab4)
         self.setupTab5(tab5)
         self.setupTab6(tab6)
+        self.setupTab7(tab7)
 
     # def chTextMode(self, editable):
     #     btns = self.dockColors.findChildren(QPushButton)
@@ -961,6 +965,79 @@ class PreviewWidget(QTabWidget):
         lay.addWidget(tree1)
         lay.addWidget(tree2)
 
+    def setupTab7(self, tab):
+        """Custom widgets for preview panel"""
+
+        # tools
+        def createAct(text, tip=None, shortcut=None, iconimg=None, checkable=False, slot=None):
+            action = QAction(self.tr(text), self)
+            if iconimg is not None:
+                action.setIcon(QIcon(iconimg))
+            if shortcut is not None:
+                action.setShortcut(shortcut)
+            if tip is not None:
+                tip = self.tr(tip)
+                action.setToolTip(tip)
+                action.setStatusTip(tip)
+            if checkable:
+                action.setCheckable(True)
+            if slot is not None:
+                action.triggered.connect(slot)
+            return action
+
+        def keys2str(standardkey):
+            return "".join(("(", QKeySequence(standardkey).toString(), ")"))
+
+        toolbar = QToolBar("source")
+        actnew = createAct(self.tr("&New", "&New"),
+                                        self.tr("new") + keys2str(QKeySequence.New), QKeySequence.New,
+                                        ':appres.img/NewDocument.png')
+        actopen = createAct(self.tr("&Open"),
+                                         self.tr("Open") + keys2str(QKeySequence.Open), QKeySequence.Open,
+                                         ':appres.img/openHS.png')
+        actsave = createAct(self.tr("&Save"),
+                                         self.tr("Save") + keys2str(QKeySequence.Save), QKeySequence.Save,
+                                         ':appres.img/save.png')
+        actsaveas = createAct(self.tr("&Save as..."), self.tr("Save as..."), None,
+                                           ':appres.img/SaveAs.png')
+        toolbar.addAction(actnew)
+        toolbar.addAction(actopen)
+        toolbar.addAction(actsave)
+        toolbar.addAction(actsaveas)
+        tab.addToolBar(toolbar)
+
+        toolbar2 = QToolBar("edit")
+        actundo = createAct(self.tr("&Undo"),
+                                         self.tr("Undo") + keys2str(QKeySequence.Undo), QKeySequence.Undo,
+                                         ':appres.img/undo.png')
+        actredo = createAct(self.tr("&Redo"),
+                                         self.tr("Redo") + keys2str(QKeySequence.Redo), QKeySequence.Redo,
+                                         ':appres.img/redo.png')
+        actfind = createAct(self.tr("&Find"),
+                                         self.tr("Find") + keys2str(QKeySequence.Find), QKeySequence.Find,
+                                         ':appres.img/find.png')
+        actreplace = createAct(self.tr("&Replace"),
+                                            self.tr("Replace") + keys2str(QKeySequence.Replace), QKeySequence.Replace,
+                                            ':appres.img/replace.png')
+        toolbar2.addAction(actredo)
+        toolbar2.addAction(actundo)
+        toolbar2.addAction(actfind)
+        toolbar2.addAction(actreplace)
+        tab.addToolBar(toolbar2)
+
+        toolbar3 = QToolBar("preview")
+        actpreview = createAct(self.tr("Preview"), self.tr("Preview custom ui using qss."))
+        actpreview.setFont(QFont("Arial",12,QFont.Medium))
+        toolbar3.addAction(actpreview)
+        tab.addToolBar(toolbar3)
+
+        srcediter = SrcEditor()
+        tab.setCentralWidget(srcediter)
+
+        tab.statusbar = tab.statusBar()
+        tab.statusbar.showMessage(self.tr("Define a class named 'MainWindow' and press the preview button."))
+
+        actpreview.triggered.connect(srcediter.preview)
 
 if __name__ == "__main__":
     import sys
