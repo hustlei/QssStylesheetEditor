@@ -7,7 +7,7 @@ from os import path
 from importlib import import_module, reload
 from CodeEditor import Editor
 from PyQt5.Qsci import QsciLexer, QsciLexerPython
-from PyQt5.QtWidgets import QMessageBox, QWidget
+from PyQt5.QtWidgets import QMessageBox, QWidget, QFileDialog
 from data import cache
 
 
@@ -21,6 +21,38 @@ class SrcEditor(Editor):
         self.setLexer(QsciLexerPython(self))
         self.load(self.file)
         self.custom = None
+
+    def open(self):
+            file, _ = QFileDialog.getOpenFileName(
+                self, self.tr("Open File"), '',
+                "Python(*.py);;all(*.*)")
+            if os.path.exists(file):
+                self.file = file
+                ok = self.load(self.file)
+                if not ok:
+                    QMessageBox.information(self, "Error", self.tr("load file failed"),
+                                            QMessageBox.Ok, QMessageBox.Ok)
+            else:
+
+                QMessageBox.information(self, "Error", self.tr("file not found."),
+                                        QMessageBox.Ok, QMessageBox.Ok)
+
+    def saveslot(self):
+        if (self.file):
+            self.save(self.file)
+        else:
+            self.saveAs()
+
+    def saveas(self):
+        file, _ = QFileDialog.getSaveFileName(
+            self,
+            self.tr(  # __ is filefilter
+                "save file"),
+            self.file,
+            "Python(*.py);;all(*.*)")
+        if file:
+            self.file = file.encode("utf-8")
+            self.save(self.file)
 
     def preview(self):
         with open(self.cachefile, 'w', newline='') as file:
