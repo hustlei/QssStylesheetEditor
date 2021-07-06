@@ -36,7 +36,7 @@ class MainWin(MainWinBase):
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
-        self.confDialog = ConfDialog(self)
+        self.confDialog = ConfDialog(self)#, self)
         # self.setupUi()
         self.setupActions()
         if self.tr("LTR") == "RTL":

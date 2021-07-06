@@ -7,6 +7,7 @@ from os import path
 from importlib import import_module, reload
 from CodeEditor import Editor
 from PyQt5.Qsci import QsciLexer, QsciLexerPython
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QMessageBox, QWidget, QFileDialog
 from data import cache
 
@@ -78,6 +79,8 @@ from PyQt5.QtCore import *
             #self.custom = import_module(".custom", "data.cache")
             if (hasattr(self.custom, "MainWindow")):
                 self.w = self.custom.MainWindow()
+                self.w.setParent(self)
+                self.w.setWindowFlags(Qt.Window)
                 self.w.setMinimumSize(400,280)
                 self.w.show()
             else:

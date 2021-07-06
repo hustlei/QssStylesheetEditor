@@ -5,8 +5,11 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
+
+from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import (QApplication, QWidget, QHBoxLayout, QVBoxLayout, QListWidget, QStackedWidget, QGroupBox,
-                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout, QDialog, QCheckBox, QMessageBox)
+                             QLabel, QSpinBox, QPushButton, QComboBox, QFormLayout, QDialog, QCheckBox, QMessageBox,
+                             QStyleOption, QStyle)
 from PyQt5.QtCore import Qt
 
 
@@ -20,8 +23,10 @@ def setValue(vartobeassign):
 class ConfDialog(QDialog):
     """config dialog"""
 
-    def __init__(self, mainwin):
-        super(ConfDialog, self).__init__()
+    def __init__(self, mainwin,parent=None):
+        super(ConfDialog, self).__init__(parent)
+        #self.setAttribute(Qt.WA_StyledBackground)
+        #self.setAutoFillBackground(True)
         self._app = QApplication.instance()  # 获取app实例
         self.setWindowFlags(Qt.Tool | Qt.WindowStaysOnTopHint)
         self.win = mainwin
@@ -245,6 +250,12 @@ class ConfDialog(QDialog):
         self.changedOptions.clear()
         self.win.editor.settings.cancel()
 
+    # def paintEvent(self,e):
+    #     paint=QPainter(self)
+    #     option=QStyleOption()
+    #     option.initFrom(self)
+    #     self.style().drawPrimitive(QStyle.PE_Widget, option, paint, self)
+    #     super().paintEvent(e)
 
 if __name__ == "__main__":
     import sys
