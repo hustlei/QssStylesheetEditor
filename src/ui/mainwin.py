@@ -14,6 +14,7 @@ from PyQt5.QtCore import Qt, QSize
 from config import Config, ConfDialog
 from qss_template import Qsst
 from .mainwinbase import MainWinBase
+from .palettedialog import PaletteDialog
 from .recent import Recent
 
 
@@ -33,6 +34,7 @@ class MainWin(MainWinBase):
         # ui
         self.setAcceptDrops(True)
         self.currentUIqss=""
+        self.paletteDailog=PaletteDialog(self)
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
@@ -70,6 +72,7 @@ class MainWin(MainWinBase):
         self.actions["paste"].triggered.connect(self.editor.paste)
         self.actions["ShowColor"].triggered.connect(self.docks["color"].setVisible)
         self.actions["ShowPreview"].triggered.connect(self.docks["preview"].setVisible)
+        self.actions["Palette"].triggered.connect(self.paletteDailog.show)
         self.actions["find"].triggered.connect(self.editor.find)
         self.actions["replace"].triggered.connect(self.editor.replace)
         self.actions["echospace"].triggered.connect(

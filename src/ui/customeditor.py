@@ -82,7 +82,7 @@ from PyQt5.QtCore import *
                 self.w.setParent(self)
                 self.w.setWindowFlags(Qt.Window)
                 self.w.setMinimumSize(400,280)
-                self.w.show()
+                self.w.showdialog()
             else:
                 raise
             #w.raise_()

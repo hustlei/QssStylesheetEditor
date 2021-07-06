@@ -19,7 +19,7 @@ class PaletteDialog(QDialog):
     def initUI(self):
         self.setWindowTitle(self.tr("Palette Color Setting"))
         self.setMinimumSize(500,500)
-        tab = {"Window": QPalette.Window,
+        self.tab = {"Window": QPalette.Window,
                "WindowText": QPalette.WindowText,
                "Base": QPalette.Base,
                "AlternateBase": QPalette.AlternateBase,
@@ -46,7 +46,7 @@ class PaletteDialog(QDialog):
                "NoRole": QPalette.NoRole}
         layout = QVBoxLayout()
         t = QTableWidget()
-        t.setRowCount(len(tab))
+        t.setRowCount(len(self.tab))
         t.setColumnCount(5)
         t.setHorizontalHeaderLabels(["ColorRole", "Active", "Inactive", "Disabled","reset"])
         t.verticalHeader().setVisible(False)
@@ -97,11 +97,11 @@ class PaletteDialog(QDialog):
             btn = t.cellWidget(rowNum, 4)
             btn.setEnabled(False)
 
-        for key, val in tab.items():
+        for key, val in self.tab.items():
             t.setRowHeight(i,15)
             t.setItem(i, 0, QTableWidgetItem(key))
             btn1=QPushButton()
-            clrRole = tab[t.item(i,0).text()]
+            clrRole = self.tab[t.item(i,0).text()]
             c1=self.p.color(QPalette.Active,clrRole).name()
             c2=self.p.color(QPalette.Inactive,clrRole).name()
             c3=self.p.color(QPalette.Disabled,clrRole).name()
@@ -144,32 +144,33 @@ class PaletteDialog(QDialog):
 
     def getCode(self):
         t=""
-        for k,v in self.newclr:
+        for k,v in self.newclr.items():
             c1,c2,c3=v
             if c1:
-                t+="palette.setColor(QPalette.Active, QPalette."+k+", QColor(c1))\n"
+                t+="palette.setColor(QPalette.Active, QPalette."+k+", QColor("+c1+"))\n"
             if c2:
-                t+="palette.setColor(QPalette.Inactive, QPalette."+k+", QColor(c1))\n"
+                t+="palette.setColor(QPalette.Inactive, QPalette."+k+", QColor("+c2+"))\n"
             if c3:
-                t+="palette.setColor(QPalette.Disabled, QPalette."+k+", QColor(c1))\n"
-        self.d.show(t)
+                t+="palette.setColor(QPalette.Disabled, QPalette."+k+", QColor("+c3+"))\n"
+        self.d.showdialog(t)
 
     def cancel(self):
         self.newclr={}
         self.close()
 
     def apply(self):
-        for k,v in self.newclr:
+        for k,v in self.newclr.items():
             c1,c2,c3=v
-        if c1:
-            self.p.setColor(QPalette.Active, self.tab[k], QColor(c1))
-            self.oldclr[k][0]=c1
-        if c2:
-            self.p.setColor(QPalette.Inactive, self.tab[k], QColor(c2))
-            self.oldclr[k][1]=c2
-        if c3:
-            self.p.setColor(QPalette.Disabled, self.tab[k], QColor(c3))
-            self.oldclr[k][2]=c3
+            if c1:
+                self.p.setColor(QPalette.Active, self.tab[k], QColor(c1))
+                self.oldclr[k][0]=c1
+            if c2:
+                self.p.setColor(QPalette.Inactive, self.tab[k], QColor(c2))
+                self.oldclr[k][1]=c2
+            if c3:
+                self.p.setColor(QPalette.Disabled, self.tab[k], QColor(c3))
+                self.oldclr[k][2]=c3
+        qApp.setPalette(self.p)
         self.close()
 
 class CodeDialog(QDialog):
@@ -179,13 +180,20 @@ class CodeDialog(QDialog):
 
     def initUI(self):
         self.setWindowTitle(self.tr("Palette Color Setting"))
-        self.setMinimumSize(500,500)
+        self.setMinimumSize(650,400)
         layout=QVBoxLayout()
         self.edit=QTextEdit()
         layout.addWidget(self.edit)
+        self.setLayout(layout)
 
-    def show(self, text):
-        self.edit.setText(text)
+    def showdialog(self, text):
+        if text=='':
+            self.edit.setText(self.tr("No Custom QPalette, using the default palette."))
+            self.edit.setEnabled(False)
+        else:
+            self.edit.setEnabled(True)
+            self.edit.setReadOnly(True)
+            self.edit.setText(text)
         self.show()
 
 

@@ -125,6 +125,10 @@ class MainWinBase(QMainWindow):
                                                 None,
                                                 ":appres.img/view.png",
                                                 checkable=True)
+        self.actions["Palette"] = createAct(self.tr("&Palette"),
+                                                self.tr("ShowPaletteSettingDialog"),
+                                                None,
+                                                ":appres.img/texture.png")
         self.actions["ShowPreview"].setChecked(True)
 
         self.actions["config"] = createAct(self.tr("&Config"), self.tr("settings."), None, ":appres.img/config.png")
@@ -176,6 +180,7 @@ class MainWinBase(QMainWindow):
 
         self.menus["View"].addAction(self.actions["ShowColor"])
         self.menus["View"].addAction(self.actions["ShowPreview"])
+        self.menus["View"].addAction(self.actions["Palette"])
 
         self.menus["Tool"].addAction(self.actions["config"])
 
@@ -231,6 +236,7 @@ class MainWinBase(QMainWindow):
         self.toolbars["View"] = QToolBar(self.tr("View"))
         self.toolbars["View"].addAction(self.actions["ShowColor"])
         self.toolbars["View"].addAction(self.actions["ShowPreview"])
+        self.toolbars["View"].addAction(self.actions["Palette"])
 
         self.toolbars["Echo"] = QToolBar(self.tr("Echo"))
         self.toolbars["Echo"].addAction(self.actions["fontup"])
