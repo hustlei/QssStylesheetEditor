@@ -143,7 +143,8 @@ class ConfDialog(QDialog):
     def applyskin(self, skinfile):
         try:
             with open(os.path.join(self.skindir, skinfile), 'r', encoding='utf-8') as f:
-                self.win.setStyleSheet(f.read())
+                self.win.currentUIqss=f.read()
+                self.win.setStyleSheet(self.win.currentUIqss)
         except:
             QMessageBox.information(self, "Skin Error", self.tr("Apply skin error, please check the qss skin."),
                                 QMessageBox.Ok, QMessageBox.Ok)

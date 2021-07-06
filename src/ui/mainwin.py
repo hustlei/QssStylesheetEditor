@@ -32,6 +32,7 @@ class MainWin(MainWinBase):
         self.firstAutoExport = True
         # ui
         self.setAcceptDrops(True)
+        self.currentUIqss=""
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
@@ -134,8 +135,10 @@ class MainWin(MainWinBase):
 
     def unuseQss(self, unuse):
         if unuse:
-            qApp.setStyleSheet('')
+            self.docks["preview"].setStyleSheet('')
+            self.setStyleSheet('')
         else:
+            self.setStyleSheet(self.currentUIqss)
             self.renderStyle()
             self.loadColorPanel()
 
@@ -147,7 +150,7 @@ class MainWin(MainWinBase):
 
         norand = self.actions["DisableQss"].isChecked()
         if norand:
-            qApp.setStyleSheet('')
+            self.docks["preview"].setStyleSheet('')
         else:
             # self.setStyleSheet(self.qsst.qss)#tooltip透明等显示不出来
             # try:
@@ -171,7 +174,7 @@ class MainWin(MainWinBase):
                         __import__(resn)
                     except BaseException:
                         pass
-            qApp.setStyleSheet(styleSheet)
+            self.docks["preview"].setStyleSheet(styleSheet)
 
             #     self.statusbar.showMessage("")#不起作用
             # except Exception:
