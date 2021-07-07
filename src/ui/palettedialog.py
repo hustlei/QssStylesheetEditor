@@ -136,11 +136,11 @@ class PaletteDialog(QDialog):
         layout.addLayout(hlay)
 
         self.d = CodeDialog(self)
-        btncode.clicked.connect(self.getCode)
+        btncode.clicked.connect(self.getcode)
         btncancel.clicked.connect(self.cancel)
         btnok.clicked.connect(self.apply)
 
-    def getCode(self):
+    def getcode(self):
         t = ""
         for k, v in self.newclr.items():
             c1, c2, c3 = v
@@ -178,7 +178,7 @@ class CodeDialog(QDialog):
         self.initUI()
 
     def initUI(self):
-        self.setWindowTitle(self.tr("Palette Color Setting"))
+        self.setWindowTitle(self.tr("Custom Palette Code"))
         self.setMinimumSize(650, 400)
         layout = QVBoxLayout()
         self.edit = QTextEdit()
@@ -186,7 +186,7 @@ class CodeDialog(QDialog):
         self.setLayout(layout)
 
     def showdialog(self, text):
-        if len(text.strip()) == 0:
+        if not len(text.strip()):
             self.edit.setText(self.tr("No Custom QPalette, using the default palette."))
             self.edit.setEnabled(False)
         else:

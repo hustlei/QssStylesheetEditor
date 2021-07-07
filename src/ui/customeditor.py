@@ -79,14 +79,14 @@ from PyQt5.QtCore import *
                 self.w.setParent(self)
                 self.w.setWindowFlags(Qt.Window)
                 self.w.setMinimumSize(400, 280)
-                self.w.showdialog()
+                self.w.show()
             else:
                 raise
             # w.raise_()
-        except Exception:
+        except Exception as e:
             # del self.custom
             # del self.w
-            QMessageBox.information(self, "Error", self.tr("Preview error, please check the code."), QMessageBox.Ok,
+            QMessageBox.information(self, "Error", self.tr("Preview error, please check the code.\n\n"+str(e)), QMessageBox.Ok,
                                     QMessageBox.Ok)
         finally:
             os.chdir(dir1)
