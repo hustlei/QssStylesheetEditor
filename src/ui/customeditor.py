@@ -70,10 +70,12 @@ from PyQt5.QtCore import *
         dir1 = os.getcwd()
         try:
             os.chdir(self.dir)
+            #del self.custom
+            if "data.cache.custom" in sys.modules:
+                sys.modules.pop("data.cache.custom")
+            # self.custom = import_module(".custom", "data.cache")
             self.custom = import_module(".cache.custom", "data")
             reload(self.custom)
-            # sys.modules.pop("data.cache.custom")
-            # self.custom = import_module(".custom", "data.cache")
             if (hasattr(self.custom, "MainWindow")):
                 self.w = self.custom.MainWindow()
                 self.w.setParent(self)
@@ -81,12 +83,12 @@ from PyQt5.QtCore import *
                 self.w.setMinimumSize(400, 280)
                 self.w.show()
             else:
-                raise
+                raise Exception(self.tr('Please define the "MainWindow" class.'))
             # w.raise_()
         except Exception as e:
             # del self.custom
             # del self.w
-            QMessageBox.information(self, "Error", self.tr("Preview error, please check the code.\n\n"+str(e)), QMessageBox.Ok,
+            QMessageBox.information(self, "Error", self.tr("Preview error, please check the code.\n\n")+str(e), QMessageBox.Ok,
                                     QMessageBox.Ok)
         finally:
             os.chdir(dir1)
