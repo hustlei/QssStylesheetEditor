@@ -88,7 +88,10 @@ from PyQt5.QtWidgets import (
     QTreeWidgetItem,
     QDirModel,
     QCompleter,
-    QMenu, QToolBar, QAction, QMainWindow,
+    QMenu,
+    QToolBar,
+    QAction,
+    QMainWindow,
 )
 from .customeditor import SrcEditor
 
@@ -991,16 +994,25 @@ class PreviewWidget(QTabWidget):
         srcediter = SrcEditor()
         toolbar = QToolBar("source")
         actnew = createAct(self.tr("&New", "&New"),
-                                        self.tr("new") + keys2str(QKeySequence.New), QKeySequence.New,
-                                        ':appres.img/NewDocument.png',slot=srcediter.clear)
+                           self.tr("new") + keys2str(QKeySequence.New),
+                           QKeySequence.New,
+                           ':appres.img/NewDocument.png',
+                           slot=srcediter.clear)
         actopen = createAct(self.tr("&Open"),
-                                         self.tr("Open") + keys2str(QKeySequence.Open), QKeySequence.Open,
-                                         ':appres.img/openHS.png',slot=srcediter.open)
+                            self.tr("Open") + keys2str(QKeySequence.Open),
+                            QKeySequence.Open,
+                            ':appres.img/openHS.png',
+                            slot=srcediter.open)
         actsave = createAct(self.tr("&Save"),
-                                         self.tr("Save") + keys2str(QKeySequence.Save), QKeySequence.Save,
-                                         ':appres.img/save.png',slot=srcediter.saveslot)
-        actsaveas = createAct(self.tr("&Save as..."), self.tr("Save as..."), None,
-                                           ':appres.img/SaveAs.png',slot=lambda:{srcediter.saveas(),actsave.setEnabled(False)})
+                            self.tr("Save") + keys2str(QKeySequence.Save),
+                            QKeySequence.Save,
+                            ':appres.img/save.png',
+                            slot=srcediter.saveslot)
+        actsaveas = createAct(self.tr("&Save as..."),
+                              self.tr("Save as..."),
+                              None,
+                              ':appres.img/SaveAs.png',
+                              slot=lambda: {srcediter.saveas(), actsave.setEnabled(False)})
         toolbar.addAction(actnew)
         toolbar.addAction(actopen)
         toolbar.addAction(actsave)
@@ -1009,17 +1021,25 @@ class PreviewWidget(QTabWidget):
 
         toolbar2 = QToolBar("edit")
         actundo = createAct(self.tr("&Undo"),
-                                         self.tr("Undo") + keys2str(QKeySequence.Undo), QKeySequence.Undo,
-                                         ':appres.img/undo.png',slot=srcediter.undo)
+                            self.tr("Undo") + keys2str(QKeySequence.Undo),
+                            QKeySequence.Undo,
+                            ':appres.img/undo.png',
+                            slot=srcediter.undo)
         actredo = createAct(self.tr("&Redo"),
-                                         self.tr("Redo") + keys2str(QKeySequence.Redo), QKeySequence.Redo,
-                                         ':appres.img/redo.png',slot=srcediter.redo)
+                            self.tr("Redo") + keys2str(QKeySequence.Redo),
+                            QKeySequence.Redo,
+                            ':appres.img/redo.png',
+                            slot=srcediter.redo)
         actfind = createAct(self.tr("&Find"),
-                                         self.tr("Find") + keys2str(QKeySequence.Find), QKeySequence.Find,
-                                         ':appres.img/find.png',slot=srcediter.find)
+                            self.tr("Find") + keys2str(QKeySequence.Find),
+                            QKeySequence.Find,
+                            ':appres.img/find.png',
+                            slot=srcediter.find)
         actreplace = createAct(self.tr("&Replace"),
-                                            self.tr("Replace") + keys2str(QKeySequence.Replace), QKeySequence.Replace,
-                                            ':appres.img/replace.png',slot=srcediter.replace)
+                               self.tr("Replace") + keys2str(QKeySequence.Replace),
+                               QKeySequence.Replace,
+                               ':appres.img/replace.png',
+                               slot=srcediter.replace)
         toolbar2.addAction(actredo)
         toolbar2.addAction(actundo)
         toolbar2.addAction(actfind)
@@ -1028,7 +1048,7 @@ class PreviewWidget(QTabWidget):
 
         toolbar3 = QToolBar("preview")
         actpreview = createAct(self.tr("Preview"), self.tr("Preview custom ui using qss."))
-        actpreview.setFont(QFont("Arial",12,QFont.Medium))
+        actpreview.setFont(QFont("Arial", 12, QFont.Medium))
         toolbar3.addAction(actpreview)
         tab.addToolBar(toolbar3)
 
@@ -1039,7 +1059,8 @@ class PreviewWidget(QTabWidget):
 
         actpreview.triggered.connect(srcediter.preview)
         actsave.setEnabled(False)
-        srcediter.textChanged.connect(lambda:{actsave.setEnabled(srcediter.isModified())})
+        srcediter.textChanged.connect(lambda: {actsave.setEnabled(srcediter.isModified())})
+
 
 if __name__ == "__main__":
     import sys

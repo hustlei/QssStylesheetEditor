@@ -38,7 +38,9 @@ class Qsst():
         valerr = False
         for var, val in varsDefined:
             if not valerr:
-                valerrind = re.match(r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',val)
+                valerrind = re.match(
+                    r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',
+                    val)
                 if not valerrind:
                     valerr = True
             self.varDict[var] = val
@@ -58,7 +60,7 @@ class Qsst():
                 eval("from PyQt5.QtGui import QPalette")
                 for code in self.codeBlocks:
                     exec(code)
-            except:
+            except Exception:
                 print("warning: codeblock in qsst exec error.")
 
     def convertQss(self):
@@ -75,11 +77,11 @@ class Qsst():
         for v in self.varDict:
             if v in varDict.keys():
                 # qssStr = qssStr.replace("$" + v, varDict[v])
-                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m:'{}{}'.format(varDict[m.group(1)], m.group(2)), qssStr)
+                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m: '{}{}'.format(varDict[m.group(1)], m.group(2)), qssStr)
             else:
                 self.varUndefined.append(v)
                 # qssStr = qssStr.replace("$" + v, ' ')
-                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m:'{}{}'.format(" ", m.group(2)), qssStr)
+                qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m: '{}{}'.format(" ", m.group(2)), qssStr)
         # 删除代码块
         qssStr = self.reCodeBlock.sub("", qssStr)
         self.qss = qssStr

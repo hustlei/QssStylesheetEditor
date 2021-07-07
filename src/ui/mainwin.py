@@ -33,12 +33,12 @@ class MainWin(MainWinBase):
         self.firstAutoExport = True
         # ui
         self.setAcceptDrops(True)
-        self.currentUIqss=""
-        self.paletteDailog=PaletteDialog(self)
+        self.currentUIqss = ""
+        self.paletteDailog = PaletteDialog(self)
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
-        self.confDialog = ConfDialog(self)#, self)
+        self.confDialog = ConfDialog(self)  # , self)
         # self.setupUi()
         self.setupActions()
         if self.tr("LTR") == "RTL":
@@ -102,7 +102,7 @@ class MainWin(MainWinBase):
             self.loadColorPanel()
 
         self.editor.loseFocus.connect(rend)
-        #self.editor.mouseLeave.connect(rend)
+        # self.editor.mouseLeave.connect(rend)
         self.editor.mousePress.connect(rend)
         self.editor.linesChanged.connect(
             lambda: self.status["lines"].setText(self.tr("lines:") + str(self.editor.lines())))
@@ -191,7 +191,7 @@ class MainWin(MainWinBase):
                 except Exception:
                     print("set background clolor exception.")
 
-    def keyPressed(self, e):# QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
+    def keyPressed(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         # 大键盘为Ret小键盘为Enter
         if self.changed:
@@ -237,21 +237,21 @@ class MainWin(MainWinBase):
             widLabel = 0
             widBtn = 0
             for varName, clrStr in self.qsst.varDict.items():
-                label = QLabel(varName)#, contianerWidget)
-                btn = QPushButton(clrStr)#, contianerWidget)
+                label = QLabel(varName)  # , contianerWidget)
+                btn = QPushButton(clrStr)  # , contianerWidget)
                 if sys.platform.startswith("win"):
                     font1 = QFont("Arial", 10, QFont.Medium)
                     font2 = QFont("sans-serif", 9, QFont.Medium)
                     label.setFont(font1)
                     btn.setFont(font2)
                 self.clrBtnDict[varName] = btn
-                labels [varName] = label
+                labels[varName] = label
                 label.adjustSize()
                 widLabel = label.width() if label.width() > widLabel else widLabel
                 btn.adjustSize()
                 widBtn = btn.width() if btn.width() > widBtn else widBtn
-                #label.move(5, 5)
-                #btn.move(100, 5)
+                # label.move(5, 5)
+                # btn.move(100, 5)
                 btn.clicked.connect(lambda x, var=varName: self.chclr(var))
             for name, btn in self.clrBtnDict.items():
                 contianerWidget = QWidget()
@@ -261,7 +261,7 @@ class MainWin(MainWinBase):
                 lay.addWidget(labels[name])
                 lay.addWidget(btn)
                 contianerWidget.setLayout(lay)
-                #contianerWidget.setMinimumSize(QSize(185, 25))
+                # contianerWidget.setMinimumSize(QSize(185, 25))
                 self.colorPanelLayout.addWidget(contianerWidget)
 
         for varName, btn in self.clrBtnDict.items():
@@ -276,12 +276,12 @@ class MainWin(MainWinBase):
                     lable = 255
                 try:
                     color = QColor(int(c[0]), int(c[1]), int(c[2]), lable)
-                except:
+                except Exception:
                     continue
             else:
                 try:
                     color = QColor(clrStr)
-                except:
+                except Exception:
                     continue
             s = ''
             if qGray(color.rgb()) < 100:
@@ -307,7 +307,7 @@ class MainWin(MainWinBase):
             else:
                 # 'rgba({},{},{},{})'.format(color.red(), color.green(), color.blue(), color.alpha())
                 clrstr = color.name(QColor.HexArgb).upper()
-            #     s = 'font-size:8px;'
+            # s = 'font-size:8px;'
             if qGray(color.rgb()) < 100:
                 s += 'color:white;'
             self.clrBtnDict[var].setText(clrstr)
@@ -425,7 +425,7 @@ class MainWin(MainWinBase):
             f = os.path.splitext(self.file)[0]
         savefile, _ = QFileDialog.getSaveFileName(self, self.tr("export Qss"), f, "Qss(*.qss);;all(*.*)")
         if savefile:
-            with open(savefile, 'w', newline='', encoding ='utf-8') as f:
+            with open(savefile, 'w', newline='', encoding='utf-8') as f:
                 f.write(self.qsst.qss)
 
     def autoExport(self, file):
@@ -437,7 +437,7 @@ class MainWin(MainWinBase):
                 if os.path.exists(backupfile):
                     os.remove(backupfile)
                 os.rename(qssfile, backupfile)
-            with open(qssfile, 'w', newline='', encoding ='utf-8') as f:
+            with open(qssfile, 'w', newline='', encoding='utf-8') as f:
                 f.write(self.qsst.qss)
                 self.firstAutoExport = False
 
@@ -483,5 +483,3 @@ class MainWin(MainWinBase):
     def updateSpecialConfig(self):
         """get new options, some option canbe changed without config dialog."""
         self.config.getSec("file")["recent"] = self.recent.getList()
-
-

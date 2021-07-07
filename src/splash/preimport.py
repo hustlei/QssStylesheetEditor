@@ -8,8 +8,10 @@ from time import time
 from typing import Iterable
 from warnings import warn
 
+
 def preimport(*moduleNames):
     preload(moduleNames)
+
 
 def preload(moduleNames: Iterable[str]):
     """Import modules before software starting, so that software run quickly.

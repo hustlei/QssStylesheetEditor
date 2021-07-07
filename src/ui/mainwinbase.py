@@ -125,10 +125,8 @@ class MainWinBase(QMainWindow):
                                                 None,
                                                 ":appres.img/view.png",
                                                 checkable=True)
-        self.actions["Palette"] = createAct(self.tr("&Palette"),
-                                                self.tr("ShowPaletteSettingDialog"),
-                                                None,
-                                                ":appres.img/texture.png")
+        self.actions["Palette"] = createAct(self.tr("&Palette"), self.tr("ShowPaletteSettingDialog"), None,
+                                            ":appres.img/texture.png")
         self.actions["ShowPreview"].setChecked(True)
 
         self.actions["config"] = createAct(self.tr("&Config"), self.tr("settings."), None, ":appres.img/config.png")

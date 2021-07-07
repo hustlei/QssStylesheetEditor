@@ -34,6 +34,7 @@ def sharedwin(sharedapp):
     app.windows["main"].close()
     print("@fixture: shared mainwin closed.")
 
+
 # @fixture(scope="function")
 # def sharedwin():
 #     print("@fixture: shared mainwin load...")

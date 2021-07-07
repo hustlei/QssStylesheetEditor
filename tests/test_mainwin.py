@@ -9,7 +9,7 @@ from PyQt5.QtCore import Qt, QThread
 from PyQt5.QtWidgets import QApplication
 
 
-class TestMain():        
+class TestMain():
     @classmethod
     def setup_class(cls):
         print("\nsetup_class       class:%s" % cls.__name__)
@@ -58,6 +58,7 @@ class TestMain():
         """Test file new and save, test color pick, this test will effect CodeEditor text
         """
         mainwin = sharedwin["main"]
+
         def file():
             mainwin.new()
             f = tmpdir.join("new.qsst").ensure()
@@ -71,6 +72,7 @@ class TestMain():
 
         import sys
         if sys.platform.startswith('win'):
+
             class DialogCloseThread(QThread):
                 def __init__(self, parent=None):
                     super().__init__(parent)

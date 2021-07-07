@@ -7,6 +7,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 import os
 from . import toml
 
+
 class Section(dict):
     """A section object in toml
 
@@ -87,9 +88,9 @@ class Section(dict):
         """Remove section in sec"""
         return sec.pop(subName, None)
 
-    ##
-    ## Section Operate
-    ##
+    #
+    # Section Operate
+    #
     def hasSec(self, secString):
         """If section exist and type is dict return true, else false
 
@@ -97,7 +98,7 @@ class Section(dict):
             secString: "secname.subsecname" format path to ditermine section
         """
         secString = secString.strip(". ")
-        if len(secString) <1:
+        if len(secString) < 1:
             return False
         secs = secString.split(".")
         sec = self
@@ -116,7 +117,7 @@ class Section(dict):
             `self.addSec("general.subsection")`: aaa subsection of general section
         """
         secString = secString.strip()
-        if len(secString) <1:
+        if len(secString) < 1:
             return self
         secString = secString.strip(".")
         secs = secString.split(".")
@@ -128,12 +129,12 @@ class Section(dict):
     def rmSec(self, secString):
         """Remove secname.subsecname sections if exist"""
         secString = secString.strip()
-        if len(secString) <1:
+        if len(secString) < 1:
             return None
         secString = secString.strip(".")
         secs = secString.split(".")
         sec = self
-        for i in range(0, len(secs)-1):
+        for i in range(0, len(secs) - 1):
             sec = sec[secs[i]]
             if not isinstance(sec, dict):
                 return None
@@ -165,9 +166,9 @@ class Section(dict):
                 return None
         return sec
 
-    ##
-    ## Child Item Operate
-    ##
+    #
+    # Child Item Operate
+    #
     def hasChild(self, childString):
         """If child item exist return true, else false
 
@@ -175,7 +176,7 @@ class Section(dict):
             childString: "childname.subchildname" format path to ditermine child item
         """
         childString = childString.strip()
-        if len(childString) <1:
+        if len(childString) < 1:
             return False
         childNames = childString.split(".")
         item = self
@@ -192,12 +193,12 @@ class Section(dict):
             `self.addChild("child.key1", "value")`: aaa subsection of general section
         """
         childString = childString.strip()
-        if len(childString) <1:
+        if len(childString) < 1:
             return self
         childString = childString.strip(".")
         childNames = childString.split(".")
         sec = self
-        for i in range(0, len(childNames)-1):
+        for i in range(0, len(childNames) - 1):
             sec = self._addSubSec(sec, childNames[i])
         return sec._addSubSec(sec, obj)
 
@@ -227,11 +228,12 @@ class Section(dict):
                 sec[node].remove(child)
         sec[node].insertToChild(0, child)
 
+
 class ConfigParser(Section):
     """Paser for toml config file"""
     def __init__(self):
         # self.dict = {}
-        self.cfgFile=None
+        self.cfgFile = None
         super().__init__()
 
     def read(self, cfgFile=None):
@@ -272,6 +274,3 @@ class ConfigParser(Section):
         return False
 
     # def sections(self):
-
-
-

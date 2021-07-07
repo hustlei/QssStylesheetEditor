@@ -77,7 +77,7 @@ class Language():
         Language.lang = config["general.language"]
 
         if not isinstance(Language.lang, str):
-            Language.lang=""
+            Language.lang = ""
 
         if not Language.lang.strip():
             # import locale

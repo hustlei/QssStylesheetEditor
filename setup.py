@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-
 # with open("readme.md", "r", encoding='utf-8') as fh:
 # long_desc = fh.read()
 
 # import os
 # def clearpyc(srcpath):
-    # files = os.listdir(srcpath)
-    # for fd in files:
-        # cur_path = os.path.join(srcpath, fd)            
-        # if os.path.isdir(cur_path):
-            # if fd == "__pycache__":
-                # print("rm %s -rf" % cur_path)
-                # os.system("rm %s -rf" % cur_path)
-            # else:
-                # clearpyc(cur_path)
+# files = os.listdir(srcpath)
+# for fd in files:
+# cur_path = os.path.join(srcpath, fd)
+# if os.path.isdir(cur_path):
+# if fd == "__pycache__":
+# print("rm %s -rf" % cur_path)
+# os.system("rm %s -rf" % cur_path)
+# else:
+# clearpyc(cur_path)
 # clearpyc(os.path.join(os.path.dirname(__file__),'src'))
 
 setup(
@@ -29,7 +28,7 @@ setup(
     packages=find_packages(where='src', include=('*'), exclude=[
         '*.__pycache__',
     ]),  #
-    py_modules=['app'], #, 'bootstrapper'],  # single file
+    py_modules=['app'],  # , 'bootstrapper'],  # single file
 
     # data
     package_data={

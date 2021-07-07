@@ -2,18 +2,18 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.initUI()
-    
+
     def initUI(self):
         self.setWindowTitle("Custom")
         homeAct = QAction(QIcon('img/home.png'), '&Home', self)
         forwardAct = QAction(QIcon('img/forward.png'), '&Forward', self)
-        backAct = QAction(QIcon('img/back.png'), '&Back', self) 
-        configAct = QAction(QIcon('img/config.png'), '&Config', self) 
-        cutAct = QAction(QIcon('img/cut.png'), '&Cut', self) 
+        backAct = QAction(QIcon('img/back.png'), '&Back', self)
+        configAct = QAction(QIcon('img/config.png'), '&Config', self)
+        cutAct = QAction(QIcon('img/cut.png'), '&Cut', self)
         copyAct = QAction(QIcon('img/copy.png'), '&Copy', self)
-        pasteAct = QAction(QIcon('img/paste.png'), '&Paste', self) 
-        helpAct = QAction(QIcon('img/help.png'), '&Paste', self) 
-        
+        pasteAct = QAction(QIcon('img/paste.png'), '&Paste', self)
+        helpAct = QAction(QIcon('img/help.png'), '&Paste', self)
+
         menubar = self.menuBar()
         mainMenu = menubar.addMenu('&Main')
         mainMenu.addAction(homeAct)
@@ -25,7 +25,7 @@ class MainWindow(QMainWindow):
         editMenu.addAction(pasteAct)
         helpMenu = menubar.addMenu('&Help')
         helpMenu.addAction(helpAct)
-        
+
         toolbar = self.addToolBar('Main')
         toolbar.addAction(homeAct)
         toolbar.addAction(backAct)

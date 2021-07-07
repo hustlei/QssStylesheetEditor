@@ -29,10 +29,8 @@ datadir = os.path.join(root, "src/data")
 resdir = os.path.join(root, "src/res")
 
 # 不编译的文件夹，文件后缀
-excludedir = (".git", ".github", ".idea", "__pycache__",
-              "data", "font", "img", "font",
-              "dist", "build", "tests", "installer",
-              "old", "oldversion", "bak")
+excludedir = (".git", ".github", ".idea", "__pycache__", "data", "font", "img", "font", "dist", "build", "tests",
+              "installer", "old", "oldversion", "bak")
 
 # 删除dist/build文件夹下所有文件
 print("remove all files in dist/build.")
