@@ -131,6 +131,8 @@ class MainWinBase(QMainWindow):
 
         self.actions["config"] = createAct(self.tr("&Config"), self.tr("settings."), None, ":appres.img/config.png")
 
+        self.actions["checkupdate"] = createAct(self.tr("&Check for Updates..."),
+                                                self.tr("Check is there new version released for update."))
         self.actions["about"] = createAct(self.tr("&About"), self.tr("About"))
 
         # self.exitAct.triggered.connect(qApp.exit)#等价于qApp.quit
@@ -183,6 +185,7 @@ class MainWinBase(QMainWindow):
         self.menus["Tool"].addAction(self.actions["config"])
 
         self.menus["Help"].addAction(self.actions["about"])
+        self.menus["Help"].addAction(self.actions["checkupdate"])
 
         for m in self.menus.values():
             self.menubar.addMenu(m)

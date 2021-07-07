@@ -125,6 +125,7 @@ class MainWin(MainWinBase):
             "://github.com/hustlei/QssStylesheetEditor</a><br><br>welcom communicate with me: hustlei@sina.cn ")
         aboutText += "<br>copyright &copy; 2019, lilei."
         self.actions["about"].triggered.connect(lambda: QMessageBox.about(self, "about", aboutText))
+        self.actions["checkupdate"].triggered.connect(lambda: self.checkforupdate(True))
 
     def __setSelectStatus(self):
         linefrom, _, lineto, _ = self.editor.getSelection()  # __ is posfrom posto
@@ -483,3 +484,14 @@ class MainWin(MainWinBase):
     def updateSpecialConfig(self):
         """get new options, some option canbe changed without config dialog."""
         self.config.getSec("file")["recent"] = self.recent.getList()
+
+    def checkforupdate(self, showdialogifnotupdate=False):
+        self.statusbar.showMessage(self.tr("checking for update..."))
+        from update import getLatestVer, updateinfodialog
+        newver = getLatestVer("hustlei", "QssStylesheetEditor")
+        ver = self.ver.strip('vV')
+        if showdialogifnotupdate or newver > ver:
+            if not self.updatedialog:
+                self.updatedialog = updateinfodialog()
+            self.updatedialog.setWindowIcon(self.windowIcon())
+            self.updatedialog.showdialog(ver, newver, "https://github.com/hustlei/QssStylesheetEditor/releases")

@@ -88,7 +88,8 @@ from PyQt5.QtCore import *
         except Exception as e:
             # del self.custom
             # del self.w
-            QMessageBox.information(self, "Error", self.tr("Preview error, please check the code.\n\n")+str(e), QMessageBox.Ok,
+            QMessageBox.information(self, "Error",
+                                    self.tr("Preview error, please check the code.\n\n") + str(e), QMessageBox.Ok,
                                     QMessageBox.Ok)
         finally:
             os.chdir(dir1)

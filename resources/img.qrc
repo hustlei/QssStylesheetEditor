@@ -1,6 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
 <qresource prefix="appres.img">
+    <file alias="app.png">img/app.png</file>
     <file alias="autowrap.png">img/autowrap.png</file>
     <file alias="bold.png">img/bold.png</file>
     <file alias="book_address.png">img/book_address.png</file>

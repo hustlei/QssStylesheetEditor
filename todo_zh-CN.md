@@ -12,7 +12,19 @@
 
 # ChangeLog
 
+## v1.7
+主要修改: **重构config, 修复ISSUE中提到的bug**
 
++ **New Features**
+    - 减少编辑中的卡顿
+    - 增加自定义ui界面代码预览功能
+    - 增加QPalette设置，并能在qss中引用QPalette的功能
+    - 为UI提供皮肤设置功能，qss预览仅作用于预览控件
+    - 增加版本更新检查功能
++ **BugsFixed**
+    - 修复ISSUE#11#16#19#20#21#24#26#28#29#30#31中提到的BUG
+    - 修复配置文件BUG
+    
 ## v1.6
 主要修改: **重构config, 修复ISSUE中提到的bug**
 

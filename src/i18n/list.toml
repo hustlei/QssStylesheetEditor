@@ -1,7 +1,7 @@
 [languages]
 English =["en",    "",              "English"]  #英语
 Chinese =["zh-CN", "i18n_zh.qm",    "简体中文"]  #汉语
-French  =["fr",    "i18n-fr.qm",    "Fran?ais"]  #法语
+French  =["fr",    "i18n_fr.qm",    "Fran?ais"]  #法语
 Russian =["ru",    "i18_ru.qm",     "Русский"]   #俄语
 spanish =["es",    "i18_es.qm",     "Español"]    #西班牙语
 Japanese=["ja",    "i18_ja.qm",     "日本語", ]    #日语
