@@ -301,6 +301,7 @@ QGroupBox::title {
     subcontrol-origin: margin;
     subcontrol-position: top left;
     left: 1em;
+	top: 0.1em;
     background-color: $background;
 }
 /* =============================================== */

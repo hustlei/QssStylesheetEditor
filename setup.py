@@ -33,6 +33,7 @@ setup(
     # data
     package_data={
         'config': ['*.toml'],  # *.toml files found in config package
+        'config.skin': ['*.qss'],
         'data': ['*.qss', '*.qsst'],
         'i18n': ['*.qm', '*.toml'],
         'res': ['*'],
