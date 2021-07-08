@@ -10,18 +10,18 @@ pytest = "*"
 pytest-qt = "*"
 pycodestyle = "*"
 yapf = "*"
-pyqt5-tools = "*"
+pyqt5-tools = "*" #"<5.14.1.3.0.3"
 
 [packages]
 tomlconfig = ">=1.2.1"
 preimport = ">=1.1.0"
 codeeditor = ">=1.1.0"
 chardet = ">=3.0.4"
-qscintilla = ">=2.11.4"
+qscintilla = ">=2.11.4,<=2.11.4"
 toml = ">=0.10.0"
 pyqt5 = ">=5.10.1,<5.14"
 pyqt5-sip = ">=12.7,<=12.7.1"
-requests = ">2.0"
+#requests = ">2.0"
 
 [requires]
 python_version = "3.8"
