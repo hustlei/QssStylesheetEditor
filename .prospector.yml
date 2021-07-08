@@ -30,6 +30,8 @@ pep8:
         - N802  # function name should be lowercase
         - N803  # argument name should be lowercase
         - N806  # variable in function should be lowercase
+        - N815
+        - N816
     options:
         max-line-length: 120
     
