@@ -35,6 +35,7 @@ class MainWin(MainWinBase):
         self.setAcceptDrops(True)
         self.currentUIqss = ""
         self.paletteDailog = PaletteDialog(self)
+        self.updatedialog = None
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
