@@ -35,6 +35,7 @@ class MainWin(MainWinBase):
         self.setAcceptDrops(True)
         self.currentUIqss = ""
         self.paletteDailog = PaletteDialog(self)
+        self.updatedialog = None
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
@@ -50,6 +51,8 @@ class MainWin(MainWinBase):
         # init
         self.__isNewFromTemplate = False
         self.newFromTemplate()
+
+        self.checkforupdate()
         self.statusbar.showMessage(self.tr("Ready"))
 
     def setupActions(self):
@@ -485,13 +488,43 @@ class MainWin(MainWinBase):
         """get new options, some option canbe changed without config dialog."""
         self.config.getSec("file")["recent"] = self.recent.getList()
 
+    def autocheckforupdate(self):
+        from datetime import datetime
+        today = datetime.now().date()
+        tmp1 = self.config["update.autocheck"]
+        if not isinstance(tmp1, bool):
+            tmp1 = True
+        if tmp1:
+            tmp2 = self.config["update.checkfreq"]
+            if not tmp2:
+                tmp2 = "start"
+            if tmp2 == "start":
+                self.checkforupdate()
+            lastcheckday = self.config["update.lastcheckday"]
+            if not lastcheckday:
+                self.checkforupdate()
+            else:
+                deltaday = today - lastcheckday
+                d = deltaday.days
+                if (tmp2 == "day" and d >= 1) or (tmp2 == "week" and d >= 7) or (tmp2 == "month" and d >= 30):
+                    self.checkforupdate()
+
     def checkforupdate(self, showdialogifnotupdate=False):
         self.statusbar.showMessage(self.tr("checking for update..."))
-        from update import getLatestVer, updateinfodialog
-        newver = getLatestVer("hustlei", "QssStylesheetEditor")
-        ver = self.ver.strip('vV')
-        if showdialogifnotupdate or newver > ver:
-            if not self.updatedialog:
-                self.updatedialog = updateinfodialog()
-            self.updatedialog.setWindowIcon(self.windowIcon())
-            self.updatedialog.showdialog(ver, newver, "https://github.com/hustlei/QssStylesheetEditor/releases")
+
+        def aftcall(newver):
+            ver = self.ver.strip('vV')
+            if showdialogifnotupdate or newver > ver:
+                if not self.updatedialog:
+                    self.updatedialog = updateinfodialog(self)
+                self.updatedialog.setWindowIcon(self.windowIcon())
+                self.updatedialog.showdialog(ver, newver, "https://github.com/hustlei/QssStylesheetEditor/releases")
+
+            from datetime import datetime
+            today = datetime.now().date()
+            self.config["update.lastcheckday"] = today
+
+        from update import AsyncGetLatestVer, updateinfodialog
+        self.t = AsyncGetLatestVer("hustlei", "QssStylesheetEditor")
+        self.t.got.connect(aftcall)
+        self.t.start()

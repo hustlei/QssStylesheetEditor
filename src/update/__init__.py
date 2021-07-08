@@ -5,7 +5,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import requests
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QThread, pyqtSignal
 from PyQt5.QtGui import QDesktopServices, QFont, QPixmap
 from PyQt5.QtWidgets import QDialog, QHBoxLayout, QVBoxLayout, QLabel, QPushButton
 
@@ -15,6 +15,16 @@ def getLatestVer(githubname, projname):  # hustlei #QssStylesheetEditor
     response = requests.get(addr)
     return response.json()["tag_name"].strip('Vv')
 
+class AsyncGetLatestVer(QThread):  # 线程2
+    got =pyqtSignal(str) #已执行完成的信号
+    def __init__(self, githubname, projname):
+        super().__init__()
+        self.addr = "https://api.github.com/repos/" + githubname + "/" + projname + "/releases/latest"
+
+    def run(self):
+        response = requests.get(self.addr)
+        ret = response.json()["tag_name"].strip('Vv')
+        self.got.emit(ret)
 
 class updateinfodialog(QDialog):
     def __init__(self, parent=None):
