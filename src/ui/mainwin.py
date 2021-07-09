@@ -40,6 +40,7 @@ class MainWin(MainWinBase):
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
         self.confDialog = ConfDialog(self)  # , self)
+        self.confDialog.setMinimumWidth(650)
         # self.setupUi()
         self.setupActions()
         if self.tr("LTR") == "RTL":
@@ -121,7 +122,7 @@ class MainWin(MainWinBase):
         # help
         aboutText = "<b><center>" + self.title + "</center></b><br><br>"
         aboutText += self.tr(
-            "This software is a advanced CodeEditor for QtWidget stylesheet(Qss), <br>support custom variable and "
+            "This software is a advanced CodeEditor for QtWidget stylesheet(Qss), support custom variable and "
             "real-time preview.<br><br> ")
         aboutText += self.tr(
             "author: lileilei<br>website: <a href='https://github.com/hustlei/QssStylesheetEditor'>https"
