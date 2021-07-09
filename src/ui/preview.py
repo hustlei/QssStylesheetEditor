@@ -1047,7 +1047,7 @@ class PreviewWidget(QTabWidget):
 
         toolbar3 = QToolBar("preview")
         actpreview = createAct(self.tr("Preview"), self.tr("Preview custom ui using qss."))
-        actpreview.setFont(QFont("Arial", 12, QFont.Medium))
+        actpreview.setFont(QFont("SimHei, STHeiti, Arial", 12, QFont.Medium))
         toolbar3.addAction(actpreview)
         tab.addToolBar(toolbar3)
 

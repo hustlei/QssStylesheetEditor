@@ -154,8 +154,8 @@ class ConfDialog(QDialog):
         ltmph.addStretch(1)
         ltmph.addWidget(self.updateCombo)
         g31.setLayout(ltmpv)
-        tmp1=self.win.config["update.autocheck"]
-        tmp2=self.win.config["update.checkfreq"]
+        tmp1 = self.win.config["update.autocheck"]
+        tmp2 = self.win.config["update.checkfreq"]
         if not isinstance(tmp1, bool):
             tmp1 = True
         self.checkboxUpdate.setChecked(tmp1)
@@ -179,8 +179,7 @@ class ConfDialog(QDialog):
         self.recentcountspin.valueChanged.connect(lambda x: self.changedOptions.__setitem__("file.recentcount", x))
         self.langCombo.currentIndexChanged.connect(
             lambda i: self.changedOptions.__setitem__("general.language", self.langCombo.itemData(i)))
-        self.checkboxUpdate.stateChanged.connect(
-            lambda b: self.changedOptions.update({"update.autocheck": b}))
+        self.checkboxUpdate.stateChanged.connect(lambda b: self.changedOptions.update({"update.autocheck": b}))
         self.updateCombo.currentIndexChanged.connect(
             lambda i: self.changedOptions.__setitem__("update.checkfreq", self.updateCombo.itemData(i)))
         self.checkboxAutoExportQss.stateChanged.connect(

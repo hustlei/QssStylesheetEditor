@@ -15,8 +15,10 @@ def getLatestVer(githubname, projname):  # hustlei #QssStylesheetEditor
     response = requests.get(addr)
     return response.json()["tag_name"].strip('Vv')
 
+
 class AsyncGetLatestVer(QThread):  # 线程2
-    got =pyqtSignal(str) #已执行完成的信号
+    got = pyqtSignal(str)  #已执行完成的信号
+
     def __init__(self, githubname, projname):
         super().__init__()
         self.addr = "https://api.github.com/repos/" + githubname + "/" + projname + "/releases/latest"
@@ -25,6 +27,7 @@ class AsyncGetLatestVer(QThread):  # 线程2
         response = requests.get(self.addr)
         ret = response.json()["tag_name"].strip('Vv')
         self.got.emit(ret)
+
 
 class updateinfodialog(QDialog):
     def __init__(self, parent=None):
