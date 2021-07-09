@@ -8,20 +8,26 @@
 [![Platform:win|osx|linux](https://hustlei.github.io/assets/badge/platform.svg)](https://travis-ci.com/hustlei/QssStylesheetEditor)
 
 <br>
-QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持实时预览，自动提示，自定义变量。
+QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持实时预览，自动提示，自定义变量,
+支持预览自定义ui代码，引用QPalette等功能。
+
+# 软件界面
+
+![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png  "GUI(v1.5)")
 
 # 功能简介
 
 + Qss代码高亮，代码折叠
 + Qss代码自动提示，自动补全
-+ 实时预览 Qss 样式效果
-+ 可以预览几乎所有的 qtwidget 控件效果
++ 实时预览 Qss 样式效果，可以预览几乎所有的 qtwidget 控件效果
++ 支持预览自定义界面代码
 + 支持在 Qss 中自定义变量
 + 自定义变量可以在颜色对话框中拾取变量的颜色
++ 支持通过颜色对话框改变QPalette，并在Qss中引用
 + 支持相对路径引用图片，以及引用资源文件中的图片
 + 支持切换不同的系统 theme，如 xp 主题，vista 主题等(不同 theme 下 qss 效果会略有差异)
 + 能够在 windows，linux，unix 上运行
-+ 支持多国语言（中文，英文）
++ 支持多国语言（目前已有中文，英文，俄文翻译）
 
 # screenshot
 
@@ -47,6 +53,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 >>     + 安装 preimport： `pip install preimport`
 >>     + 安装 tomlconfig: `pip install tomlconfig`
 >>     + 安装 CodeEditor `pip install CodeEditor`
+>>     + 安装 requests `pip install requests`
 >> 3. 下载解压软件：
 >>     + 下载 [QssStylesheetEditor_v1.6.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
 >>     + 解压并进入 QssStylesheetEditor_v1.6 文件夹： `cd QssStylesheetEditor_v1.6`
@@ -61,6 +68,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 ~~~
 $background = #fff;
 $border     = red;
+$text     = rgb(10,10,10);
 ~~~
 
 
@@ -107,6 +115,22 @@ background-image: url(":/img/close.png");
 
 软件会在当前打开的 xxx.qss 样式文件所在目录中搜索资源文件 xxx.py 并自动加载。
 
+# QPalette引用
+
+在qss中可以直接引用QPalette，格式如下：
+
+~~~
+color: palette(Text);
+background-color: palette(Window);
+~~~
+
+通过Palette对话框，可以用颜色对话框拾取颜色的方式改变QPalette中每个ColorRole
+的颜色。改变后的QPalette可以通过查看代码按钮显示QPalette代码。
+
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QPaletteDialog_v1.7.png" height=180 />
+
+> Palette对话框中reset 按钮可以取消本次打开对话框做的修改。
+
 # screenshot
 
 ## 自动补全
@@ -127,5 +151,4 @@ background-image: url(":/img/close.png");
     <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.1.png" alt="v1.1" height=200/>
 <div><span><b>QssStylesheetEditor GUI V1.0</b></span></div>
     <img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.0.png" alt="v1.0" height=200/>
-
 

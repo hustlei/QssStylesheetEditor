@@ -10,10 +10,8 @@ English | [简体中文](readme_zh-CN.md)
 <br>
 
 QssStylesheetEditor is a powerful qt stylesheet(QSS) editor.
-Real-time preview, automatically completion, and user can define custom variables.
-
-
-> **Now I want to change a new name for QssStylesheetEditor, welcome everyone to vote: <https://github.com/hustlei/QssStylesheetEditor/issues/4>**
+Real-time preview, automatically completion, and user can define custom variables,
+preview custom ui code, using QPalette etc.
 
 
 # screenshot
@@ -24,15 +22,15 @@ Real-time preview, automatically completion, and user can define custom variable
 
 + Qss code highlight and code folding
 + Automatic completion
-+ In-time preview
-+ Almost all of the qtwidgets can be previewed
++ In-time preview, Almost all of the qtwidgets can be previewed
++ Custom ui code preview
 + Customize variables and reference in Qss
 + Change variable color through color dialog box
-+ Reference image by relative path
-+ Reference image in resource files
++ Reference image by relative path or in resource files
++ Reference QPalette, and change QPalette via color dialog box
 + Switch different system themes (xp, vista etc.)
 + Internationalization
-  + Now Chinese and English translations are available
+  + Now English Chainese and Russian translations are available
 
 # Platform
 
@@ -63,6 +61,7 @@ If you are windows 64bit user, binary package and installer is available now.
 >>     - preimport: `pip install preimport`
 >>     - tomlconfig: `pip install tomlconfig`
 >>     - CodeEditor: `pip install CodeEditor`
+>>     - requests: `pip install requests`
 >> 3. download and unzip package:
 >>     + download [QssStylesheetEditor_v1.6.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
 >>     + unzip and change dir to QssStylesheetEditor_v1.6 `cd QssStylesheetEditor_v1.6`
@@ -80,10 +79,11 @@ Using following statement to define new variable:
 ~~~js
 /*example of custom variable definition*/
 $background = #fff;  /* define var with name "background" */
-$text = red; /* define var with name "text" */
+$border = red; /* define var with name "border" */
+$text     = rgb(10,10,10);
 ~~~
 
-A variable definition end with a ";".
+> A variable definition end with a ";".
 
 Reference defined variable as following:
 
@@ -130,6 +130,22 @@ background-image: url(":/img/close.png");
 
 QssStylesheetEditor will search the resource file filename.py(filename must be same of qss file) in the directory of the currently opened qss stylesheet code file and loads it automatically.
 
+# QPalette reference
+
+In QssStylesheetEditor, users can use QPalette as follow：
+
+~~~
+color: palette(Text);
+background-color: palette(Window);
+~~~
+
+Changing color of QPalette is supported via pick-up color in palettdialog.
+And the new QPalette code can be viewed via click the "ViewPaletteCode" button.
+
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QPaletteDialog_v1.7.png" height=180 />
+
+> The reset button in PaletteDialogreset could cancel QPalette modification.
+
 # screenshot
 
 <div><span><b>AutoComplete</b></span></div>
@@ -147,4 +163,4 @@ QssStylesheetEditor will search the resource file filename.py(filename must be s
 # License
 You can use this software for free in open source projects that are licensed under the GPL. but there is an exception: if you only use it to generate qss file for commercial product, the product's source code can be shipped with whatever license you want.
 
-If you don't want to open your code up to the public, you can purchase a commercial license for USD 10 per developer, and also should purchase a commercial license for PyQt5.
+If you don't want to open your code up to the public, you can purchase a commercial license for USD 100 per developer, and also should purchase a commercial license for PyQt5.

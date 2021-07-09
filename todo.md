@@ -7,24 +7,23 @@ English | [简体中文](todo_zh-CN.md)
     - Help
     - Qss tutorial
 
-+ ToDo or not?
-    - qss only support /* */ comment , add inline comment syntax?
 
 # ChangeLog
 
-## v1.8
-
-Main Changes: **add custom window preview, fixed ISSUES**
-
 ## v1.7
-
-Main Changes: **update config, fixed ISSUES**
+Main Changes: **add custom ui preview and qpalette and update features, fixed ISSUES**
 
 + **New Features**
     - add auto export qss features
     - make groupbox in preivew area checkable  ISSUES#25
+	- optimize editor lags
+	- add ui skin settings
+	- add update check feature
+	- add using qpalette feature to qsst
+	- update chinese for i18n
+	- preview only applied on preivewwidget
 + **BugsFixed**
-    - fixed ISSUES
+    - fixed ISSUES#11#16#19#20#21#28#29#30#31
     - fixed var export error ISSUES#24
     - fixed wheel package error ISSUES#26
 
@@ -84,7 +83,6 @@ Main Changes: **portable exe for windows x64**
     - Fix display error of Find dialog
 
 ## v1.2
-
 Main Changes: **change editor to Qscintilla**
 
 + **New Features**
