@@ -61,6 +61,7 @@ class ConfDialog(QDialog):
         # left list
         self.leftList.addItem(self.tr("General"))
         self.leftList.addItem(self.tr("Editor"))
+        self.leftList.addItem(self.tr("Update"))
         self.leftList.setMaximumWidth(150)
 
         # right stack
@@ -130,6 +131,45 @@ class ConfDialog(QDialog):
         # CodeEditor SettingPannel
         self.rightStack.addWidget(self.win.editor.settings.settingPanel())
 
+        # right stack for update
+        w3 = QWidget()
+        layw3 = QVBoxLayout()
+        # update setting
+        g31 = QGroupBox(self.tr("update check"))
+        self.checkboxUpdate = QCheckBox(self.tr("auto check for update"))
+        labtmp = QLabel(self.tr("update checking frequency:"))
+        self.updateCombo = QComboBox()
+        self.updateCombo.setToolTip(self.tr("setup frequency for checking update"))
+        self.updateCombo.addItem(self.tr("Each startup"), "start")
+        self.updateCombo.addItem(self.tr("Every day"), "day")
+        self.updateCombo.addItem(self.tr("Every week"), "week")
+        self.updateCombo.addItem(self.tr("Every month"), "month")
+        self.updateCombo.setEnabled(False)
+        self.checkboxUpdate.stateChanged.connect(self.updateCombo.setEnabled)
+        ltmpv = QVBoxLayout()
+        ltmph = QHBoxLayout()
+        ltmpv.addWidget(self.checkboxUpdate)
+        ltmpv.addLayout(ltmph)
+        ltmph.addWidget(labtmp)
+        ltmph.addStretch(1)
+        ltmph.addWidget(self.updateCombo)
+        g31.setLayout(ltmpv)
+        tmp1=self.win.config["update.autocheck"]
+        tmp2=self.win.config["update.checkfreq"]
+        if not isinstance(tmp1, bool):
+            tmp1 = True
+        self.checkboxUpdate.setChecked(tmp1)
+        if not tmp2:
+            tmp2 = "start"
+        tmpi = self.updateCombo.findData(tmp2)
+        if tmpi:
+            self.updateCombo.setCurrentIndex(tmpi)
+
+        layw3.addWidget(g31)
+        layw3.addStretch(1)
+        w3.setLayout(layw3)
+        self.rightStack.addWidget(w3)
+
         # action for dialog
         self.leftList.currentRowChanged.connect(self.rightStack.setCurrentIndex)
         self.cancelbtn.clicked.connect(lambda: (self.cancel(), self.close()))
@@ -139,6 +179,10 @@ class ConfDialog(QDialog):
         self.recentcountspin.valueChanged.connect(lambda x: self.changedOptions.__setitem__("file.recentcount", x))
         self.langCombo.currentIndexChanged.connect(
             lambda i: self.changedOptions.__setitem__("general.language", self.langCombo.itemData(i)))
+        self.checkboxUpdate.stateChanged.connect(
+            lambda b: self.changedOptions.update({"update.autocheck": b}))
+        self.updateCombo.currentIndexChanged.connect(
+            lambda i: self.changedOptions.__setitem__("update.checkfreq", self.updateCombo.itemData(i)))
         self.checkboxAutoExportQss.stateChanged.connect(
             lambda b: self.changedOptions.update({"advance.autoexportqss": b}))
         self.skinCombo.currentTextChanged.connect(lambda t:
@@ -192,6 +236,12 @@ class ConfDialog(QDialog):
             ],
             "general.skin":
             [lambda t: (self.win.config.setChild("general.skin", t), self.applyskin(t)), self.skinCombo.setCurrentText],
+            "update.autocheck":
+            [lambda t: self.win.config.setChild("update.autocheck", bool(t)), self.checkboxUpdate.setChecked],
+            "update.checkfreq": [
+                lambda t: self.win.config.setChild("update.checkfreq", t),
+                lambda t: self.updateCombo.setCurrentIndex(self.updateCombo.findData(t))
+            ],
         }
 
     def fillLangItems(self, combo):

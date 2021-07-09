@@ -1,8 +1,9 @@
 chardet>=3.0.4
-CodeEditor>=1.1.0
+requests>=2.0
 preimport>=1.1.0
-PyQt5>=5.10.1
-PyQt5-sip>=12.7,<13
-QScintilla>=2.11.4
 toml>=0.10.0
 tomlconfig>=1.2.1
+PyQt5>=5.10.1,<5.14
+PyQt5-sip>=12.7,<12.7.1
+QScintilla==2.11.4
+CodeEditor>=1.1.0
