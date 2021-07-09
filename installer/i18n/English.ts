@@ -40,7 +40,7 @@
     </message>
 </context>
 <context>
-    <name>CodeEditor</name>
+    <name>Editor</name>
     <message>
         <location filename="../../src/ui/editor/editor.py" line="269"/>
         <source>can&apos;t open this file, it may be a binary file.</source>
@@ -1130,7 +1130,7 @@
     </message>
 </context>
 <context>
-    <name>searchDialog</name>
+    <name>SearchDialog</name>
     <message>
         <location filename="../../src/ui/editor/search.py" line="140"/>
         <source>Replace</source>
@@ -1222,6 +1222,297 @@
         <location filename="../../src/ui/editor/search.py" line="213"/>
         <source>reach </source>
         <translation>已经到达</translation>
+    </message>
+</context>
+<context>
+    <name>EditorSettings</name>
+    <message>
+        <location filename="settings.py" line="24"/>
+        <source>Tab indents</source>
+        <translation>Tab缩进</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="25"/>
+        <source>Use the tab key to indent text</source>
+        <translation>启用Tab键缩进文本</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="31"/>
+        <source>Backspace unindents</source>
+        <translation>启用Backspace键取消缩进</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="33"/>
+        <source>Backspace will unindent a line instead of just deleting a character</source>
+        <translation>Backspace键功能由删除一个字符改为取消一行缩进</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="38"/>
+        <source>Auto-indent</source>
+        <translation>自动缩进</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="39"/>
+        <source>Automatically indent text to match the preceding line</source>
+        <translation>根据当前行缩进自动缩进下一行</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="46"/>
+        <source>Indentation guides</source>
+        <translation>缩进参考线</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="48"/>
+        <source>Display visible guidelines to help keep indentation consistent</source>
+        <translation>显示缩进参考线</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="55"/>
+        <source>Use tab character</source>
+        <translation>tab字符不替换为空格</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="57"/>
+        <source>Tab key inserts an actual tab character instead of spaces</source>
+        <translation>tab字符不替换为空格</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="63"/>
+        <source>Show CR/LF</source>
+        <translation>显示回车换行符</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="65"/>
+        <source>Display a visible icon for carriage return and line feeds</source>
+        <translation>显示回车及换行符号</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="71"/>
+        <source>Text color</source>
+        <translation>文本颜色</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="72"/>
+        <source>Default text color</source>
+        <translation>默认文本颜色</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="76"/>
+        <source>Paper color</source>
+        <translation>背景颜色</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="77"/>
+        <source>Default background color</source>
+        <translation>默认背景色</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="81"/>
+        <source>Font Family</source>
+        <translation>字体</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="82"/>
+        <source>Default font family</source>
+        <translation>默认字体</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="86"/>
+        <source>Font Size</source>
+        <translation>字号</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="87"/>
+        <source>Default font size</source>
+        <translation>默认字号</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="92"/>
+        <source>Text width</source>
+        <translation>文本宽度</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="93"/>
+        <source>Number of characters per line before wrapping occurs</source>
+        <translation>每行字符数</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="100"/>
+        <source>Tab width</source>
+        <translation>tab键等同空格数</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="102"/>
+        <source>Width of tabs in characters, or the number of spaces to insert when tab is pressed</source>
+        <translation>tab显示宽度，或者tab替换为空格的数量</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="110"/>
+        <source>Brace Matching</source>
+        <translation>括号匹配</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="111"/>
+        <source>Whether and how to highlight matching {} [] () braces</source>
+        <translation>如何高亮显示{}[]()括号</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="117"/>
+        <source>Edge Mode</source>
+        <translation>边栏模式</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="118"/>
+        <source>How the edge of the text width is indicated</source>
+        <translation>边栏文本宽度指示方式</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="123"/>
+        <source>Line Endings</source>
+        <translation>行结束符</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="124"/>
+        <source>End lines with carriage return and/or line feed</source>
+        <translation>行以回车或换行符结束的设置</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="129"/>
+        <source>Folding</source>
+        <translation>折叠</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="130"/>
+        <source>What kind of icons to display for code-folding</source>
+        <translation>代码折叠边栏显示符号</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="135"/>
+        <source>Whitespace</source>
+        <translation>空白符</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="136"/>
+        <source>Whether whitespace is indicated with visible markers</source>
+        <translation>是否显示空白符</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="141"/>
+        <source>Wrap Mode</source>
+        <translation>自动换行模式</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="142"/>
+        <source>How to wrap text when it reaches the text width</source>
+        <translation>文本达到编辑器宽度后如何自动换行</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="147"/>
+        <source>Language</source>
+        <translation>代码语言</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="148"/>
+        <source>Syntax highlighting language</source>
+        <translation>语法高亮</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="192"/>
+        <source>Colors</source>
+        <translation>颜色</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="199"/>
+        <source>Text</source>
+        <translation>文本</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="207"/>
+        <source>Indentation</source>
+        <translation>缩进</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="218"/>
+        <source>Wrapping</source>
+        <translation>自动换行</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="226"/>
+        <source>Formatting</source>
+        <translation>格式</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="234"/>
+        <source>Coding aids</source>
+        <translation>代码辅助</translation>
+    </message>
+</context>
+<context>
+    <name>SettingEnums</name>
+    <message>
+        <location filename="setting_enums.py" line="20"/>
+        <source>Hidden</source>
+        <translation>隐藏</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="24"/>
+        <source>Standard</source>
+        <translation>标准</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="28"/>
+        <source>Boxed</source>
+        <translation>方框</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="71"/>
+        <source>None</source>
+        <translation>无</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="39"/>
+        <source>All</source>
+        <translation>所有</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="43"/>
+        <source>Document</source>
+        <translation>文档</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="47"/>
+        <source>APIs</source>
+        <translation>APIs接口</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="56"/>
+        <source>No</source>
+        <translation>否</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="60"/>
+        <source>Strict</source>
+        <translation>严格</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="64"/>
+        <source>Sloppy</source>
+        <translation>宽松</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="75"/>
+        <source>NoContext</source>
+        <translation>无上下文</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="79"/>
+        <source>NoAutoCompletionContext</source>
+        <translation>无自动补全上下文</translation>
+    </message>
+    <message>
+        <location filename="setting_enums.py" line="83"/>
+        <source>Context</source>
+        <translation>上下文</translation>
     </message>
 </context>
 </TS>
