@@ -44,14 +44,14 @@ preview custom ui code, using QPalette etc.
 
 Follow the steps as below, or install the binary installation package:
 
-1. download [QssStylesheetEditor-1.6-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
-2. run `pip install QssStylesheetEditor-1.6-py3-none-any.whl` install QssStylesheetEditor
+1. download [QssStylesheetEditor-1.7-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
+2. run `pip install QssStylesheetEditor-1.7-py3-none-any.whl` install QssStylesheetEditor
 3. run `qsseditor` or `QssStylesheetEditor` the app will started
 
 If you are windows 64bit user, binary package and installer is available now.
 
-+ [QssStylesheetEditor1.6_win64_installer.exe](https://github.com/hustlei/QssStylesheetEditor/releases)
-+ QssStylesheetEditor1.6_win64_portable.7z [[Download]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ) (security code: j7fc)
++ [QssStylesheetEditor1.7_win64_installer.exe](https://github.com/hustlei/QssStylesheetEditor/releases)
++ QssStylesheetEditor1.7_win64_portable.7z [[Download]](https://pan.baidu.com/s/1T0zzM4Y6h1SwHBsliEUbTQ) (security code: 65kn)
 
 
 > Alternatively, manually install the package is ok too
@@ -63,8 +63,8 @@ If you are windows 64bit user, binary package and installer is available now.
 >>     - CodeEditor: `pip install CodeEditor`
 >>     - requests: `pip install requests`
 >> 3. download and unzip package:
->>     + download [QssStylesheetEditor_v1.6.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
->>     + unzip and change dir to QssStylesheetEditor_v1.6 `cd QssStylesheetEditor_v1.6`
+>>     + download [QssStylesheetEditor_v1.7.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
+>>     + unzip and change dir to QssStylesheetEditor_v1.7 `cd QssStylesheetEditor_v1.7`
 >> 4. Run QssStylesheetEditor:
 >>     + double click qsseditor.pyw
 >>     + or run `python qsseditor.pyw`

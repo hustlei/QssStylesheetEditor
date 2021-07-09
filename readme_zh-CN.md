@@ -13,7 +13,7 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 
 # 软件界面
 
-![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png  "GUI(v1.5)")
+![GUI(v1.7) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.7.png  "GUI(v1.7)")
 
 # 功能简介
 
@@ -29,22 +29,19 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 + 能够在 windows，linux，unix 上运行
 + 支持多国语言（目前已有中文，英文，俄文翻译）
 
-# screenshot
-
-![GUI(v1.5版本) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QssStylesheetEditor_v1.5.png "GUI(v1.5版本)")
 
 # 安装使用
 
 按照如下步骤运行 QssStylesheetEditor:
 
-1. 下载 [QssStylesheetEditor-1.6-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
-2. 运行 `pip install QssStylesheetEditor-1.6-py3-none-any.whl` 安装 QssStylesheetEditor
+1. 下载 [QssStylesheetEditor-1.7-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
+2. 运行 `pip install QssStylesheetEditor-1.7-py3-none-any.whl` 安装 QssStylesheetEditor
 3. 命令行执行 `qsseditor` 或者 `QssStylesheetEditor` 命令运行程序
 
 **windows 64bit 操作系统**可以下载安装包或者绿色版exe运行。下载地址：
 
-+ [QssStylesheetEditor1.6 64位安装包](https://github.com/hustlei/QssStylesheetEditor/releases)
-+ QssStylesheetEditor1.6 64位绿色版  [[下载]](https://pan.baidu.com/s/1d8QJH6EbGcZXi7GjbkPlsQ) (提取码: j7fc)
++ [QssStylesheetEditor1.7 64位安装包](https://github.com/hustlei/QssStylesheetEditor/releases)
++ QssStylesheetEditor1.7 64位绿色版  [[下载]](https://pan.baidu.com/s/1T0zzM4Y6h1SwHBsliEUbTQ) (提取码: 65kn)
 
 > 或者可以根据如下步骤手动安装：
 >
@@ -55,8 +52,8 @@ QssStylesheetEditor 是一个功能强大的 Qt 样式表(QSS)编辑器，支持
 >>     + 安装 CodeEditor `pip install CodeEditor`
 >>     + 安装 requests `pip install requests`
 >> 3. 下载解压软件：
->>     + 下载 [QssStylesheetEditor_v1.6.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
->>     + 解压并进入 QssStylesheetEditor_v1.6 文件夹： `cd QssStylesheetEditor_v1.6`
+>>     + 下载 [QssStylesheetEditor_v1.7.zip](https://github.com/hustlei/QssStylesheetEditor/releases)
+>>     + 解压并进入 QssStylesheetEditor_v1.7 文件夹： `cd QssStylesheetEditor_v1.7`
 >> 4. 运行 QssStylesheetEditor: 
 >>     + 鼠标双击 qsseditor.pyw
 >>     + 或者命令行运行 `python qsseditor.pyw`
