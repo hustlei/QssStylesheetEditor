@@ -127,9 +127,18 @@ background-color: palette(Window);
 通过Palette对话框，可以用颜色对话框拾取颜色的方式改变QPalette中每个ColorRole
 的颜色。改变后的QPalette可以通过查看代码按钮显示QPalette代码。
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QPaletteDialog_v1.7.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/PaletteDlg_V1.7.png" height=180 />
 
 > Palette对话框中reset 按钮可以取消本次打开对话框做的修改。
+
+# 自定义ui代码预览
+
+在preview界面的'自定义'标签内可以编辑自己想要预览的ui代码。点击'预览'按钮预览效果。
+
+> 自定义代码需要定义一个类名称为'MainWindow'。参考下图：
+
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" height=180 />
+
 
 # screenshot
 

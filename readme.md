@@ -16,7 +16,7 @@ preview custom ui code, using QPalette etc.
 
 # screenshot
 
-![GUI(v1.5) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.5.png  "GUI(v1.5)")
+![GUI(v1.7) screeshot](https://hustlei.github.io/software/QssStylesheetEditor/screenshot/en/QssStylesheetEditor_v1.7.png  "GUI(v1.7)")
 
 # Features
 
@@ -70,7 +70,7 @@ If you are windows 64bit user, binary package and installer is available now.
 >>     + or run `python qsseditor.pyw`
 
 
-## Using custom variable 
+# Using custom variable 
 
 In QssStylesheetEditor, users can define and use custom variables in QSS. 
 
@@ -108,7 +108,7 @@ When a variable is defined in QssStylesheetEditor, the variable will be automati
 
 > If an undefined variable is referenced, it will be automatically recognized and displayed in the color panel too. 
 
-## Image reference path
+# Image reference path
 
 When images are use in the qss code, if the url is relative,  QssStylesheetEditor will find the image file in the folder where the qss code file is.
 
@@ -142,9 +142,25 @@ background-color: palette(Window);
 Changing color of QPalette is supported via pick-up color in palettdialog.
 And the new QPalette code can be viewed via click the "ViewPaletteCode" button.
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/QPaletteDialog_v1.7.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/PaletteDlg_V1.7.png" style="max-height:480px;max-width:960px" />
 
 > The reset button in PaletteDialogreset could cancel QPalette modification.
+
+# custom ui code preview
+
+In the  editor of 'Custom' tab of preview widget, user can input custom ui code, like follow:
+
+~~~
+class MainWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+~~~
+
+and then press 'Preview' button to preview the qss.
+
+> 'MainWindow' must be defined in the custom code.
+
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" height=180 />
 
 # screenshot
 
