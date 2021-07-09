@@ -24,8 +24,16 @@ class AsyncGetLatestVer(QThread):  # 线程2
         self.addr = "https://api.github.com/repos/" + githubname + "/" + projname + "/releases/latest"
 
     def run(self):
-        response = requests.get(self.addr)
-        ret = response.json()["tag_name"].strip('Vv')
+        # response = requests.get(self.addr)
+        # ret = response.json()["tag_name"].strip('Vv')
+        try:
+            s = requests.session()
+            s.keep_alive = False
+            rst = s.get(self.addr)
+            ret = rst.json()["tag_name"].strip('Vv')
+        except Exception:
+            self.got.emit(None)
+            return
         self.got.emit(ret)
 
 

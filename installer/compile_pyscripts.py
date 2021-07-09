@@ -7,6 +7,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import os
+import sys
 import re
 import shutil
 # import py_compile
@@ -18,7 +19,7 @@ from py_compile import compile as compilepy
 root = os.path.join(os.path.dirname(__file__), "..")
 srcdir = os.path.join(root, "src")
 distroot = os.path.join(root, "dist/build")
-venvroot = os.path.join(root, "venv/Lib/site-packages")
+venvroot = os.path.abspath(os.path.join(sys.executable, "../../Lib/site-packages"))
 deps = ["chardet", "CodeEditor", "preimport", "toml", "tomlconfig"]
 
 pydir = os.path.join(root, "dist/libs/libpython")
@@ -100,7 +101,7 @@ copyfiles(os.path.join(root, r"dist/libs"), distroot)  # copy app.exe
 
 # compile python 脚本并copy到目标文件夹
 print("\ncompile all scripts and copy to dist/build.")
-copyexts = (".zip", ".bat", ".qm", ".toml", ".conf")
+copyexts = (".zip", ".bat", ".qm", ".toml", ".conf", ".qss")
 pexclude = re.compile(r'_[vV][0-9.\-_]+[.]py$$|[.]old[.]py$|_bak[.]py$')
 
 

@@ -515,6 +515,10 @@ class MainWin(MainWinBase):
 
         def aftcall(newver):
             ver = self.ver.strip('vV')
+            if not newver:
+                if not showdialogifnotupdate:
+                    return
+                newver = "[network err]"
             if showdialogifnotupdate or newver > ver:
                 if not self.updatedialog:
                     self.updatedialog = updateinfodialog(self)

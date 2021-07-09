@@ -1,6 +1,6 @@
 ;QssStylesheetEditor Installer, compiled by nsis mui2
 ;Author: lileilei
-;lastedited: 2019.10
+;lastedited: 2021.7
 
 
 ;!pragma warning error all ;警告作为错误
@@ -23,7 +23,7 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
 
     !define ProductName "QssStylesheetEditor"  ;产品名，和项目名相同
     !define StartFile "AppStart" ;.exe文件名,启动软件的exe名称
-    !define Version "1.6" ;版本
+    !define Version "1.7" ;版本
     !define Publisher "lileilei" ;发布人
     !define Website "https://github.com/hustlei/QssStylesheetEditor" ;网站地址
     !define Year "2019"    
@@ -114,7 +114,6 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     !define MUI_UNFINISHPAGE_NOAUTOCLOSE ;不自动跳到完成页面, 允许用户检查卸载记录
 
 
-
 /*** 安装界面 ***/
 ;--------------------------------
 ;Include
@@ -125,13 +124,14 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     #!include "nsDialogs.nsh"
     #!include "WordFunc.nsh"
     
+
 ;--------------------------------
 ;install pages
 
     #!define MUI_PAGE_CUSTOMFUNCTION_SHOW show ;欢迎页面设置函数
     !insertmacro MUI_PAGE_WELCOME ;1.欢迎页面
-    
-    !insertmacro MUI_PAGE_LICENSE ${LICENSE} ;2.许可协议页面
+
+    !insertmacro MUI_PAGE_LICENSE $(LICENSE) ;2.许可协议页面
     
     !insertmacro MUI_PAGE_COMPONENTS ;3.组件选择页面
     ShowInstDetails show ;设置是否显示安装详细信息。区段里可以使用 SetDetailsView 来更改它的设置。
@@ -174,6 +174,11 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     #!insertmacro MUI_LANGUAGE "Japanese"
     #!insertmacro MUI_LANGUAGE "Korean"
     #!insertmacro MUI_LANGUAGE "TradChinese"
+
+    LicenseLangString LICENSE ${LANG_ENGLISH} "License.rtf"
+    LicenseLangString LICENSE ${LANG_SIMPCHINESE} "License.zh_cn.rtf"
+    # http://blog.sina.com.cn/s/blog_6aeaee7e0100smr3.html
+
     
 ;--------------------------------
 ;Reserve Files
@@ -333,11 +338,6 @@ SetCompressor /SOLID /FINAL lzma  ;使用zip会被360误报为病毒 ;/FINAL ，后边调用的
     LangString langInfo ${LANG_ENGLISH} "Please select a language:"
     !define MUI_LANGDLL_WINDOWTITLE $(langTitle)
     !define MUI_LANGDLL_INFO $(langInfo)
-
-    LicenseLangString langLicense ${LANG_ENGLISH} "License.rtf"
-    LicenseLangString langLicense ${LANG_SIMPCHINESE} "License.zh_cn.rtf"
-    !define LICENSE ${langLicense}
-    # http://blog.sina.com.cn/s/blog_6aeaee7e0100smr3.html
 
     LangString msgRuning ${LANG_SIMPCHINESE} "安装程序已经在运行"
     LangString msgRuning ${LANG_ENGLISH} "Installer is running."

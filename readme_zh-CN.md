@@ -91,7 +91,7 @@ QWidget
 
 在 QssStylesheetEditor 中自定义一个变量后，在软件的颜色栏会自动显示变量名字和颜色，点击颜色可以用通过颜色拾取框选取变量颜色。
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/ColorDlg_v1.3.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/ColorDlg_v1.3.png" style="max-height:400px;max-width:800px" />
 
 在 QssStylesheetEditor 中引用一个未定义的变量后，软件会自动识别，并在颜色栏显示该变量名字。如果通过颜色拾取框为该变量选择了颜色，这软件会自动在文档中添加该变量定义。
 
@@ -127,7 +127,7 @@ background-color: palette(Window);
 通过Palette对话框，可以用颜色对话框拾取颜色的方式改变QPalette中每个ColorRole
 的颜色。改变后的QPalette可以通过查看代码按钮显示QPalette代码。
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/PaletteDlg_V1.7.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/PaletteDlg_V1.7.png" style="max-height:400px;max-width:800px" />
 
 > Palette对话框中reset 按钮可以取消本次打开对话框做的修改。
 
@@ -137,7 +137,7 @@ background-color: palette(Window);
 
 > 自定义代码需要定义一个类名称为'MainWindow'。参考下图：
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" style="max-height:400px;max-width:800px" />
 
 
 # screenshot

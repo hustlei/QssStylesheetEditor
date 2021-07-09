@@ -160,7 +160,7 @@ and then press 'Preview' button to preview the qss.
 
 > 'MainWindow' must be defined in the custom code.
 
-<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" height=180 />
+<img src="https://hustlei.github.io/software/QssStylesheetEditor/screenshot/CustomPreview_v1.7.png" style="max-height:480px;max-width:960px" />
 
 # screenshot
 
