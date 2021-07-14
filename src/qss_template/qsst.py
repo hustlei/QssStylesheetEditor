@@ -5,7 +5,7 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import re
-
+from PyQt5.QtGui import QColor
 
 class Qsst():
     """qss template"""
@@ -33,16 +33,19 @@ class Qsst():
         if qssStr is None:
             qssStr = self.srctext
         self.varUsed = re.findall(r':[ \t\w,.:()]*[$]([\w]+)', qssStr)
-        varsDefined = re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)
+        varsDefined = list(set(re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)))
         self.varDict = {}
         valerr = False
         for var, val in varsDefined:
             if not valerr:
-                valerrind = re.match(
-                    r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',
-                    val)
-                if not valerrind:
-                    valerr = True
+                if val in QColor.colorNames():
+                    self.varDict[var] = val
+                else:
+                    valerrind = re.match(
+                        r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',
+                        val)
+                    if not valerrind:
+                        valerr = True
             self.varDict[var] = val
 
         self.varUndefined = []
