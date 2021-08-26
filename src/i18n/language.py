@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QApplication
 from config import Config
 
 
-class Language():
+class Language:
     """i18n setting class"""
     trans = QTranslator()  # 必须定义为Language的变量，定义为局部变量不起作用
     systrans = QTranslator()
@@ -28,11 +28,7 @@ class Language():
             conf = Config(os.path.join(os.path.dirname(__file__), "list.toml"))
             languages = conf.getSec("languages")
             for k, v in languages.items():
-                langitem = {}
-                langitem["lang"] = v[0]
-                langitem["qmfile"] = v[1]
-                langitem["nativename"] = v[2]
-                langitem["englishname"] = k
+                langitem = {"lang": v[0], "qmfile": v[1], "nativename": v[2], "englishname": k}
                 if not langitem["nativename"]:
                     langitem["nativename"] = QLocale(langitem["name"]).nativeLanguageName()
                 if langitem["lang"]:
