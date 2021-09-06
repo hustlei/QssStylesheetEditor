@@ -46,7 +46,7 @@ Follow the steps as below, or install the binary installation package:
 
 1. download [QssStylesheetEditor-1.7-py3-none-any.whl](https://github.com/hustlei/QssStylesheetEditor/releases)
 2. run `pip install QssStylesheetEditor-1.7-py3-none-any.whl` install QssStylesheetEditor
-3. run `qsseditor` or `QssStylesheetEditor` the app will started
+3. run `qsseditor` or `QssStylesheetEditor` the app will start
 
 If you are windows 64bit user, binary package and installer is available now.
 
