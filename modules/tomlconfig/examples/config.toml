@@ -1,0 +1,7 @@
+
+[general]
+language = 'en'
+
+[general.editor]
+size = 12
+font = 'arial'
