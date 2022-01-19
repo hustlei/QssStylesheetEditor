@@ -1,0 +1,13 @@
+[run]
+branch = False
+omit = */.git/*  /dist/* */build/* /tests/*  setup.py
+
+[report]
+exclude_lines =
+    def __repr__
+    if self\.debug
+
+    if __name__ == .__main__.:
+    def main():
+
+ignore_errors = True

@@ -1,0 +1,45 @@
+language: python # this works for Linux but is an error on macOS or Windows
+
+jobs:
+    include:
+        - name: "linux" 
+          os: linux
+          sudo: required
+          # dist: bionic
+          python:
+            - 3.8
+          before_install:
+            - sudo apt-get -qq update
+            - python --version
+            - pip3 install -U pip
+            
+        - name: "win"
+          os: windows           # Windows 10.0.17134 N/A Build 17134
+          language: shell       # 'language: python' is an error on Travis CI Windows
+          before_install:
+            - choco install python3 # --version 3.8.0
+            - python --version
+            - python -m pip install --upgrade pip
+          env:
+            - PATH=/c/Python38:/c/Python38/Scripts:$PATH
+            
+        - name: "macOS"
+          os: osx
+          osx_image: xcode11.2 #python3.7.4
+          language: shell # 'language: python' is an error on Travis CI macOS
+          before_install:
+            - python3 --version
+
+install:
+    - pip3 install -U pytest
+    - pip3 install -U pytest-cov
+    - pip3 install -U coveralls
+    # - pip3 install numpy
+    # - pip3 install openpyxl
+    
+script:
+    - py.test --cov=preimport tests
+    
+after_success:
+    - coveralls
+    
