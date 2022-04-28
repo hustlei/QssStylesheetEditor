@@ -45,6 +45,7 @@ class MainWin(MainWinBase):
         self.setupActions()
         if self.tr("LTR") == "RTL":
             self.setLayoutDirection(Qt.RightToLeft)
+
         # lang
         # from i18n.language import Language as Lang
         # Lang.getConfigLang(self)
@@ -55,6 +56,55 @@ class MainWin(MainWinBase):
 
         self.checkforupdate()
         self.statusbar.showMessage(self.tr("Ready"))
+
+        # new fetures 202204
+        import threading,time
+        class Timer(threading.Thread):
+            """计时器
+            执行start函数：会在interval秒后执行function函数，args,kwargs是function函数的参数。
+            repeat参数为True时，会循环在interval秒间隔后执行函数。
+            stop函数会中断start函数的运行，比如start函数执行时间小于interval秒时，stop函数会导致不执行function函数。
+            finish函数会结束线程。
+            """
+
+            def __init__(self, interval=1, function=print, args=None, kwargs=None):
+                super().__init__()
+                self.__running = threading.Event()  # 用于停止线程的标识
+                self.__awake = threading.Event()  # 阻塞还是唤醒线程的标识，wait是否有用的标识
+                self.__waiting = threading.Event()  # 用于设置等待时间，
+                self.__awake.set()  # 设置为True
+                self.__running.set()  # 将running设置为True
+                self.interval = interval
+                self.function = function
+                self.args = args if args else []
+                self.kwargs = kwargs if kwargs else {}
+                self.repeat = False
+
+            def run(self):
+                while self.__running.isSet():
+                    self.__awake.wait()  # 为True时立即返回,为False时阻塞直到内部的标识位为True
+                    time.sleep(self.interval)
+                    if self.__awake.is_set():
+                        self.function(*self.args, **self.kwargs)
+                    if not self.repeat:
+                        self.stop()
+
+            def stop(self):
+                self.__awake.clear()  # 设置为False, 阻塞线程，启用wait
+
+            def start(self, interval=-1):
+                if self.is_alive():
+                    if interval >= 0:
+                        self.interval = interval
+                    self.__awake.set()  # 设置为True, 唤醒线程，停止wait
+                else:
+                    super().start()
+
+            def finish(self):
+                self.__running.clear()  # 设置为False
+                self.__awake.set()  # 将线程从暂停状态恢复, 如何已经暂停的话
+
+        self.timer = Timer(0.8, lambda:{self.renderStyle(),self.loadColorPanel()})
 
     def setupActions(self):
         # theme  toolbarWidget
@@ -199,12 +249,13 @@ class MainWin(MainWinBase):
     def keyPressed(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         # 大键盘为Ret小键盘为Enter
+        self.timer.stop()
         if self.changed:
-            if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight, Qt.Key_Up, Qt.Key_Down,
-                            Qt.Key_Left, Qt.Key_Right, Qt.Key_Tab, Qt.Key_Delete, Qt.Key_Backspace)):
-                self.renderStyle()
-                self.loadColorPanel()
+            if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight)):
+                self.timer.start(0.75)
                 self.changed = False
+            else:
+                self.timer.start(1.5)
 
     def textChanged(self):
         self.changed = True
