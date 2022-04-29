@@ -962,7 +962,7 @@ class PreviewWidget(QTabWidget):
         tree1.expand(tree1.model().index(0, 0))
         tree1.expandItem(node11)
         tree2 = QTreeView()
-        folder = QDirModel()
+        folder = QDirModel(self)
         tree2.setModel(folder)
         lay.addWidget(tree1)
         lay.addWidget(tree2)

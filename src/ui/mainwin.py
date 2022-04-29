@@ -70,8 +70,8 @@ class MainWin(MainWinBase):
             def __init__(self, interval=1, function=print, args=None, kwargs=None):
                 super().__init__()
                 self.__running = threading.Event()  # 用于停止线程的标识
-                self.__awake = threading.Event()  # 阻塞还是唤醒线程的标识，wait是否有用的标识
-                self.__waiting = threading.Event()  # 用于设置等待时间，
+                self.__awake = threading.Event()  # 阻塞还是唤醒线程的标识
+                self.__waiting = threading.Event()  # 用于设置等待时间
                 self.__awake.set()  # 设置为True
                 self.__running.set()  # 将running设置为True
                 self.interval = interval
@@ -83,26 +83,30 @@ class MainWin(MainWinBase):
             def run(self):
                 while self.__running.isSet():
                     self.__awake.wait()  # 为True时立即返回,为False时阻塞直到内部的标识位为True
-                    time.sleep(self.interval)
-                    if self.__awake.is_set():
+                    self.__waiting.wait(self.interval)
+                    time.sleep(0.0010)
+                    if not self.__waiting.is_set():
                         self.function(*self.args, **self.kwargs)
-                    if not self.repeat:
-                        self.stop()
+                        if not self.repeat:
+                            self.stop()
 
             def stop(self):
                 self.__awake.clear()  # 设置为False, 阻塞线程，启用wait
 
             def start(self, interval=-1):
+                if interval >= 0:
+                    self.interval = interval
                 if self.is_alive():
-                    if interval >= 0:
-                        self.interval = interval
-                    self.__awake.set()  # 设置为True, 唤醒线程，停止wait
+                    self.__waiting.set() # 如果在waiting，撤销
+                    self.__waiting.clear()  # 如果waiting撤销了，重新waiting
+                    self.__awake.set()  # 设置为True, 唤醒线程
                 else:
                     super().start()
 
             def finish(self):
                 self.__running.clear()  # 设置为False
                 self.__awake.set()  # 将线程从暂停状态恢复, 如何已经暂停的话
+                self.__waiting.set()
 
         self.timer = Timer(0.8, lambda:{self.renderStyle(),self.loadColorPanel()})
 
@@ -249,9 +253,8 @@ class MainWin(MainWinBase):
     def keyPressed(self, e):  # QKeyEvent(QEvent.KeyPress, Qt.Key_Enter, Qt.NoModifier)
         # if (32<e.key()<96 or 123<e.key()<126 or 0x1000001<e.key()<0x1000005 or e.key==Qt.Key_Delete):
         # 大键盘为Ret小键盘为Enter
-        self.timer.stop()
         if self.changed:
-            if (e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight)):
+            if e.key() in (Qt.Key_Return, Qt.Key_Enter, Qt.Key_Semicolon, Qt.Key_BraceRight):
                 self.timer.start(0.75)
                 self.changed = False
             else:

@@ -44,7 +44,10 @@ class App(QApplication):
 
 def main():
     """main function for the program"""
-    App().run()
+    try:
+        App().run()
+    except Exception as e:
+        print("Error:"+e)
 
 
 if __name__ == "__main__":
