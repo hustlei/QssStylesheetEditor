@@ -13,6 +13,7 @@
     <file alias="color1.png">img/color1.png</file>
     <file alias="color2.png">img/color2.png</file>
     <file alias="colorize.png">img/colorize.png</file>
+    <file alias="commentcode.png">img/commentcode.png</file>
     <file alias="config.png">img/config.png</file>
     <file alias="copy.png">img/copy.png</file>
     <file alias="cup.jpg">img/cup.jpg</file>
@@ -81,6 +82,7 @@
     <file alias="space.png">img/space.png</file>
     <file alias="texture.jpg">img/texture.jpg</file>
     <file alias="texture.png">img/texture.png</file>
+    <file alias="uncommentcode.png">img/uncommentcode.png</file>
     <file alias="undo.png">img/undo.png</file>
     <file alias="view.png">img/view.png</file>
     <file alias="view2col2left.png">img/view2col2left.png</file>

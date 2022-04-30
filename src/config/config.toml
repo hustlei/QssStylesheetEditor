@@ -1,4 +1,6 @@
 [general]
+language = ""
+skin = ""
 
 [file]
 recent = []
@@ -8,3 +10,9 @@ recentcount = 8
 fontsize = 11
 
 [advance]
+autoexportqss = ""
+
+[update]
+autocheck = ""
+checkfreq = ""
+lastcheckday = 2022-04-30

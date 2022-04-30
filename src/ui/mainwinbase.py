@@ -100,6 +100,11 @@ class MainWinBase(QMainWindow):
         self.actions["replace"] = createAct(self.tr("&Replace"),
                                             self.tr("Replace") + keys2str(QKeySequence.Replace), QKeySequence.Replace,
                                             ':appres.img/replace.png')
+        self.actions["comment"] = createAct(self.tr("Comment"),
+                                            self.tr("Comment the selected code"), None, ':appres.img/commentcode.png')
+        self.actions["uncomment"] = createAct(self.tr("UnComment"),
+                                            self.tr("UnComment code"), None, ':appres.img/uncommentcode.png')
+
         self.actions["fontup"] = createAct(self.tr("&BiggerFont"), self.tr("Bigger Font"), None,
                                            ':appres.img/fontup.png')
         self.actions["fontdown"] = createAct(self.tr("&SmallerFont"), self.tr("Smaller Font"), None,
@@ -177,6 +182,9 @@ class MainWinBase(QMainWindow):
 
         self.menus["Edit"].addMenu(editMenu)
         self.menus["Edit"].addMenu(searchMenu)
+        self.menus["Edit"].addSeparator()
+        self.menus["Edit"].addAction(self.actions["comment"])
+        self.menus["Edit"].addAction(self.actions["uncomment"])
 
         self.menus["View"].addAction(self.actions["ShowColor"])
         self.menus["View"].addAction(self.actions["ShowPreview"])
@@ -245,6 +253,10 @@ class MainWinBase(QMainWindow):
         self.toolbars["Echo"].addAction(self.actions["echospace"])
         self.toolbars["Echo"].addAction(self.actions["echoeol"])
         self.toolbars["Echo"].addAction(self.actions["autowrap"])
+
+        self.toolbars["Code"] = QToolBar(self.tr("Code"))
+        self.toolbars["Code"].addAction(self.actions["comment"])
+        self.toolbars["Code"].addAction(self.actions["uncomment"])
 
         for t in self.toolbars.values():
             self.addToolBar(t)

@@ -59,7 +59,7 @@ class MainWin(MainWinBase):
 
         # new fetures 202204
         self.timer = QTimer()
-        self.timer.timeout.connect(lambda:{self.renderStyle(),self.loadColorPanel(),self.timer.stop()})
+        self.timer.timeout.connect(lambda: {self.renderStyle(), self.loadColorPanel(), self.timer.stop()})
 
     def setupActions(self):
         # theme  toolbarWidget
@@ -79,6 +79,8 @@ class MainWin(MainWinBase):
         self.actions["cut"].triggered.connect(self.editor.cut)
         self.actions["copy"].triggered.connect(self.editor.copy)
         self.actions["paste"].triggered.connect(self.editor.paste)
+        self.actions["comment"].triggered.connect(self.commentcode)
+        self.actions["uncomment"].triggered.connect(self.uncommentcode)
         self.actions["ShowColor"].triggered.connect(self.docks["color"].setVisible)
         self.actions["ShowPreview"].triggered.connect(self.docks["preview"].setVisible)
         self.actions["Palette"].triggered.connect(self.paletteDailog.show)
@@ -146,6 +148,102 @@ class MainWin(MainWinBase):
             text = self.tr("select:ln") + str(linefrom) + self.tr(" - ln") + str(lineto)
         self.status["select"].setText(text)
 
+    def commentcode(self):
+        linefrom, colfrom, lineto, colto = self.editor.getSelection()
+        if linefrom == -1:
+            linefrom, _ = self.editor.getCursorPosition()
+            colfrom = 0
+            lineto = linefrom
+            colto = self.editor.lineLength(lineto) + 1
+        self.editor.insertAt("/* ", linefrom, colfrom)
+        self.editor.insertAt(" */ ", lineto, colto)
+
+    def uncommentcode(self):
+        linefrom, colfrom, lineto, colto = self.editor.getSelection()
+        start, end = -1, -1
+        if linefrom == -1:
+            linefrom, colcursor = self.editor.getCursorPosition()
+            lineto = linefrom
+            linetext = self.editor.text(linefrom)
+            linebytes = linetext.encode()
+            if len(linetext.encode()) < 4 or colcursor<2 or colcursor >len(linetext.encode())-2:
+                return
+            for i in range(colcursor - 1, -1, -1):
+                if linebytes[i] == ord("*") and linebytes[i - 1] == ord("/"):
+                    start = i - 1
+                    break
+            for i in range(colcursor, len(linebytes) - 1):
+                if linebytes[i] == ord("*") and linebytes[i + 1] == ord("/"):
+                    print(i, linebytes[i], linebytes[i+1])
+                    end = i
+                    break
+        else:
+            linestart = self.editor.text(linefrom).encode()
+            colend = len(linestart) if lineto>linefrom else colto
+            for i in range(colfrom, colend):
+                if linestart[i] == ord('/') and linestart[i+1] == ord('*'):
+                    start = i
+                    break
+            if start == -1:
+                for i in range(colfrom, 0, -1):
+                    if linestart[i] == ord('/') and linestart[i-1] == ord('*'):
+                        start = -2
+                        break
+                    elif linestart[i] == ord('*') and linestart[i-1] == ord('/'):
+                        start = i-1
+                        break
+            if start ==-1 and linefrom > 0:
+                while linefrom > 0:
+                    linefrom = linefrom -1
+                    if self.editor.text(linefrom).strip() != "":
+                        break
+                linestart = self.editor.text(linefrom).encode()
+                for i in range(len(linestart)-1, 0, -1):
+                    if linestart[i] == ord('/') and linestart[i-1] == ord('*'):
+                        break
+                    elif linestart[i] == ord('*') and linestart[i-1] == ord('/'):
+                        start = i-1
+                        break
+
+            if start > 0:
+                lineend = self.editor.text(lineto).encode()
+                colstart = 0 if lineto>linefrom else colfrom
+                for i in range(colto, colstart, -1):
+                    if lineend[i] == ord('/') and lineend[i - 1] == ord('*'):
+                        end = i
+                        break
+                if end == -1:
+                    for i in range(colto, len(lineend)-1):
+                        if lineend[i] == ord('/') and lineend[i + 1] == ord('*'):
+                            end = -2
+                            break
+                        elif lineend[i] == ord('*') and lineend[i + 1] == ord('/'):
+                            end = i
+                            break
+                if end < 0 and lineto < self.editor.lines()-1:
+                    while lineto < self.editor.lines()-1:
+                        lineto = lineto + 1
+                        if self.editor.text(lineto).strip() != "":
+                            break
+                    print(lineto)
+                    lineend = self.editor.text(lineto).encode()
+                    for i in range(len(lineend)-1):
+                        if lineend[i] == ord('/') and lineend[i + 1] == ord('*'):
+                            break
+                        elif lineend[i] == ord('*') and lineend[i + 1] == ord('/'):
+                            end = i
+            print(linefrom,start, lineto, end)
+
+        if start>=0 and end>=0:
+            # try:
+            # self.editor.positionFromLineIndex(linefrom, lineto)
+            self.editor.setSelection(lineto, end, lineto, end + 2)
+            self.editor.removeSelectedText()
+            self.editor.setSelection(linefrom, start, linefrom, start + 2)
+            self.editor.removeSelectedText()
+            # except:
+            # print("uncomment err")
+
     def unuseQss(self, unuse):
         if unuse:
             self.docks["preview"].setStyleSheet('')
@@ -210,7 +308,7 @@ class MainWin(MainWinBase):
                 self.timer.start(300)  # 普通人正常打字速度
                 self.changed = False
             else:
-                self.timer.start(600) # 很慢的打字速度
+                self.timer.start(600)  # 很慢的打字速度
 
     def textChanged(self):
         self.changed = True
