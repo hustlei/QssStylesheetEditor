@@ -68,6 +68,25 @@ class Qsst():
             except Exception:
                 print("warning: codeblock in qsst exec error.")
 
+    def addColorOpacity(self, color: str, opacity: str):
+        """颜色添加透明度,参数可以配置为 $mycolor%50
+        1. 只支持 #112233 或 #123 格式的颜色
+        2. 最终颜色为 #80112233
+        """
+        if '#' not in color and len(color) not in [4, 7]:
+            return color
+        
+        if len(color) == 4:
+            color = ''.join(item + item for item in color)[1:]
+
+        opacity = int(int(opacity) / 100 * 255 + 0.5)
+        if opacity < 0:
+            opacity = 0
+        if opacity > 255:
+            opacity = 255
+
+        return '#' + hex(opacity).replace('0x', '') + color[1:]
+    
     def convertQss(self):
         """根据varDict中变量的值，把模板文件中引用的变量用值替换，转换为qss文件。
         """
@@ -81,6 +100,9 @@ class Qsst():
 
             for v in self.varDict:
                 if v in varDict.keys():
+                    # opacity
+                    qssStr = re.sub(r'[$](\w+)[%](\w+)([\s;]*)',
+                                    lambda m: '{}{}'.format(self.addColorOpacity(varDict[m.group(1)], m.group(2)), m.group(3)), qssStr)
                     # qssStr = qssStr.replace("$" + v, varDict[v])
                     qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m: '{}{}'.format(varDict[m.group(1)], m.group(2)), qssStr)
                 else:
