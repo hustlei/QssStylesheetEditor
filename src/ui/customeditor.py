@@ -65,7 +65,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 """
             file.write(pretext)
-            file.write(self.text())
+            file.write(self.text().replace('\t', '    '))
 
         dir1 = os.getcwd()
         try:
