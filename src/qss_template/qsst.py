@@ -33,7 +33,7 @@ class Qsst():
         if qssStr is None:
             qssStr = self.srctext
         self.varUsed = list(set(re.findall(r':[ \t\w,.:()]*[$]([\w]+)', qssStr)))
-        varsDefined = list(set(re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[\r\n;\/]+', qssStr)))
+        varsDefined = list(set(re.findall(r'[$](\w+)\s*=[ \t]*([#(),.\w ]*)[\t ]*[\r\n;\/]+', qssStr)))
 
         self.varDict = {}
         valerr = False
@@ -43,7 +43,7 @@ class Qsst():
                     self.varDict[var] = val
                 else:
                     valerrind = re.match(
-                        r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)',
+                        r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)|[\w]*px',
                         val)
                     if not valerrind:
                         valerr = True
@@ -95,7 +95,7 @@ class Qsst():
             varDict = self.varDict
             self.loadVars()
             # 删除变量定义
-            varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[ \t;]*[\r\n]{0,2}')
+            varsDefined = re.compile(r'[$](\w+)\s*=[ \t]*([#(),.\w ]*)[ \t;]*[\r\n]{0,2}')
             qssStr = varsDefined.sub("", qssStr)
 
             for v in self.varDict:
