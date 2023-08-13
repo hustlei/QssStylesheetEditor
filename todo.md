@@ -10,6 +10,18 @@ English | [简体中文](todo_zh-CN.md)
 
 # ChangeLog
 
+## v1.8
+Main Changes: **update ui in-time preview feature，fixed editor bugs, fixed ISSUES**
+
++ **New Features**
+    - in-time preview feature is more responsive, consuming less resources and time
+    - update parameter reference features，fixed bugs
+    - add comment features
++ **BugsFixed**
+    - fixed ISSUE#14#33#34#41#43
+    - merge #41#44 request
+    - fixed editor BUGs
+
 ## v1.7
 Main Changes: **add custom ui preview and qpalette and update features, fixed ISSUES**
 

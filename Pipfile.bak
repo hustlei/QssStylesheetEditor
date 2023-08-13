@@ -1,8 +1,8 @@
 [[source]]
 name = "pypi"
 # url = "https://pypi.douban.com/simple"
-# url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-url = "https://mirrors.aliyun.com/pypi/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+# url = "https://mirrors.aliyun.com/pypi/simple"
 verify_ssl = true
 
 [dev-packages]
@@ -10,7 +10,7 @@ pycodestyle = "*"
 yapf = "*"
 pytest = "*"
 pytest-qt = "*"
-pyqt5-tools = "<5.14.1.3.0.3"
+pyqt5-tools = "*" #"<5.14.1.3.0.3"
 
 [packages]
 requests = ">2.0"
@@ -23,5 +23,5 @@ pyqt5-sip = ">=12.7,<=12.7.1"
 qscintilla = ">=2.11.4,<=2.11.4"
 codeeditor = ">=1.1.0"
 
-[requires]
-python_version = "3.7"
+# [requires]
+# python_version = "3.7"

@@ -21,7 +21,7 @@ from .recent import Recent
 class MainWin(MainWinBase):
     def __init__(self):
         super().__init__()
-        self.ver = "v1.70"
+        self.ver = "v1.80"
         self.title = "QssStylesheet Editor " + self.ver
         self.setWindowTitle(self.title)
         self.setWindowIcon(QIcon("res/app.ico"))
@@ -35,7 +35,7 @@ class MainWin(MainWinBase):
         self.setAcceptDrops(True)
         self.currentUIqss = ""
         self.paletteDailog = PaletteDialog(self)
-        self.updatedialog = None
+        self.updateDialog = None
         # conf
         self.recent = Recent(self.open, self.submenus["recent"])
         self.config = Config.current()
@@ -624,10 +624,10 @@ class MainWin(MainWinBase):
                     return
                 newver = "[network err]"
             if showdialogifnotupdate or newver > ver:
-                if not self.updatedialog:
-                    self.updatedialog = updateinfodialog(self)
-                self.updatedialog.setWindowIcon(self.windowIcon())
-                self.updatedialog.showdialog(ver, newver, "https://github.com/hustlei/QssStylesheetEditor/releases")
+                if not self.updateDialog:
+                    self.updateDialog = updateinfodialog(self)
+                self.updateDialog.setWindowIcon(self.windowIcon())
+                self.updateDialog.showdialog(ver, newver, "https://github.com/hustlei/QssStylesheetEditor/releases")
 
             from datetime import datetime
             today = datetime.now().date()

@@ -1,0 +1,71 @@
+打包安装程序，或者python安装包等
+
+# 打包类型
+
+可以打包为不同的类型的包，每一种包都可以安装QssStylesheetEditor，主要包括如下几种：
+
++ Windows安装包：向导式安装程序
++ python pip安装包：
+    - python zip安装包：pip可以安装的压缩包
+    - python wheel安装包（.whl）：可以用pip直接安装的包
++ 清洁源码包（.zip）：手动安装依赖后，可以运行的清洁源码（.py or .pyc）包
+
+# Windows安装包
+
+1、编译源码（py编译为pyc），收集windows平台上依赖的文件
+
+运行build文件夹中的compile_pyscripts.cmd脚本。见“docs/dev/distribution/build.md”
+
+> dist/build文件夹中的文件即为脚本生成的用于打包的文件。
+>
+> dist/build文件夹中文件实际上就是免安装的绿色版windows程序，可以直接运行。
+
+2、打包为向导式windows安装程序
+
+> 安装Nsis中文增强版
+
++ 用VNISEDIT打开“installer”文件夹中“installer.nsi”文件。
++ 编译脚本（ctl+F9）
++ dist文件夹中自动生成QssStylesheetEditor1.8_win_x64_Installer.exe
+
+> 双击“QssStylesheetEditor1.8_win_x64_Installer.exe”就可以启动安装程序。
+
+# Pip安装包
+
+> pip安装包是根据“setup.py”和“setup.cfg”生成的，不依赖于installer文件夹中的文件。
+
+**制作wheel包**
+
+执行如下命令：
+
+1. pipenv shell（如果使用了pipenv虚拟环境，先进入虚拟环境）
+2. cd QssStylesheetEditor（进入QssStylesheetEditor文件夹）
+3. python setup.py bdist_wheel（生成wheel包）
+
+dist文件中生成QssStylesheetEditor-1.8-py3-none-any.whl，可以直接发布了，直接pip  install QssStylesheetEditor-1.8-py3-none-any.whl安装就可以用了。
+
+> python setup.py bdist_rpm # rpm格式包 
+
+**制作pip安装压缩包**
+
+执行如下命令：
+
+1. pipenv shell（如果使用了pipenv虚拟环境，先进入虚拟环境）
+2. cd QssStylesheetEditor（进入QssStylesheetEditor文件夹）
+3. python setup.py sdist（生成压缩包）
+
+dist文件中生成QssStylesheetEditor-1.8.tar.gz，可以直接发布了，直接pip  install QssStylesheetEditor-1.8.tar.gz安装就可以用了。
+
+
+# 手动打包清洁源码包
+
+1. 把dist/build/scripts文件中文件拷贝出来。
+2. 把main.pyc删除
+3. 把bootstrapper.pyc文件名改为qsseditor.pyw
+
+就可以发布了。
+
+使用方法：
+
++ 用pip安装preimport、tomlconfig、CodeEditor、requests。
++ 鼠标双击 qsseditor.pyw或者命令行运行 `python qsseditor.pyw`
