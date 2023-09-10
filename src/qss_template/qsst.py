@@ -5,10 +5,41 @@ Copyright (c) 2019 lileilei <hustlei@sina.cn>
 """
 
 import re
+from dataclasses import dataclass
 from PyQt5.QtGui import QColor
+
+
+@dataclass
+class Var:
+    value: str
+    key: str
+    _type: str = None
+
+    def __repr__(self):
+        return self.value
+
+    @property
+    def var(self):
+        return self.value.strip()
+
+    @property
+    def type(self):
+        if self.value in QColor.colorNames():
+            return "color"
+        elif self.var.startswith("#") or "rgb" in self.var or "rgba" in self.var:
+            return "color"
+
+        elif "px" in self.var:
+            return "px"
+        elif self.var.replace('.', '', 1).isdigit():
+            return "digit"
+
+        return "text"
+
 
 class Qsst():
     """qss template"""
+
     def __init__(self, qssFile=None):
         if qssFile is None:
             self.srctext = ''  # qss template，qss with vars
@@ -40,20 +71,21 @@ class Qsst():
         for var, val in varsDefined:
             if not valerr:
                 if val in QColor.colorNames():
-                    self.varDict[var] = val
+                    self.varDict[var] = Var(val, var)
                 else:
-                    valerrind = re.match(
-                        r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)|[\w]*px',
-                        val)
-                    if not valerrind:
+                    # valerrind = re.match(
+                    #     r'#[0-9A-Fa-f]{1,8}|rgb\(\s*[0-9]*\s*(,\s*[0-9]*\s*){2}\)|rgba\(\s*[0-9]*\s*(,\s*[0-9]*\s*){3}\)|[\w]*px',
+                    #     val)
+                    v = Var(val, var)
+                    if not v.type:
                         valerr = True
                     else:
-                        self.varDict[var] = val
+                        self.varDict[var] = v
 
         self.varUndefined = []
         for varused in self.varUsed:
             if varused not in self.varDict.keys():
-                self.varDict[varused] = ''
+                self.varDict[varused] = Var('', varused)
                 self.varUndefined.append(varused)
         return not valerr  # 如果有变量的值格式不正确返回false
 
@@ -75,7 +107,7 @@ class Qsst():
         """
         if '#' not in color and len(color) not in [4, 7]:
             return color
-        
+
         if len(color) == 4:
             color = ''.join(item + item for item in color)[1:]
 
@@ -86,7 +118,7 @@ class Qsst():
             opacity = 255
 
         return '#' + hex(opacity).replace('0x', '') + color[1:]
-    
+
     def convertQss(self):
         """根据varDict中变量的值，把模板文件中引用的变量用值替换，转换为qss文件。
         """
@@ -102,9 +134,11 @@ class Qsst():
                 if v in varDict.keys():
                     # opacity
                     qssStr = re.sub(r'[$](\w+)[%](\w+)([\s;]*)',
-                                    lambda m: '{}{}'.format(self.addColorOpacity(varDict[m.group(1)], m.group(2)), m.group(3)), qssStr)
+                                    lambda m: '{}{}'.format(self.addColorOpacity(varDict[m.group(1)].value, m.group(2)),
+                                                            m.group(3)), qssStr)
                     # qssStr = qssStr.replace("$" + v, varDict[v])
-                    qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m: '{}{}'.format(varDict[m.group(1)], m.group(2)), qssStr)
+                    qssStr = re.sub(r'[$](\w+)([\s;]*)', lambda m: '{}{}'.format(varDict[m.group(1)].value, m.group(2)),
+                                    qssStr)
                 else:
                     self.varUndefined.append(v)
                     # qssStr = qssStr.replace("$" + v, ' ')
@@ -127,19 +161,20 @@ class Qsst():
         self.loadVars()
         if self.varDict:  # 如果文件中变量不为空，更新变量值
             self.srctext = re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?',
-                                  lambda m: '${} = {};'.format(m.group(1), varDictNew.get(m.group(1), "")),
+                                  lambda m: '${} = {};'.format(m.group(1),
+                                                               varDictNew.get(m.group(1), Var("", "")).value),
                                   self.srctext)
             if self.varUndefined:  # 在第一的变量处插入多出来的变量,引用比定义的变量多的时候回出现这种情况
                 s = ''
                 for var, val in varDictNew.items():
                     if var in self.varUndefined:
-                        s += "$" + var + " = " + val + ";\n"
+                        s += "$" + var + " = " + val.value + ";\n"
                 self.srctext = re.sub(r'[$](\w+)\s*=[ \t]*([#(),.\w]*)[\t ]*[;]?', r'{}$\1 = \2;\n'.format(s),
                                       self.srctext, 1)
         else:
             s = ''
             for var, val in varDictNew.items():
-                s += "$" + var + " = " + val + ";\n"
+                s += "$" + var + " = " + val.value + ";\n"
             s += '\n'
             self.srctext = s + self.srctext
         self.loadVars()
@@ -147,6 +182,7 @@ class Qsst():
 
 if __name__ == "__main__":
     import os
+
     os.chdir(os.path.dirname(__file__))
     qssT = Qsst('default.qsst')
     qssT.loadVars()

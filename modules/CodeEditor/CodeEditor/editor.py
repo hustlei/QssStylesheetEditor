@@ -360,7 +360,7 @@ class Editor(QsciScintilla):
 
     def save(self, filename):
         """Save the editor contents to the given filename."""
-        with open(filename, 'w', newline='') as outfile:
+        with open(filename, 'w', newline='', encoding="utf-8") as outfile:
             # 不指定newline，则换行符为各系统默认的换行符（\n, \r, or \r\n, ）
             # newline=''表示不转换
             outfile.write(self.text())

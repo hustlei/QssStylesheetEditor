@@ -6,13 +6,14 @@ import re
 import sys
 
 from PyQt5.QtWidgets import (qApp, QWidget, QLabel, QPushButton, QColorDialog, QFileDialog, QMessageBox, QFormLayout,
-                             QVBoxLayout, QHBoxLayout)
+                             QVBoxLayout, QHBoxLayout, QLineEdit)
 from PyQt5.QtGui import QIcon, QColor, qGray, QFont
 from PyQt5.QtCore import Qt, QSize, QTimer
 # import sip
 
 from config import Config, ConfDialog
 from qss_template import Qsst
+from qss_template.qsst import Var
 from .mainwinbase import MainWinBase
 from .palettedialog import PaletteDialog
 from .recent import Recent
@@ -166,7 +167,7 @@ class MainWin(MainWinBase):
             lineto = linefrom
             linetext = self.editor.text(linefrom)
             linebytes = linetext.encode()
-            if len(linetext.encode()) < 4 or colcursor<2 or colcursor >len(linetext.encode())-2:
+            if len(linetext.encode()) < 4 or colcursor < 2 or colcursor > len(linetext.encode()) - 2:
                 return
             for i in range(colcursor - 1, -1, -1):
                 if linebytes[i] == ord("*") and linebytes[i - 1] == ord("/"):
@@ -174,67 +175,67 @@ class MainWin(MainWinBase):
                     break
             for i in range(colcursor, len(linebytes) - 1):
                 if linebytes[i] == ord("*") and linebytes[i + 1] == ord("/"):
-                    print(i, linebytes[i], linebytes[i+1])
+                    print(i, linebytes[i], linebytes[i + 1])
                     end = i
                     break
         else:
             linestart = self.editor.text(linefrom).encode()
-            colend = len(linestart) if lineto>linefrom else colto
+            colend = len(linestart) if lineto > linefrom else colto
             for i in range(colfrom, colend):
-                if linestart[i] == ord('/') and linestart[i+1] == ord('*'):
+                if linestart[i] == ord('/') and linestart[i + 1] == ord('*'):
                     start = i
                     break
             if start == -1:
                 for i in range(colfrom, 0, -1):
-                    if linestart[i] == ord('/') and linestart[i-1] == ord('*'):
+                    if linestart[i] == ord('/') and linestart[i - 1] == ord('*'):
                         start = -2
                         break
-                    elif linestart[i] == ord('*') and linestart[i-1] == ord('/'):
-                        start = i-1
+                    elif linestart[i] == ord('*') and linestart[i - 1] == ord('/'):
+                        start = i - 1
                         break
-            if start ==-1 and linefrom > 0:
+            if start == -1 and linefrom > 0:
                 while linefrom > 0:
-                    linefrom = linefrom -1
+                    linefrom = linefrom - 1
                     if self.editor.text(linefrom).strip() != "":
                         break
                 linestart = self.editor.text(linefrom).encode()
-                for i in range(len(linestart)-1, 0, -1):
-                    if linestart[i] == ord('/') and linestart[i-1] == ord('*'):
+                for i in range(len(linestart) - 1, 0, -1):
+                    if linestart[i] == ord('/') and linestart[i - 1] == ord('*'):
                         break
-                    elif linestart[i] == ord('*') and linestart[i-1] == ord('/'):
-                        start = i-1
+                    elif linestart[i] == ord('*') and linestart[i - 1] == ord('/'):
+                        start = i - 1
                         break
 
             if start > 0:
                 lineend = self.editor.text(lineto).encode()
-                colstart = 0 if lineto>linefrom else colfrom
+                colstart = 0 if lineto > linefrom else colfrom
                 for i in range(colto, colstart, -1):
                     if lineend[i] == ord('/') and lineend[i - 1] == ord('*'):
                         end = i
                         break
                 if end == -1:
-                    for i in range(colto, len(lineend)-1):
+                    for i in range(colto, len(lineend) - 1):
                         if lineend[i] == ord('/') and lineend[i + 1] == ord('*'):
                             end = -2
                             break
                         elif lineend[i] == ord('*') and lineend[i + 1] == ord('/'):
                             end = i
                             break
-                if end < 0 and lineto < self.editor.lines()-1:
-                    while lineto < self.editor.lines()-1:
+                if end < 0 and lineto < self.editor.lines() - 1:
+                    while lineto < self.editor.lines() - 1:
                         lineto = lineto + 1
                         if self.editor.text(lineto).strip() != "":
                             break
                     print(lineto)
                     lineend = self.editor.text(lineto).encode()
-                    for i in range(len(lineend)-1):
+                    for i in range(len(lineend) - 1):
                         if lineend[i] == ord('/') and lineend[i + 1] == ord('*'):
                             break
                         elif lineend[i] == ord('*') and lineend[i + 1] == ord('/'):
                             end = i
-            print(linefrom,start, lineto, end)
+            print(linefrom, start, lineto, end)
 
-        if start>=0 and end>=0:
+        if start >= 0 and end >= 0:
             # try:
             # self.editor.positionFromLineIndex(linefrom, lineto)
             self.editor.setSelection(lineto, end, lineto, end + 2)
@@ -290,7 +291,7 @@ class MainWin(MainWinBase):
             #     self.statusbar.showMessage("")#不起作用
             # except Exception:
             #     self.statusbar.showMessage("qss parse failed")
-            cstr = self.qsst.varDict.get("background", "")
+            cstr = self.qsst.varDict.get("background", Var("", "background")).value
             if cstr:
                 try:
                     c = QColor()
@@ -338,31 +339,51 @@ class MainWin(MainWinBase):
         # self.colorGridLayout.update()  # 不起作用
 
         # a,b=list(self.clrBtnDict.keys()),list(self.qsst.varDict.keys());a.sort();b.sort()
-        if sorted(list(self.clrBtnDict.keys())) != sorted(list(self.qsst.varDict.keys())):
+        if sorted(list(self.clrBtnDict.items())) != sorted(list(self.qsst.varDict.items())):
             while self.colorPanelLayout.count() > 0:
                 self.colorPanelLayout.removeItem(self.colorPanelLayout.itemAt(0))
             self.clrBtnDict = {}
+            self.varLinDict = {}
             labels = {}
             widLabel = 0
             widBtn = 0
+            widLin = 0
             for varName, clrStr in self.qsst.varDict.items():
-                label = QLabel(varName)  # , contianerWidget)
-                btn = QPushButton(clrStr)  # , contianerWidget)
-                if sys.platform.startswith("win"):
-                    font1 = QFont("Arial", 10, QFont.Medium)
-                    font2 = QFont("sans-serif", 9, QFont.Medium)
-                    label.setFont(font1)
-                    btn.setFont(font2)
-                self.clrBtnDict[varName] = btn
-                labels[varName] = label
-                label.adjustSize()
-                widLabel = label.width() if label.width() > widLabel else widLabel
-                btn.adjustSize()
-                widBtn = btn.width() if btn.width() > widBtn else widBtn
-                # label.move(5, 5)
-                # btn.move(100, 5)
-                btn.clicked.connect(lambda x, var=varName: self.chclr(var))
-            for name, btn in self.clrBtnDict.items():
+                if clrStr.type in ["color"]:
+                    label = QLabel(varName)  # , contianerWidget)
+                    btn = QPushButton(clrStr.value)  # , contianerWidget)
+                    if sys.platform.startswith("win"):
+                        font1 = QFont("Arial", 10, QFont.Medium)
+                        font2 = QFont("sans-serif", 9, QFont.Medium)
+                        label.setFont(font1)
+                        btn.setFont(font2)
+                    self.clrBtnDict[varName] = btn
+                    labels[varName] = label
+                    label.adjustSize()
+                    widLabel = label.width() if label.width() > widLabel else widLabel
+                    btn.adjustSize()
+                    widBtn = btn.width() if btn.width() > widBtn else widBtn
+                    # label.move(5, 5)
+                    # btn.move(100, 5)
+                    btn.clicked.connect(lambda x, var=varName: self.chclr(var))
+                elif clrStr.type:
+                    label = QLabel(varName)  # , contianerWidget)
+                    line = QLineEdit(clrStr.value)
+                    if sys.platform.startswith("win"):
+                        font1 = QFont("Arial", 10, QFont.Medium)
+                        font2 = QFont("sans-serif", 9, QFont.Medium)
+                        label.setFont(font1)
+                        line.setFont(font2)
+
+                    self.varLinDict[varName] = line
+                    labels[varName] = label
+                    label.adjustSize()
+                    widLabel = label.width() if label.width() > widLabel else widLabel
+                    line.adjustSize()
+                    widLin = line.width() if line.width() > widLin else widLin
+                    line.textChanged.connect(lambda x, var=varName: self.chLine(var))
+
+            for name, btn in [*self.clrBtnDict.items(), *self.varLinDict.items()]:
                 contianerWidget = QWidget()
                 lay = QHBoxLayout()
                 labels[name].setFixedWidth(widLabel)
@@ -374,7 +395,7 @@ class MainWin(MainWinBase):
                 self.colorPanelLayout.addWidget(contianerWidget)
 
         for varName, btn in self.clrBtnDict.items():
-            clrStr = self.qsst.varDict[varName]
+            clrStr = self.qsst.varDict[varName].value
             btn.setText(clrStr)
             if "rgb" in clrStr:
                 t = clrStr.strip(r" rgba()")
@@ -400,6 +421,18 @@ class MainWin(MainWinBase):
 
             btn.setStyleSheet(s + "background:" + btn.text())
 
+    def chLine(self, var):
+        val = self.sender().text()
+        self.qsst.varDict[var] = Var(val, var)
+        self.qsst.writeVars()
+        # 用setText之后undo redo堆栈全部消失，所以暂时用这种方法
+        pos = self.editor.verticalScrollBar().sliderPosition()
+        self.editor.selectAll()
+        self.editor.replaceSelectedText(self.qsst.srctext)  # setText(self.qsst.srctext)
+        # self.CodeEditor.setCursorPosition(xp,yp)
+        self.editor.verticalScrollBar().setSliderPosition(pos)
+        self.renderStyle()
+
     def chclr(self, var):
         c = QColor()
         cstr = self.sender().text()
@@ -421,7 +454,7 @@ class MainWin(MainWinBase):
                 s += 'color:white;'
             self.clrBtnDict[var].setText(clrstr)
             self.clrBtnDict[var].setStyleSheet(s + "background:" + clrstr)
-            self.qsst.varDict[var] = clrstr
+            self.qsst.varDict[var] = Var(clrstr, var)
             self.qsst.writeVars()
             # 用setText之后undo redo堆栈全部消失，所以暂时用这种方法
             pos = self.editor.verticalScrollBar().sliderPosition()
