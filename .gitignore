@@ -113,3 +113,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+src/config/config.toml
